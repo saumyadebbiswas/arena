@@ -1,0 +1,162 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+
+// -------------start header-------------
+.head{
+    width: 100%;
+    // background: #f73d42;
+    background-image: url("/assets/images/header-back-img.png");
+    background: #fff;
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    padding: 0;
+    margin: 0;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 6px;
+    color: #433542;
+  }
+  .text-center{
+    text-align: center;
+  }
+  .manu-icon{
+    width: 28px;
+}
+  .notification{
+    width: 48px;
+    text-align: right;
+    padding-top: 10px;
+    padding-right: 18px;
+  }
+  .notification i{
+    font-size: 1.5rem;
+    position: absolute;
+    right: 18px;
+    top: 16px;
+    color: #443643;
+  }
+  .notification img{
+    width: 22px;
+    position: absolute;
+    right: 18px;
+    top: 22px;
+  }
+  .notification span{
+    background: #3e3539;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 8px;
+    width: 13px;
+    font-weight: bold;
+    height: 13px;
+    position: absolute;
+    right: 17px;
+    top: 18px;
+    text-align: center;
+  }
+  
+  // -----end header------
+
+
+  // -----start tool------
+
+  .tool{
+    background: #ffffff;
+    margin: 0;
+    z-index: 9;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    border-top: 1px solid #ddd;
+  }
+  .tool h4{
+    background: #d32f2f;
+    color: #fff;
+    padding: 10px;
+    border-radius: 10px 10px 0 0;
+    font-size: 1rem;
+    margin-top: 0;
+  }
+  
+  .tool-bar{
+    display: flex;
+    margin: 0px;
+    text-align: center;
+  }
+  .tool-box{
+    width: 33%;
+    margin: 1%;
+    background: #fff;
+    font-size: 1rem;
+    border-radius: 5px;
+    padding: 10px;
+  }
+  .tool-box i{
+    font-size: 1.2rem;
+    margin-right: 5px;
+    color: #7a7a7a;
+  }
+  .tool-box h6{
+    font-size: 0.6rem;
+    color: #a1a0a7;
+    margin-top: 5px;
+    margin-bottom: 0
+  }
+  .profile-img{
+    width: 18px;
+    height: 20px;
+  }
+
+  // -----end tool-------
+
+  .content-box{
+    // background-image: url(/assets/images/background.png);
+    // background-size: cover;
+    // width: 100%;
+    // height: 100%;
+    background-position: center;
+    padding-bottom: 37px;
+    margin-bottom: 37px;
+    // color: #fff;
+  }
+
+  .sing-btn{
+    width: 75%;
+    background: #eb1d23;
+    color: #fff;
+    margin: auto;
+    border-radius: 20px;
+    font-weight: 500;
+
+}
+.active i{
+  color: #eb1d23;
+}
+.active h6{
+  color: #eb1d23;
+}

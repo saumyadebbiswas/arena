@@ -1,0 +1,52 @@
+<ion-content>
+  <ion-grid class="no-pad">
+    <ion-row justify-content-center>
+      <ion-col align-self-center size-md="6" size-lg="5" size-xs="12" class="no-pad">
+        <div class="back-bg">
+          <!-- <img src="/assets/images/background.png" alt=""> -->
+          <div class="sing-text">
+            <h5>Register</h5>
+            <img src="/assets/images/logo.png" alt="">
+            <!-- <p>Welcome to Vishesh <br>Investment Consultants</p> -->
+          </div>
+
+          <div class="sing-frm">
+              
+            <!-- <ion-item class="form-group frm"> -->
+            <span class="icon2"><i class="fa fa-user"></i></span>
+            <ion-input type="text" class="info-frm" id="name" [(ngModel)]="name" placeholder="Your Name"></ion-input>
+            <!-- </ion-item> -->
+
+            <!-- <ion-item class="form-group frm"> -->
+            <span class="icon6"><i class="fa fa-envelope"></i></span>
+            <ion-input type="text" class="info-frm" id="email" [(ngModel)]="email" placeholder="Email ID"></ion-input>
+            <!-- </ion-item> -->
+
+            <!-- <ion-item class="form-group frm"> -->
+            <span class="icon7"><i class="fa fa-phone "></i></span>
+            <ion-input type="text" class="info-frm" id="phone" [(ngModel)]="phone" placeholder="Phone Number"></ion-input>
+            <!-- </ion-item> -->
+
+            <!-- <ion-item class="form-group frm"> -->
+            <span class="icon8"><i class="fa fa-unlock"></i></span>
+            <ion-input type="password" class="info-frm" id="password" [(ngModel)]="password" placeholder="Password" ></ion-input>
+            <!-- </ion-item> -->
+      
+          </div>
+
+          <div class="sign-box">
+            <button type="button" size="large" expand="block" class="btn sing-btn">Register</button>
+            
+            <p><a>Already have an account?</a></p>
+            <p class="regi">
+              <a routerLink="/login">Sign In 
+                <img src="/assets/images/arrow.png" alt="">
+                <hr>
+              </a>
+            </p>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

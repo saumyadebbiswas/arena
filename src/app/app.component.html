@@ -1,0 +1,28 @@
+<ion-app>
+  <ion-split-pane contentId="main-content">
+    <ion-menu contentId="main-content" type="overlay">
+      <ion-content>
+        <ion-menu-toggle auto-hide="false" >
+          <div class="user-details">
+            <!-- <span class="cross"><i class="fa fa-times-circle"></i></span>  -->
+            <div class="my-details">
+              <img src="../assets/images/user-img.png" alt="" />
+              <h4>{{ name }}</h4>
+              <p>Kolkata</p>
+            </div>
+  
+            <ul class="manu-link">
+              <li *ngFor="let page of appPages">
+                <span [routerLink]="[page.url]"> {{page.title}}</span>
+              </li>
+              
+              <li></li>
+              <li (click)="signOut()">Log Out</li>
+            </ul>
+          </div>
+        </ion-menu-toggle>
+      </ion-content>
+    </ion-menu>
+    <ion-router-outlet id="main-content"></ion-router-outlet>
+  </ion-split-pane>
+</ion-app>
