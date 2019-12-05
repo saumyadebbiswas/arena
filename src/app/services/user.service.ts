@@ -41,7 +41,7 @@ export class UserService {
   }
 	
   register(sendData: any): Observable<any> {
-    return this.http.post<any>(this.api_url+'/student/register', sendData, {headers: this.requestHeader});
+    return this.http.post<any>(this.api_url+'/student/insert', sendData, {headers: this.requestHeader});
   }
 
   logout() {

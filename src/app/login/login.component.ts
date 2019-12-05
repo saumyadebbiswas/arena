@@ -42,8 +42,12 @@ export class LoginComponent implements OnInit {
     //--- Check empty credentials
     if(this.username.length == 0 || this.password.length == 0) {
 
-      this.showErrorAlert = true;
-      this.error_message = "Enter full credentials!";
+      const alert = await this.alertCtrl.create({
+        header: 'Error!',
+        message: "Enter full Credentials!",
+        buttons: ['OK']
+        });
+      alert.present();
 
     } else {
       //--- Start loader
@@ -57,7 +61,7 @@ export class LoginComponent implements OnInit {
         username: this.username,
         password: this.password
       }
-      //console.log('sendData...', sendData);
+      //console.log('Login sendData...', sendData);
 
       this.userService.login(sendData).subscribe(async response => {
         console.log('Login response...', response);
