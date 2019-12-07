@@ -25,36 +25,48 @@
 
 <body>
   <app-root></app-root>
-  <div class="modal fade" id="myModal">
-    <div class="modal-dialog modal-sm">
+ <!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
       <div class="modal-content">
-      
-        <!-- Modal Header -->
-        <!-- <div class="modal-header">
-          <h4 class="modal-title">Modal Heading</h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div> -->
+  
         
-        <!-- Modal body -->
-        <div  padding class="modal-body">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <div class="form-group">
-            <label for="comment">Comment:</label>
-            <textarea class="form-control" rows="3" id="comment"></textarea>
-          </div>
-          <div padding class="text-center">
-            <button size="large" expand="block" class="btn sing-btn">End SOS</button>
-          </div>
+        <div class="modal-body">
+  
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>        
+  
+                  <img src="assets/images/loder.gif" alt="" id="image" class="img-fluid">
+  
+          
         </div>
-        
-        <!-- Modal footer -->
-        <!-- <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        </div> -->
-        
+  
       </div>
     </div>
+  </div> 
+  <!-- Modal2 -->
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content top-none">
+  
+        
+        <div class="modal-body">
+  
+         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>        
+          <!-- 16:9 aspect ratio -->
+  <div class="embed-responsive embed-responsive-16by9">
+    <iframe class="embed-responsive-item" src="" id="video"  allowscriptaccess="always" allow="autoplay"  controls></iframe>
   </div>
+          
+          
+        </div>
+  
+      </div>
+    </div>
+  </div>   
     
   <script>
     function show1(){
@@ -76,6 +88,132 @@
       document.getElementById('div3').style.display ='none';
     }
   </script>
+
+  <script>
+  $(document).ready(function() {
+
+// Gets the video src from the data-src on each button
+var $imageSrc;  
+$('.gallery img').click(function() {
+    $imageSrc = $(this).data('bigimage');
+});
+console.log($imageSrc);
+  
+  
+  
+// when the modal is opened autoplay it  
+$('#myModal').on('shown.bs.modal', function (e) {
+    
+// set the video src to autoplay and not to show related video. Youtube related video is like a box of chocolates... you never know what you're gonna get
+
+$("#image").attr('src', $imageSrc  ); 
+})
+  
+  
+// reset the modal image
+$('#myModal').on('hide.bs.modal', function (e) {
+    // a poor man's stop video
+    $("#image").attr('src',''); 
+}) 
+    
+    
+
+
+  
+  
+// document ready  
+});
+
+
+
+  </script>
+
+  <script>
+    window.document.onkeydown = function(e) {
+  if (!e) {
+    e = event;
+  }
+  if (e.keyCode == 27) {
+    lightbox_close();
+  }
+}
+
+function lightbox_open() {
+  var lightBoxVideo = document.getElementById("VisaChipCardVideo");
+  window.scrollTo(0, 0);
+  document.getElementById('light').style.display = 'block';
+  document.getElementById('fade').style.display = 'block';
+  lightBoxVideo.play();
+}
+
+function lightbox_close() {
+  var lightBoxVideo = document.getElementById("VisaChipCardVideo");
+  document.getElementById('light').style.display = 'none';
+  document.getElementById('fade').style.display = 'none';
+  lightBoxVideo.pause();
+}
+  </script>
+
+  <script>
+    $(document).ready(function() {
+
+// Gets the video src from the data-src on each button
+
+var $videoSrc;  
+$('.video-btn').click(function() {
+    $videoSrc = $(this).data( "src" );
+});
+console.log($videoSrc);
+
+  
+  
+// when the modal is opened autoplay it  
+$('#myModal2').on('shown.bs.modal', function (e) {
+    
+// set the video src to autoplay and not to show related video. Youtube related video is like a box of chocolates... you never know what you're gonna get
+$("#video").attr('src',$videoSrc + "?autoplay=1&amp;modestbranding=1&amp;showinfo=0" ); 
+})
+  
+
+
+// stop playing the youtube video when I close the modal
+$('#myModal2').on('hide.bs.modal', function (e) {
+    // a poor man's stop video
+    $("#video").attr('src',$videoSrc); 
+}) 
+    
+ 
+  
+// document ready  
+});
+
+
+
+  </script>
+
+  <script>
+  $(document).ready(function() {
+    $('body').bootstrapMaterialDesign();
+    
+    
+});
+  </script>
+
+  <script>
+    $(function() {
+var selectedClass = "";
+$(".filter").click(function(){
+selectedClass = $(this).attr("data-rel");
+$("#gallery").fadeTo(100, 0.1);
+$("#gallery div").not("."+selectedClass).fadeOut().removeClass('animation');
+setTimeout(function() {
+$("."+selectedClass).fadeIn().addClass('animation');
+$("#gallery").fadeTo(300, 1);
+}, 300);
+});
+});
+  </script>
+  
 </body>
 
 </html>

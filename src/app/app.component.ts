@@ -21,14 +21,34 @@ export class AppComponent {
       url: '/home',
       icon: 'home'
     },
+    // {
+    //   title: 'Landing',
+    //   url: '/landind',
+    //   icon: 'list'
+    // },
+    // {
+    //   title: 'Courses',
+    //   url: '/course',
+    //   icon: 'list'
+    // },
     {
-      title: 'Landing',
-      url: '/landind',
+      title: 'Student Artwork',
+      url: '/twod',
       icon: 'list'
     },
     {
-      title: 'Courses',
-      url: '/list',
+      title: 'Placement Record',
+      url: '/placementrecord',
+      icon: 'list'
+    },
+    {
+      title: 'Infrastructure',
+      url: '/infrest',
+      icon: 'list'
+    },
+    {
+      title: 'Videos',
+      url: '/videos',
       icon: 'list'
     }
   ];
