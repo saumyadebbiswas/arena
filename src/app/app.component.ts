@@ -21,19 +21,14 @@ export class AppComponent {
       url: '/home',
       icon: 'home'
     },
-    // {
-    //   title: 'Landing',
-    //   url: '/landind',
-    //   icon: 'list'
-    // },
-    // {
-    //   title: 'Courses',
-    //   url: '/course',
-    //   icon: 'list'
-    // },
+    {
+      title: 'Courses',
+      url: '/course',
+      icon: 'list'
+    },
     {
       title: 'Student Artwork',
-      url: '/twod',
+      url: '/work',
       icon: 'list'
     },
     {

@@ -1,0 +1,75 @@
+.ex-pad{
+    padding: 12px 0 0 12px;
+  }
+  .place-box{
+    padding: 0;
+    width: 100%;
+    list-style-type: none;
+  }
+  .place-box li{
+    width: 97%;
+    margin-bottom: 12px;
+    margin-right: 3%;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #ddd;
+    float: left;
+    overflow: hidden;
+}
+.cours-detal{
+    display: flex;
+    width: 100%;
+  }
+  .place-box li img{
+    width: 40%;
+    height: 112px;
+    margin-right: 12px;
+    border-radius: 8px;
+    padding: 3px;
+    border: 1px solid #a5a5a5bf;
+  }
+  .drec-box{
+      width: 57%;
+  }
+  .place-box li h4{
+    color: #6f6e6e;
+    margin-top: 7px;
+    font-size: 15px;
+    min-height: 36px;
+  }
+  .place-box li p{
+    margin-bottom: 0px;
+    color: #838383;
+    font-size: 12px;
+    text-align: justify;
+    white-space: pre-line;
+  }
+
+  .place-box li p a{
+    font-size: 11px;
+    color: #eb1d23;
+  }
+  .detal-box{
+    width: 100%;
+    margin-top: 9px;
+    display: -webkit-box;
+    display: flex;
+    justify-content: space-around;
+    font-size: 11px;
+    text-align: center;
+    color: #717070;
+  }
+  .detal-box span{
+    //   width: 43%;
+  }
+  .detal-box a{
+    color: #eb1d23;
+    padding: 0px 12px;
+  }
+
+  @media only screen and (max-width: 325px){
+
+    .detal-box{
+        font-size: 10px;
+    }
+  }
+

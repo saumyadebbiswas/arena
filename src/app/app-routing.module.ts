@@ -9,6 +9,9 @@ import { VfxComponent } from './vfx/vfx.component';
 import { PlacementrecordComponent } from './placementrecord/placementrecord.component';
 import { VideosComponent } from './videos/videos.component';
 import { InfrestComponent } from './infrest/infrest.component';
+import { WorkComponent } from './work/work.component';
+import { CoursedetailsComponent } from './coursedetails/coursedetails.component';
+import { CourseComponent } from './course/course.component';
 
 const routes: Routes = [
   {
@@ -31,9 +34,12 @@ const routes: Routes = [
   { path: "twod",  component: TwoDComponent},
   { path: "threed",  component: ThreeDComponent},
   { path: "vfx",  component: VfxComponent},
-  { path: "placementrecord",  component:PlacementrecordComponent},
+  { path: "placementrecord",  component: PlacementrecordComponent},
   { path: "videos",  component: VideosComponent},
-  { path: "infrest",  component: InfrestComponent}
+  { path: "infrest",  component: InfrestComponent},
+  { path: "work",  component: WorkComponent},
+  { path: "coursedetails",  component: CoursedetailsComponent},
+  { path: "course",  component: CourseComponent}
 ];
 
 @NgModule({

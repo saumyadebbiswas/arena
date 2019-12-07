@@ -1,0 +1,67 @@
+.ex-pad{
+    padding: 12px 0 0 12px;
+  }
+  .place-box{
+    padding: 0;
+    width: 100%;
+    list-style-type: none;
+  }
+  .place-box li{
+    width: 97%;
+    margin-bottom: 12px;
+    margin-right: 3%;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #ddd;
+    float: left;
+    overflow: hidden;
+}
+ .place-box li img{
+    width: 40%;
+    height: 112px;
+    margin-right: 12px;
+    border-radius: 8px;
+    padding: 3px;
+    border: 1px solid #a5a5a5bf;
+  }
+  .drec-box{
+      width: 100%;
+  }
+  .place-box li h4{
+    color: #6f6e6e;
+    margin-top: 7px;
+    font-size: 17px;
+    margin-bottom: 9px;
+    text-align: center;
+  }
+  .place-box li p{
+    margin-bottom: 0.6rem;
+    color: #838383;
+    font-size: 12px;
+    text-align: justify;
+    white-space: pre-line;
+  }
+
+  .place-box li p a{
+    font-size: 11px;
+    color: #eb1d23;
+  }
+  .detal-box{
+    width: 100%;
+    display: -webkit-box;
+    display: flex;
+    justify-content: space-around;
+    font-size: 11px;
+    text-align: center;
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+    color: #717070;
+    border-bottom: 1px solid #ddd;
+  }
+  .detal-box span{
+    //   width: 43%;
+  }
+  .detal-box a{
+    color: #eb1d23;
+    padding: 0px 12px;
+  }
+

@@ -19,6 +19,9 @@ import { VfxComponent } from './vfx/vfx.component';
 import { PlacementrecordComponent } from './placementrecord/placementrecord.component';
 import { VideosComponent } from './videos/videos.component';
 import { InfrestComponent } from './infrest/infrest.component';
+import { WorkComponent } from './work/work.component';
+import { CoursedetailsComponent } from './coursedetails/coursedetails.component';
+import { CourseComponent } from './course/course.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +34,10 @@ import { InfrestComponent } from './infrest/infrest.component';
     VfxComponent,
     PlacementrecordComponent,
     VideosComponent,
-    InfrestComponent
+    InfrestComponent,
+    WorkComponent,
+    CoursedetailsComponent,
+    CourseComponent
   ],
   entryComponents: [],
   imports: [
