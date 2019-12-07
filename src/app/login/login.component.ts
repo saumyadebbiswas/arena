@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuController, AlertController, LoadingController, Events } from '@ionic/angular';
+import { MenuController, AlertController, LoadingController, Events, Platform } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { UserService } from '../services';
 
@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   showLoader: boolean;
   showErrorAlert: boolean;
   error_message: string;
+  subscription:any;
 
   constructor(
     private router: Router,
@@ -22,7 +23,8 @@ export class LoginComponent implements OnInit {
     public alertCtrl: AlertController,
     public loadingController: LoadingController,
     public events: Events,
-    public userService: UserService
+    public userService: UserService,
+    private platform: Platform
   ) { }
 
   ngOnInit() {}
@@ -36,6 +38,16 @@ export class LoginComponent implements OnInit {
       this.menuCtrl.enable(false);
       console.log('Location: LoginComponent');
     }
+  }
+
+  ionViewDidEnter(){ 
+    this.subscription = this.platform.backButton.subscribe(()=>{ 
+      navigator['app'].exitApp(); 
+    }); 
+  } 
+
+  ionViewWillLeave(){ 
+    this.subscription.unsubscribe();
   }
 
   async onSubmit() {
