@@ -23,8 +23,9 @@ export class CourseComponent implements OnInit {
   ionViewWillEnter(){ 
     if(this.userService.currentUserValue == null) {
       this.router.navigate(['/login']);
+    } else {
+      console.log('Location: CourseComponent');
     }
-    console.log('Location: CourseComponent');
   }
 
   ionViewDidEnter(){ 

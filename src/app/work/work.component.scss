@@ -79,6 +79,9 @@ div.card.card-plain {
     background: transparent;
     box-shadow: none;
 }
+div.card.card-plain span {
+    text-align: center
+}
 div.card .card-header {
     border-radius: 3px;
     padding: 1rem 15px;

@@ -75,10 +75,10 @@ export class RegisterComponent implements OnInit {
         phone: this.phone,
         password: this.password
       }
-      console.log('Register sendData...', sendData);
+      //console.log('Register sendData...', sendData);
 
       this.userService.register(sendData).subscribe(async response => {
-        console.log('Register response...', response);
+        //console.log('Register response...', response);
         //--- After record insert - dismiss loader, navigate to login
         this.loadingController.dismiss();
 

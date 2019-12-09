@@ -98,7 +98,7 @@ export class LoginComponent implements OnInit {
         this.loadingController.dismiss();
         const alert = await this.alertCtrl.create({
           header: 'Error!',
-          message: "Internal problem!",
+          message: "Internal problem! " + error,
           buttons: ['OK']
           });
         alert.present();

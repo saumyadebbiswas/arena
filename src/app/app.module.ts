@@ -18,6 +18,7 @@ import { InfrestComponent } from './infrest/infrest.component';
 import { WorkComponent } from './work/work.component';
 import { CoursedetailsComponent } from './coursedetails/coursedetails.component';
 import { CourseComponent } from './course/course.component';
+import { PhotoViewer } from '@ionic-native/photo-viewer/ngx';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { CourseComponent } from './course/course.component';
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    PhotoViewer
   ],
   bootstrap: [AppComponent]
 })
