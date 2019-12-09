@@ -17,28 +17,23 @@ export class AppComponent {
   name: string;
   public appPages = [
     {
-      title: 'Home',
-      url: '/home',
-      icon: 'home'
-    },
-    {
       title: 'Courses',
       url: '/course',
       icon: 'list'
     },
     {
       title: 'Student Artwork',
-      url: '/work',
+      url: '/art-work',
       icon: 'list'
     },
     {
       title: 'Placement Record',
-      url: '/placementrecord',
+      url: '/placement',
       icon: 'list'
     },
     {
       title: 'Infrastructure',
-      url: '/infrest',
+      url: '/infrastructure',
       icon: 'list'
     },
     {
