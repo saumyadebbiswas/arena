@@ -5,9 +5,7 @@
         <img src="../assets/images/manu.png" alt="" class="manu-icon">
       </ion-menu-button>
     </ion-buttons>
-    <ion-title class="text-center">
-      Placement Record
-    </ion-title>
+    <ion-title class="text-center">Placement Record</ion-title>
     <div class="notification">
       <a><img src="../assets/images/notification-icon.png" alt="">
       <span>2</span>
@@ -26,22 +24,13 @@
             <div class="nav-tabs-wrapper">
               <ul class="nav nav-tabs tab-bar" data-tabs="tabs">
 
-                <li class="nav-item">
-                    <a class="nav-link active" href="#home" data-toggle="tab">2019 - 20</a>
+                <li *ngFor="let year of year_list; let i = index" class="nav-item">
+                  <a class="nav-link" [ngClass]="i == '0' ? 'active' : ''" href="#year_{{i}}" data-toggle="tab">{{year.year_from}} - {{year.year_to}}</a>
                 </li>
-                
-                <li class="nav-item">
-                    <a class="nav-link" href="#updates" data-toggle="tab">2018 - 19</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#history" data-toggle="tab">2017 - 18</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#geo" data-toggle="tab">2016 - 17</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#math" data-toggle="tab">2015 - 16</a>
-                </li>
+
+                <!-- <li class="nav-item">
+                  <a class="nav-link active" href="#home" data-toggle="tab">2019 - 20</a>
+                </li> -->
               </ul>
             </div>
           </div>
@@ -49,40 +38,33 @@
 
         <div class="card-body ">
             <div class="tab-content text-center">
-                <div class="tab-pane active" id="home">
+              
+              <div *ngFor="let year of year_list; let i = index" class="tab-pane" [ngClass]="i == '0' ? 'active' : ''" id="year_{{i}}">
+                <ul class="place-box">
+
+                    <li *ngFor="let placement of placement_list">
+                      <div *ngIf="year.id == placement.year_id">
+                        <img src="{{site_url}}/placement_image/{{placement.image_name}}" alt="">
+                        <h4>{{placement.name}}</h4>
+                        <p>Company: {{placement.company}} <br> Course: {{placement.post}}</p>
+                      </div>
+                    </li>
+                    
+                    <!-- <li>
+                      <div>
+                        <img src="../../assets/images/user3-img.png" alt="">
+                        <h4>Test Name2</h4>
+                        <-- <p>23 March 2019</p> ->
+                        <p>Company: TCS <br> Course: GWDD</p>
+                      </div>
+                    </li> -->
+                </ul>
+              </div>
+
+              <!-- <div class="tab-pane" id="updates">
                     <ul class="place-box">
                         <li><img src="../../assets/images/user2-img.png" alt="">
                           <h4>Test Name1</h4>
-                          <!-- <p>23 March 2019</p> -->
-                          <p>Company: Wipro <br> Course: VFX</p>
-                        </li>
-                        
-                        <li><img src="../../assets/images/user3-img.png" alt="">
-                          <h4>Test Name2</h4>
-                          <p>Company: TCS <br> Course: GWDD</p>
-                        </li>
-              
-                        <li><img src="../../assets/images/user4-img.png" alt="">
-                          <h4>Test Name3</h4>
-                          <p>Company: Capgemini <br> Course: 3D Animation</p>
-                        </li>
-              
-                        <li><img src="../../assets/images/user5-img.png" alt="">
-                          <h4>Test Name4</h4>
-                          <p>Company: Wipro <br> Course: Graphic Designer</p>
-                        </li>
-              
-                        <li><img src="../../assets/images/user-img.png" alt="">
-                          <h4>Test Name5</h4>
-                          <p>Company: PWC <br> Course: VFX</p>
-                        </li>
-                      </ul>
-                </div>
-                <div class="tab-pane" id="updates">
-                    <ul class="place-box">
-                        <li><img src="../../assets/images/user2-img.png" alt="">
-                          <h4>Test Name1</h4>
-                          <!-- <p>23 March 2019</p> -->
                           <p>Company: Wipro <br> Course: VFX</p>
                         </li>
                         
@@ -97,86 +79,12 @@
                           <p>Company: PWC <br> Course: VFX</p>
                         </li>
                       </ul>
-                </div>
-                <div class="tab-pane" id="history">
-                    <ul class="place-box">
-                        <li><img src="../../assets/images/user2-img.png" alt="">
-                          <h4>Test Name1</h4>
-                          <!-- <p>23 March 2019</p> -->
-                          <p>Company: Wipro <br> Course: VFX</p>
-                        </li>
-                        
-                        <li><img src="../../assets/images/user3-img.png" alt="">
-                          <h4>Test Name2</h4>
-                          <p>Company: TCS <br> Course: GWDD</p>
-                        </li>
-              
-                        <li><img src="../../assets/images/user4-img.png" alt="">
-                          <h4>Test Name3</h4>
-                          <p>Company: Capgemini <br> Course: 3D Animation</p>
-                        </li>
-              
-                        <li><img src="../../assets/images/user5-img.png" alt="">
-                          <h4>Test Name4</h4>
-                          <p>Company: Wipro <br> Course: Graphic Designer</p>
-                        </li>
-              
-                      </ul>
-                </div>
-                <div class="tab-pane" id="geo">
-                    <ul class="place-box">
-                        
-              
-                        <li><img src="../../assets/images/user4-img.png" alt="">
-                          <h4>Test Name1</h4>
-                          <p>Company: Capgemini <br> Course: 3D Animation</p>
-                        </li>
-              
-                        <li><img src="../../assets/images/user5-img.png" alt="">
-                          <h4>Test Name2</h4>
-                          <p>Company: Wipro <br> Course: Graphic Designer</p>
-                        </li>
-              
-                        <li><img src="../../assets/images/user-img.png" alt="">
-                          <h4>Test Name3</h4>
-                          <p>Company: PWC <br> Course: VFX</p>
-                        </li>
-                        
-                      </ul>
-                </div>
-                <div class="tab-pane" id="math">
-                    <ul class="place-box">
-                        
-              
-                        <li><img src="../../assets/images/user4-img.png" alt="">
-                          <h4>Test Name1</h4>
-                          <p>Company: Capgemini <br> Course: 3D Animation</p>
-                        </li>
-              
-                        <li><img src="../../assets/images/user5-img.png" alt="">
-                          <h4>Test Name2</h4>
-                          <p>Company: Wipro <br> Course: Graphic Designer</p>
-                        </li>
-                        <li><img src="../../assets/images/user2-img.png" alt="">
-                          <h4>Test Name3</h4>
-                          <!-- <p>23 March 2019</p> -->
-                          <p>Company: Wipro <br> Course: VFX</p>
-                        </li>
-                        
-                        <li><img src="../../assets/images/user3-img.png" alt="">
-                          <h4>Test Name4</h4>
-                          <p>Company: TCS <br> Course: GWDD</p>
-                        </li>
-              
-                        <li><img src="../../assets/images/user-img.png" alt="">
-                          <h4>Test Name5</h4>
-                          <p>Company: PWC <br> Course: VFX</p>
-                        </li>
-                      </ul>
-                </div>
+                </div> -->
             </div>
         </div>
       </div>
+
+      <div *ngIf="year_list.length == 0" class="card card-nav-tabs card-plain"><span>{{message}}</span></div>
       <!-- End Tabs with icons on Card -->
     </ion-row>
 

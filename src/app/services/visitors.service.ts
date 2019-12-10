@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { API_LINK } from './constants';
 
@@ -23,4 +22,16 @@ export class VisitorsService {
   art_list() {
     return this.http.get<any>(this.api_url+'/artgallery/list', {headers: this.requestHeader});
   }
+
+  placement_year_list() {
+    return this.http.get<any>(this.api_url+'/placementyear/details', {headers: this.requestHeader});
+  }
+
+  placement_list() {
+    return this.http.get<any>(this.api_url+'/placement/details', {headers: this.requestHeader});
+  }
+
+  // campus_list() {
+  //   return this.http.get<any>(this.api_url+'/placement/details', {headers: this.requestHeader});
+  // }
 }

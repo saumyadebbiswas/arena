@@ -30,7 +30,7 @@ export class WorkComponent implements OnInit {
 
   ngOnInit() {}
 
-  ionViewWillEnter(){ 
+  ionViewWillEnter() { 
     if(this.userService.currentUserValue == null) {
       this.router.navigate(['/login']);
     } else {
@@ -67,7 +67,7 @@ export class WorkComponent implements OnInit {
 
       const alert = await this.alertCtrl.create({
         header: 'Error!',
-        message: "Internal problem! "+error,
+        message: "Internal problem! " + error,
         buttons: ['OK']
       });
       alert.present();
