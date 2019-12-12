@@ -15,6 +15,10 @@ export class VisitorsService {
     this.requestHeader.append('Content-Type', 'application/json');
   }
 	
+  course_details() {
+    return this.http.get<any>(this.api_url+'/course/details', {headers: this.requestHeader});
+  }
+	
   art_categories() {
     return this.http.get<any>(this.api_url+'/artcategory/list', {headers: this.requestHeader});
   }
