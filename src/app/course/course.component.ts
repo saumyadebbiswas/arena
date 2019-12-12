@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { UserService, VisitorsService } from '../services';
 import { Platform, AlertController, LoadingController } from '@ionic/angular';
 import { SITE_URL } from '../services/constants';
+import { FileOpener } from '@ionic-native/file-opener/ngx';
 
 @Component({
   selector: 'app-course',
@@ -22,7 +23,8 @@ export class CourseComponent implements OnInit {
     public loadingController: LoadingController,
     public userService: UserService,
     public visitorsService: VisitorsService,
-    private platform: Platform
+    private platform: Platform,
+    private fileOpener: FileOpener
   ) {
     this.site_url = SITE_URL;
   }
@@ -57,8 +59,8 @@ export class CourseComponent implements OnInit {
     });
     loading.present();
 
-    this.visitorsService.course_details().subscribe(async response => {
-      console.log('Course details...', response);
+    this.visitorsService.course_list().subscribe(async response => {
+      //console.log('Course details...', response);
       //--- After get record - dismiss loader
       this.loadingController.dismiss();
 
@@ -79,6 +81,13 @@ export class CourseComponent implements OnInit {
       });
       alert.present();
     });
+  }
+
+  viewSyllabus(file_path: string) {
+    //console.log('Syllabus file path...', file_path);
+    this.fileOpener.open(file_path, 'application/pdf')
+    .then(() => console.log('File is opened'))
+    .catch(e => console.log('Error opening file', e));
   }
 
 }

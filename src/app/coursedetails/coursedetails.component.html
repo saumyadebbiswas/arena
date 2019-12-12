@@ -1,47 +1,39 @@
 <ion-header>
- 
-    <div class="head">
+  <div class="head">
     <ion-buttons slot="start">
       <ion-menu-button>
         <img src="../assets/images/manu.png" alt="" class="manu-icon">
       </ion-menu-button>
     </ion-buttons>
-    <ion-title class="text-center">
-      Course Details
-    </ion-title>
+
+    <ion-title class="text-center">{{course_details.name}}</ion-title>
+
     <div class="notification">
       <a><img src="../assets/images/notification-icon.png" alt="">
       <span>2</span>
       </a>
     </div>
   </div>
-  
-  </ion-header>
+</ion-header>
 
-  <ion-content>
-      <div padding class="ex-pad" >
-        <ion-row justify-content-center class="product-sec">
-            <ul class="place-box">
-                <li>
-                    <div class="drec-box">
-                      <h4>Graphics Web Design & Development</h4>
-                      <div class="detal-box">
-                          <span><i class="fa fa-tags"></i> Fees : ₹ 90,000</span>
-                        <span><a href="#"><i class="fa fa-eye"></i> View Syllabus</a></span>
-                          <span><i class="fa fa-clock-o"></i> Drration : 12 Months</span>
-                      </div>
-                      <p>Graphics Web Design & Development (GWDD) Plus is a comprehensive program that trains students in all aspects of Graphic 
-                      & Web Designing, development along with digital marketing which makes you a complete digital media professional.<br>
+<ion-content>
+  <div padding class="ex-pad" >
+    <ion-row justify-content-center class="product-sec">
+      <ul class="place-box">
+        <li>
+          <div class="drec-box">
+            <!-- <h4>{{course_details.name}}</h4> -->
+            <div class="detal-box">
+              <span><i class="fa fa-tags"></i> Fees : ₹ {{course_details.fees}}</span>
+              <span><a (click)="viewSyllabus(site_url+'/course_syllabus/'+course_details.file_name)"><i class="fa fa-eye"></i> View Syllabus</a></span>
+              <span><i class="fa fa-clock-o"></i> Duration : {{course_details.duration}} Month</span>
+            </div>
+            <div innerHTML={{course_details.description}}></div>
+          </div>
+        </li>
+      </ul>
 
-                      It uses industry-endorsed techniques to make the student an in demand new media creative professional for rich multimedia
-                       content, visually appealing websites, logos for advertisements, concepts of digital graphics, concepts of programming, 
-                       image editing for print & publishing, Internet advertising, Mobile Marketing etc.
-                    </p>
-                    </div>
-                    
-                </li>
-               
-              </ul>
-          </ion-row>
-      </div>
-  </ion-content>
+      <div *ngIf="course_details == null" class="card card-nav-tabs card-plain"><span>{{message}}</span></div>
+    </ion-row>
+  </div>
+</ion-content>

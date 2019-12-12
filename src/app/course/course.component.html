@@ -26,13 +26,13 @@
             <img src="{{site_url}}/course_image/{{course.image_name}}" alt="">
             <div class="drec-box">
               <h4>{{course.name}}</h4>
-              <p>Graphics Web Design & Development (GWDD) Plus is a comprehensive.. &nbsp; <a routerLink="/course-details">Read more</a></p>
+              <p>{{course.short_description}}... &nbsp; <a routerLink="/course-details/{{course.id}}">Read more</a></p>
             </div>
           </div>
           <div class="detal-box">
             <span><i class="fa fa-tags"></i> Fees : ₹ {{course.fees}}</span>
             <span>
-              <a href="JavaScript:Void(0);"><i class="fa fa-eye"></i> View Syllabus </a>
+              <a (click)="viewSyllabus(site_url+'/course_syllabus/'+course.file_name)"><i class="fa fa-eye"></i> View Syllabus </a>
             </span>
             <span><i class="fa fa-clock-o"></i> Duration : {{course.duration}} Month</span>
           </div>
@@ -53,6 +53,8 @@
           </div>
         </li> -->
       </ul>
+
+      <div *ngIf="course_list.length == 0" class="card card-nav-tabs card-plain"><span>{{message}}</span></div>
     </ion-row>
   </div>
 </ion-content>

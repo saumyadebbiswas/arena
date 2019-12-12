@@ -21,7 +21,7 @@ const routes: Routes = [
   { path: "videos",  component: VideosComponent},
   { path: "infrastructure",  component: InfrestComponent},
   { path: "art-work",  component: WorkComponent},
-  { path: "course-details",  component: CoursedetailsComponent},
+  { path: "course-details/:id",  component: CoursedetailsComponent},
   { path: "course",  component: CourseComponent}
 ];
 
