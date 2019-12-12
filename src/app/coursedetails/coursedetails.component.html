@@ -6,7 +6,7 @@
       </ion-menu-button>
     </ion-buttons>
 
-    <ion-title class="text-center">{{course_details.name}}</ion-title>
+    <ion-title class="text-center">Course Details</ion-title>
 
     <div class="notification">
       <a><img src="../assets/images/notification-icon.png" alt="">
@@ -22,7 +22,7 @@
       <ul class="place-box">
         <li>
           <div class="drec-box">
-            <!-- <h4>{{course_details.name}}</h4> -->
+            <h4>{{course_details.name}}</h4>
             <div class="detal-box">
               <span><i class="fa fa-tags"></i> Fees : ₹ {{course_details.fees}}</span>
               <span><a (click)="viewSyllabus(site_url+'/course_syllabus/'+course_details.file_name)"><i class="fa fa-eye"></i> View Syllabus</a></span>
