@@ -38,23 +38,9 @@
           </div>
         </li>
         
-        <!-- <li>
-          <div class="cours-detal">
-            <img src="../../assets/images/course2.jpg" alt="">
-            <div class="drec-box">
-              <h4>Print & Publishing</h4>
-              <p>Arena’s Print & Publishing course trains you in design and visualisation.. &nbsp; <a routerLink="/course-details">Read more</a></p>
-            </div>
-          </div>
-          <div class="detal-box">
-              <span><i class="fa fa-tags"></i> Fees : ₹ 60,000</span>
-            <span><a href="JavaScript:Void(0);"><i class="fa fa-eye"></i> View Syllabus </a></span>
-              <span><i class="fa fa-clock-o"></i> Drration : 8 Months</span>
-          </div>
-        </li> -->
       </ul>
 
-      <div *ngIf="course_list.length == 0" class="card card-nav-tabs card-plain"><span>{{message}}</span></div>
+      <div *ngIf="course_list.length == 0"><span>{{message}}</span></div>
     </ion-row>
   </div>
 </ion-content>

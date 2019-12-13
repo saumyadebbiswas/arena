@@ -19,7 +19,8 @@ import { WorkComponent } from './work/work.component';
 import { CoursedetailsComponent } from './coursedetails/coursedetails.component';
 import { CourseComponent } from './course/course.component';
 import { PhotoViewer } from '@ionic-native/photo-viewer/ngx';
-import { FileOpener } from '@ionic-native/file-opener/ngx';
+//import { FileOpener } from '@ionic-native/file-opener/ngx';
+import { DocumentViewer } from '@ionic-native/document-viewer/ngx';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { FileOpener } from '@ionic-native/file-opener/ngx';
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     PhotoViewer,
-    FileOpener
+    //FileOpener,
+    DocumentViewer 
   ],
   bootstrap: [AppComponent]
 })

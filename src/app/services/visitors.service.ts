@@ -39,7 +39,11 @@ export class VisitorsService {
     return this.http.get<any>(this.api_url+'/placement/details', {headers: this.requestHeader});
   }
 
-  // campus_list() {
-  //   return this.http.get<any>(this.api_url+'/placement/details', {headers: this.requestHeader});
-  // }
+  campus_list() {
+    return this.http.get<any>(this.api_url+'/campus/details', {headers: this.requestHeader});
+  }
+
+  infrastructure_list(campus_id: any) {
+    return this.http.get<any>(this.api_url+'/campus/details/'+campus_id, {headers: this.requestHeader});
+  }
 }
