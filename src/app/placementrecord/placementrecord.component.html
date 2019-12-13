@@ -49,42 +49,14 @@
                         <p>Company: {{placement.company}} <br> Course: {{placement.post}}</p>
                       </div>
                     </li>
-                    
-                    <!-- <li>
-                      <div>
-                        <img src="../../assets/images/user3-img.png" alt="">
-                        <h4>Test Name2</h4>
-                        <-- <p>23 March 2019</p> ->
-                        <p>Company: TCS <br> Course: GWDD</p>
-                      </div>
-                    </li> -->
+
                 </ul>
               </div>
 
-              <!-- <div class="tab-pane" id="updates">
-                    <ul class="place-box">
-                        <li><img src="../../assets/images/user2-img.png" alt="">
-                          <h4>Test Name1</h4>
-                          <p>Company: Wipro <br> Course: VFX</p>
-                        </li>
-                        
-                        <li><img src="../../assets/images/user4-img.png" alt="">
-                          <h4>Test Name2</h4>
-                          <p>Company: Capgemini <br> Course: 3D Animation</p>
-                        </li>
-              
-              
-                        <li><img src="../../assets/images/user-img.png" alt="">
-                          <h4>Test Name3</h4>
-                          <p>Company: PWC <br> Course: VFX</p>
-                        </li>
-                      </ul>
-                </div> -->
+              <div *ngIf="year_list.length == 0" class="card card-nav-tabs card-plain"><span>{{message}}</span></div>
             </div>
         </div>
       </div>
-
-      <div *ngIf="year_list.length == 0" class="card card-nav-tabs card-plain"><span>{{message}}</span></div>
       <!-- End Tabs with icons on Card -->
     </ion-row>
 

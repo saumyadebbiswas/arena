@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { UserService, VisitorsService } from '../services';
 import { SITE_URL } from '../services/constants';
-import { FileOpener } from '@ionic-native/file-opener/ngx';
+//import { FileOpener } from '@ionic-native/file-opener/ngx';
 
 @Component({
   selector: 'app-coursedetails',
@@ -24,7 +24,7 @@ export class CoursedetailsComponent implements OnInit {
     public loadingController: LoadingController,
     public userService: UserService,
     public visitorsService: VisitorsService,
-    private fileOpener: FileOpener
+    //private fileOpener: FileOpener
   ) {
     this.site_url = SITE_URL;
   }
@@ -78,9 +78,9 @@ export class CoursedetailsComponent implements OnInit {
 
   viewSyllabus(file_path: string) {
     //console.log('Syllabus file path...', file_path);
-    this.fileOpener.open(file_path, 'application/pdf')
-    .then(() => console.log('File is opened'))
-    .catch(e => console.log('Error opening file', e));
+    // this.fileOpener.open(file_path, 'application/pdf')
+    // .then(() => console.log('File is opened'))
+    // .catch(e => console.log('Error opening file', e));
   }
 
 }

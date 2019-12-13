@@ -24,13 +24,18 @@
 
             <!-- <ion-item class="form-group frm"> -->
             <span class="icon7"><i class="fa fa-phone "></i></span>
-            <ion-input type="text" class="info-frm" id="phone" [(ngModel)]="phone" placeholder="Phone Number"></ion-input>
+            <ion-input type="number" class="info-frm" id="phone" [(ngModel)]="phone" placeholder="Phone Number"></ion-input>
             <!-- </ion-item> -->
 
             <!-- <ion-item class="form-group frm"> -->
-            <span class="icon8"><i class="fa fa-unlock"></i></span>
+            <span class="icon8"><i class="fa fa-lock"></i></span>
             <ion-input type="password" class="info-frm" id="password" [(ngModel)]="password" placeholder="Password" ></ion-input>
             <!-- </ion-item> -->
+
+            <span class="icon9"><i class="fa fa-book"></i></span>
+            <ion-select id="course_id" class="info-frm" placeholder="Course of Interest" [(ngModel)]="course_id">
+              <ion-select-option *ngFor="let course of course_list" [value]="course.id">{{course.name}}</ion-select-option>
+            </ion-select>
       
           </div>
 

@@ -94,11 +94,13 @@ export class LoginComponent implements OnInit {
           alert.present();
         }
       }, async error => {
+        console.log('Login error...', error);
+        
         //--- In case of login error - dismiss loader, show error message
         this.loadingController.dismiss();
         const alert = await this.alertCtrl.create({
           header: 'Error!',
-          message: "Internal problem! " + error,
+          message: "Internal problem!",
           buttons: ['OK']
           });
         alert.present();
