@@ -25,7 +25,7 @@
             <h4>{{course_details.name}}</h4>
             <div class="detal-box">
               <span><i class="fa fa-tags"></i> Fees : ₹ {{course_details.fees}}</span>
-              <span><a (click)="viewSyllabus(site_url+'/course_syllabus/'+course_details.file_name)"><i class="fa fa-eye"></i> View Syllabus</a></span>
+              <span><a (click)="viewSyllabus(site_url+'/course_syllabus/'+course_details.file_name, course_details.name)"><i class="fa fa-eye"></i> View Syllabus</a></span>
               <span><i class="fa fa-clock-o"></i> Duration : {{course_details.duration}} Month</span>
             </div>
             <div innerHTML={{course_details.description}}></div>

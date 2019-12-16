@@ -3,8 +3,6 @@ import { Router } from '@angular/router';
 import { UserService, VisitorsService } from '../services';
 import { Platform, AlertController, LoadingController } from '@ionic/angular';
 import { SITE_URL } from '../services/constants';
-//import { FileOpener } from '@ionic-native/file-opener/ngx';
-import { DocumentViewer, DocumentViewerOptions } from '@ionic-native/document-viewer/ngx';
 import { PdfViewerService } from '../services/pdf-viewer.service';
 
 @Component({
@@ -26,8 +24,6 @@ export class CourseComponent implements OnInit {
     public userService: UserService,
     public visitorsService: VisitorsService,
     private platform: Platform,
-    //private fileOpener: FileOpener,
-    private documentViewer: DocumentViewer,
     private pdf: PdfViewerService
   ) {
     this.site_url = SITE_URL;
@@ -88,17 +84,7 @@ export class CourseComponent implements OnInit {
   }
 
   viewSyllabus(url, title) {
-    console.log('Syllabus url and title...', url, title);
-    this.pdf.download(url, title);
-
-    // const options: DocumentViewerOptions = {
-    //   title: 'Syllabus'
-    // }
-
-    // this.documentViewer.viewDocument(file_path, 'application/pdf', options);
-    // this.fileOpener.open(file_path, 'application/pdf')
-    // .then(() => console.log('File is opened'))
-    // .catch(e => console.log('Error opening file', e));
+    this.pdf.download(url, title + ' Syllabus');
   }
 
 }
