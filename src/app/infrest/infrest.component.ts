@@ -85,7 +85,7 @@ export class InfrestComponent implements OnInit {
     let campus_id = this.campus_list[0].id;
 
     this.visitorsService.infrastructure_list(campus_id).subscribe(async response => {
-      console.log('Infrastructure list details...', response);
+      //console.log('Infrastructure list details...', response);
       //--- After get record - dismiss loader
       this.loadingController.dismiss();
 

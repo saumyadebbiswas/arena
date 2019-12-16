@@ -19,8 +19,11 @@ import { WorkComponent } from './work/work.component';
 import { CoursedetailsComponent } from './coursedetails/coursedetails.component';
 import { CourseComponent } from './course/course.component';
 import { PhotoViewer } from '@ionic-native/photo-viewer/ngx';
-//import { FileOpener } from '@ionic-native/file-opener/ngx';
 import { DocumentViewer } from '@ionic-native/document-viewer/ngx';
+import { FileOpener } from "@ionic-native/file-opener/ngx";
+import { File } from "@ionic-native/file/ngx";
+import { FileTransfer } from "@ionic-native/file-transfer/ngx";
+import { PdfViewerService } from "./services/pdf-viewer.service";
 
 @NgModule({
   declarations: [
@@ -46,10 +49,13 @@ import { DocumentViewer } from '@ionic-native/document-viewer/ngx';
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     PhotoViewer,
-    //FileOpener,
-    DocumentViewer 
+    DocumentViewer,
+    FileTransfer,
+    FileOpener,
+    File,
+    PdfViewerService,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
 })

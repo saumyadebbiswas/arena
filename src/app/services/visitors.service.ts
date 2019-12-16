@@ -46,4 +46,8 @@ export class VisitorsService {
   infrastructure_list(campus_id: any) {
     return this.http.get<any>(this.api_url+'/campus/details/'+campus_id, {headers: this.requestHeader});
   }
+
+  videos_list() {
+    return this.http.get<any>(this.api_url+'/videos/details', {headers: this.requestHeader});
+  }
 }

@@ -32,7 +32,7 @@
           <div class="detal-box">
             <span><i class="fa fa-tags"></i> Fees : ₹ {{course.fees}}</span>
             <span>
-              <a (click)="viewSyllabus(site_url+'/course_syllabus/'+course.file_name)"><i class="fa fa-eye"></i> View Syllabus </a>
+              <a (click)="viewSyllabus(site_url+'/course_syllabus/'+course.file_name, course.name)"><i class="fa fa-eye"></i> View Syllabus </a>
             </span>
             <span><i class="fa fa-clock-o"></i> Duration : {{course.duration}} Month</span>
           </div>
