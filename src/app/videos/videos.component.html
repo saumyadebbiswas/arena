@@ -24,48 +24,7 @@
         </li>
       </ul>
 
-      <!-- <ul class="gallery">
-
-        <li data-toggle="modal" data-src="https://www.youtube.com/embed/YE7VzlLtp-4?rel=0" data-target="#myModal2" class="video-btn" type="video/mp4">
-          <div>
-            <img src="../assets/images/Big_Buck_Bunny_1_96.jpg" alt=""   >
-          </div>
-        </li>
-
-        <-- Not acceptable: Single video supportable ->
-        <li> 
-          <a onclick="lightbox_open();">
-            <div>
-              <img src="../assets/images/Big_Buck_Bunny_1_96.jpg" alt="">
-            </div>
-          </a>
-        </li>
-
-        <li data-toggle="modal" data-src="https://player.vimeo.com/video/1084537" data-target="#myModal2" class="video-btn" type="video/mp4">
-          <div>
-            <img src="../assets/images/Big_Buck_Bunny_2_96.jpg" alt=""   >
-          </div>
-        </li>
-        
-        <-- Error: Video downloded on click ->
-        <li data-toggle="modal" data-src="https://html5box.com/html5lightbox/images/Big_Buck_Bunny_2.m4v" data-target="#myModal2" class="video-btn" type="video/mp4">
-          <div>
-            <img src="../assets/images/Big_Buck_Bunny_3_96.jpg" alt="">
-          </div>
-        </li>
-
-      </ul> -->
+      <div *ngIf="video_list.length == 0"><span>{{message}}</span></div>
     </ion-row>
-
-    <!-- <ion-row>
-      <div id="light">
-        <a class="boxclose" id="boxclose" onclick="lightbox_close();"></a>
-        <video id="VisaChipCardVideo" width="100%" controls>
-          <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-        </video>
-      </div>
-      
-      <div id="fade" onClick="lightbox_close();"></div>
-    </ion-row> -->
   </div>
 </ion-content>
