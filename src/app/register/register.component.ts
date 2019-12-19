@@ -81,10 +81,10 @@ export class RegisterComponent implements OnInit {
         buttons: ['OK']
         });
       alert.present();
-    } else if(this.email.length == 0 && this.phone.length == 0) {
+    } else if(this.phone.length == 0) {
       const alert = await this.alertCtrl.create({
         header: 'Error!',
-        message: "Enter either email ID or phone number!",
+        message: "Enter phone number!",
         buttons: ['OK']
         });
       alert.present();

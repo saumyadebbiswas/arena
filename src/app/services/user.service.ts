@@ -14,14 +14,12 @@ export class UserService {
   requestHeader: any = new HttpHeaders();
 
 	private currentUserSubject: BehaviorSubject<User>;
-	public currentUser: Observable<User>;
 
   constructor( private http: HttpClient ) {
     this.api_url = API_LINK;
     this.requestHeader.append('Content-Type', 'application/json');
 
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
-		this.currentUser = this.currentUserSubject.asObservable();
   }
 
 	public get currentUserValue(): User {
@@ -29,14 +27,14 @@ export class UserService {
 	}
 
   login(sendData: any): Observable<any> {
-    return this.http.post<any>(this.api_url+'/student/login', sendData, {headers: this.requestHeader}).pipe(map(user => {
+    return this.http.post<any>(this.api_url+'/student/login', sendData, {headers: this.requestHeader}).pipe(map(response => {
       //--- Set current user details in local storage
-			if(user.status == true) {
-				localStorage.setItem('currentUser', JSON.stringify(user.data));
-				this.currentUserSubject.next(user.data);
+			if(response.status == true) {
+				localStorage.setItem('currentUser', JSON.stringify(response.data));
+				this.currentUserSubject.next(response.data);
       }
       
-			return user;
+			return response;
 		}));
   }
 	

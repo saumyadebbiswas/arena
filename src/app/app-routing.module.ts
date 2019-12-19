@@ -8,6 +8,9 @@ import { InfrestComponent } from './infrest/infrest.component';
 import { WorkComponent } from './work/work.component';
 import { CoursedetailsComponent } from './coursedetails/coursedetails.component';
 import { CourseComponent } from './course/course.component';
+import { RegisterStudentComponent } from './register-student/register-student.component';
+import { StudentGuard } from './guards/student.guard';
+import { AdminGuard } from './guards/admin.guard';
 
 const routes: Routes = [
   {
@@ -15,14 +18,15 @@ const routes: Routes = [
     redirectTo: 'login',
     pathMatch: 'full'
   },
-  { path: "login",  component: LoginComponent},
-  { path: "register",  component: RegisterComponent},
-  { path: "placement",  component: PlacementrecordComponent},
-  { path: "videos",  component: VideosComponent},
-  { path: "infrastructure",  component: InfrestComponent},
-  { path: "art-work",  component: WorkComponent},
-  { path: "course-details/:id",  component: CoursedetailsComponent},
-  { path: "course",  component: CourseComponent}
+  { path: "login", component: LoginComponent},
+  { path: "register", component: RegisterComponent},
+  { path: "placement", component: PlacementrecordComponent, canActivate: [StudentGuard]},
+  { path: "videos", component: VideosComponent, canActivate: [StudentGuard]},
+  { path: "infrastructure", component: InfrestComponent, canActivate: [StudentGuard]},
+  { path: "art-work", component: WorkComponent, canActivate: [StudentGuard]},
+  { path: "course-details/:id", component: CoursedetailsComponent, canActivate: [StudentGuard]},
+  { path: "course", component: CourseComponent, canActivate: [StudentGuard]},
+  { path: "reg-students", component: RegisterStudentComponent, canActivate: [AdminGuard]}
 ];
 
 @NgModule({
