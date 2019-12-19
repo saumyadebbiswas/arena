@@ -6,7 +6,7 @@
     width: 100%;
     list-style-type: none;
   }
-  .place-box li{
+  .place-box li div{
     width: 50%;
     float: left;
     /* margin-right: 3%; */
@@ -19,18 +19,18 @@
     border-right: 1px solid #ddd;
 }
 
-  .place-box li img{
+  .place-box li div img{
     width: 85px;
     border-radius: 50%;
     height: 82px;
     padding: 3px;
     border: 2px solid #a5a5a5bf;
   }
-  .place-box li h4{
+  .place-box li div h4{
     color: #6f6e6e;
     margin-top: 8px;
   }
-  .place-box li p{
+  .place-box li div p{
     margin-bottom: 0.6rem;
     color: #838383;
     font-size: 14px;

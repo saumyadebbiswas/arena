@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
     //--- Redirect to home/dashboard if already logged in
     if(this.userService.currentUserValue) { 
       this.menuCtrl.enable(true);
-      this.router.navigate(['/home']);
+      this.router.navigate(['/course']);
     } else {
       this.menuCtrl.enable(false);
       console.log('Location: LoginComponent');
@@ -76,7 +76,7 @@ export class LoginComponent implements OnInit {
       //console.log('Login sendData...', sendData);
 
       this.userService.login(sendData).subscribe(async response => {
-        console.log('Login response...', response);
+        //console.log('Login response...', response);
         //--- After successful login - dismiss loader, enable side menu, navigate to dashboard
         this.loadingController.dismiss();
 
@@ -84,7 +84,7 @@ export class LoginComponent implements OnInit {
           //--- Set event data which will access from app component page after login
           this.events.publish('userLogin', {loggedin: true});
           this.menuCtrl.enable(true);
-          this.router.navigate(['/home']);
+          this.router.navigate(['/course']);
         } else {
           const alert = await this.alertCtrl.create({
             header: 'Error!',
@@ -94,6 +94,8 @@ export class LoginComponent implements OnInit {
           alert.present();
         }
       }, async error => {
+        console.log('Login error...', error);
+        
         //--- In case of login error - dismiss loader, show error message
         this.loadingController.dismiss();
         const alert = await this.alertCtrl.create({

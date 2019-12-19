@@ -1,80 +1,63 @@
 <ion-header>
- 
   <div class="head">
-  <ion-buttons slot="start">
-    <ion-menu-button>
-      <img src="../assets/images/manu.png" alt="" class="manu-icon">
-    </ion-menu-button>
-  </ion-buttons>
-  <ion-title class="text-center">
-    Student Artwork
-  </ion-title>
-  <div class="notification">
-    <a href="/notifications"><img src="../assets/images/notification-icon.png" alt="">
-    <span>2</span>
-    </a>
-  </div>
-</div>
+    <ion-buttons slot="start">
+      <ion-menu-button>
+        <img src="../assets/images/manu.png" alt="" class="manu-icon">
+      </ion-menu-button>
+    </ion-buttons>
 
+    <ion-title class="text-center">Student Artwork</ion-title>
+
+    <div class="notification">
+      <a><img src="../assets/images/notification-icon.png" alt="">
+      <span>2</span>
+      </a>
+    </div>
+  </div>
 </ion-header>
 
 <ion-content>
   <div padding class="ex-pad" >
     <ion-row>
       <!-- Tabs with icons on Card -->
-      <div class="card card-nav-tabs card-plain">
-          <div class="card-header card-header-danger">
-              <!-- colors: "header-primary", "header-info", "header-success", "header-warning", "header-danger" -->
-              <div class="nav-tabs-navigation">
-                  <div class="nav-tabs-wrapper">
-                      <ul class="nav nav-tabs tab-bar" data-tabs="tabs">
-                          <li class="nav-item">
-                              <a class="nav-link active" href="#td" data-toggle="tab">2D Animation</a>
-                          </li>
-                          <li class="nav-item">
-                              <a class="nav-link" href="#thrd" data-toggle="tab">3D Animation</a>
-                          </li>
-                          <li class="nav-item">
-                              <a class="nav-link" href="#vfx" data-toggle="tab">Visual Effects</a>
-                          </li>
-                      </ul>
+      <div *ngIf="category_list.length != 0" class="card card-nav-tabs card-plain">
+        <div class="card-header card-header-danger">
+          <div class="nav-tabs-navigation">
+            <div class="nav-tabs-wrapper">
+              <ul class="nav nav-tabs tab-bar" data-tabs="tabs">
+
+                <li *ngFor="let category of category_list; let i = index" class="nav-item">
+                  <a class="nav-link" [ngClass]="i == '0' ? 'active' : ''" href="#category_{{i}}" data-toggle="tab">{{category.name}}</a>
+                </li>
+
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-body ">
+          <div class="tab-content text-center">
+
+            <div *ngFor="let category of category_list; let i = index" class="tab-pane" [ngClass]="i == '0' ? 'active' : ''" id="category_{{i}}">
+              <ul class="gallery">
+                <li *ngFor="let art of art_list">
+                  <div *ngIf="category.id == art.category_id">
+                    <img (click)="viewImage(site_url+'/gallery_image/'+art.image_name)" src="{{site_url}}/gallery_image/{{art.image_name}}" alt="" class="img-fluid">
                   </div>
-              </div>
-          </div><div class="card-body ">
-              <div class="tab-content text-center">
-                  <div class="tab-pane active" id="td">
-                    <ul class="gallery">
-                      <li><img src="https://arenakkg.com/wp-content/uploads/2019/07/Moana-Dreepto-Pal.jpg" alt="" data-toggle="modal" data-bigimage="https://arenakkg.com/wp-content/uploads/2019/07/Moana-Dreepto-Pal.jpg" data-target="#myModal" class="img-fluid"></li>
-                      <li><img src="https://arenakkg.com/wp-content/uploads/2019/07/pk-cartoonn-charicature-SAGAR-HALDER.jpg" alt="" data-toggle="modal" data-bigimage="https://arenakkg.com/wp-content/uploads/2019/07/pk-cartoonn-charicature-SAGAR-HALDER.jpg"  data-target="#myModal" class="img-fluid"></li>
-                      <li><img src="https://arenakkg.com/wp-content/uploads/2019/04/s-work-1.jpg" alt="" data-toggle="modal" data-bigimage="https://arenakkg.com/wp-content/uploads/2019/04/s-work-1.jpg"  data-target="#myModal" class="img-fluid"></li>
-                      <li><img src="https://arenakkg.com/wp-content/uploads/2019/06/Aladin-Dreepto-Pal.jpg" alt="" data-toggle="modal" data-bigimage="https://arenakkg.com/wp-content/uploads/2019/06/Aladin-Dreepto-Pal.jpg"  data-target="#myModal" class="img-fluid"></li>
-                      <li><img src="https://arenakkg.com/wp-content/uploads/2019/06/Final_output_view01.jpg" alt="" data-toggle="modal" data-bigimage="https://arenakkg.com/wp-content/uploads/2019/06/Final_output_view01.jpg"  data-target="#myModal" class="img-fluid"></li>
-                  </ul>
-                  </div>
-                  <div class="tab-pane" id="thrd">
-                    <ul class="gallery">
-                        <li><img src="https://arenakkg.com/wp-content/uploads/2019/04/s-work-1.jpg" alt="" data-toggle="modal" data-bigimage="https://arenakkg.com/wp-content/uploads/2019/04/s-work-1.jpg"  data-target="#myModal" class="img-fluid"></li>
-                        <li><img src="https://arenakkg.com/wp-content/uploads/2019/06/Aladin-Dreepto-Pal.jpg" alt="" data-toggle="modal" data-bigimage="https://arenakkg.com/wp-content/uploads/2019/06/Aladin-Dreepto-Pal.jpg"  data-target="#myModal" class="img-fluid"></li>
-                        <li><img src="https://arenakkg.com/wp-content/uploads/2019/06/Final_output_view01.jpg" alt="" data-toggle="modal" data-bigimage="https://arenakkg.com/wp-content/uploads/2019/06/Final_output_view01.jpg"  data-target="#myModal" class="img-fluid"></li>
-                  </ul>
-                  </div>
-                  <div class="tab-pane" id="vfx">
-                    <ul class="gallery">
-                      <li><img src="https://arenakkg.com/wp-content/uploads/2019/04/s-work-1.jpg" alt="" data-toggle="modal" data-bigimage="https://arenakkg.com/wp-content/uploads/2019/04/s-work-1.jpg"  data-target="#myModal" class="img-fluid"></li>
-                      <li><img src="https://arenakkg.com/wp-content/uploads/2019/07/Moana-Dreepto-Pal.jpg" alt="" data-toggle="modal" data-bigimage="https://arenakkg.com/wp-content/uploads/2019/07/Moana-Dreepto-Pal.jpg" data-target="#myModal" class="img-fluid"></li>
-                      <li><img src="https://arenakkg.com/wp-content/uploads/2019/06/Aladin-Dreepto-Pal.jpg" alt="" data-toggle="modal" data-bigimage="https://arenakkg.com/wp-content/uploads/2019/06/Aladin-Dreepto-Pal.jpg"  data-target="#myModal" class="img-fluid"></li>
-                      <li><img src="https://arenakkg.com/wp-content/uploads/2019/06/Final_output_view01.jpg" alt="" data-toggle="modal" data-bigimage="https://arenakkg.com/wp-content/uploads/2019/06/Final_output_view01.jpg"  data-target="#myModal" class="img-fluid"></li>
-                  </ul>
-                  </div>
-                  
-              </div>
-          </div></div>
+                </li>
+
+                <!-- <li><img src="https://arenakkg.com/wp-content/uploads/2019/07/pk-cartoonn-charicature-SAGAR-HALDER.jpg" alt="" data-toggle="modal" data-bigimage="https://arenakkg.com/wp-content/uploads/2019/07/pk-cartoonn-charicature-SAGAR-HALDER.jpg"  data-target="#myModal" class="img-fluid"></li>-->
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="category_list.length == 0" class="card card-nav-tabs card-plain"><span>{{message}}</span></div>
       <!-- End Tabs with icons on Card -->
     </ion-row>
 
-    <ion-row justify-content-center class="product-sec">
-              
-    </ion-row>
+    <ion-row justify-content-center class="product-sec"></ion-row>
   </div>
-
 </ion-content>

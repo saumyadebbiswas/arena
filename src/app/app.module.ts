@@ -12,26 +12,24 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { LandingComponent } from './landing/landing.component';
-import { TwoDComponent } from './two-d/two-d.component';
-import { ThreeDComponent } from './three-d/three-d.component';
-import { VfxComponent } from './vfx/vfx.component';
 import { PlacementrecordComponent } from './placementrecord/placementrecord.component';
 import { VideosComponent } from './videos/videos.component';
 import { InfrestComponent } from './infrest/infrest.component';
 import { WorkComponent } from './work/work.component';
 import { CoursedetailsComponent } from './coursedetails/coursedetails.component';
 import { CourseComponent } from './course/course.component';
+import { PhotoViewer } from '@ionic-native/photo-viewer/ngx';
+import { DocumentViewer } from '@ionic-native/document-viewer/ngx';
+import { FileOpener } from "@ionic-native/file-opener/ngx";
+import { File } from "@ionic-native/file/ngx";
+import { FileTransfer } from "@ionic-native/file-transfer/ngx";
+import { PdfViewerService } from "./services/pdf-viewer.service";
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    LandingComponent,
-    TwoDComponent,
-    ThreeDComponent,
-    VfxComponent,
     PlacementrecordComponent,
     VideosComponent,
     InfrestComponent,
@@ -51,6 +49,12 @@ import { CourseComponent } from './course/course.component';
   providers: [
     StatusBar,
     SplashScreen,
+    PhotoViewer,
+    DocumentViewer,
+    FileTransfer,
+    FileOpener,
+    File,
+    PdfViewerService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

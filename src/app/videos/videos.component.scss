@@ -1,11 +1,15 @@
-.ex-pad{
-    padding: 15px 0 0 15px;
-  }
-  .gallery li {
+.ex-pad {
+  padding: 15px;
+}
+
+.gallery li{
+  margin-bottom: 10px;
+}
+
+.gallery li div {
     height: auto;
    
 }
-.gallery li img {
-   
+.gallery li div img {
     height: auto;
 }

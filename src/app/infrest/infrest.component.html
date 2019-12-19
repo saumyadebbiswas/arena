@@ -1,130 +1,64 @@
 <ion-header>
- 
-    <div class="head">
+  <div class="head">
     <ion-buttons slot="start">
       <ion-menu-button>
         <img src="../assets/images/manu.png" alt="" class="manu-icon">
       </ion-menu-button>
     </ion-buttons>
-    <ion-title class="text-center">
-      Our Infrastructure
-    </ion-title>
+
+    <ion-title class="text-center">Infrastructure</ion-title>
+
     <div class="notification">
-      <a href="/notifications"><img src="../assets/images/notification-icon.png" alt="">
+      <a><img src="../assets/images/notification-icon.png" alt="">
       <span>2</span>
       </a>
     </div>
   </div>
+</ion-header>
   
-  </ion-header>
-  
-  <ion-content>
-    <div padding class="ex-pad" >
-      <ion-row>
-        <!-- Tabs with icons on Card -->
-        <div class="card card-nav-tabs card-plain">
-            <div class="card-header card-header-danger">
-                <!-- colors: "header-primary", "header-info", "header-success", "header-warning", "header-danger" -->
-                <div class="nav-tabs-navigation">
-                    <div class="nav-tabs-wrapper">
-                        <ul class="nav nav-tabs" data-tabs="tabs">
-                            <li class="nav-item">
-                                <a class="nav-link active" href="#campus1" data-toggle="tab">Kankurgachi 1</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#campus2" data-toggle="tab">Kankurgachi 2</a>
-                            </li>
-                            <!-- <li class="nav-item">
-                              <a class="nav-link" href="#campus2" data-toggle="tab">New Town</a>
-                          </li> -->
-                            
-                        </ul>
-                    </div>
-                </div>
+<ion-content>
+  <div padding class="ex-pad" >
+    <ion-row>
+      <!-- Tabs with icons on Card -->
+      <div class="card card-nav-tabs card-plain">
+        <!-- <div class="card-header card-header-danger">
+          <div class="nav-tabs-navigation">
+            <div class="nav-tabs-wrapper">
+              <ul class="nav nav-tabs" data-tabs="tabs">
+
+                <li class="nav-item">
+                  <a class="nav-link active" href="#campus1" data-toggle="tab">Kankurgachi 1</a>
+                </li>
+
+                <li class="nav-item">
+                  <a class="nav-link" href="#campus2" data-toggle="tab">Kankurgachi 2</a>
+                </li>
+                  
+              </ul>
             </div>
-            <div class="card-body ">
-                <div class="tab-content text-center">
-                    <div class="tab-pane active" id="campus1">
-                        <div padding class="gallery" id="gallery">
+          </div>
+        </div> -->
 
-                            <!-- Grid column -->
-                            <div class="mb-3 pics animation">
-                               <img src="../../assets/images/cam4.png" alt="" data-toggle="modal" data-bigimage="../../assets/images/cam4.png"  data-target="#myModal" class="img-fluid">
-                             </div>
-                             <!-- Grid column -->
-                                                     
-                             <!-- Grid column -->
-                             <div class="mb-3 pics animation">
-                               <img src="../../assets/images/cam6.png" alt="" data-toggle="modal" data-bigimage="../../assets/images/cam6.png"  data-target="#myModal" class="img-fluid">
-                             </div>
-                             <!-- Grid column -->
-                           
-                             <!-- Grid column -->
-                             <div class="mb-3 pics animation">
-                               <img src="../../assets/images/cam3.png" alt="" data-toggle="modal" data-bigimage="../../assets/images/cam3.png"  data-target="#myModal" class="img-fluid">
-                              
-                             </div>
-                             <!-- Grid column -->
-                              <!-- Grid column -->
-                              <div class="mb-3 pics animation">
-                                 <img src="../../assets/images/cam1.png" alt="" data-toggle="modal" data-bigimage="../../assets/images/cam1.png" data-target="#myModal" class="img-fluid">
-                               </div>
-                               <!-- Grid column -->
-                             
-                             <!-- Grid column -->
-                             <div class="mb-3 pics animation">
-                                 <img src="../../assets/images/cam2.jpg" alt="" data-toggle="modal" data-bigimage="../../assets/images/cam2.jpg"  data-target="#myModal" class="img-fluid">
-                               </div>
-                               <!-- Grid column -->
-                               
-                             <!-- Grid column -->
-                             <div class="mb-3 pics animation ">
-                                 <img src="../../assets/images/cam5.png" alt="" data-toggle="modal" data-bigimage="../../assets/images/cam5.png"  data-target="#myModal" class="img-fluid">
-                                </div>
-                             <!-- Grid column -->
+        <div class="card-body ">
+          <div class="tab-content text-center">
+            <div class="tab-pane active" id="campus1">
+              <div padding class="gallery1" id="gallery1">
 
-                              <!-- Grid column -->
-                              <div class="mb-3 pics animation">
-                                  <img src="../../assets/images/cam2.jpg" alt="" data-toggle="modal" data-bigimage="../../assets/images/cam2.jpg"  data-target="#myModal" class="img-fluid">
-                                </div>
-                              <!-- Grid column -->
-                           
-                         </div>
-                    </div>
-                    <div class="tab-pane" id="campus2">
-                        <div padding class="gallery" id="gallery">
+                <!-- Grid column -->
+                <div *ngFor="let images of infras_images" class="mb-3 pics animation">
+                    <img (click)="viewImage(site_url+'/campus_image/'+images.image_name)" src="{{site_url}}/campus_image/{{images.image_name}}" alt="" class="img-fluid">
+                </div>
+                <!-- Grid column -->
 
-                           <!-- Grid column -->
-                           <div class="mb-3 pics animation">
-                              <img src="../../assets/images/cam2.jpg" alt="" data-toggle="modal" data-bigimage="../../assets/images/cam2.jpg"  data-target="#myModal" class="img-fluid">
-                            </div>
-                            <!-- Grid column -->
-                                                    
-                            <!-- Grid column -->
-                            <div class="mb-3 pics animation">
-                              <img src="../../assets/images/cam4.png" alt="" data-toggle="modal" data-bigimage="../../assets/images/cam4.png"  data-target="#myModal" class="img-fluid">
-                            </div>
-                            <!-- Grid column -->
-                          
-                            <!-- Grid column -->
-                            <div class="mb-3 pics animation">
-                              <img src="../../assets/images/cam1.png" alt="" data-toggle="modal" data-bigimage="../../assets/images/cam1.png"  data-target="#myModal" class="img-fluid">
-                             
-                            </div>
-                            <!-- Grid column -->
-                            
-                            
-                            <!-- Grid column -->
-                            <div class="mb-3 pics animation">
-                                <img src="../../assets/images/cam5.png" alt="" data-toggle="modal" data-bigimage="../../assets/images/cam5.png"  data-target="#myModal" class="img-fluid">
-                              </div>
-                              <!-- Grid column -->
+              </div>
+            </div>
 
-                            <!-- Grid column -->
-                            <div class="mb-3 pics animation ">
-                                <img src="../../assets/images/cam3.png" alt="" data-toggle="modal" data-bigimage="../../assets/images/cam3.png"  data-target="#myModal" class="img-fluid">
-                               </div>
-                               <!-- Grid column -->
+            <div *ngIf="campus_list.length == 0" class="card card-nav-tabs card-plain"><span>{{message}}</span></div>
+          </div>
+        </div>
+      </div>
+      <!-- End Tabs with icons on Card -->
+    </ion-row>
 
                                 <!-- Grid column -->
                            <div class="mb-3 pics animation">
