@@ -52,102 +52,6 @@
         </div>
       </div>
     </div>
-  </div>   
-    
- 
-  <script>
-  $(document).ready(function() {
-
-// Gets the video src from the data-src on each button
-var $imageSrc;  
-$('.gallery img').click(function() {
-    $imageSrc = $(this).data('bigimage');
-});
-console.log($imageSrc);
-  
-  
-  
-// when the modal is opened autoplay it  
-$('#myModal').on('shown.bs.modal', function (e) {
-    
-// set the video src to autoplay and not to show related video. Youtube related video is like a box of chocolates... you never know what you're gonna get
-
-$("#image").attr('src', $imageSrc  ); 
-})
-  
-  
-// reset the modal image
-$('#myModal').on('hide.bs.modal', function (e) {
-    // a poor man's stop video
-    $("#image").attr('src',''); 
-}) 
-    
-// document ready  
-});
-
-
-
-  </script>
-
-  <script>
-    window.document.onkeydown = function(e) {
-  if (!e) {
-    e = event;
-  }
-  if (e.keyCode == 27) {
-    lightbox_close();
-  }
-}
-
-function lightbox_open() {
-  var lightBoxVideo = document.getElementById("VisaChipCardVideo");
-  window.scrollTo(0, 0);
-  document.getElementById('light').style.display = 'block';
-  document.getElementById('fade').style.display = 'block';
-  lightBoxVideo.play();
-}
-
-function lightbox_close() {
-  var lightBoxVideo = document.getElementById("VisaChipCardVideo");
-  document.getElementById('light').style.display = 'none';
-  document.getElementById('fade').style.display = 'none';
-  lightBoxVideo.pause();
-}
-  </script>
-
-  <script>
-    $(document).ready(function() {
-
-// Gets the video src from the data-src on each button
-
-var $videoSrc;  
-$('.video-btn').click(function() {
-    $videoSrc = $(this).data( "src" );
-});
-console.log($videoSrc);
-
-  
-  
-// when the modal is opened autoplay it  
-$('#myModal2').on('shown.bs.modal', function (e) {
-    
-// set the video src to autoplay and not to show related video. Youtube related video is like a box of chocolates... you never know what you're gonna get
-$("#video").attr('src',$videoSrc + "?autoplay=1&amp;modestbranding=1&amp;showinfo=0" ); 
-})
-  
-
-
-// stop playing the youtube video when I close the modal
-$('#myModal2').on('hide.bs.modal', function (e) {
-    // a poor man's stop video
-    $("#video").attr('src',$videoSrc); 
-}) 
-    
- 
-  
-// document ready  
-});
-
 
     <!-- Modal2 -->
     <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -187,23 +91,101 @@ $('#myModal2').on('hide.bs.modal', function (e) {
           $("#image").attr('src',''); 
         })  
 
-  
+        
+        // Gets the video src from the data-src on each button
+        var $imageSrc1;  
+        $('.gallery1 img').click(function() {
+          $imageSrc1 = $(this).data('bigimage');
+          console.log('infrastructure image: ', $imageSrc1);
+        });
+          
+        // when the modal is opened autoplay it  
+        $('#myModal1').on('shown.bs.modal', function (e) {
+          // set the video src to autoplay and not to show related video. Youtube related video is like a box of chocolates... you never know what you're gonna get
+          $("#image1").attr('src', $imageSrc1); 
+        })
+          
+        // Reset the modal image
+        $('#myModal1').on('hide.bs.modal', function (e) {
+          // a poor man's stop video
+          $("#image1").attr('src',''); 
+        })  
+      });
+    </script>
 
-  <script>
-    $(function() {
-var selectedClass = "";
-$(".filter").click(function(){
-selectedClass = $(this).attr("data-rel");
-$("#gallery").fadeTo(100, 0.1);
-$("#gallery div").not("."+selectedClass).fadeOut().removeClass('animation');
-setTimeout(function() {
-$("."+selectedClass).fadeIn().addClass('animation');
-$("#gallery").fadeTo(300, 1);
-}, 300);
-});
-});
-  </script>
-  
-</body>
+    <script>
+      window.document.onkeydown = function(e) {
+        if(!e) {
+          e = event;
+        }
+
+        if(e.keyCode == 27) {
+          lightbox_close();
+        }
+      }
+
+      function lightbox_open() {
+        var lightBoxVideo = document.getElementById("VisaChipCardVideo");
+        window.scrollTo(0, 0);
+        document.getElementById('light').style.display = 'block';
+        document.getElementById('fade').style.display = 'block';
+        lightBoxVideo.play();
+      }
+
+      function lightbox_close() {
+        var lightBoxVideo = document.getElementById("VisaChipCardVideo");
+        document.getElementById('light').style.display = 'none';
+        document.getElementById('fade').style.display = 'none';
+        lightBoxVideo.pause();
+      }
+    </script>
+
+    <script>
+      $(document).ready(function() {
+        // Gets the video src from the data-src on each button
+        var $videoSrc;  
+        $('.video-btn').click(function() {
+            $videoSrc = $(this).data( "src" );
+          console.log('videos: ', $videoSrc);
+        });
+          
+        // when the modal is opened autoplay it  
+        $('#myModal2').on('shown.bs.modal', function (e) {
+            
+          // set the video src to autoplay and not to show related video. Youtube related video is like a box of chocolates... you never know what you're gonna get
+          $("#video").attr('src',$videoSrc + "?autoplay=1&amp;modestbranding=1&amp;showinfo=0" ); 
+        })
+
+        // stop playing the youtube video when I close the modal
+        $('#myModal2').on('hide.bs.modal', function (e) {
+          // a poor man's stop video
+          $("#video").attr('src',$videoSrc); 
+        })  
+      });
+    </script>
+
+    <!-- <script>
+      $(document).ready(function() {
+        $('body').bootstrapMaterialDesign();
+      });
+    </script> -->
+
+    <script>
+      $(function() {
+        var selectedClass = "";
+        $(".filter").click(function(){
+          selectedClass = $(this).attr("data-rel");
+          $("#gallery").fadeTo(100, 0.1);
+          $("#gallery div").not("."+selectedClass).fadeOut().removeClass('animation');
+
+          setTimeout(function() {
+            $("."+selectedClass).fadeIn().addClass('animation');
+            $("#gallery").fadeTo(300, 1);
+          }, 300);
+        });
+      });
+    </script>
+    
+  </body>
 
 </html>
