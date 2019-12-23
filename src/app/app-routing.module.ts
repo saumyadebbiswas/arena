@@ -8,6 +8,7 @@ import { InfrestComponent } from './infrest/infrest.component';
 import { WorkComponent } from './work/work.component';
 import { CoursedetailsComponent } from './coursedetails/coursedetails.component';
 import { CourseComponent } from './course/course.component';
+import { ApplicationformComponent } from './applicationform/applicationform.component';
 
 const routes: Routes = [
   {
@@ -22,7 +23,8 @@ const routes: Routes = [
   { path: "infrastructure",  component: InfrestComponent},
   { path: "art-work",  component: WorkComponent},
   { path: "course-details/:id",  component: CoursedetailsComponent},
-  { path: "course",  component: CourseComponent}
+  { path: "course",  component: CourseComponent},
+  { path: "appilicationform",  component: ApplicationformComponent}
 ];
 
 @NgModule({

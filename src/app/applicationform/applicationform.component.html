@@ -1,0 +1,680 @@
+<ion-header>
+  <div class="head">
+    <ion-buttons slot="start">
+      <ion-menu-button>
+        <img src="../assets/images/manu.png" alt="" class="manu-icon">
+      </ion-menu-button>
+    </ion-buttons>
+
+    <ion-title class="text-center">Appilication Form</ion-title>
+
+    <div class="notification">
+      <a><img src="../assets/images/notification-icon.png" alt="">
+      <span>2</span>
+      </a>
+    </div>
+  </div>
+</ion-header>
+
+<ion-content>
+  <div class="row">
+    <!-- MultiStep Form -->
+<div class="container-fluid" id="grad1">
+    <div class="row justify-content-center mt-0">
+        <div class="col-11 text-center p-0">
+            <div class="col-md-12 mx-0">
+                <form id="msform">
+                    <!-- progressbar -->
+                    <ul id="progressbar">
+                        <li class="active" id="personal"><strong>Personal</strong></li>
+                        <li id="education"><strong>Education</strong></li>
+                        <li id="activity"><strong>Activities</strong></li>
+                        <li id="office"><strong>Office</strong></li>
+                        <li id="confirm"><strong>Finish</strong></li>
+                    </ul> <!-- fieldsets -->
+                    <fieldset>
+                        <div class="form-card">
+                            <h5 class="fs-title">Personal Information</h5>
+                            <div class="inpt-box">
+                                <ion-item class="dropdown frm">
+                                    <ion-label class="drop-mnu">Course Applied For</ion-label>
+                                        <ion-select placeholder="Select One">
+                                          <ion-select-option value="s">2D Animation</ion-select-option>
+                                          <ion-select-option value="m">3D Animation</ion-select-option>
+                                          <ion-select-option value="w">VFX</ion-select-option>
+                                        </ion-select>
+                                    
+                                </ion-item>
+                                <ion-item class="frm">
+                                    <ion-input type="text" class="info-frm" id="email" placeholder="Name"></ion-input>
+                                    <span  data-toggle="tooltip" data-placement="top" title="Tooltip on top"><i class="fa fa-question-circle toolp"></i></span>
+                                </ion-item>
+                                <ion-item class="frm">
+                                    <ion-input type="text" class="info-frm" id="email" placeholder="Parents Name"></ion-input>
+                                </ion-item>
+                                <ion-item class="frm">
+                                    <ion-input type="text" class="info-frm" id="email" placeholder="Present Address"></ion-input>
+                                </ion-item>
+                                <ion-item class="frm">
+                                    <ion-input type="text" class="info-frm" id="email" placeholder="Mobile No"></ion-input>
+                                </ion-item>
+                                <ion-item class="frm">
+                                    <ion-input type="text" class="info-frm" id="email" placeholder="Parents Mobile No"></ion-input>
+                                </ion-item>
+                                <ion-item class="frm">
+                                    <ion-input type="date" class="info-frm drop-mnu" id="Name" placeholder="Date of Birth"></ion-input>
+                                </ion-item>
+                                <ion-item class="frm">
+                                    <ion-input type="text" class="info-frm" id="email" placeholder="Present Address"></ion-input>
+                                </ion-item>
+                                <p class="chq-inpt">
+                                    <ion-checkbox color="primary"></ion-checkbox> &nbsp;
+                                    <ion-label class="chq-lebl">I agree with this statement</ion-label>
+                                </p>
+                                <ion-item class="frm">
+                                    <ion-input type="text" class="info-frm" id="email" placeholder="Permanent Address"></ion-input>
+                                </ion-item>
+                                <ion-item class="frm">
+                                    <ion-input type="text" class="info-frm" id="email" placeholder="Tel"></ion-input>
+                                </ion-item>
+                                <ion-item class="frm">
+                                    <ion-input type="text" class="info-frm" id="email" placeholder="State"></ion-input>
+                                </ion-item>
+                                <ion-item class="frm">
+                                    <ion-input type="text" class="info-frm" id="email" placeholder="E-mail 1"></ion-input>
+                                </ion-item>                  
+                              <ion-item class="frm">
+                                  <ion-input type="text" class="info-frm" id="email" placeholder="E-mail 2"></ion-input>
+                              </ion-item>
+
+                              <ion-item class="dropdown frm">
+                                  <ion-label class="drop-mnu">Known From</ion-label>
+                                      <ion-select placeholder="Select One">
+                                        <ion-select-option value="s">Newspaper</ion-select-option>
+                                        <ion-select-option value="m">Hoarding / Leaflet</ion-select-option>
+                                        <ion-select-option value="w">Television</ion-select-option>
+                                        <ion-select-option value="m">Internet</ion-select-option>
+                                        <ion-select-option value="w">Others</ion-select-option>
+                                      </ion-select>
+                                  
+                                </ion-item>
+                                <div class="sign-box">
+                                    <button type="button"size="large" expand="block" class="btn save-btn">Save</button>
+                                </div>
+                            </div> 
+                        </div>
+                        <input type="button" name="next" class="next action-button nxt-btns fst-btn" value="Next Step" />
+                    </fieldset>
+                    <fieldset>
+                        <div class="form-card">
+                            <h5 class="fs-title">Education Information</h5>
+
+                            <div id="accordion" class="accordion">
+                                <div class="card mb-0">
+                                    <div class="card-header collapsed" data-toggle="collapse" href="#collapseOne">
+                                        <a class="card-title">
+                                           SSC
+                                        </a>
+                                    </div>
+                                    <div id="collapseOne" class="collapse show" data-parent="#accordion" >
+                                        <div class="period-inpt">
+                                                <ion-item class="">
+                                                  <ion-label position="floating">To</ion-label>
+                                                  <ion-input type="date" class="info-frm drop-mnu" id="Name" placeholder="Date of Birth"></ion-input>
+                                                </ion-item> &nbsp; &nbsp;
+                                                <ion-item class="">
+                                                   <ion-label position="floating">From</ion-label>
+                                                   <ion-input type="date" class="info-frm drop-mnu" id="Name" placeholder="Date of Birth"></ion-input>
+                                                </ion-item>
+                                        </div>
+                                        <ion-item class="frm">
+                                            <ion-input type="text" class="info-frm" id="email" placeholder="School/College/Institute"></ion-input>
+                                        </ion-item>
+                                        <ion-item class="frm">
+                                            <ion-input type="text" class="info-frm" id="email" placeholder="Board/University"></ion-input>
+                                        </ion-item>
+                                        <ion-item class="dropdown frm">
+                                            <ion-label class="drop-mnu">Year Of Passing</ion-label>
+                                                <ion-select placeholder="Select One">
+                                                  <ion-select-option value="s">2019</ion-select-option>
+                                                  <ion-select-option value="m">2018</ion-select-option>
+                                                  <ion-select-option value="w">2017</ion-select-option>
+                                                </ion-select>
+                                            
+                                        </ion-item>
+                                        <ion-item class="frm">
+                                            <ion-input type="text" class="info-frm" id="email" placeholder="Division / %Marks of CGPa"></ion-input>
+                                        </ion-item>
+                                        <ion-item class="frm">
+                                            <ion-input type="text" class="info-frm" id="email" placeholder="Rank in the Class"></ion-input>
+                                        </ion-item>
+                                        <ion-item class="frm">
+                                            <ion-input type="text" class="info-frm" id="email" placeholder="Special/Major Subject"></ion-input>
+                                        </ion-item>
+                                        <div class="sign-box">
+                                                <button type="button"size="large" expand="block" class="btn save-btn">Save</button>
+                                            </div> 
+                                    </div>
+
+                                    <div class="card-header collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                                        <a class="card-title">
+                                            HSC
+                                        </a>
+                                    </div>
+                                    <div id="collapseTwo" class=" collapse" data-parent="#accordion" >
+                                            <div class="period-inpt">
+                                                    <ion-item class="">
+                                                      <ion-label position="floating">To</ion-label>
+                                                      <ion-input type="date" class="info-frm drop-mnu" id="Name" placeholder="Date of Birth"></ion-input>
+                                                    </ion-item> &nbsp; &nbsp;
+                                                    <ion-item class="">
+                                                       <ion-label position="floating">From</ion-label>
+                                                       <ion-input type="date" class="info-frm drop-mnu" id="Name" placeholder="Date of Birth"></ion-input>
+                                                    </ion-item>
+                                            </div>
+                                            <ion-item class="frm">
+                                                <ion-input type="text" class="info-frm" id="email" placeholder="School/College/Institute"></ion-input>
+                                            </ion-item>
+                                            <ion-item class="frm">
+                                                <ion-input type="text" class="info-frm" id="email" placeholder="Board/University"></ion-input>
+                                            </ion-item>
+                                            <ion-item class="dropdown frm">
+                                                <ion-label class="drop-mnu">Year Of Passing</ion-label>
+                                                    <ion-select placeholder="Select One">
+                                                      <ion-select-option value="s">2019</ion-select-option>
+                                                      <ion-select-option value="m">2018</ion-select-option>
+                                                      <ion-select-option value="w">2017</ion-select-option>
+                                                    </ion-select>
+                                                
+                                            </ion-item>
+                                            <ion-item class="frm">
+                                                <ion-input type="text" class="info-frm" id="email" placeholder="Division / %Marks of CGPa"></ion-input>
+                                            </ion-item>
+                                            <ion-item class="frm">
+                                                <ion-input type="text" class="info-frm" id="email" placeholder="Rank in the Class"></ion-input>
+                                            </ion-item>
+                                            <ion-item class="frm">
+                                                <ion-input type="text" class="info-frm" id="email" placeholder="Special/Major Subject"></ion-input>
+                                            </ion-item>
+                                            <div class="sign-box">
+                                                    <button type="button"size="large" expand="block" class="btn save-btn">Save</button>
+                                                </div>
+                                    </div>
+
+                                    <div class="card-header collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                                            <a class="card-title">
+                                               Graduation
+                                            </a>
+                                    </div>
+                                    <div id="collapseThree" class="collapse inner-acc" data-parent="#accordion" >
+                                            <ion-item class="form-group frm">
+                                                    <!-- Default inline 1-->
+                                                      <div class="custom-control custom-radio custom-control-inline dgree">
+                                                          <input type="radio" class="custom-control-input" id="defaultInline5" name="offline" checked />
+                                                          <label class="custom-control-label dgree-lab" for="defaultInline5">B.A.</label>
+                                                        </div>
+                                                        
+                                                        <!-- Default inline 2-->
+                                                        <div class="custom-control custom-radio custom-control-inline dgree">
+                                                          <input type="radio" class="custom-control-input" id="defaultInline6" name="offline" />
+                                                          <label class="custom-control-label dgree-lab" for="defaultInline6">B.Sc.</label>
+                                                        </div>
+
+                                                         <!-- Default inline 3-->
+                                                         <div class="custom-control custom-radio custom-control-inline dgree">
+                                                            <input type="radio" class="custom-control-input" id="defaultInline7" name="offline" />
+                                                            <label class="custom-control-label dgree-lab" for="defaultInline7">B.Com</label>
+                                                         </div>
+
+                                                         <!-- Default inline 4-->
+                                                         <div class="custom-control custom-radio custom-control-inline dgree">
+                                                            <input type="radio" class="custom-control-input" id="defaultInline8" name="offline" />
+                                                            <label class="custom-control-label dgree-lab" for="defaultInline8">B.E.</label>
+                                                        </div>
+                                            </ion-item>
+
+                                            <div id="accordion2" class="accordion marks-box">
+                                                <div class="card-header collapsed" data-toggle="collapse" data-parent="#accordion2" href="#collapseThreeOne">
+                                                        <a class="card-title">
+                                                        1st Year
+                                                        </a>
+                                                </div>
+                                                <div id="collapseThreeOne" class="collapse show" data-parent="#accordion2" >
+                                                    
+                                                        <div class="period-inpt">
+                                                                <ion-item class="">
+                                                                <ion-label position="floating">To</ion-label>
+                                                                <ion-input type="date" class="info-frm drop-mnu" id="Name" placeholder="Date of Birth"></ion-input>
+                                                                </ion-item> &nbsp; &nbsp;
+                                                                <ion-item class="">
+                                                                <ion-label position="floating">From</ion-label>
+                                                                <ion-input type="date" class="info-frm drop-mnu" id="Name" placeholder="Date of Birth"></ion-input>
+                                                                </ion-item>
+                                                        </div>
+                                                        <ion-item class="frm">
+                                                            <ion-input type="text" class="info-frm" id="email" placeholder="School/College/Institute"></ion-input>
+                                                        </ion-item>
+                                                        <ion-item class="frm">
+                                                            <ion-input type="text" class="info-frm" id="email" placeholder="Board/University"></ion-input>
+                                                        </ion-item>
+                                                        <ion-item class="dropdown frm">
+                                                            <ion-label class="drop-mnu">Year Of Passing</ion-label>
+                                                                <ion-select placeholder="Select One">
+                                                                <ion-select-option value="s">2019</ion-select-option>
+                                                                <ion-select-option value="m">2018</ion-select-option>
+                                                                <ion-select-option value="w">2017</ion-select-option>
+                                                                </ion-select>
+                                                            
+                                                        </ion-item>
+                                                        <ion-item class="frm">
+                                                            <ion-input type="text" class="info-frm" id="email" placeholder="Division / %Marks of CGPa"></ion-input>
+                                                        </ion-item>
+                                                        <ion-item class="frm">
+                                                            <ion-input type="text" class="info-frm" id="email" placeholder="Rank in the Class"></ion-input>
+                                                        </ion-item>
+                                                        <ion-item class="frm">
+                                                            <ion-input type="text" class="info-frm" id="email" placeholder="Special/Major Subject"></ion-input>
+                                                        </ion-item>
+                                                        <div class="sign-box">
+                                                                <button type="button"size="large" expand="block" class="btn save-btn">Save</button>
+                                                        </div>
+                                                </div>
+
+                                                <div class="card-header collapsed" data-toggle="collapse" data-parent="#accordion2" href="#collapseThreeTwo">
+                                                        <a class="card-title">
+                                                        2nd Year
+                                                        </a>
+                                                </div>
+                                                <div id="collapseThreeTwo" class=" collapse" data-parent="#accordion2" >
+                                                    
+                                                        <div class="period-inpt">
+                                                                <ion-item class="">
+                                                                <ion-label position="floating">To</ion-label>
+                                                                <ion-input type="date" class="info-frm drop-mnu" id="Name" placeholder="Date of Birth"></ion-input>
+                                                                </ion-item> &nbsp; &nbsp;
+                                                                <ion-item class="">
+                                                                <ion-label position="floating">From</ion-label>
+                                                                <ion-input type="date" class="info-frm drop-mnu" id="Name" placeholder="Date of Birth"></ion-input>
+                                                                </ion-item>
+                                                        </div>
+                                                        <ion-item class="frm">
+                                                            <ion-input type="text" class="info-frm" id="email" placeholder="School/College/Institute"></ion-input>
+                                                        </ion-item>
+                                                        <ion-item class="frm">
+                                                            <ion-input type="text" class="info-frm" id="email" placeholder="Board/University"></ion-input>
+                                                        </ion-item>
+                                                        <ion-item class="dropdown frm">
+                                                            <ion-label class="drop-mnu">Year Of Passing</ion-label>
+                                                                <ion-select placeholder="Select One">
+                                                                <ion-select-option value="s">2019</ion-select-option>
+                                                                <ion-select-option value="m">2018</ion-select-option>
+                                                                <ion-select-option value="w">2017</ion-select-option>
+                                                                </ion-select>
+                                                            
+                                                        </ion-item>
+                                                        <ion-item class="frm">
+                                                            <ion-input type="text" class="info-frm" id="email" placeholder="Division / %Marks of CGPa"></ion-input>
+                                                        </ion-item>
+                                                        <ion-item class="frm">
+                                                            <ion-input type="text" class="info-frm" id="email" placeholder="Rank in the Class"></ion-input>
+                                                        </ion-item>
+                                                        <ion-item class="frm">
+                                                            <ion-input type="text" class="info-frm" id="email" placeholder="Special/Major Subject"></ion-input>
+                                                        </ion-item>
+                                                        <div class="sign-box">
+                                                                <button type="button"size="large" expand="block" class="btn save-btn">Save</button>
+                                                        </div>
+                                                </div>
+
+                                                <div class="card-header collapsed" data-toggle="collapse" data-parent="#accordion2" href="#collapseThreeThree">
+                                                        <a class="card-title">
+                                                        3rd Year
+                                                        </a>
+                                                </div>
+                                                <div id="collapseThreeThree" class=" collapse" data-parent="#accordion2" >
+                                                    
+                                                        <div class="period-inpt">
+                                                                <ion-item class="">
+                                                                <ion-label position="floating">To</ion-label>
+                                                                <ion-input type="date" class="info-frm drop-mnu" id="Name" placeholder="Date of Birth"></ion-input>
+                                                                </ion-item> &nbsp; &nbsp;
+                                                                <ion-item class="">
+                                                                <ion-label position="floating">From</ion-label>
+                                                                <ion-input type="date" class="info-frm drop-mnu" id="Name" placeholder="Date of Birth"></ion-input>
+                                                                </ion-item>
+                                                        </div>
+                                                        <ion-item class="frm">
+                                                            <ion-input type="text" class="info-frm" id="email" placeholder="School/College/Institute"></ion-input>
+                                                        </ion-item>
+                                                        <ion-item class="frm">
+                                                            <ion-input type="text" class="info-frm" id="email" placeholder="Board/University"></ion-input>
+                                                        </ion-item>
+                                                        <ion-item class="dropdown frm">
+                                                            <ion-label class="drop-mnu">Year Of Passing</ion-label>
+                                                                <ion-select placeholder="Select One">
+                                                                <ion-select-option value="s">2019</ion-select-option>
+                                                                <ion-select-option value="m">2018</ion-select-option>
+                                                                <ion-select-option value="w">2017</ion-select-option>
+                                                                </ion-select>
+                                                            
+                                                        </ion-item>
+                                                        <ion-item class="frm">
+                                                            <ion-input type="text" class="info-frm" id="email" placeholder="Division / %Marks of CGPa"></ion-input>
+                                                        </ion-item>
+                                                        <ion-item class="frm">
+                                                            <ion-input type="text" class="info-frm" id="email" placeholder="Rank in the Class"></ion-input>
+                                                        </ion-item>
+                                                        <ion-item class="frm">
+                                                            <ion-input type="text" class="info-frm" id="email" placeholder="Special/Major Subject"></ion-input>
+                                                        </ion-item>
+                                                        <div class="sign-box">
+                                                                <button type="button"size="large" expand="block" class="btn save-btn">Save</button>
+                                                            </div>
+                                                </div>
+
+                                                <div class="card-header collapsed" data-toggle="collapse" data-parent="#accordion2" href="#collapseThreeFour">
+                                                        <a class="card-title">
+                                                        4th Year
+                                                        </a>
+                                                </div>
+                                                <div id="collapseThreeFour" class=" collapse" data-parent="#accordion2" >
+                                                    
+                                                        <div class="period-inpt">
+                                                                <ion-item class="">
+                                                                <ion-label position="floating">To</ion-label>
+                                                                <ion-input type="date" class="info-frm drop-mnu" id="Name" placeholder="Date of Birth"></ion-input>
+                                                                </ion-item> &nbsp; &nbsp;
+                                                                <ion-item class="">
+                                                                <ion-label position="floating">From</ion-label>
+                                                                <ion-input type="date" class="info-frm drop-mnu" id="Name" placeholder="Date of Birth"></ion-input>
+                                                                </ion-item>
+                                                        </div>
+                                                        <ion-item class="frm">
+                                                            <ion-input type="text" class="info-frm" id="email" placeholder="School/College/Institute"></ion-input>
+                                                        </ion-item>
+                                                        <ion-item class="frm">
+                                                            <ion-input type="text" class="info-frm" id="email" placeholder="Board/University"></ion-input>
+                                                        </ion-item>
+                                                        <ion-item class="dropdown frm">
+                                                            <ion-label class="drop-mnu">Year Of Passing</ion-label>
+                                                                <ion-select placeholder="Select One">
+                                                                <ion-select-option value="s">2019</ion-select-option>
+                                                                <ion-select-option value="m">2018</ion-select-option>
+                                                                <ion-select-option value="w">2017</ion-select-option>
+                                                                </ion-select>
+                                                            
+                                                        </ion-item>
+                                                        <ion-item class="frm">
+                                                            <ion-input type="text" class="info-frm" id="email" placeholder="Division / %Marks of CGPa"></ion-input>
+                                                        </ion-item>
+                                                        <ion-item class="frm">
+                                                            <ion-input type="text" class="info-frm" id="email" placeholder="Rank in the Class"></ion-input>
+                                                        </ion-item>
+                                                        <ion-item class="frm">
+                                                            <ion-input type="text" class="info-frm" id="email" placeholder="Special/Major Subject"></ion-input>
+                                                        </ion-item>
+                                                        <div class="sign-box">
+                                                                <button type="button"size="large" expand="block" class="btn save-btn">Save</button>
+                                                            </div>
+                                                </div>
+                                            </div>
+                                            
+                                    </div>
+
+                                    <div class="card-header collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+                                            <a class="card-title">
+                                               Post Graduation
+                                            </a>
+                                    </div>
+                                    <div id="collapseFour" class="collapse inner-acc" data-parent="#accordion" >
+                                           
+                                            <div id="accordion3" class="accordion marks-box">
+                                                <div class="card-header collapsed" data-toggle="collapse" data-parent="#accordion3" href="#collapseFourOne">
+                                                        <a class="card-title">
+                                                        1st Year
+                                                        </a>
+                                                </div>
+                                                <div id="collapseFourOne" class="collapse show" data-parent="#accordion3" >
+                                                    
+                                                        <div class="period-inpt">
+                                                                <ion-item class="">
+                                                                <ion-label position="floating">To</ion-label>
+                                                                <ion-input type="date" class="info-frm drop-mnu" id="Name" placeholder="Date of Birth"></ion-input>
+                                                                </ion-item> &nbsp; &nbsp;
+                                                                <ion-item class="">
+                                                                <ion-label position="floating">From</ion-label>
+                                                                <ion-input type="date" class="info-frm drop-mnu" id="Name" placeholder="Date of Birth"></ion-input>
+                                                                </ion-item>
+                                                        </div>
+                                                        <ion-item class="frm">
+                                                            <ion-input type="text" class="info-frm" id="email" placeholder="School/College/Institute"></ion-input>
+                                                        </ion-item>
+                                                        <ion-item class="frm">
+                                                            <ion-input type="text" class="info-frm" id="email" placeholder="Board/University"></ion-input>
+                                                        </ion-item>
+                                                        <ion-item class="dropdown frm">
+                                                            <ion-label class="drop-mnu">Year Of Passing</ion-label>
+                                                                <ion-select placeholder="Select One">
+                                                                <ion-select-option value="s">2019</ion-select-option>
+                                                                <ion-select-option value="m">2018</ion-select-option>
+                                                                <ion-select-option value="w">2017</ion-select-option>
+                                                                </ion-select>
+                                                            
+                                                        </ion-item>
+                                                        <ion-item class="frm">
+                                                            <ion-input type="text" class="info-frm" id="email" placeholder="Division / %Marks of CGPa"></ion-input>
+                                                        </ion-item>
+                                                        <ion-item class="frm">
+                                                            <ion-input type="text" class="info-frm" id="email" placeholder="Rank in the Class"></ion-input>
+                                                        </ion-item>
+                                                        <ion-item class="frm">
+                                                            <ion-input type="text" class="info-frm" id="email" placeholder="Special/Major Subject"></ion-input>
+                                                        </ion-item>
+                                                        <div class="sign-box">
+                                                                <button type="button"size="large" expand="block" class="btn save-btn">Save</button>
+                                                        </div>
+                                                </div>
+
+                                                <div class="card-header collapsed" data-toggle="collapse" data-parent="#accordion3" href="#collapseFourTwo">
+                                                        <a class="card-title">
+                                                        2nd Year
+                                                        </a>
+                                                </div>
+                                                <div id="collapseFourTwo" class=" collapse" data-parent="#accordion3" >
+                                                    
+                                                        <div class="period-inpt">
+                                                                <ion-item class="">
+                                                                <ion-label position="floating">To</ion-label>
+                                                                <ion-input type="date" class="info-frm drop-mnu" id="Name" placeholder="Date of Birth"></ion-input>
+                                                                </ion-item> &nbsp; &nbsp;
+                                                                <ion-item class="">
+                                                                <ion-label position="floating">From</ion-label>
+                                                                <ion-input type="date" class="info-frm drop-mnu" id="Name" placeholder="Date of Birth"></ion-input>
+                                                                </ion-item>
+                                                        </div>
+                                                        <ion-item class="frm">
+                                                            <ion-input type="text" class="info-frm" id="email" placeholder="School/College/Institute"></ion-input>
+                                                        </ion-item>
+                                                        <ion-item class="frm">
+                                                            <ion-input type="text" class="info-frm" id="email" placeholder="Board/University"></ion-input>
+                                                        </ion-item>
+                                                        <ion-item class="dropdown frm">
+                                                            <ion-label class="drop-mnu">Year Of Passing</ion-label>
+                                                                <ion-select placeholder="Select One">
+                                                                <ion-select-option value="s">2019</ion-select-option>
+                                                                <ion-select-option value="m">2018</ion-select-option>
+                                                                <ion-select-option value="w">2017</ion-select-option>
+                                                                </ion-select>
+                                                            
+                                                        </ion-item>
+                                                        <ion-item class="frm">
+                                                            <ion-input type="text" class="info-frm" id="email" placeholder="Division / %Marks of CGPa"></ion-input>
+                                                        </ion-item>
+                                                        <ion-item class="frm">
+                                                            <ion-input type="text" class="info-frm" id="email" placeholder="Rank in the Class"></ion-input>
+                                                        </ion-item>
+                                                        <ion-item class="frm">
+                                                            <ion-input type="text" class="info-frm" id="email" placeholder="Special/Major Subject"></ion-input>
+                                                        </ion-item>
+                                                        <div class="sign-box">
+                                                                <button type="button"size="large" expand="block" class="btn save-btn">Save</button>
+                                                        </div>
+                                                </div>
+
+                                            </div>
+                                            
+                                    </div>
+
+                                    <div class="card-header collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
+                                        <a class="card-title">
+                                            Any Other Qualification
+                                        </a>
+                                    </div>
+                                    <div id="collapseFive" class=" collapse" data-parent="#accordion" >
+                                            <div class="period-inpt">
+                                                    <ion-item class="">
+                                                      <ion-label position="floating">To</ion-label>
+                                                      <ion-input type="date" class="info-frm drop-mnu" id="Name" placeholder="Date of Birth"></ion-input>
+                                                    </ion-item> &nbsp; &nbsp;
+                                                    <ion-item class="">
+                                                       <ion-label position="floating">From</ion-label>
+                                                       <ion-input type="date" class="info-frm drop-mnu" id="Name" placeholder="Date of Birth"></ion-input>
+                                                    </ion-item>
+                                            </div>
+                                            <ion-item class="frm">
+                                                <ion-input type="text" class="info-frm" id="email" placeholder="School/College/Institute"></ion-input>
+                                            </ion-item>
+                                            <ion-item class="frm">
+                                                <ion-input type="text" class="info-frm" id="email" placeholder="Board/University"></ion-input>
+                                            </ion-item>
+                                            <ion-item class="dropdown frm">
+                                                <ion-label class="drop-mnu">Year Of Passing</ion-label>
+                                                    <ion-select placeholder="Select One">
+                                                      <ion-select-option value="s">2019</ion-select-option>
+                                                      <ion-select-option value="m">2018</ion-select-option>
+                                                      <ion-select-option value="w">2017</ion-select-option>
+                                                    </ion-select>
+                                                
+                                            </ion-item>
+                                            <ion-item class="frm">
+                                                <ion-input type="text" class="info-frm" id="email" placeholder="Division / %Marks of CGPa"></ion-input>
+                                            </ion-item>
+                                            <ion-item class="frm">
+                                                <ion-input type="text" class="info-frm" id="email" placeholder="Rank in the Class"></ion-input>
+                                            </ion-item>
+                                            <ion-item class="frm">
+                                                <ion-input type="text" class="info-frm" id="email" placeholder="Special/Major Subject"></ion-input>
+                                            </ion-item>
+                                            <div class="sign-box">
+                                                    <button type="button"size="large" expand="block" class="btn save-btn">Save</button>
+                                                </div>
+                                    </div>
+                                </div>
+                            </div>
+                                                       
+                            
+                        </div> 
+                        <input type="button" name="previous" class="previous action-button-previous prv-btns" value="Previous" /> 
+                        <input type="button" name="next" class="next action-button nxt-btns" value="Next Step" />
+                    </fieldset>
+                    <fieldset>
+                        <div class="form-card">
+                            <h5 class="fs-title">Others Activities</h5>
+                            <ion-item class="frm">
+                                <ion-input type="text" class="info-frm" id="email" placeholder="Games"></ion-input>
+                            </ion-item>
+                            <ion-item class="frm">
+                                <ion-input type="text" class="info-frm" id="email" placeholder="Social Activities"></ion-input>
+                            </ion-item>
+                            <ion-item>
+                                <ion-textarea rows="3" placeholder="Hobby"></ion-textarea>
+                              </ion-item>
+                           
+                              <p class="lang-lab"><ion-label>Languages Known</ion-label></p>
+                              <div class="d-flex">
+                                    <p class="chq-inpt lng-box">
+                                        <ion-checkbox color="primary"></ion-checkbox> &nbsp;
+                                        <ion-label class="chq-lebl">English</ion-label><br><br>
+
+                                        <ion-checkbox color="primary"></ion-checkbox> &nbsp;
+                                        <ion-label class="chq-lebl">Hindi</ion-label>
+                                    </p>
+                                    <p class="chq-inpt lng-box">
+                                        <ion-checkbox color="primary"></ion-checkbox> &nbsp;
+                                        <ion-label class="chq-lebl">Bengali</ion-label><br><br>
+
+                                        <ion-checkbox color="primary"></ion-checkbox> &nbsp;
+                                        <ion-label class="chq-lebl">Others</ion-label>
+                                    </p>
+                            </div>
+                            <div class="sign-box">
+                                <button type="button"size="large" expand="block" class="btn save-btn">Save</button>
+                            </div>
+                        </div> 
+                        <input type="button" name="previous" class="previous action-button-previous prv-btns" value="Previous" /> <input type="button" name="make_payment" class="next action-button nxt-btns" value="Next Step" />
+                    </fieldset>
+                    <fieldset>
+                        <div class="form-card">
+                            <h5 class="fs-title">Official Information</h5>
+                            <ion-item class="dropdown frm">
+                                <ion-label class="drop-mnu">Accepted By</ion-label>
+                                    <ion-select placeholder="Select One">
+                                      <ion-select-option value="s">Xyz</ion-select-option>
+                                      <ion-select-option value="m">Others</ion-select-option>
+                                      <ion-select-option value="w">Abc</ion-select-option>
+                                    </ion-select>
+                                
+                            </ion-item>
+                            <ion-item class="frm">
+                                <ion-input type="text" class="info-frm" id="email" placeholder="At"></ion-input>
+                            </ion-item>
+                            <ion-item class="frm">
+                                <ion-input type="text" class="info-frm" id="email" placeholder="Booking Confirmation No"></ion-input>
+                            </ion-item>
+                            <ion-item class="dropdown frm">
+                                <ion-label class="drop-mnu">Center</ion-label>
+                                    <ion-select placeholder="Select One">
+                                      <ion-select-option value="s">Abcd</ion-select-option>
+                                      <ion-select-option value="m">Xyz</ion-select-option>
+                                      <ion-select-option value="w">others</ion-select-option>
+                                    </ion-select>
+                                
+                            </ion-item>
+                            <ion-item class="frm">
+                                <ion-input type="date" class="info-frm drop-mnu" id="Name" placeholder="Date"></ion-input>
+                            </ion-item>
+                            <ion-item class="frm">
+                                <ion-input type="text" class="info-frm" id="email" placeholder="Roll No"></ion-input>
+                            </ion-item>
+                            <div class="sign-box">
+                                <button type="button"size="large" expand="block" class="btn save-btn">Save</button>
+                            </div>
+                        </div>
+                        <input type="button" name="previous" class="previous action-button-previous prv-btns" value="Previous" />
+                        <input type="button" name="next" class="next action-button nxt-btns" value="Confirm" />
+                    </fieldset>
+                    <fieldset>
+                        <div class="form-card">
+                            <h5 class="fs-title text-center">Success !</h5> <br><br>
+                            <div class="row justify-content-center">
+                                <div class="col-3">
+                                     <!-- <img src="https://img.icons8.com/color/96/000000/ok--v2.png" class="fit-image"> -->
+                                     <div class="circle-ripple">
+                                         <i class="fa fa-check"></i>
+                                     </div>
+                                 </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col-12 text-center success-frm">
+                                    <h5>You Have Successfully Signed Up</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</ion-content>

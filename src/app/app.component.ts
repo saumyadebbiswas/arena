@@ -40,6 +40,11 @@ export class AppComponent {
       title: 'Videos',
       url: '/videos',
       icon: 'list'
+    },
+    {
+      title: 'Appilication Form',
+      url: '/appilicationform',
+      icon: 'list'
     }
   ];
 
