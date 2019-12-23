@@ -8,11 +8,8 @@
 
     <ion-title class="text-center">Course</ion-title>
 
-    <div class="notification">
-      <a><img src="../assets/images/notification-icon.png" alt="">
-      <span>2</span>
-      </a>
-    </div>
+    <app-notification *ngIf="user_type == 'admin'"></app-notification>
+    <div class="notification" *ngIf="user_type == 'student'"></div>
   </div>
 </ion-header>
 

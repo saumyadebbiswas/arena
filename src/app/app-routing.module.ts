@@ -9,6 +9,9 @@ import { WorkComponent } from './work/work.component';
 import { CoursedetailsComponent } from './coursedetails/coursedetails.component';
 import { CourseComponent } from './course/course.component';
 import { ApplicationformComponent } from './applicationform/applicationform.component';
+import { RegisterStudentComponent } from './register-student/register-student.component';
+import { StudentGuard } from './guards/student.guard';
+import { AdminGuard } from './guards/admin.guard';
 
 const routes: Routes = [
   {

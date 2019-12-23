@@ -1,0 +1,39 @@
+<ion-header>
+  <div class="head">
+    <ion-buttons slot="start">
+      <ion-menu-button>
+        <img src="../assets/images/manu.png" alt="" class="manu-icon">
+      </ion-menu-button>
+    </ion-buttons>
+
+    <ion-title class="text-center">Register Student List</ion-title>
+
+    <app-notification></app-notification>
+  </div>
+</ion-header>
+
+<ion-content>
+  <div padding class="ex-pad" >
+    <ion-row justify-content-center class="product-sec">
+      <ion-item class="form-group frm">
+        <span><i class="fa fa-search"></i></span>
+        <ion-input type="text" class="info-frm" id="search" placeholder="Search By Name" (keyup)="updateList($event)" ></ion-input>
+      </ion-item>
+
+      <ul class="place-box">
+
+        <li *ngFor="let student of student_list; let i = index">
+          <div class="cours-detal">
+            <h4>{{student.name}}</h4>
+          </div>
+          <p *ngIf="student.email">Email: {{student.email}}</p>
+          <p>Phone: {{student.phone}}</p>
+          <p *ngIf="student.applied_course">Applied Course: {{student.applied_course}}</p>
+        </li>
+        
+      </ul>
+
+      <div *ngIf="student_list.length == 0"><span>{{message}}</span></div>
+    </ion-row>
+  </div>
+</ion-content>

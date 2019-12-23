@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-
 import { Platform, MenuController, Events } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
@@ -13,40 +12,10 @@ import { UserService } from './services';
 })
 export class AppComponent {
 
-  user_details: any = [];
-  name: string;
-  public appPages = [
-    {
-      title: 'Courses',
-      url: '/course',
-      icon: 'list'
-    },
-    {
-      title: 'Student Artwork',
-      url: '/art-work',
-      icon: 'list'
-    },
-    {
-      title: 'Placement Record',
-      url: '/placement',
-      icon: 'list'
-    },
-    {
-      title: 'Infrastructure',
-      url: '/infrastructure',
-      icon: 'list'
-    },
-    {
-      title: 'Videos',
-      url: '/videos',
-      icon: 'list'
-    },
-    {
-      title: 'Appilication Form',
-      url: '/appilicationform',
-      icon: 'list'
-    }
-  ];
+  user_info: any = [];
+  name: string = "Guest";
+  phone: string = "0000000000";
+  public appPages = [];
 
   constructor(
     public menuCtrl: MenuController,
@@ -63,24 +32,103 @@ export class AppComponent {
     if(this.userService.currentUserValue) {	
       this.menuCtrl.enable(true);
       	   
-      this.user_details = this.userService.currentUserValue;
-      // console.log('Logged user details...', this.user_details);
-      if(this.user_details.name != null) {
-        this.name = this.user_details.name;
+      this.user_info = this.userService.currentUserValue;
+      console.log('Logged user details...', this.user_info);
+      if(this.user_info.details.name != null) {
+        this.name = this.user_info.details.name;
+        this.phone = this.user_info.details.phone;
+      }
+
+      //--- Select user type and load menu tabs accordingly
+      if(this.user_info.user_type == 'student') {
+        this.appPages = [
+          {
+            title: 'Courses',
+            url: '/course',
+            icon: 'list'
+          },
+          {
+            title: 'Student Artwork',
+            url: '/art-work',
+            icon: 'list'
+          },
+          {
+            title: 'Placement Record',
+            url: '/placement',
+            icon: 'list'
+          },
+          {
+            title: 'Infrastructure',
+            url: '/infrastructure',
+            icon: 'list'
+          },
+          {
+            title: 'Videos',
+            url: '/videos',
+            icon: 'list'
+          }
+        ];
+      } else if(this.user_info.user_type == 'admin') {
+        this.appPages = [
+          {
+            title: 'Register Students',
+            url: '/reg-students',
+            icon: 'list'
+          }
+        ];
       }
     }
 
     //--- Get event data set at login time from login page
     events.subscribe('userLogin', (data) => {
-      this.menuCtrl.enable(true);
-      // console.log('Login event data...', data.loggedin);
-
       //--- Get logged cuurent user details
-      if(this.userService.currentUserValue) {		   
-        this.user_details = this.userService.currentUserValue;
-        // console.log('Logged user details event...', this.user_details);
-        if(this.user_details.name != null) {
-          this.name = this.user_details.name;
+      if(this.userService.currentUserValue) {
+        this.menuCtrl.enable(true);
+
+        this.user_info = this.userService.currentUserValue;
+        console.log('Logged user details event...', this.user_info);
+        if(this.user_info.details.name != null) {
+          this.name = this.user_info.details.name;
+          this.phone = this.user_info.details.phone;
+        }
+
+        //--- Select user type and load menu tabs accordingly
+        if(this.user_info.user_type == 'student') {
+          this.appPages = [
+            {
+              title: 'Courses',
+              url: '/course',
+              icon: 'list'
+            },
+            {
+              title: 'Student Artwork',
+              url: '/art-work',
+              icon: 'list'
+            },
+            {
+              title: 'Placement Record',
+              url: '/placement',
+              icon: 'list'
+            },
+            {
+              title: 'Infrastructure',
+              url: '/infrastructure',
+              icon: 'list'
+            },
+            {
+              title: 'Videos',
+              url: '/videos',
+              icon: 'list'
+            }
+          ];
+        } else if(this.user_info.user_type == 'admin') {
+          this.appPages = [
+            {
+              title: 'Register Students',
+              url: '/reg-students',
+              icon: 'list'
+            }
+          ];
         }
       }
     });

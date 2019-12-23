@@ -76,7 +76,7 @@ export class LoginComponent implements OnInit {
       //console.log('Login sendData...', sendData);
 
       this.userService.login(sendData).subscribe(async response => {
-        //console.log('Login response...', response);
+        console.log('Login response...', response);
         //--- After successful login - dismiss loader, enable side menu, navigate to dashboard
         this.loadingController.dismiss();
 
@@ -84,7 +84,13 @@ export class LoginComponent implements OnInit {
           //--- Set event data which will access from app component page after login
           this.events.publish('userLogin', {loggedin: true});
           this.menuCtrl.enable(true);
-          this.router.navigate(['/course']);
+
+          if(response.data.user_type == 'student') {
+            this.router.navigate(['/course']);
+          } else if(response.data.user_type == 'admin') {
+            this.router.navigate(['/reg-students']);
+          }
+
         } else {
           const alert = await this.alertCtrl.create({
             header: 'Error!',

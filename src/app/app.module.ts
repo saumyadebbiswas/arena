@@ -25,6 +25,8 @@ import { File } from "@ionic-native/file/ngx";
 import { FileTransfer } from "@ionic-native/file-transfer/ngx";
 import { PdfViewerService } from "./services/pdf-viewer.service";
 import { ApplicationformComponent } from './applicationform/applicationform.component';
+import { NotificationComponent } from './notification/notification.component';
+import { RegisterStudentComponent } from './register-student/register-student.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { ApplicationformComponent } from './applicationform/applicationform.comp
     WorkComponent,
     CoursedetailsComponent,
     CourseComponent,
-    ApplicationformComponent
+    ApplicationformComponent,
+    NotificationComponent,
+    RegisterStudentComponent
   ],
   entryComponents: [],
   imports: [

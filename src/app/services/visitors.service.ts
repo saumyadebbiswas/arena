@@ -50,4 +50,8 @@ export class VisitorsService {
   videos_list() {
     return this.http.get<any>(this.api_url+'/videos/details', {headers: this.requestHeader});
   }
+
+  register_student_list() {
+    return this.http.get<any>(this.api_url+'/application/registerdetails', {headers: this.requestHeader});
+  }
 }

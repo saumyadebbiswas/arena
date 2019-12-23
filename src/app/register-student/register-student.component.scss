@@ -1,0 +1,60 @@
+.ex-pad{
+    padding: 12px 0 0 12px;
+  }
+  .place-box{
+    padding: 0;
+    width: 100%;
+    list-style-type: none;
+  }
+  .place-box li{
+    width: 97%;
+    margin-bottom: 12px;
+    margin-right: 3%;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #ddd;
+    float: left;
+    overflow: hidden;
+}
+.cours-detal{
+    display: flex;
+    width: 100%;
+  }
+  .place-box li h4{
+    color: #6f6e6e;
+    margin-top: 7px;
+    font-size: 15px;
+    min-height: 20px;
+  }
+  .place-box li p{
+    margin-bottom: 0px;
+    color: #838383;
+    font-size: 12px;
+    text-align: justify;
+    white-space: pre-line;
+  }
+
+  .place-box li p a{
+    font-size: 11px;
+    color: #eb1d23;
+  }
+
+  .frm{
+    width: 80%;
+    padding-left: 0px;
+    padding-right: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .info-frm{
+    color: #757575;
+  }
+  
+  .frm span{
+    color: #757575;
+  }
+  
+  .frm span i{
+    color: #757575;
+    padding-right: 12px;
+  }
+
