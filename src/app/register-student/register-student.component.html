@@ -15,6 +15,11 @@
 <ion-content>
   <div padding class="ex-pad" >
     <ion-row justify-content-center class="product-sec">
+      <ion-item class="form-group frm">
+        <span><i class="fa fa-search"></i></span>
+        <ion-input type="text" class="info-frm" id="search" placeholder="Search By Name" (keyup)="updateList($event)" ></ion-input>
+      </ion-item>
+
       <ul class="place-box">
 
         <li *ngFor="let student of student_list; let i = index">

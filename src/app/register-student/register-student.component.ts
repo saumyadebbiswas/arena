@@ -12,7 +12,8 @@ import { SITE_URL } from '../services/constants';
 export class RegisterStudentComponent implements OnInit {
   
   subscription:any;
-  message: string = "Loading..."
+  message: string = "Loading...";
+  student_list_fix: any = [];
   student_list: any = [];
   site_url: string;
   user_type: string;
@@ -59,6 +60,7 @@ export class RegisterStudentComponent implements OnInit {
       this.loadingController.dismiss();
 
       if(response.status == true) {
+        this.student_list_fix = response.data;
         this.student_list = response.data;
       } else {
         this.message = "No Student Available!"
@@ -75,6 +77,25 @@ export class RegisterStudentComponent implements OnInit {
       });
       alert.present();
     });
+  }
+  
+  updateList(event) {
+    let search_value = event.target.value;
+
+    this.student_list = [];
+
+    if(search_value.length >= 3) {
+      this.student_list_fix.forEach(element => {
+        let name = element.name.toLowerCase();
+        search_value = search_value.toLowerCase();
+
+        if(name.includes(search_value)){
+          this.student_list.push(element);
+        }
+      });
+    } else {
+      this.student_list = this.student_list_fix;
+    }
   }
 
 }
