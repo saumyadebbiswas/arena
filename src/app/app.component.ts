@@ -66,6 +66,11 @@ export class AppComponent {
             title: 'Videos',
             url: '/videos',
             icon: 'list'
+          },
+          {
+            title: 'Application Form',
+            url: '/appilicationform',
+            icon: 'list'
           }
         ];
       } else if(this.user_info.user_type == 'admin') {
@@ -73,6 +78,11 @@ export class AppComponent {
           {
             title: 'Register Students',
             url: '/reg-students',
+            icon: 'list'
+          },
+          {
+            title: 'Application Form',
+            url: '/appilicationform',
             icon: 'list'
           }
         ];
@@ -119,6 +129,11 @@ export class AppComponent {
               title: 'Videos',
               url: '/videos',
               icon: 'list'
+            },
+            {
+              title: 'Application Form',
+              url: '/appilicationform',
+              icon: 'list'
             }
           ];
         } else if(this.user_info.user_type == 'admin') {
@@ -126,6 +141,11 @@ export class AppComponent {
             {
               title: 'Register Students',
               url: '/reg-students',
+              icon: 'list'
+            },
+            {
+              title: 'Application Form',
+              url: '/appilicationform',
               icon: 'list'
             }
           ];

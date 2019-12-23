@@ -19,15 +19,16 @@ const routes: Routes = [
     redirectTo: 'login',
     pathMatch: 'full'
   },
-  { path: "login",  component: LoginComponent},
-  { path: "register",  component: RegisterComponent},
-  { path: "placement",  component: PlacementrecordComponent},
-  { path: "videos",  component: VideosComponent},
-  { path: "infrastructure",  component: InfrestComponent},
-  { path: "art-work",  component: WorkComponent},
-  { path: "course-details/:id",  component: CoursedetailsComponent},
-  { path: "course",  component: CourseComponent},
-  { path: "appilicationform",  component: ApplicationformComponent}
+  { path: "login", component: LoginComponent},
+  { path: "register", component: RegisterComponent},
+  { path: "placement", component: PlacementrecordComponent, canActivate: [StudentGuard]},
+  { path: "videos", component: VideosComponent, canActivate: [StudentGuard]},
+  { path: "infrastructure", component: InfrestComponent, canActivate: [StudentGuard]},
+  { path: "art-work", component: WorkComponent, canActivate: [StudentGuard]},
+  { path: "course-details/:id", component: CoursedetailsComponent, canActivate: [StudentGuard]},
+  { path: "course", component: CourseComponent, canActivate: [StudentGuard]},
+  { path: "appilicationform",  component: ApplicationformComponent},
+  { path: "reg-students", component: RegisterStudentComponent, canActivate: [AdminGuard]}
 ];
 
 @NgModule({
