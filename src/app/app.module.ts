@@ -31,6 +31,8 @@ import { ApplicationeducationComponent } from './applicationeducation/applicatio
 import { ApplicationactivitiesComponent } from './applicationactivities/applicationactivities.component';
 import { ApplicationofficeComponent } from './applicationoffice/applicationoffice.component';
 import { ApplicationfinishComponent } from './applicationfinish/applicationfinish.component';
+import { StudentBachListComponent } from './student-bach-list/student-bach-list.component';
+import { RoutineComponent } from './routine/routine.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,9 @@ import { ApplicationfinishComponent } from './applicationfinish/applicationfinis
     ApplicationeducationComponent,
     ApplicationactivitiesComponent,
     ApplicationofficeComponent,
-    ApplicationfinishComponent
+    ApplicationfinishComponent,
+    StudentBachListComponent,
+    RoutineComponent
   ],
   entryComponents: [],
   imports: [

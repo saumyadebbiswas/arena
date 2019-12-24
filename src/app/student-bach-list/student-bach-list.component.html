@@ -1,0 +1,55 @@
+<ion-header>
+    <div class="head">
+      <ion-buttons slot="start">
+        <ion-menu-button>
+          <img src="../assets/images/manu.png" alt="" class="manu-icon">
+        </ion-menu-button>
+      </ion-buttons>
+  
+      <ion-title class="text-center">Student Batch</ion-title>
+  
+      <app-notification *ngIf="user_type == 'admin'"></app-notification>
+      <div *ngIf="user_type == 'student'" class="notification"></div>
+    </div>
+  </ion-header>
+  <ion-content>
+      <div class="container-fluid" id="grad1">
+          <ion-item class="frm">
+              <ion-input type="text" class="info-frm" placeholder="Batch Name"></ion-input>
+          </ion-item>
+          <div class="dropdown frm select-dropdown">
+              <!-- <ion-label class="drop-mnu"></ion-label> -->
+              <ion-select placeholder="Select Course">
+                  <ion-select-option value="newspaper">course1</ion-select-option>
+                  <ion-select-option value="leftlet">course2</ion-select-option>
+                  <ion-select-option value="television">course3</ion-select-option>
+                  <ion-select-option value="internet">course4</ion-select-option>
+                  <ion-select-option value="other">course5</ion-select-option>
+              </ion-select>
+          </div>
+          <div class="student-col">
+          <h5>Select Student</h5>
+          <ul class="student-list">
+            <li>
+                <p class="chq-inpt">
+                    <ion-label class="chq-lebl">Same Address?</ion-label>
+                    <ion-checkbox class="checkbox" (click)="checkAddress()" color="primary"></ion-checkbox>
+                </p>
+            </li>
+          </ul>
+          <button type="submit" class="batch-btn">Create Batch</button>
+        </div>
+      </div>
+  </ion-content>
+
+
+
+
+
+
+
+
+
+
+
+

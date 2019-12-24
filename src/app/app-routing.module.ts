@@ -16,6 +16,8 @@ import { ApplicationeducationComponent } from './applicationeducation/applicatio
 import { ApplicationactivitiesComponent } from './applicationactivities/applicationactivities.component';
 import { ApplicationofficeComponent } from './applicationoffice/applicationoffice.component';
 import { ApplicationfinishComponent } from './applicationfinish/applicationfinish.component';
+import { StudentBachListComponent } from './student-bach-list/student-bach-list.component';
+import { RoutineComponent } from './routine/routine.component';
 
 const routes: Routes = [
   {
@@ -36,6 +38,8 @@ const routes: Routes = [
   { path: "application-activity",  component: ApplicationactivitiesComponent},
   { path: "application-official",  component: ApplicationofficeComponent, canActivate: [AdminGuard]},
   { path: "application-finish",  component: ApplicationfinishComponent},
+  { path: "student-batch",  component: StudentBachListComponent},
+  { path: "routine",  component: RoutineComponent},
   { path: "reg-students", component: RegisterStudentComponent, canActivate: [AdminGuard]}
 ];
 
