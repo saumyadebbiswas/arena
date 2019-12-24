@@ -74,6 +74,16 @@ export class AppComponent {
             title: 'Register Students',
             url: '/reg-students',
             icon: 'list'
+          },
+          {
+            title: 'Batch Create',
+            url: '/student-batch',
+            icon: 'list'
+          },
+          {
+            title: 'Routine Create',
+            url: '/routine',
+            icon: 'list'
           }
         ];
       }
@@ -126,6 +136,16 @@ export class AppComponent {
             {
               title: 'Register Students',
               url: '/reg-students',
+              icon: 'list'
+            },
+            {
+              title: 'Batch Create',
+              url: '/student-batch',
+              icon: 'list'
+            },
+            {
+              title: 'Routine Create',
+              url: '/routine',
               icon: 'list'
             }
           ];

@@ -38,8 +38,8 @@ const routes: Routes = [
   { path: "application-activity",  component: ApplicationactivitiesComponent},
   { path: "application-official",  component: ApplicationofficeComponent, canActivate: [AdminGuard]},
   { path: "application-finish",  component: ApplicationfinishComponent},
-  { path: "student-batch",  component: StudentBachListComponent},
-  { path: "routine",  component: RoutineComponent},
+  { path: "student-batch",  component: StudentBachListComponent, canActivate: [AdminGuard]},
+  { path: "routine",  component: RoutineComponent, canActivate: [AdminGuard]},
   { path: "reg-students", component: RegisterStudentComponent, canActivate: [AdminGuard]}
 ];
 
