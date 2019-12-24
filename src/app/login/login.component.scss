@@ -29,7 +29,14 @@
     margin-bottom: 25px;
     letter-spacing: 34px;
 }
-
+.sing-frm .icon2{
+    width: 20px;
+    position: absolute;
+    top: 9px;
+    left:5px;
+}
+.sing-frm .icon2 .fa{ color: #b7b7b7;}
+.form-group{ position: relative;}
 .sing-text h5{
     font-size: 1.2rem;
     font-weight: bold; 
@@ -39,7 +46,7 @@
 
 .sing-text p{
     letter-spacing: 2px;
-    font-size: 1rem;
+    font-size: 14px;
     font-weight: bold;
 }
 
@@ -62,10 +69,10 @@
     margin-left: 30px;
     padding: 0!important;
     margin-bottom: 20px;
-    border-bottom: 1px solid #7a7a7a;
-    font-size: 12px;
+    border-bottom: 1px solid #cdcdcd;
+    font-size: 14px;
 }
-
+.fa-lock{ font-size: 20px;}
 .info-frm .sc-ion-input-md{
     padding-left: 0!important;
 }

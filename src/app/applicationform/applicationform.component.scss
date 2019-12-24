@@ -179,13 +179,13 @@ select.list-dt:focus {
 #progressbar .active {
     color: #000000
 }
-ul.user li{ width: 25% !important;}
+ul.user li{ width: 20% !important;}
 #progressbar li {
     list-style-type: none;
     font-size: 12px;
-    width: 20%;
-    float: left;
-    position: relative
+    width: 19%;
+    position: relative;
+    display: inline-block;
 }
 
 

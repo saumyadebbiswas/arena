@@ -25,12 +25,13 @@
         <li *ngFor="let student of student_list; let i = index">
           <div class="cours-detal">
             <h4>{{student.name}}</h4>
-          </div>
-          <p *ngIf="student.email">Email: {{student.email}}</p>
+            <p *ngIf="student.email">Email: {{student.email}}</p>
           <p>Phone: {{student.phone}}</p>
           <p *ngIf="student.applied_course">Applied Course: {{student.applied_course}}</p>
+          </div>
+          
 
-          <input type="button" (click)="moveApplicationForm(student.id)" value="Fill Application" />
+          <input type="button" class="application-btn" (click)="moveApplicationForm(student.id)" value="Fill Application" />
         </li>
         
       </ul>
