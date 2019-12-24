@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AlertController, LoadingController } from '@ionic/angular';
+import { AlertController, LoadingController, ToastController } from '@ionic/angular';
 import { UserService, VisitorsService, ApplicationService } from '../services';
 
 @Component({
@@ -35,6 +35,7 @@ export class ApplicationformComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     public alertCtrl: AlertController,
+    public toastController: ToastController,
     public loadingController: LoadingController,
     public applicationService: ApplicationService,
     public visitorsService: VisitorsService,
@@ -58,8 +59,6 @@ export class ApplicationformComponent implements OnInit {
       } else if(this.route.snapshot.paramMap.get('type') == 'edit') {
         this.process_type = 'edit';
         this.student_id = this.route.snapshot.paramMap.get('id');
-
-        this.student_details();
       } else {
         //--- If no type found then navigate to landing page
         if(this.user_type == 'admin') {
@@ -68,10 +67,11 @@ export class ApplicationformComponent implements OnInit {
           this.router.navigate(['/course']);
         }
       }
-      console.log('Process type ', this.process_type, this.student_id);
+      //console.log('Process type ', this.process_type, this.student_id);
 
       this.course_all();
     }
+    
   }
 
   async course_all() {
@@ -89,8 +89,20 @@ export class ApplicationformComponent implements OnInit {
 
       if(response.status == true) {
         this.course_list = response.data;
+
+        if(this.process_type == 'edit') {
+          this.student_details();
+        }
+      } else {
+        if(this.process_type == 'edit') {
+          this.student_details();
+        }
       }
     }, async error => {
+      if(this.process_type == 'edit') {
+        this.student_details();
+      }
+
       //--- In case of any error - dismiss loader, show error message
       this.loadingController.dismiss();
 
@@ -103,6 +115,7 @@ export class ApplicationformComponent implements OnInit {
     });
   }
 
+  //--- Execute when student fill up the form or admin fill up any existing students form
   async student_details() {
     //--- Start loader
     const loading = await this.loadingController.create({
@@ -135,6 +148,13 @@ export class ApplicationformComponent implements OnInit {
         if(this.student_id != null && this.course_id != null) {
           this.show_next_button = true;
         }
+      } else {
+        const alert = await this.alertCtrl.create({
+          header: 'Error!',
+          message: "Unable to load student details!",
+          buttons: ['OK']
+        });
+        alert.present();
       }
     }, async error => {
       //--- In case of any error - dismiss loader, show error message
@@ -160,7 +180,7 @@ export class ApplicationformComponent implements OnInit {
   }
 
   async onSubmit() {
-    var mail_format = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/; //--- Numeric, min 10 and max 13
+    var mail_format = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/; //--- Numeric, min 10 and max 13, fromat: 9876543210
 
     var phone_num_format = /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/; //--- String, format: demo@domain.co
 
@@ -170,7 +190,7 @@ export class ApplicationformComponent implements OnInit {
       //console.log('DOB date......', date_split[0]);
     }
 
-    //--- Check empty credentials
+    //--- Check empty and invalid credentials
     if(this.course_id == null) {
       const alert = await this.alertCtrl.create({
         header: 'Error!',
@@ -285,11 +305,11 @@ export class ApplicationformComponent implements OnInit {
       alert.present();
     } else {
       //--- Start loader
-      // const loading = await this.loadingController.create({
-      //   message: 'Please wait...',
-      //   spinner: 'bubbles'
-      // });
-      // loading.present();
+      const loading = await this.loadingController.create({
+        message: 'Please wait...',
+        spinner: 'bubbles'
+      });
+      loading.present();
 
       let sendData = {
         course_id: this.course_id,
@@ -306,42 +326,42 @@ export class ApplicationformComponent implements OnInit {
         email2: this.email2,
         known_from: this.known_from
       }
-      console.log('Application personal sendData...', sendData);
+      console.log('Application personal sendData: ', sendData);
 
-      // this.userService.register(sendData).subscribe(async response => {
-      //   //console.log('Register response...', response);
-      //   //--- After record insert - dismiss loader, navigate to login
-      //   this.loadingController.dismiss();
+      this.applicationService.personal_insert(sendData).subscribe(async response => {
+        console.log('Application personal insert response: ', response);
+        //--- After record insert - dismiss loader
+        this.loadingController.dismiss();
 
-      //   if(response.status == true) {
-      //     const alert = await this.alertCtrl.create({
-      //       header: 'Thank You!',
-      //       message: "Registration successfull.",
-      //       buttons: ['OK']
-      //       });
-      //     alert.present();
+        if(response.status == true) {
+          const toast = await this.toastController.create({
+            message: 'Personal details inserted.',
+            color: "dark",
+            position: "bottom",
+            duration: 2000
+          });
+          toast.present();
 
-      //     this.router.navigate(['/login']);
-      //   } else {
-      //     const alert = await this.alertCtrl.create({
-      //       header: 'Error!',
-      //       message: response.message,
-      //       buttons: ['OK']
-      //       });
-      //     alert.present();
-      //   }
-      // }, async error => {
-      //   console.log('Register error...', error);
-
-      //   //--- In case of login error - dismiss loader, show error message
-      //   this.loadingController.dismiss();
-      //   const alert = await this.alertCtrl.create({
-      //     header: 'Error!',
-      //     message: "Internal problem!",
-      //     buttons: ['OK']
-      //     });
-      //   alert.present();
-      // });
+          this.show_next_button = true;
+        } else {
+          const alert = await this.alertCtrl.create({
+            header: 'Error!',
+            message: response.message,
+            buttons: ['OK']
+          });
+          alert.present();
+        }
+      }, async error => {
+        console.log('Application personal insert error: ', error);
+        //--- In case of login error - dismiss loader, show error message
+        this.loadingController.dismiss();
+        const alert = await this.alertCtrl.create({
+          header: 'Error!',
+          message: "Internal problem!",
+          buttons: ['OK']
+        });
+        alert.present();
+      });
     }
   }
 
