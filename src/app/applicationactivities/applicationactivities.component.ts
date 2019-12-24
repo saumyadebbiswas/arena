@@ -21,7 +21,7 @@ export class ApplicationactivitiesComponent implements OnInit {
 
   ngOnInit() {}
 
-  ionViewWillEnter(){ 
+  ionViewWillEnter() { 
     if(this.userService.currentUserValue == null) {
       this.router.navigate(['/login']);
     } else {

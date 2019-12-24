@@ -47,8 +47,6 @@
                                         <!-- Name -->
                                         <ion-item class="frm">
                                             <ion-input type="text" class="info-frm" id="name" placeholder="Name" [(ngModel)]="name"></ion-input>
-                                            
-                                            <span data-toggle="tooltip" data-placement="top" title="Tooltip on top"><i class="fa fa-question-circle toolp"></i></span>
                                         </ion-item>
 
                                         <!-- Parents/Guardian Name -->
@@ -57,8 +55,15 @@
                                         </ion-item>
 
                                         <!-- Mobile No -->
-                                        <ion-item class="frm">
+                                        <ion-item *ngIf="student_id == null" class="frm">
                                             <ion-input type="text" class="info-frm" id="mobile" placeholder="Mobile No" [(ngModel)]="mobile"></ion-input>
+                                        </ion-item>
+                                        
+                                        <!-- Mobile No (readonly) -->
+                                        <ion-item *ngIf="student_id != null" class="frm">
+                                            <ion-input type="text" class="info-frm" id="mobile" placeholder="Mobile No" [(ngModel)]="mobile" readonly="true"></ion-input>
+                                            
+                                            <span data-toggle="tooltip" data-placement="top" title="Can't update" (click)="tooltipMsg('Cant update')"><i class="fa fa-question-circle toolp"></i></span>
                                         </ion-item>
 
                                         <!-- Parents/Guardian Mobile No -->
@@ -68,7 +73,6 @@
 
                                         <!-- Date of Birth -->
                                         <ion-item class="frm">
-                                            <!-- <ion-input type="date" class="info-frm drop-mnu" id="Name" placeholder="Date of Birth"></ion-input> -->
                                             <ion-datetime id="dob" class="info-frm" displayFormat="MMM DD, YYYY" placeholder="Date of Birth" [(ngModel)]="dob"></ion-datetime>
                                         </ion-item>
 
@@ -122,7 +126,7 @@
 
                                         <!-- Save Button -->
                                         <div class="sign-box">
-                                            <button  *ngIf="student_id == null"type="button"size="large" expand="block" class="btn save-btn" (click)="onSubmit()">Save</button>
+                                            <button *ngIf="student_id == null" type="button"size="large" expand="block" class="btn save-btn" (click)="onSubmit()">Save</button>
 
                                             <button *ngIf="student_id != null" type="button"size="large" expand="block" class="btn save-btn" (click)="onUpdate()">Update</button>
                                         </div>

@@ -133,9 +133,10 @@ export class ApplicationformComponent implements OnInit {
         this.student_id = response.data[0].id;
         this.course_id = response.data[0].applied_course_id;
         this.name = response.data[0].name;
-        if(response.data[0].phone != null) {
-          this.mobile = response.data[0].phone;
+        if(response.data[0].guardian_name != null) {
+          this.guardian_name = response.data[0].guardian_name;
         }
+        this.mobile = response.data[0].phone;
         if(response.data[0].guardian_phone != null) {
           this.guardian_mobile = response.data[0].guardian_phone;
         }
@@ -146,14 +147,18 @@ export class ApplicationformComponent implements OnInit {
         if(response.data[0].permanent_address != null) {
           this.permanent_addr = response.data[0].permanent_address;
         }
-        this.telephone = response.data[0].telephone;
+        if(response.data[0].telephone != null) {
+          this.telephone = response.data[0].telephone;
+        }
         if(response.data[0].state != null) {
           this.state = response.data[0].state;
         }
         if(response.data[0].email != null) {
           this.email1 = response.data[0].email;
         }
-        this.email2 = response.data[0].email2;
+        if(response.data[0].email2 != null) {
+          this.email2 = response.data[0].email2;
+        }
         this.known_from = response.data[0].known_from;
 
         if(this.student_id != null && this.course_id != null) {
@@ -382,7 +387,7 @@ export class ApplicationformComponent implements OnInit {
 
     var phone_num_format = /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/; //--- String, format: demo@domain.co
 
-    if(this.dob != null){
+    if(this.dob != null) {
       let date_split = this.dob.split('T');
       this.dob = date_split[0];
       //console.log('DOB date......', date_split[0]);
@@ -417,21 +422,23 @@ export class ApplicationformComponent implements OnInit {
         buttons: ['OK']
         });
       alert.present();
-    } else if(this.mobile.length == 0) {
-      const alert = await this.alertCtrl.create({
-        header: 'Error!',
-        message: "Enter mobile no!",
-        buttons: ['OK']
-        });
-      alert.present();
-    } else if(!phone_num_format.test(this.mobile)) {
-      const alert = await this.alertCtrl.create({
-        header: 'Error!',
-        message: "Enter valid mobile no!",
-        buttons: ['OK']
-        });
-      alert.present();
-    } else if(this.guardian_mobile.length == 0) {
+    } 
+    // else if(this.mobile.length == 0) {
+    //   const alert = await this.alertCtrl.create({
+    //     header: 'Error!',
+    //     message: "Enter mobile no!",
+    //     buttons: ['OK']
+    //     });
+    //   alert.present();
+    // } else if(!phone_num_format.test(this.mobile)) {
+    //   const alert = await this.alertCtrl.create({
+    //     header: 'Error!',
+    //     message: "Enter valid mobile no!",
+    //     buttons: ['OK']
+    //     });
+    //   alert.present();
+    // } 
+    else if(this.guardian_mobile.length == 0) {
       const alert = await this.alertCtrl.create({
         header: 'Error!',
         message: "Enter guardian mobile no!",
@@ -532,10 +539,10 @@ export class ApplicationformComponent implements OnInit {
         email2: this.email2,
         known_from: this.known_from
       }
-      console.log('Application personal update sendData: ', sendData);
+      //console.log('Application personal update sendData: ', sendData);
 
       this.applicationService.personal_update(sendData).subscribe(async response => {
-        console.log('Application personal update response: ', response);
+        //console.log('Application personal update response: ', response);
         //--- After record insert - dismiss loader
         this.loadingController.dismiss();
 
@@ -572,7 +579,17 @@ export class ApplicationformComponent implements OnInit {
   }
 
   moveNext() {
-    this.router.navigate(['/application-education']);
+    this.router.navigate(['/application-education', {id: this.student_id}]);
+  }
+
+  async tooltipMsg(message) {
+    const toast = await this.toastController.create({
+      message: message,
+      color: "dark",
+      position: "bottom",
+      duration: 2000
+    });
+    toast.present();
   }
 
 }
