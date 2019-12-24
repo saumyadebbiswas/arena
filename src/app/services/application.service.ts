@@ -23,4 +23,8 @@ export class ApplicationService {
   personal_insert(sendData: any): Observable<any> {
     return this.http.post<any>(this.api_url+'/application/detail/insert', sendData, {headers: this.requestHeader});
   }
+	
+  personal_update(sendData: any): Observable<any> {
+    return this.http.post<any>(this.api_url+'/application/detail/edit', sendData, {headers: this.requestHeader});
+  }
 }
