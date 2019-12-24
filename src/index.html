@@ -165,12 +165,6 @@
       });
     </script>
 
-    <!-- <script>
-      $(document).ready(function() {
-        $('body').bootstrapMaterialDesign();
-      });
-    </script> -->
-
     <script>
       $(function() {
         var selectedClass = "";
@@ -187,130 +181,129 @@
       });
     </script>
 
+    <!-- For application form - start -->
+    <script>
+      $(document).ready(function(){
 
-<!-- ------new-------- -->
+        var current_fs, next_fs, previous_fs; //fieldsets
+        var opacity;
 
-<script>
-$(document).ready(function(){
+        $(".next").click(function(){
 
-var current_fs, next_fs, previous_fs; //fieldsets
-var opacity;
+          current_fs = $(this).parent();
+          next_fs = $(this).parent().next();
 
-$(".next").click(function(){
+          //Add Class Active
+          $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
 
-current_fs = $(this).parent();
-next_fs = $(this).parent().next();
+          //show the next fieldset
+          next_fs.show();
+          //hide the current fieldset with style
+          current_fs.animate({opacity: 0}, {
+          step: function(now) {
+            // for making fielset appear animation
+            opacity = 1 - now;
 
-//Add Class Active
-$("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+            current_fs.css({
+            'display': 'none',
+            'position': 'relative'
+            });
+            next_fs.css({'opacity': opacity});
+          },
+          duration: 600
+          });
+        });
 
-//show the next fieldset
-next_fs.show();
-//hide the current fieldset with style
-current_fs.animate({opacity: 0}, {
-step: function(now) {
-// for making fielset appear animation
-opacity = 1 - now;
+        $(".previous").click(function(){
 
-current_fs.css({
-'display': 'none',
-'position': 'relative'
-});
-next_fs.css({'opacity': opacity});
-},
-duration: 600
-});
-});
+          current_fs = $(this).parent();
+          previous_fs = $(this).parent().prev();
 
-$(".previous").click(function(){
+          //Remove class active
+          $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
 
-current_fs = $(this).parent();
-previous_fs = $(this).parent().prev();
+          //show the previous fieldset
+          previous_fs.show();
 
-//Remove class active
-$("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+          //hide the current fieldset with style
+          current_fs.animate({opacity: 0}, {
+          step: function(now) {
+          // for making fielset appear animation
+          opacity = 1 - now;
 
-//show the previous fieldset
-previous_fs.show();
+          current_fs.css({
+          'display': 'none',
+          'position': 'relative'
+          });
+          previous_fs.css({'opacity': opacity});
+          },
+          duration: 600
+          });
+        });
 
-//hide the current fieldset with style
-current_fs.animate({opacity: 0}, {
-step: function(now) {
-// for making fielset appear animation
-opacity = 1 - now;
+        $('.radio-group .radio').click(function(){
+        $(this).parent().find('.radio').removeClass('selected');
+        $(this).addClass('selected');
+        });
 
-current_fs.css({
-'display': 'none',
-'position': 'relative'
-});
-previous_fs.css({'opacity': opacity});
-},
-duration: 600
-});
-});
+        $(".submit").click(function(){
+          return false;
+        })
 
-$('.radio-group .radio').click(function(){
-$(this).parent().find('.radio').removeClass('selected');
-$(this).addClass('selected');
-});
+      });
+    </script>
 
-$(".submit").click(function(){
-return false;
-})
+    <script>
+      // CSS animation maps:
+      const rotateH = {
+        transform: 'rotateZ(90deg)',
+        left: 0
+      };
+      const rotateH_Rev = {
+        transform: 'rotateZ(0deg)',
+        top: '50%'
+      };
+      const rotateV = {
+        transform: 'rotateZ(90deg)',
+        top: 0
+      };
 
-});
-</script>
+      // Wait for DOM content to be loaded:
+      $(function() {
+        $('li').on('click', '.inactive', (evt) => {
+          const $currTarg = $(evt.currentTarget),
+                $accordion = $currTarg.next('.accordion'),
+                $lineH = $currTarg.find('.line-h');
+          $('h4.active').trigger('click');
+          $lineH.css(rotateH);
+          setTimeout(() => {
+            $lineH.parent().css({ transform: 'rotateZ(90deg)' });
+            $currTarg.toggleClass('inactive active');
+          }, 250);
+        });
+        
+        $('li').on('click', '.active', (evt) => {
+          const $currTarg = $(evt.currentTarget),
+                $accordion = $currTarg.next('.accordion'),
+                $lineH = $currTarg.find('.line-h');
+          $currTarg.find('.glyph-wrapper').css({ transform: 'rotateZ(-90deg)' });
+          setTimeout(() => {
+            $lineH.css(rotateH_Rev);
+            $currTarg.toggleClass('inactive active');
+          }, 250);
+        });
+        
+        $('.default').trigger('click');
+      });
 
-
-<script>
-// CSS animation maps:
-const rotateH = {
-  transform: 'rotateZ(90deg)',
-  left: 0
-};
-const rotateH_Rev = {
-  transform: 'rotateZ(0deg)',
-  top: '50%'
-};
-const rotateV = {
-  transform: 'rotateZ(90deg)',
-  top: 0
-};
-
-// Wait for DOM content to be loaded:
-$(function() {
-  $('li').on('click', '.inactive', (evt) => {
-    const $currTarg = $(evt.currentTarget),
-          $accordion = $currTarg.next('.accordion'),
-          $lineH = $currTarg.find('.line-h');
-    $('h4.active').trigger('click');
-    $lineH.css(rotateH);
-    setTimeout(() => {
-      $lineH.parent().css({ transform: 'rotateZ(90deg)' });
-      $currTarg.toggleClass('inactive active');
-    }, 250);
-  });
-  
-  $('li').on('click', '.active', (evt) => {
-    const $currTarg = $(evt.currentTarget),
-          $accordion = $currTarg.next('.accordion'),
-          $lineH = $currTarg.find('.line-h');
-    $currTarg.find('.glyph-wrapper').css({ transform: 'rotateZ(-90deg)' });
-    setTimeout(() => {
-      $lineH.css(rotateH_Rev);
-      $currTarg.toggleClass('inactive active');
-    }, 250);
-  });
-  
-  $('.default').trigger('click');
-});
-
-</script>
-<script>
-$(function () {
-  $('[data-toggle="tooltip"]').tooltip()
-})
-</script>
+    </script>
+    
+    <script>
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+      })
+    </script>
+    <!-- For application form - end -->
   </body>
 
 </html>

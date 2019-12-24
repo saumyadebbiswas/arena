@@ -1,0 +1,60 @@
+<ion-header>
+    <div class="head">
+      <ion-buttons slot="start">
+        <ion-menu-button>
+          <img src="../assets/images/manu.png" alt="" class="manu-icon">
+        </ion-menu-button>
+      </ion-buttons>
+  
+      <ion-title class="text-center">Appilication Form</ion-title>
+  
+      <app-notification *ngIf="user_type == 'admin'"></app-notification>
+      <div *ngIf="user_type == 'student'" class="notification"></div>
+    </div>
+</ion-header>
+
+<ion-content>
+    <div class="row">
+    <!-- MultiStep Form -->
+        <div class="container-fluid" id="grad1">
+            <div class="row justify-content-center mt-0">
+                <div class="col-11 text-center p-0">
+                    <div class="col-md-12 mx-0">
+                        <form id="msform">
+                            <!-- progressbar -->
+                            <ul id="progressbar">
+                                <li class="active" id="personal"><strong>Personal</strong></li>
+                                <li class="active" id="education"><strong>Education</strong></li>
+                                <li class="active" id="activity"><strong>Activities</strong></li>
+                                <li *ngIf="user_type == 'admin'" class="active" id="office"><strong>Office</strong></li>
+                                <li class="active" id="confirm"><strong>Finish</strong></li>
+                            </ul>
+                            
+                            <!-- fieldset - Finish -->
+                            <fieldset>
+                                <div class="form-card">
+                                    <h5 class="fs-title text-center">Thank You!</h5> <br><br>
+                                    <div class="row justify-content-center">
+                                        <div class="col-3">
+                                            <div class="circle-ripple">
+                                                <i class="fa fa-check"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row justify-content-center">
+                                        <div *ngIf="user_type == 'admin'" class="col-12 text-center success-frm">
+                                            <h5>You have successfully completed the process.</h5>
+                                        </div>
+                                        <div *ngIf="user_type == 'student'" class="col-12 text-center success-frm">
+                                            <h5>You have successfully completed the process. We will contact you soon.</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ion-content>

@@ -27,6 +27,10 @@ import { PdfViewerService } from "./services/pdf-viewer.service";
 import { ApplicationformComponent } from './applicationform/applicationform.component';
 import { NotificationComponent } from './notification/notification.component';
 import { RegisterStudentComponent } from './register-student/register-student.component';
+import { ApplicationeducationComponent } from './applicationeducation/applicationeducation.component';
+import { ApplicationactivitiesComponent } from './applicationactivities/applicationactivities.component';
+import { ApplicationofficeComponent } from './applicationoffice/applicationoffice.component';
+import { ApplicationfinishComponent } from './applicationfinish/applicationfinish.component';
 
 @NgModule({
   declarations: [
@@ -39,9 +43,13 @@ import { RegisterStudentComponent } from './register-student/register-student.co
     WorkComponent,
     CoursedetailsComponent,
     CourseComponent,
-    ApplicationformComponent,
     NotificationComponent,
-    RegisterStudentComponent
+    RegisterStudentComponent,
+    ApplicationformComponent,
+    ApplicationeducationComponent,
+    ApplicationactivitiesComponent,
+    ApplicationofficeComponent,
+    ApplicationfinishComponent
   ],
   entryComponents: [],
   imports: [

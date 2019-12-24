@@ -55,7 +55,7 @@ export class RegisterStudentComponent implements OnInit {
     loading.present();
 
     this.visitorsService.register_student_list().subscribe(async response => {
-      console.log('Register student list...', response);
+      //console.log('Register student list...', response);
       //--- After get record - dismiss loader
       this.loadingController.dismiss();
 
@@ -96,6 +96,10 @@ export class RegisterStudentComponent implements OnInit {
     } else {
       this.student_list = this.student_list_fix;
     }
+  }
+
+  moveApplicationForm(student_id) {
+    this.router.navigate(['/application-personal', {type: 'edit', id: student_id}]);
   }
 
 }

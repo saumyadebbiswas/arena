@@ -29,6 +29,8 @@
           <p *ngIf="student.email">Email: {{student.email}}</p>
           <p>Phone: {{student.phone}}</p>
           <p *ngIf="student.applied_course">Applied Course: {{student.applied_course}}</p>
+
+          <input type="button" (click)="moveApplicationForm(student.id)" value="Fill Application" />
         </li>
         
       </ul>

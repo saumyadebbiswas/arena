@@ -12,6 +12,10 @@ import { ApplicationformComponent } from './applicationform/applicationform.comp
 import { RegisterStudentComponent } from './register-student/register-student.component';
 import { StudentGuard } from './guards/student.guard';
 import { AdminGuard } from './guards/admin.guard';
+import { ApplicationeducationComponent } from './applicationeducation/applicationeducation.component';
+import { ApplicationactivitiesComponent } from './applicationactivities/applicationactivities.component';
+import { ApplicationofficeComponent } from './applicationoffice/applicationoffice.component';
+import { ApplicationfinishComponent } from './applicationfinish/applicationfinish.component';
 
 const routes: Routes = [
   {
@@ -27,7 +31,11 @@ const routes: Routes = [
   { path: "art-work", component: WorkComponent, canActivate: [StudentGuard]},
   { path: "course-details/:id", component: CoursedetailsComponent, canActivate: [StudentGuard]},
   { path: "course", component: CourseComponent, canActivate: [StudentGuard]},
-  { path: "appilicationform",  component: ApplicationformComponent},
+  { path: "application-personal",  component: ApplicationformComponent},
+  { path: "application-education",  component: ApplicationeducationComponent},
+  { path: "application-activity",  component: ApplicationactivitiesComponent},
+  { path: "application-official",  component: ApplicationofficeComponent, canActivate: [AdminGuard]},
+  { path: "application-finish",  component: ApplicationfinishComponent},
   { path: "reg-students", component: RegisterStudentComponent, canActivate: [AdminGuard]}
 ];
 

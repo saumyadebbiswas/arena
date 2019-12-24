@@ -33,7 +33,7 @@ export class AppComponent {
       this.menuCtrl.enable(true);
       	   
       this.user_info = this.userService.currentUserValue;
-      console.log('Logged user details...', this.user_info);
+      //console.log('Logged user details...', this.user_info);
       if(this.user_info.details.name != null) {
         this.name = this.user_info.details.name;
         this.phone = this.user_info.details.phone;
@@ -66,11 +66,6 @@ export class AppComponent {
             title: 'Videos',
             url: '/videos',
             icon: 'list'
-          },
-          {
-            title: 'Application Form',
-            url: '/appilicationform',
-            icon: 'list'
           }
         ];
       } else if(this.user_info.user_type == 'admin') {
@@ -78,11 +73,6 @@ export class AppComponent {
           {
             title: 'Register Students',
             url: '/reg-students',
-            icon: 'list'
-          },
-          {
-            title: 'Application Form',
-            url: '/appilicationform',
             icon: 'list'
           }
         ];
@@ -96,7 +86,7 @@ export class AppComponent {
         this.menuCtrl.enable(true);
 
         this.user_info = this.userService.currentUserValue;
-        console.log('Logged user details event...', this.user_info);
+        //console.log('Logged user details event...', this.user_info);
         if(this.user_info.details.name != null) {
           this.name = this.user_info.details.name;
           this.phone = this.user_info.details.phone;
@@ -129,11 +119,6 @@ export class AppComponent {
               title: 'Videos',
               url: '/videos',
               icon: 'list'
-            },
-            {
-              title: 'Application Form',
-              url: '/appilicationform',
-              icon: 'list'
             }
           ];
         } else if(this.user_info.user_type == 'admin') {
@@ -141,11 +126,6 @@ export class AppComponent {
             {
               title: 'Register Students',
               url: '/reg-students',
-              icon: 'list'
-            },
-            {
-              title: 'Application Form',
-              url: '/appilicationform',
               icon: 'list'
             }
           ];
@@ -159,6 +139,18 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
+  }
+
+  moveApplicationForm() {
+    this.menuCtrl.close();
+    
+    //--- Select user type and forward to application form page accordingly
+    if(this.user_info.user_type == 'admin') {
+      this.router.navigate(['/application-personal', {type: 'insert', id: null}]);
+    } else if(this.user_info.user_type == 'student') {
+      let student_id = this.user_info.details.id;
+      this.router.navigate(['/application-personal', {type: 'edit', id: student_id}]);
+    }
   }
 
   signOut() {

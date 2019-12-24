@@ -33,15 +33,9 @@ export class CourseComponent implements OnInit {
   ngOnInit() {}
 
   ionViewWillEnter(){ 
-    if(this.userService.currentUserValue == null) {
-      this.router.navigate(['/login']);
-    } else {
-      console.log('Location: CourseComponent');
+    console.log('Location: CourseComponent');
 
-      this.user_type = this.userService.currentUserValue.user_type;
-
-      this.course_details();
-    }
+    this.course_details();
   }
 
   ionViewDidEnter(){ 

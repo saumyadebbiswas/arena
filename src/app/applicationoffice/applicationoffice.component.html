@@ -1,0 +1,86 @@
+<ion-header>
+    <div class="head">
+      <ion-buttons slot="start">
+        <ion-menu-button>
+          <img src="../assets/images/manu.png" alt="" class="manu-icon">
+        </ion-menu-button>
+      </ion-buttons>
+  
+      <ion-title class="text-center">Appilication Form</ion-title>
+  
+      <div class="notification">
+        <a><img src="../assets/images/notification-icon.png" alt="">
+        <span>2</span>
+        </a>
+      </div>
+    </div>
+</ion-header>
+
+<ion-content>
+    <div class="row">
+        <!-- MultiStep Form -->
+        <div class="container-fluid" id="grad1">
+            <div class="row justify-content-center mt-0">
+                <div class="col-11 text-center p-0">
+                    <div class="col-md-12 mx-0">
+                        <form id="msform">
+                            <!-- progressbar -->
+                            <ul id="progressbar">
+                                <li class="active" id="personal"><strong>Personal</strong></li>
+                                <li class="active" id="education"><strong>Education</strong></li>
+                                <li class="active" id="activity"><strong>Activities</strong></li>
+                                <li class="active" id="office"><strong>Office</strong></li>
+                                <li id="confirm"><strong>Finish</strong></li>
+                            </ul> 
+                        
+                            <!-- fieldset - Office -->
+                            <fieldset>
+                                <div class="form-card">
+                                    <h5 class="fs-title">Official Information</h5>
+                                    <ion-item class="dropdown frm">
+                                        <ion-label class="drop-mnu">Accepted By</ion-label>
+                                            <ion-select placeholder="Select One">
+                                            <ion-select-option value="s">Xyz</ion-select-option>
+                                            <ion-select-option value="m">Others</ion-select-option>
+                                            <ion-select-option value="w">Abc</ion-select-option>
+                                            </ion-select>
+                                        
+                                    </ion-item>
+                                    <ion-item class="frm">
+                                        <ion-input type="text" class="info-frm" id="email" placeholder="At"></ion-input>
+                                    </ion-item>
+                                    <ion-item class="frm">
+                                        <ion-input type="text" class="info-frm" id="email" placeholder="Booking Confirmation No"></ion-input>
+                                    </ion-item>
+                                    <ion-item class="dropdown frm">
+                                        <ion-label class="drop-mnu">Center</ion-label>
+                                            <ion-select placeholder="Select One">
+                                            <ion-select-option value="s">Abcd</ion-select-option>
+                                            <ion-select-option value="m">Xyz</ion-select-option>
+                                            <ion-select-option value="w">others</ion-select-option>
+                                            </ion-select>
+                                        
+                                    </ion-item>
+                                    <ion-item class="frm">
+                                        <ion-input type="date" class="info-frm drop-mnu" id="Name" placeholder="Date"></ion-input>
+                                    </ion-item>
+                                    <ion-item class="frm">
+                                        <ion-input type="text" class="info-frm" id="email" placeholder="Roll No"></ion-input>
+                                    </ion-item>
+                                    <div class="sign-box">
+                                        <button type="button"size="large" expand="block" class="btn save-btn">Save</button>
+                                    </div>
+                                </div>
+
+                                <input type="button" name="previous" class="previous action-button-previous prv-btns" value="Previous" (click)="movePrevious()" />
+
+                                <input type="button" name="next" class="next action-button nxt-btns" value="Confirm" (click)="moveNext()" />
+                            </fieldset>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ion-content>
