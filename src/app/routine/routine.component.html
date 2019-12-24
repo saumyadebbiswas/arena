@@ -1,0 +1,116 @@
+<ion-header>
+    <div class="head">
+      <ion-buttons slot="start">
+        <ion-menu-button>
+          <img src="../assets/images/manu.png" alt="" class="manu-icon">
+        </ion-menu-button>
+      </ion-buttons>
+  
+      <ion-title class="text-center">Routine</ion-title>
+  
+      <app-notification *ngIf="user_type == 'admin'"></app-notification>
+      <div *ngIf="user_type == 'student'" class="notification"></div>
+    </div>
+  </ion-header>
+
+  <ion-content>
+      <div class="container-fluid routine-col" id="grad1">
+          <div class="dropdown frm select-dropdown">
+              <!-- <ion-label class="drop-mnu"></ion-label> -->
+              <ion-select placeholder="Select No of Day">
+                  <ion-select-option value="Day1">Day 1</ion-select-option>
+                  <ion-select-option value="Day2">Day 2</ion-select-option>
+                  <ion-select-option value="Day3">Day 3</ion-select-option>
+                  <ion-select-option value="Day4">Day 4</ion-select-option>
+              </ion-select>
+          </div>
+          <ul class="routine-list">
+            <li>
+              <h6>Day 1</h6>
+              <div class="routine-field" style="width:100%; padding-right: 0px;">
+                  <ion-label>Select Day</ion-label>
+                  <div class="dropdown frm select-dropdown">
+                      <!-- <ion-label class="drop-mnu"></ion-label> -->
+                      
+                      <ion-select placeholder="Select Day">
+                          <ion-select-option value="Sun">Su</ion-select-option>
+                          <ion-select-option value="Mon">Mo</ion-select-option>
+                          <ion-select-option value="Tus">Tu</ion-select-option>
+                          <ion-select-option value="Wed">We</ion-select-option>
+                          <ion-select-option value="Fri">Fr</ion-select-option>
+                          <ion-select-option value="Sat">Sa</ion-select-option>
+                      </ion-select>
+                  </div>
+              </div>
+              <div class="routine-field">
+                  <ion-label>Set Time</ion-label>
+                  <div class="select-dropdown">
+                      <ion-datetime displayFormat="h:mm a" placeholder="Set Time"></ion-datetime>
+                  </div>
+              </div>
+              <div class="routine-field">
+                  <ion-label>Time Duration</ion-label>
+                  <div class="select-dropdown">
+                      <ion-datetime displayFormat="h:mm" placeholder="Time Duration"></ion-datetime>
+                  </div>
+              </div>
+              <div class="routine-field" style="width:100%;">
+              <ion-label>Select Teacher</ion-label>
+              <div class="dropdown frm select-dropdown">
+                  <!-- <ion-label class="drop-mnu"></ion-label> -->
+                  
+                  <ion-select placeholder="Select Teacher">
+                      <ion-select-option value="Sun">Teacher 1</ion-select-option>
+                      <ion-select-option value="Mon">Teacher 2</ion-select-option>
+                      <ion-select-option value="Tus">Teacher 3</ion-select-option>
+                  </ion-select>
+              </div>
+            </div>
+            </li>
+            <li>
+                <h6>Day 2</h6>
+                <div class="routine-field" style="width:100%;">
+                    <ion-label>Select Day</ion-label>
+                    <div class="dropdown frm select-dropdown">
+                        <!-- <ion-label class="drop-mnu"></ion-label> -->
+                        
+                        <ion-select placeholder="Select Day">
+                            <ion-select-option value="Sun">Su</ion-select-option>
+                            <ion-select-option value="Mon">Mo</ion-select-option>
+                            <ion-select-option value="Tus">Tu</ion-select-option>
+                            <ion-select-option value="Wed">We</ion-select-option>
+                            <ion-select-option value="Fri">Fr</ion-select-option>
+                            <ion-select-option value="Sat">Sa</ion-select-option>
+                        </ion-select>
+                    </div>
+                </div>
+                <div class="routine-field">
+                    <ion-label>Set Time</ion-label>
+                    <div class="select-dropdown">
+                        <ion-datetime displayFormat="h:mm a" placeholder="Set Time"></ion-datetime>
+                    </div>
+                </div>
+                <div class="routine-field">
+                    <ion-label>Time Duration</ion-label>
+                    <div class="select-dropdown">
+                        <ion-datetime displayFormat="h:mm" placeholder="Time Duration"></ion-datetime>
+                    </div>
+                </div>
+                <div class="routine-field" style="width:100%;">
+                <ion-label>Select Teacher</ion-label>
+                <div class="dropdown frm select-dropdown">
+                    <!-- <ion-label class="drop-mnu"></ion-label> -->
+                    
+                    <ion-select placeholder="Select Teacher">
+                        <ion-select-option value="Sun">Teacher 1</ion-select-option>
+                        <ion-select-option value="Mon">Teacher 2</ion-select-option>
+                        <ion-select-option value="Tus">Teacher 3</ion-select-option>
+                        
+                    </ion-select>
+                </div>
+              </div>
+              </li>
+          </ul>
+          <button type="submit" class="batch-btn">Submit</button>
+      </div>
+  </ion-content>
