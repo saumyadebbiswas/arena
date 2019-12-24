@@ -161,7 +161,7 @@ select.list-dt:focus {
     padding-left: 15px;
     margin-top: 10px;
 }
-
+.select-dropdown{ width: 100%; border-bottom: 1px rgba(0, 0, 0, 0.12) solid; font-size: 14px; color: rgba(0, 0, 0, 0.9);}
 #progressbar {
     margin-bottom: 12px;
     overflow: hidden;
@@ -179,7 +179,7 @@ select.list-dt:focus {
 #progressbar .active {
     color: #000000
 }
-
+ul.user li{ width: 25% !important;}
 #progressbar li {
     list-style-type: none;
     font-size: 12px;
