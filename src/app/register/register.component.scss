@@ -45,7 +45,7 @@
 
 .sing-frm{
     width: 100%;
-    padding: 20px;
+    padding: 0px 20px 20px;
     position: relative;
 }
 
@@ -55,58 +55,23 @@
     top: 31px;
     left: 26px;
 }
-.sing-frm i{
+.sing-frm .icon2{
     width: 20px;
     position: absolute;
-    top: 31px;
-    left: 26px;
+    top: 9px;
+    left:5px;
 }
-
-.icon2 i{
-    top: 30px;
-}
-
-
-
-.icon6 i{
-    top: 87px;
-}
-
-.icon7 i{
-    top: 150px;
-}
-
-.icon8 i{
-    top: 200px;
-    font-size: 1.5rem;
-}
-
-.icon9 i{
-    top: 250px;
-    //font-size: 1.2rem;
-}
-
-.icon10 i{
-    top: 566px;
-    font-size: 1.2rem;
-}
-
-.icon11 i{
-    top: 622px;
-}
-
-.icon12 i{
-    top: 682px;
-}
+.sing-frm .icon2 .fa{ color: #b7b7b7;}
+.form-group{ position: relative;}
 
 .info-frm{
     width: 92%;
     margin: auto;
     margin-left: 30px;
     padding: 0!important;
-    margin-bottom: 20px;
-    border-bottom: 1px solid #7a7a7a;
-    font-size: 12px;
+    margin-bottom:12px;
+    border-bottom: 1px solid #cdcdcd;
+    font-size: 14px;
 }
 
 .info-frm .sc-ion-input-md{
@@ -142,7 +107,7 @@
 .sign-box p{
     color: #000;
     font-weight: 500;
-    font-size: 12px;
+    font-size: 14px;
     padding-top: 25px;
     padding-bottom: 0;
     margin-bottom: 0;
@@ -151,7 +116,7 @@
 .sign-box p a{
     color: #000;
     font-weight: bold;
-    font-size: 12px
+    font-size: 14px
 }
 
 .regi a{
@@ -185,3 +150,4 @@ hr{
     font-size: 12px;
     // position: absolute;
 }
+.select-dropdown{ width: 92%; float: right; border-bottom: 1px #cdcdcd solid; font-size: 14px; margin-bottom: 20px;}

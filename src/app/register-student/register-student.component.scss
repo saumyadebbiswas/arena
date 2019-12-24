@@ -7,28 +7,28 @@
     list-style-type: none;
   }
   .place-box li{
-    width: 97%;
-    margin-bottom: 12px;
+    width: 96%;
     margin-right: 3%;
-    padding-bottom: 12px;
     border-bottom: 1px solid #ddd;
     float: left;
     overflow: hidden;
+    padding: 10px 0;
 }
 .cours-detal{
-    display: flex;
-    width: 100%;
+    // display: flex;
+    width: 65%;
+    float: left;
   }
+  .application-btn{ float: right; border: 2px #d07b7f solid; border-radius: 5px; font-size: 13px; background: #fff; height: 30px;}
   .place-box li h4{
-    color: #6f6e6e;
-    margin-top: 7px;
+    color: #5a5959;
+    margin-top: 0;
     font-size: 15px;
-    min-height: 20px;
   }
   .place-box li p{
     margin-bottom: 0px;
     color: #838383;
-    font-size: 12px;
+    font-size: 13px;
     text-align: justify;
     white-space: pre-line;
   }
@@ -39,7 +39,7 @@
   }
 
   .frm{
-    width: 80%;
+    width: 100%;
     padding-left: 0px;
     padding-right: 10px;
     margin-bottom: 10px;
