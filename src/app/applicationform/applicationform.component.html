@@ -109,16 +109,16 @@
                                         </ion-item>
 
                                         <!-- Known Us From -->
-                                        <ion-item class="dropdown frm">
-                                            <ion-label class="drop-mnu">Known Us From</ion-label>
-                                            <ion-select id="known_from" [(ngModel)]="known_from">
+                                        <div class="dropdown frm select-dropdown">
+                                            <!-- <ion-label class="drop-mnu"></ion-label> -->
+                                            <ion-select id="known_from" [(ngModel)]="known_from" placeholder="Known Us From">
                                                 <ion-select-option value="newspaper">Newspaper</ion-select-option>
                                                 <ion-select-option value="leftlet">Hoarding / Leaflet</ion-select-option>
                                                 <ion-select-option value="television">Television</ion-select-option>
                                                 <ion-select-option value="internet">Internet</ion-select-option>
                                                 <ion-select-option value="other">Others</ion-select-option>
                                             </ion-select>
-                                        </ion-item>
+                                        </div>
 
                                         <!-- Save Button -->
                                         <div class="sign-box">
