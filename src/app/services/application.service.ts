@@ -39,4 +39,20 @@ export class ApplicationService {
   educatuion_update(sendData: any): Observable<any> {
     return this.http.post<any>(this.api_url+'/application/education/edit', sendData, {headers: this.requestHeader});
   }
+	
+  educatuion_grad_type_update(sendData: any): Observable<any> {
+    return this.http.post<any>(this.api_url+'/application/education/editdegree', sendData, {headers: this.requestHeader});
+  }
+	
+  activity_detail(student_id: any) {
+    return this.http.get<any>(this.api_url+'/application/activities/student/'+student_id, {headers: this.requestHeader});
+  }
+	
+  activities_insert(sendData: any): Observable<any> {
+    return this.http.post<any>(this.api_url+'/application/activity/insert', sendData, {headers: this.requestHeader});
+  }
+	
+  activities_update(sendData: any): Observable<any> {
+    return this.http.post<any>(this.api_url+'/application/activity/edit', sendData, {headers: this.requestHeader});
+  }
 }

@@ -76,7 +76,7 @@ export class LoginComponent implements OnInit {
       //console.log('Login sendData...', sendData);
 
       this.userService.login(sendData).subscribe(async response => {
-        console.log('Login response...', response);
+        //console.log('Login response...', response);
         //--- After successful login - dismiss loader, enable side menu, navigate to dashboard
         this.loadingController.dismiss();
 

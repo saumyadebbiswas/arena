@@ -156,218 +156,264 @@
                                                 </a>
                                             </div>
                                             <div id="collapseThree" class="collapse inner-acc" data-parent="#accordion" >
-                                                    <ion-item class="form-group frm">
-                                                            <!-- Default inline 1-->
-                                                            <div class="custom-control custom-radio custom-control-inline dgree">
-                                                                <input type="radio" class="custom-control-input" id="defaultInline5" name="offline" checked />
-                                                                <label class="custom-control-label dgree-lab" for="defaultInline5">B.A.</label>
-                                                                </div>
-                                                                
-                                                                <!-- Default inline 2-->
-                                                                <div class="custom-control custom-radio custom-control-inline dgree">
-                                                                <input type="radio" class="custom-control-input" id="defaultInline6" name="offline" />
-                                                                <label class="custom-control-label dgree-lab" for="defaultInline6">B.Sc.</label>
-                                                                </div>
+                                                <!-- Radio Buttons - start -->
+                                                <ion-item class="form-group frm">
+                                                    <!-- Radio - BA -->
+                                                    <div class="custom-control custom-radio custom-control-inline dgree">
+                                                        <input type="radio" *ngIf="grad_type == 'ba'" class="custom-control-input" id="defaultInline5" name="offline" checked (click)="changeGraduation('ba')" />
+                                                        <input type="radio" *ngIf="grad_type != 'ba'" class="custom-control-input" id="defaultInline5" name="offline" (click)="changeGraduation('ba')" />
+                                                        <label class="custom-control-label dgree-lab" for="defaultInline5">B.A.</label>
+                                                    </div>
+                                                        
+                                                    <!-- Radio - BSc -->
+                                                    <div class="custom-control custom-radio custom-control-inline dgree">
+                                                        <input type="radio" *ngIf="grad_type == 'bsc'" class="custom-control-input" id="defaultInline6" name="offline" checked (click)="changeGraduation('bsc')" />
+                                                        <input type="radio" *ngIf="grad_type != 'bsc'" class="custom-control-input" id="defaultInline6" name="offline" (click)="changeGraduation('bsc')" />
+                                                        <label class="custom-control-label dgree-lab" for="defaultInline6">B.Sc.</label>
+                                                    </div>
 
-                                                                <!-- Default inline 3-->
-                                                                <div class="custom-control custom-radio custom-control-inline dgree">
-                                                                    <input type="radio" class="custom-control-input" id="defaultInline7" name="offline" />
-                                                                    <label class="custom-control-label dgree-lab" for="defaultInline7">B.Com</label>
-                                                                </div>
+                                                    <!-- Radio - BCom -->
+                                                    <div class="custom-control custom-radio custom-control-inline dgree">
+                                                        <input type="radio" *ngIf="grad_type == 'bcom'" class="custom-control-input" id="defaultInline7" name="offline" checked (click)="changeGraduation('bcom')" />
+                                                        <input type="radio" *ngIf="grad_type != 'bcom'" class="custom-control-input" id="defaultInline7" name="offline" (click)="changeGraduation('bcom')" />
+                                                        <label class="custom-control-label dgree-lab" for="defaultInline7">B.Com</label>
+                                                    </div>
 
-                                                                <!-- Default inline 4-->
-                                                                <div class="custom-control custom-radio custom-control-inline dgree">
-                                                                    <input type="radio" class="custom-control-input" id="defaultInline8" name="offline" />
-                                                                    <label class="custom-control-label dgree-lab" for="defaultInline8">B.E.</label>
-                                                                </div>
-                                                    </ion-item>
+                                                    <!-- Radio - BE -->
+                                                    <div class="custom-control custom-radio custom-control-inline dgree">
+                                                        <input type="radio" *ngIf="grad_type == 'others'" class="custom-control-input" id="defaultInline8" name="offline" checked (click)="changeGraduation('others')" />
+                                                        <input type="radio" *ngIf="grad_type != 'others'" class="custom-control-input" id="defaultInline8" name="offline" (click)="changeGraduation('others')" />
+                                                        <label class="custom-control-label dgree-lab" for="defaultInline8">Others</label>
+                                                    </div>
+                                                </ion-item>
+                                                <!-- Radio Buttons - end -->
 
-                                                    <div id="accordion2" class="accordion marks-box">
-                                                        <div class="card-header collapsed" data-toggle="collapse" data-parent="#accordion2" href="#collapseThreeOne">
-                                                                <a class="card-title">
-                                                                1st Year
-                                                                </a>
+                                                <!-- graduation year - start -->
+                                                <div id="accordion2" class="accordion marks-box">
+                                                    <!-- 1st year - start -->
+                                                    <div class="card-header collapsed" data-toggle="collapse" data-parent="#accordion2" href="#collapseThreeOne">
+                                                        <a class="card-title">
+                                                        1st Year
+                                                        </a>
+                                                    </div>
+                                                    <div id="collapseThreeOne" class="collapse show" data-parent="#accordion2" >
+                                                        <div class="period-inpt">
+                                                            <ion-item class="">
+                                                                <ion-datetime id="from_grad1st" class="info-frm drop-mnu" displayFormat="MMM DD, YYYY" placeholder="From" [(ngModel)]="from_grad1st"></ion-datetime>
+                                                            </ion-item> &nbsp; &nbsp;
+        
+                                                            <ion-item class="">
+                                                                <ion-datetime id="to_grad1st" class="info-frm drop-mnu" displayFormat="MMM DD, YYYY" placeholder="To" [(ngModel)]="to_grad1st"></ion-datetime>
+                                                            </ion-item>
                                                         </div>
-                                                        <div id="collapseThreeOne" class="collapse show" data-parent="#accordion2" >
-                                                            
-                                                                <div class="period-inpt">
-                                                                        <ion-item class="">
-                                                                        <ion-label position="floating">To</ion-label>
-                                                                        <ion-input type="date" class="info-frm drop-mnu" id="Name" placeholder="Date of Birth"></ion-input>
-                                                                        </ion-item> &nbsp; &nbsp;
-                                                                        <ion-item class="">
-                                                                        <ion-label position="floating">From</ion-label>
-                                                                        <ion-input type="date" class="info-frm drop-mnu" id="Name" placeholder="Date of Birth"></ion-input>
-                                                                        </ion-item>
-                                                                </div>
-                                                                <ion-item class="frm">
-                                                                    <ion-input type="text" class="info-frm" id="email" placeholder="School/College/Institute"></ion-input>
-                                                                </ion-item>
-                                                                <ion-item class="frm">
-                                                                    <ion-input type="text" class="info-frm" id="email" placeholder="Board/University"></ion-input>
-                                                                </ion-item>
-                                                                <ion-item class="dropdown frm">
-                                                                    <ion-label class="drop-mnu">Year Of Passing</ion-label>
-                                                                        <ion-select placeholder="Select One">
-                                                                        <ion-select-option value="s">2019</ion-select-option>
-                                                                        <ion-select-option value="m">2018</ion-select-option>
-                                                                        <ion-select-option value="w">2017</ion-select-option>
-                                                                        </ion-select>
-                                                                    
-                                                                </ion-item>
-                                                                <ion-item class="frm">
-                                                                    <ion-input type="text" class="info-frm" id="email" placeholder="Division / %Marks of CGPa"></ion-input>
-                                                                </ion-item>
-                                                                <ion-item class="frm">
-                                                                    <ion-input type="text" class="info-frm" id="email" placeholder="Rank in the Class"></ion-input>
-                                                                </ion-item>
-                                                                <ion-item class="frm">
-                                                                    <ion-input type="text" class="info-frm" id="email" placeholder="Special/Major Subject"></ion-input>
-                                                                </ion-item>
-                                                                <div class="sign-box">
-                                                                        <button type="button"size="large" expand="block" class="btn save-btn">Save</button>
-                                                                </div>
-                                                        </div>
-
-                                                        <div class="card-header collapsed" data-toggle="collapse" data-parent="#accordion2" href="#collapseThreeTwo">
-                                                                <a class="card-title">
-                                                                2nd Year
-                                                                </a>
-                                                        </div>
-                                                        <div id="collapseThreeTwo" class=" collapse" data-parent="#accordion2" >
-                                                            
-                                                                <div class="period-inpt">
-                                                                        <ion-item class="">
-                                                                        <ion-label position="floating">To</ion-label>
-                                                                        <ion-input type="date" class="info-frm drop-mnu" id="Name" placeholder="Date of Birth"></ion-input>
-                                                                        </ion-item> &nbsp; &nbsp;
-                                                                        <ion-item class="">
-                                                                        <ion-label position="floating">From</ion-label>
-                                                                        <ion-input type="date" class="info-frm drop-mnu" id="Name" placeholder="Date of Birth"></ion-input>
-                                                                        </ion-item>
-                                                                </div>
-                                                                <ion-item class="frm">
-                                                                    <ion-input type="text" class="info-frm" id="email" placeholder="School/College/Institute"></ion-input>
-                                                                </ion-item>
-                                                                <ion-item class="frm">
-                                                                    <ion-input type="text" class="info-frm" id="email" placeholder="Board/University"></ion-input>
-                                                                </ion-item>
-                                                                <ion-item class="dropdown frm">
-                                                                    <ion-label class="drop-mnu">Year Of Passing</ion-label>
-                                                                        <ion-select placeholder="Select One">
-                                                                        <ion-select-option value="s">2019</ion-select-option>
-                                                                        <ion-select-option value="m">2018</ion-select-option>
-                                                                        <ion-select-option value="w">2017</ion-select-option>
-                                                                        </ion-select>
-                                                                    
-                                                                </ion-item>
-                                                                <ion-item class="frm">
-                                                                    <ion-input type="text" class="info-frm" id="email" placeholder="Division / %Marks of CGPa"></ion-input>
-                                                                </ion-item>
-                                                                <ion-item class="frm">
-                                                                    <ion-input type="text" class="info-frm" id="email" placeholder="Rank in the Class"></ion-input>
-                                                                </ion-item>
-                                                                <ion-item class="frm">
-                                                                    <ion-input type="text" class="info-frm" id="email" placeholder="Special/Major Subject"></ion-input>
-                                                                </ion-item>
-                                                                <div class="sign-box">
-                                                                        <button type="button"size="large" expand="block" class="btn save-btn">Save</button>
-                                                                </div>
-                                                        </div>
-
-                                                        <div class="card-header collapsed" data-toggle="collapse" data-parent="#accordion2" href="#collapseThreeThree">
-                                                                <a class="card-title">
-                                                                3rd Year
-                                                                </a>
-                                                        </div>
-                                                        <div id="collapseThreeThree" class=" collapse" data-parent="#accordion2" >
-                                                            
-                                                                <div class="period-inpt">
-                                                                        <ion-item class="">
-                                                                        <ion-label position="floating">To</ion-label>
-                                                                        <ion-input type="date" class="info-frm drop-mnu" id="Name" placeholder="Date of Birth"></ion-input>
-                                                                        </ion-item> &nbsp; &nbsp;
-                                                                        <ion-item class="">
-                                                                        <ion-label position="floating">From</ion-label>
-                                                                        <ion-input type="date" class="info-frm drop-mnu" id="Name" placeholder="Date of Birth"></ion-input>
-                                                                        </ion-item>
-                                                                </div>
-                                                                <ion-item class="frm">
-                                                                    <ion-input type="text" class="info-frm" id="email" placeholder="School/College/Institute"></ion-input>
-                                                                </ion-item>
-                                                                <ion-item class="frm">
-                                                                    <ion-input type="text" class="info-frm" id="email" placeholder="Board/University"></ion-input>
-                                                                </ion-item>
-                                                                <ion-item class="dropdown frm">
-                                                                    <ion-label class="drop-mnu">Year Of Passing</ion-label>
-                                                                        <ion-select placeholder="Select One">
-                                                                        <ion-select-option value="s">2019</ion-select-option>
-                                                                        <ion-select-option value="m">2018</ion-select-option>
-                                                                        <ion-select-option value="w">2017</ion-select-option>
-                                                                        </ion-select>
-                                                                    
-                                                                </ion-item>
-                                                                <ion-item class="frm">
-                                                                    <ion-input type="text" class="info-frm" id="email" placeholder="Division / %Marks of CGPa"></ion-input>
-                                                                </ion-item>
-                                                                <ion-item class="frm">
-                                                                    <ion-input type="text" class="info-frm" id="email" placeholder="Rank in the Class"></ion-input>
-                                                                </ion-item>
-                                                                <ion-item class="frm">
-                                                                    <ion-input type="text" class="info-frm" id="email" placeholder="Special/Major Subject"></ion-input>
-                                                                </ion-item>
-                                                                <div class="sign-box">
-                                                                        <button type="button"size="large" expand="block" class="btn save-btn">Save</button>
-                                                                    </div>
-                                                        </div>
-
-                                                        <div class="card-header collapsed" data-toggle="collapse" data-parent="#accordion2" href="#collapseThreeFour">
-                                                                <a class="card-title">
-                                                                4th Year
-                                                                </a>
-                                                        </div>
-                                                        <div id="collapseThreeFour" class=" collapse" data-parent="#accordion2" >
-                                                            
-                                                                <div class="period-inpt">
-                                                                        <ion-item class="">
-                                                                        <ion-label position="floating">To</ion-label>
-                                                                        <ion-input type="date" class="info-frm drop-mnu" id="Name" placeholder="Date of Birth"></ion-input>
-                                                                        </ion-item> &nbsp; &nbsp;
-                                                                        <ion-item class="">
-                                                                        <ion-label position="floating">From</ion-label>
-                                                                        <ion-input type="date" class="info-frm drop-mnu" id="Name" placeholder="Date of Birth"></ion-input>
-                                                                        </ion-item>
-                                                                </div>
-                                                                <ion-item class="frm">
-                                                                    <ion-input type="text" class="info-frm" id="email" placeholder="School/College/Institute"></ion-input>
-                                                                </ion-item>
-                                                                <ion-item class="frm">
-                                                                    <ion-input type="text" class="info-frm" id="email" placeholder="Board/University"></ion-input>
-                                                                </ion-item>
-                                                                <ion-item class="dropdown frm">
-                                                                    <ion-label class="drop-mnu">Year Of Passing</ion-label>
-                                                                        <ion-select placeholder="Select One">
-                                                                        <ion-select-option value="s">2019</ion-select-option>
-                                                                        <ion-select-option value="m">2018</ion-select-option>
-                                                                        <ion-select-option value="w">2017</ion-select-option>
-                                                                        </ion-select>
-                                                                    
-                                                                </ion-item>
-                                                                <ion-item class="frm">
-                                                                    <ion-input type="text" class="info-frm" id="email" placeholder="Division / %Marks of CGPa"></ion-input>
-                                                                </ion-item>
-                                                                <ion-item class="frm">
-                                                                    <ion-input type="text" class="info-frm" id="email" placeholder="Rank in the Class"></ion-input>
-                                                                </ion-item>
-                                                                <ion-item class="frm">
-                                                                    <ion-input type="text" class="info-frm" id="email" placeholder="Special/Major Subject"></ion-input>
-                                                                </ion-item>
-                                                                <div class="sign-box">
-                                                                        <button type="button"size="large" expand="block" class="btn save-btn">Save</button>
-                                                                    </div>
+        
+                                                        <ion-item class="frm">
+                                                            <ion-input type="text" class="info-frm" id="institue_grad1st" [(ngModel)]="institue_grad1st" placeholder="School/College/Institute"></ion-input>
+                                                        </ion-item>
+        
+                                                        <ion-item class="frm">
+                                                            <ion-input type="text" class="info-frm" id="board_grad1st" placeholder="Board/University" [(ngModel)]="board_grad1st"></ion-input>
+                                                        </ion-item>
+        
+                                                        <ion-item class="dropdown frm">
+                                                            <ion-label class="drop-mnu">Year Of Passing</ion-label>
+                                                            <ion-select id="pass_year_grad1st" placeholder="Select One" [(ngModel)]="pass_year_grad1st">
+                                                                <ion-select-option *ngFor="let year of year_list" value="{{year}}">{{year}}</ion-select-option>
+                                                            </ion-select>
+                                                        </ion-item>
+        
+                                                        <ion-item class="frm">
+                                                            <ion-input type="text" class="info-frm" id="marks_grad1st" placeholder="Division / %Marks of CGPa" [(ngModel)]="marks_grad1st"></ion-input>
+                                                        </ion-item>
+        
+                                                        <ion-item class="frm">
+                                                            <ion-input type="number" class="info-frm" id="rank_grad1st" placeholder="Rank in the Class" [(ngModel)]="rank_grad1st" min="1"></ion-input>
+                                                        </ion-item>
+        
+                                                        <ion-item class="frm">
+                                                            <ion-input type="text" class="info-frm" id="subject_grad1st" placeholder="Special/Major Subject" [(ngModel)]="subject_grad1st"></ion-input>
+                                                        </ion-item>
+        
+                                                        <div class="sign-box">
+                                                            <button *ngIf="id_grad1st == null" type="button" size="large" expand="block" class="btn save-btn" (click)="onSubmit_grad1st()">Save</button>
+        
+                                                            <button *ngIf="id_grad1st != null" type="button" size="large" expand="block" class="btn save-btn" (click)="onUpdate_grad1st()">Update</button>
                                                         </div>
                                                     </div>
-                                                    
+                                                    <!-- 1st year - end -->
+
+                                                    <!-- 2nd year - start -->
+                                                    <div *ngIf="show_grad2ndyr" class="card-header collapsed" data-toggle="collapse" data-parent="#accordion2" href="#collapseThreeTwo">
+                                                        <a class="card-title">
+                                                        2nd Year
+                                                        </a>
+                                                    </div>
+                                                    <div *ngIf="!show_grad2ndyr" class="card-header collapsed" (click)="tooltipMsg('Fill up 1st Year')">
+                                                        <a class="card-title">
+                                                            2nd Year
+                                                        </a>
+                                                    </div>
+                                                    <div id="collapseThreeTwo" class=" collapse" data-parent="#accordion2" >
+                                                        <div class="period-inpt">
+                                                            <ion-item class="">
+                                                                <ion-datetime id="from_grad2" class="info-frm drop-mnu" displayFormat="MMM DD, YYYY" placeholder="From" [(ngModel)]="from_grad2"></ion-datetime>
+                                                            </ion-item> &nbsp; &nbsp;
+        
+                                                            <ion-item class="">
+                                                                <ion-datetime id="to_grad2" class="info-frm drop-mnu" displayFormat="MMM DD, YYYY" placeholder="To" [(ngModel)]="to_grad2"></ion-datetime>
+                                                            </ion-item>
+                                                        </div>
+        
+                                                        <ion-item class="frm">
+                                                            <ion-input type="text" class="info-frm" id="institue_grad2" [(ngModel)]="institue_grad2" placeholder="School/College/Institute"></ion-input>
+                                                        </ion-item>
+        
+                                                        <ion-item class="frm">
+                                                            <ion-input type="text" class="info-frm" id="board_grad2" placeholder="Board/University" [(ngModel)]="board_grad2"></ion-input>
+                                                        </ion-item>
+        
+                                                        <ion-item class="dropdown frm">
+                                                            <ion-label class="drop-mnu">Year Of Passing</ion-label>
+                                                            <ion-select id="pass_year_grad2" placeholder="Select One" [(ngModel)]="pass_year_grad2">
+                                                                <ion-select-option *ngFor="let year of year_list" value="{{year}}">{{year}}</ion-select-option>
+                                                            </ion-select>
+                                                        </ion-item>
+        
+                                                        <ion-item class="frm">
+                                                            <ion-input type="text" class="info-frm" id="marks_grad2" placeholder="Division / %Marks of CGPa" [(ngModel)]="marks_grad2"></ion-input>
+                                                        </ion-item>
+        
+                                                        <ion-item class="frm">
+                                                            <ion-input type="number" class="info-frm" id="rank_grad2" placeholder="Rank in the Class" [(ngModel)]="rank_grad2" min="1"></ion-input>
+                                                        </ion-item>
+        
+                                                        <ion-item class="frm">
+                                                            <ion-input type="text" class="info-frm" id="subject_grad2" placeholder="Special/Major Subject" [(ngModel)]="subject_grad2"></ion-input>
+                                                        </ion-item>
+        
+                                                        <div class="sign-box">
+                                                            <button *ngIf="id_grad2 == null" type="button" size="large" expand="block" class="btn save-btn" (click)="onSubmit_grad2()">Save</button>
+        
+                                                            <button *ngIf="id_grad2 != null" type="button" size="large" expand="block" class="btn save-btn" (click)="onUpdate_grad2()">Update</button>
+                                                        </div>
+                                                    </div>
+                                                    <!-- 2nd year - end -->
+
+                                                    <!-- 3rd year - start -->
+                                                    <div *ngIf="show_grad3rdyr" class="card-header collapsed" data-toggle="collapse" data-parent="#accordion2" href="#collapseThreeThree">
+                                                        <a class="card-title">
+                                                        3rd Year
+                                                        </a>
+                                                    </div>
+                                                    <div *ngIf="!show_grad3rdyr" class="card-header collapsed" (click)="tooltipMsg('Fill up 2nd Year')">
+                                                        <a class="card-title">
+                                                            3rd Year
+                                                        </a>
+                                                    </div>
+                                                    <div id="collapseThreeThree" class=" collapse" data-parent="#accordion2" >
+                                                        <div class="period-inpt">
+                                                            <ion-item class="">
+                                                                <ion-datetime id="from_grad3" class="info-frm drop-mnu" displayFormat="MMM DD, YYYY" placeholder="From" [(ngModel)]="from_grad3"></ion-datetime>
+                                                            </ion-item> &nbsp; &nbsp;
+        
+                                                            <ion-item class="">
+                                                                <ion-datetime id="to_grad3" class="info-frm drop-mnu" displayFormat="MMM DD, YYYY" placeholder="To" [(ngModel)]="to_grad3"></ion-datetime>
+                                                            </ion-item>
+                                                        </div>
+        
+                                                        <ion-item class="frm">
+                                                            <ion-input type="text" class="info-frm" id="institue_grad3" [(ngModel)]="institue_grad3" placeholder="School/College/Institute"></ion-input>
+                                                        </ion-item>
+        
+                                                        <ion-item class="frm">
+                                                            <ion-input type="text" class="info-frm" id="board_grad3" placeholder="Board/University" [(ngModel)]="board_grad3"></ion-input>
+                                                        </ion-item>
+        
+                                                        <ion-item class="dropdown frm">
+                                                            <ion-label class="drop-mnu">Year Of Passing</ion-label>
+                                                            <ion-select id="pass_year_grad3" placeholder="Select One" [(ngModel)]="pass_year_grad3">
+                                                                <ion-select-option *ngFor="let year of year_list" value="{{year}}">{{year}}</ion-select-option>
+                                                            </ion-select>
+                                                        </ion-item>
+        
+                                                        <ion-item class="frm">
+                                                            <ion-input type="text" class="info-frm" id="marks_grad3" placeholder="Division / %Marks of CGPa" [(ngModel)]="marks_grad3"></ion-input>
+                                                        </ion-item>
+        
+                                                        <ion-item class="frm">
+                                                            <ion-input type="number" class="info-frm" id="rank_grad3" placeholder="Rank in the Class" [(ngModel)]="rank_grad3" min="1"></ion-input>
+                                                        </ion-item>
+        
+                                                        <ion-item class="frm">
+                                                            <ion-input type="text" class="info-frm" id="subject_grad3" placeholder="Special/Major Subject" [(ngModel)]="subject_grad3"></ion-input>
+                                                        </ion-item>
+        
+                                                        <div class="sign-box">
+                                                            <button *ngIf="id_grad3 == null" type="button" size="large" expand="block" class="btn save-btn" (click)="onSubmit_grad3()">Save</button>
+        
+                                                            <button *ngIf="id_grad3 != null" type="button" size="large" expand="block" class="btn save-btn" (click)="onUpdate_grad3()">Update</button>
+                                                        </div>
+                                                    </div>
+                                                    <!-- 3rd year - end -->
+
+                                                    <!-- 4th year - start -->
+                                                    <div *ngIf="show_grad4thyr" class="card-header collapsed" data-toggle="collapse" data-parent="#accordion2" href="#collapseThreeFour">
+                                                        <a class="card-title">
+                                                        4th Year
+                                                        </a>
+                                                    </div>
+                                                    <div *ngIf="!show_grad4thyr" class="card-header collapsed" (click)="tooltipMsg('Fill up 3rd Year')">
+                                                        <a class="card-title">
+                                                            4th Year
+                                                        </a>
+                                                    </div>
+                                                    <div id="collapseThreeFour" class=" collapse" data-parent="#accordion2" >
+                                                        <div class="period-inpt">
+                                                            <ion-item class="">
+                                                                <ion-datetime id="from_grad4" class="info-frm drop-mnu" displayFormat="MMM DD, YYYY" placeholder="From" [(ngModel)]="from_grad4"></ion-datetime>
+                                                            </ion-item> &nbsp; &nbsp;
+        
+                                                            <ion-item class="">
+                                                                <ion-datetime id="to_grad4" class="info-frm drop-mnu" displayFormat="MMM DD, YYYY" placeholder="To" [(ngModel)]="to_grad4"></ion-datetime>
+                                                            </ion-item>
+                                                        </div>
+        
+                                                        <ion-item class="frm">
+                                                            <ion-input type="text" class="info-frm" id="institue_grad4" [(ngModel)]="institue_grad4" placeholder="School/College/Institute"></ion-input>
+                                                        </ion-item>
+        
+                                                        <ion-item class="frm">
+                                                            <ion-input type="text" class="info-frm" id="board_grad4" placeholder="Board/University" [(ngModel)]="board_grad4"></ion-input>
+                                                        </ion-item>
+        
+                                                        <ion-item class="dropdown frm">
+                                                            <ion-label class="drop-mnu">Year Of Passing</ion-label>
+                                                            <ion-select id="pass_year_grad4" placeholder="Select One" [(ngModel)]="pass_year_grad4">
+                                                                <ion-select-option *ngFor="let year of year_list" value="{{year}}">{{year}}</ion-select-option>
+                                                            </ion-select>
+                                                        </ion-item>
+        
+                                                        <ion-item class="frm">
+                                                            <ion-input type="text" class="info-frm" id="marks_grad4" placeholder="Division / %Marks of CGPa" [(ngModel)]="marks_grad4"></ion-input>
+                                                        </ion-item>
+        
+                                                        <ion-item class="frm">
+                                                            <ion-input type="number" class="info-frm" id="rank_grad4" placeholder="Rank in the Class" [(ngModel)]="rank_grad4" min="1"></ion-input>
+                                                        </ion-item>
+        
+                                                        <ion-item class="frm">
+                                                            <ion-input type="text" class="info-frm" id="subject_grad4" placeholder="Special/Major Subject" [(ngModel)]="subject_grad4"></ion-input>
+                                                        </ion-item>
+        
+                                                        <div class="sign-box">
+                                                            <button *ngIf="id_grad4 == null" type="button" size="large" expand="block" class="btn save-btn" (click)="onSubmit_grad4()">Save</button>
+        
+                                                            <button *ngIf="id_grad4 != null" type="button" size="large" expand="block" class="btn save-btn" (click)="onUpdate_grad4()">Update</button>
+                                                        </div>
+                                                    </div>
+                                                    <!-- 4th year - end -->
+                                                </div>
+                                                <!-- graduation year - end -->
                                             </div>
                                             <!-- Graduation - end -->
 
@@ -377,108 +423,122 @@
                                                     Post Graduation
                                                     </a>
                                             </div>
-                                            <div *ngIf="!show_pg" class="card-header collapsed" (click)="tooltipMsg('Fill up Graduation')">
+                                            <div *ngIf="!show_pg" class="card-header collapsed" (click)="tooltipMsg('Fill up Graduation upto 3rd Year')">
                                                 <a class="card-title">
                                                     Post Graduation
                                                 </a>
                                             </div>
                                             <div id="collapseFour" class="collapse inner-acc" data-parent="#accordion" >
-                                                
-                                                    <div id="accordion3" class="accordion marks-box">
-                                                        <div class="card-header collapsed" data-toggle="collapse" data-parent="#accordion3" href="#collapseFourOne">
-                                                                <a class="card-title">
-                                                                1st Year
-                                                                </a>
-                                                        </div>
-                                                        <div id="collapseFourOne" class="collapse show" data-parent="#accordion3" >
-                                                            
-                                                                <div class="period-inpt">
-                                                                        <ion-item class="">
-                                                                        <ion-label position="floating">To</ion-label>
-                                                                        <ion-input type="date" class="info-frm drop-mnu" id="Name" placeholder="Date of Birth"></ion-input>
-                                                                        </ion-item> &nbsp; &nbsp;
-                                                                        <ion-item class="">
-                                                                        <ion-label position="floating">From</ion-label>
-                                                                        <ion-input type="date" class="info-frm drop-mnu" id="Name" placeholder="Date of Birth"></ion-input>
-                                                                        </ion-item>
-                                                                </div>
-                                                                <ion-item class="frm">
-                                                                    <ion-input type="text" class="info-frm" id="email" placeholder="School/College/Institute"></ion-input>
-                                                                </ion-item>
-                                                                <ion-item class="frm">
-                                                                    <ion-input type="text" class="info-frm" id="email" placeholder="Board/University"></ion-input>
-                                                                </ion-item>
-                                                                <ion-item class="dropdown frm">
-                                                                    <ion-label class="drop-mnu">Year Of Passing</ion-label>
-                                                                        <ion-select placeholder="Select One">
-                                                                        <ion-select-option value="s">2019</ion-select-option>
-                                                                        <ion-select-option value="m">2018</ion-select-option>
-                                                                        <ion-select-option value="w">2017</ion-select-option>
-                                                                        </ion-select>
-                                                                    
-                                                                </ion-item>
-                                                                <ion-item class="frm">
-                                                                    <ion-input type="text" class="info-frm" id="email" placeholder="Division / %Marks of CGPa"></ion-input>
-                                                                </ion-item>
-                                                                <ion-item class="frm">
-                                                                    <ion-input type="text" class="info-frm" id="email" placeholder="Rank in the Class"></ion-input>
-                                                                </ion-item>
-                                                                <ion-item class="frm">
-                                                                    <ion-input type="text" class="info-frm" id="email" placeholder="Special/Major Subject"></ion-input>
-                                                                </ion-item>
-                                                                <div class="sign-box">
-                                                                        <button type="button"size="large" expand="block" class="btn save-btn">Save</button>
-                                                                </div>
-                                                        </div>
-
-                                                        <div class="card-header collapsed" data-toggle="collapse" data-parent="#accordion3" href="#collapseFourTwo">
-                                                                <a class="card-title">
-                                                                2nd Year
-                                                                </a>
-                                                        </div>
-                                                        <div id="collapseFourTwo" class=" collapse" data-parent="#accordion3" >
-                                                            
-                                                                <div class="period-inpt">
-                                                                        <ion-item class="">
-                                                                        <ion-label position="floating">To</ion-label>
-                                                                        <ion-input type="date" class="info-frm drop-mnu" id="Name" placeholder="Date of Birth"></ion-input>
-                                                                        </ion-item> &nbsp; &nbsp;
-                                                                        <ion-item class="">
-                                                                        <ion-label position="floating">From</ion-label>
-                                                                        <ion-input type="date" class="info-frm drop-mnu" id="Name" placeholder="Date of Birth"></ion-input>
-                                                                        </ion-item>
-                                                                </div>
-                                                                <ion-item class="frm">
-                                                                    <ion-input type="text" class="info-frm" id="email" placeholder="School/College/Institute"></ion-input>
-                                                                </ion-item>
-                                                                <ion-item class="frm">
-                                                                    <ion-input type="text" class="info-frm" id="email" placeholder="Board/University"></ion-input>
-                                                                </ion-item>
-                                                                <ion-item class="dropdown frm">
-                                                                    <ion-label class="drop-mnu">Year Of Passing</ion-label>
-                                                                        <ion-select placeholder="Select One">
-                                                                        <ion-select-option value="s">2019</ion-select-option>
-                                                                        <ion-select-option value="m">2018</ion-select-option>
-                                                                        <ion-select-option value="w">2017</ion-select-option>
-                                                                        </ion-select>
-                                                                    
-                                                                </ion-item>
-                                                                <ion-item class="frm">
-                                                                    <ion-input type="text" class="info-frm" id="email" placeholder="Division / %Marks of CGPa"></ion-input>
-                                                                </ion-item>
-                                                                <ion-item class="frm">
-                                                                    <ion-input type="text" class="info-frm" id="email" placeholder="Rank in the Class"></ion-input>
-                                                                </ion-item>
-                                                                <ion-item class="frm">
-                                                                    <ion-input type="text" class="info-frm" id="email" placeholder="Special/Major Subject"></ion-input>
-                                                                </ion-item>
-                                                                <div class="sign-box">
-                                                                        <button type="button"size="large" expand="block" class="btn save-btn">Save</button>
-                                                                </div>
-                                                        </div>
-
+                                                <div id="accordion3" class="accordion marks-box">
+                                                    <!-- 1st year - start -->
+                                                    <div class="card-header collapsed" data-toggle="collapse" data-parent="#accordion3" href="#collapseFourOne">
+                                                        <a class="card-title">
+                                                        1st Year
+                                                        </a>
                                                     </div>
-                                                    
+                                                    <div id="collapseFourOne" class="collapse show" data-parent="#accordion3" >
+                                                        <div class="period-inpt">
+                                                            <ion-item class="">
+                                                                <ion-datetime id="from_pg1" class="info-frm drop-mnu" displayFormat="MMM DD, YYYY" placeholder="From" [(ngModel)]="from_pg1"></ion-datetime>
+                                                            </ion-item> &nbsp; &nbsp;
+        
+                                                            <ion-item class="">
+                                                                <ion-datetime id="to_pg1" class="info-frm drop-mnu" displayFormat="MMM DD, YYYY" placeholder="To" [(ngModel)]="to_pg1"></ion-datetime>
+                                                            </ion-item>
+                                                        </div>
+        
+                                                        <ion-item class="frm">
+                                                            <ion-input type="text" class="info-frm" id="institue_pg1" [(ngModel)]="institue_pg1" placeholder="School/College/Institute"></ion-input>
+                                                        </ion-item>
+        
+                                                        <ion-item class="frm">
+                                                            <ion-input type="text" class="info-frm" id="board_pg1" placeholder="Board/University" [(ngModel)]="board_pg1"></ion-input>
+                                                        </ion-item>
+        
+                                                        <ion-item class="dropdown frm">
+                                                            <ion-label class="drop-mnu">Year Of Passing</ion-label>
+                                                            <ion-select id="pass_year_pg1" placeholder="Select One" [(ngModel)]="pass_year_pg1">
+                                                                <ion-select-option *ngFor="let year of year_list" value="{{year}}">{{year}}</ion-select-option>
+                                                            </ion-select>
+                                                        </ion-item>
+        
+                                                        <ion-item class="frm">
+                                                            <ion-input type="text" class="info-frm" id="marks_pg1" placeholder="Division / %Marks of CGPa" [(ngModel)]="marks_pg1"></ion-input>
+                                                        </ion-item>
+        
+                                                        <ion-item class="frm">
+                                                            <ion-input type="number" class="info-frm" id="rank_pg1" placeholder="Rank in the Class" [(ngModel)]="rank_pg1" min="1"></ion-input>
+                                                        </ion-item>
+        
+                                                        <ion-item class="frm">
+                                                            <ion-input type="text" class="info-frm" id="subject_pg1" placeholder="Special/Major Subject" [(ngModel)]="subject_pg1"></ion-input>
+                                                        </ion-item>
+        
+                                                        <div class="sign-box">
+                                                            <button *ngIf="id_pg1 == null" type="button" size="large" expand="block" class="btn save-btn" (click)="onSubmit_pg1()">Save</button>
+        
+                                                            <button *ngIf="id_pg1 != null" type="button" size="large" expand="block" class="btn save-btn" (click)="onUpdate_pg1()">Update</button>
+                                                        </div>
+                                                    </div>
+                                                    <!-- 1st year - end -->
+
+                                                    <!-- 2nd year - start -->
+                                                    <div *ngIf="show_pg2yr" class="card-header collapsed" data-toggle="collapse" data-parent="#accordion3" href="#collapseFourTwo">
+                                                        <a class="card-title">
+                                                        2nd Year
+                                                        </a>
+                                                    </div>
+                                                    <div *ngIf="!show_pg2yr" class="card-header collapsed" (click)="tooltipMsg('Fill up 1st Year')">
+                                                        <a class="card-title">
+                                                            2nd Year
+                                                        </a>
+                                                    </div>
+                                                    <div id="collapseFourTwo" class=" collapse" data-parent="#accordion3" >
+                                                        <div class="period-inpt">
+                                                            <ion-item class="">
+                                                                <ion-datetime id="from_pg2" class="info-frm drop-mnu" displayFormat="MMM DD, YYYY" placeholder="From" [(ngModel)]="from_pg2"></ion-datetime>
+                                                            </ion-item> &nbsp; &nbsp;
+        
+                                                            <ion-item class="">
+                                                                <ion-datetime id="to_pg2" class="info-frm drop-mnu" displayFormat="MMM DD, YYYY" placeholder="To" [(ngModel)]="to_pg2"></ion-datetime>
+                                                            </ion-item>
+                                                        </div>
+        
+                                                        <ion-item class="frm">
+                                                            <ion-input type="text" class="info-frm" id="institue_pg2" [(ngModel)]="institue_pg2" placeholder="School/College/Institute"></ion-input>
+                                                        </ion-item>
+        
+                                                        <ion-item class="frm">
+                                                            <ion-input type="text" class="info-frm" id="board_pg2" placeholder="Board/University" [(ngModel)]="board_pg2"></ion-input>
+                                                        </ion-item>
+        
+                                                        <ion-item class="dropdown frm">
+                                                            <ion-label class="drop-mnu">Year Of Passing</ion-label>
+                                                            <ion-select id="pass_year_pg2" placeholder="Select One" [(ngModel)]="pass_year_pg2">
+                                                                <ion-select-option *ngFor="let year of year_list" value="{{year}}">{{year}}</ion-select-option>
+                                                            </ion-select>
+                                                        </ion-item>
+        
+                                                        <ion-item class="frm">
+                                                            <ion-input type="text" class="info-frm" id="marks_pg2" placeholder="Division / %Marks of CGPa" [(ngModel)]="marks_pg2"></ion-input>
+                                                        </ion-item>
+        
+                                                        <ion-item class="frm">
+                                                            <ion-input type="number" class="info-frm" id="rank_pg2" placeholder="Rank in the Class" [(ngModel)]="rank_pg2" min="1"></ion-input>
+                                                        </ion-item>
+        
+                                                        <ion-item class="frm">
+                                                            <ion-input type="text" class="info-frm" id="subject_pg2" placeholder="Special/Major Subject" [(ngModel)]="subject_pg2"></ion-input>
+                                                        </ion-item>
+        
+                                                        <div class="sign-box">
+                                                            <button *ngIf="id_pg2 == null" type="button" size="large" expand="block" class="btn save-btn" (click)="onSubmit_pg2()">Save</button>
+        
+                                                            <button *ngIf="id_pg2 != null" type="button" size="large" expand="block" class="btn save-btn" (click)="onUpdate_pg2()">Update</button>
+                                                        </div>
+                                                    </div>
+                                                    <!-- 2nd year - end -->
+                                                </div>
                                             </div>
                                             <!-- Post Graduation - end -->
 
@@ -489,43 +549,48 @@
                                                 </a>
                                             </div>
                                             <div id="collapseFive" class=" collapse" data-parent="#accordion" >
-                                                    <div class="period-inpt">
-                                                            <ion-item class="">
-                                                            <ion-label position="floating">To</ion-label>
-                                                            <ion-input type="date" class="info-frm drop-mnu" id="Name" placeholder="Date of Birth"></ion-input>
-                                                            </ion-item> &nbsp; &nbsp;
-                                                            <ion-item class="">
-                                                            <ion-label position="floating">From</ion-label>
-                                                            <ion-input type="date" class="info-frm drop-mnu" id="Name" placeholder="Date of Birth"></ion-input>
-                                                            </ion-item>
-                                                    </div>
-                                                    <ion-item class="frm">
-                                                        <ion-input type="text" class="info-frm" id="email" placeholder="School/College/Institute"></ion-input>
+                                                <div class="period-inpt">
+                                                    <ion-item class="">
+                                                        <ion-datetime id="from_ext" class="info-frm drop-mnu" displayFormat="MMM DD, YYYY" placeholder="From" [(ngModel)]="from_ext"></ion-datetime>
+                                                    </ion-item> &nbsp; &nbsp;
+
+                                                    <ion-item class="">
+                                                        <ion-datetime id="to_ext" class="info-frm drop-mnu" displayFormat="MMM DD, YYYY" placeholder="To" [(ngModel)]="to_ext"></ion-datetime>
                                                     </ion-item>
-                                                    <ion-item class="frm">
-                                                        <ion-input type="text" class="info-frm" id="email" placeholder="Board/University"></ion-input>
-                                                    </ion-item>
-                                                    <ion-item class="dropdown frm">
-                                                        <ion-label class="drop-mnu">Year Of Passing</ion-label>
-                                                            <ion-select placeholder="Select One">
-                                                            <ion-select-option value="s">2019</ion-select-option>
-                                                            <ion-select-option value="m">2018</ion-select-option>
-                                                            <ion-select-option value="w">2017</ion-select-option>
-                                                            </ion-select>
-                                                        
-                                                    </ion-item>
-                                                    <ion-item class="frm">
-                                                        <ion-input type="text" class="info-frm" id="email" placeholder="Division / %Marks of CGPa"></ion-input>
-                                                    </ion-item>
-                                                    <ion-item class="frm">
-                                                        <ion-input type="text" class="info-frm" id="email" placeholder="Rank in the Class"></ion-input>
-                                                    </ion-item>
-                                                    <ion-item class="frm">
-                                                        <ion-input type="text" class="info-frm" id="email" placeholder="Special/Major Subject"></ion-input>
-                                                    </ion-item>
-                                                    <div class="sign-box">
-                                                            <button type="button"size="large" expand="block" class="btn save-btn">Save</button>
-                                                        </div>
+                                                </div>
+
+                                                <ion-item class="frm">
+                                                    <ion-input type="text" class="info-frm" id="institue_ext" [(ngModel)]="institue_ext" placeholder="School/College/Institute"></ion-input>
+                                                </ion-item>
+
+                                                <ion-item class="frm">
+                                                    <ion-input type="text" class="info-frm" id="board_ext" placeholder="Board/University" [(ngModel)]="board_ext"></ion-input>
+                                                </ion-item>
+
+                                                <ion-item class="dropdown frm">
+                                                    <ion-label class="drop-mnu">Year Of Passing</ion-label>
+                                                    <ion-select id="pass_year_ext" placeholder="Select One" [(ngModel)]="pass_year_ext">
+                                                        <ion-select-option *ngFor="let year of year_list" value="{{year}}">{{year}}</ion-select-option>
+                                                    </ion-select>
+                                                </ion-item>
+
+                                                <ion-item class="frm">
+                                                    <ion-input type="text" class="info-frm" id="marks_ext" placeholder="Division / %Marks of CGPa" [(ngModel)]="marks_ext"></ion-input>
+                                                </ion-item>
+
+                                                <ion-item class="frm">
+                                                    <ion-input type="number" class="info-frm" id="rank_ext" placeholder="Rank in the Class" [(ngModel)]="rank_ext" min="1"></ion-input>
+                                                </ion-item>
+
+                                                <ion-item class="frm">
+                                                    <ion-input type="text" class="info-frm" id="subject_ext" placeholder="Special/Major Subject" [(ngModel)]="subject_ext"></ion-input>
+                                                </ion-item>
+
+                                                <div class="sign-box">
+                                                    <button *ngIf="id_ext == null" type="button" size="large" expand="block" class="btn save-btn" (click)="onSubmit_ext()">Save</button>
+
+                                                    <button *ngIf="id_ext != null" type="button" size="large" expand="block" class="btn save-btn" (click)="onUpdate_ext()">Update</button>
+                                                </div>
                                             </div>
                                             <!-- Others - end -->
                                         </div>

@@ -12,7 +12,7 @@ import { PhotoViewer } from '@ionic-native/photo-viewer/ngx';
 })
 export class InfrestComponent implements OnInit {
 
-  message: string = "Loading..."
+  message: string = "Loading...";
   campus_list: any = [];
   infras_images: any = [];
   site_url: string;

@@ -23,7 +23,7 @@
             <div class="row justify-content-center mt-0">
                 <div class="col-11 text-center p-0">
                     <div class="col-md-12 mx-0">
-                        <form id="msform">
+                        <div id="msform">
                             <!-- progressbar -->
                             <ul id="progressbar">
                                 <li class="active" id="personal"><strong>Personal</strong></li>
@@ -52,32 +52,33 @@
                                     <ion-item class="frm">
                                         <ion-input type="text" class="info-frm" id="email" placeholder="Booking Confirmation No"></ion-input>
                                     </ion-item>
+
                                     <ion-item class="dropdown frm">
                                         <ion-label class="drop-mnu">Center</ion-label>
-                                            <ion-select placeholder="Select One">
-                                            <ion-select-option value="s">Abcd</ion-select-option>
-                                            <ion-select-option value="m">Xyz</ion-select-option>
-                                            <ion-select-option value="w">others</ion-select-option>
-                                            </ion-select>
-                                        
+                                        <ion-select placeholder="Select One">
+                                            <ion-select-option *ngFor="let campus of campus_list" value="{{campus.id}}">{{campus.name}}</ion-select-option>
+                                        </ion-select>
                                     </ion-item>
+
                                     <ion-item class="frm">
-                                        <ion-input type="date" class="info-frm drop-mnu" id="Name" placeholder="Date"></ion-input>
+                                        <ion-input type="date" class="info-frm drop-mnu" id="date" placeholder="Date"></ion-input>
                                     </ion-item>
+
                                     <ion-item class="frm">
-                                        <ion-input type="text" class="info-frm" id="email" placeholder="Roll No"></ion-input>
+                                        <ion-input type="text" class="info-frm" id="roll" placeholder="Roll No"></ion-input>
                                     </ion-item>
+
                                     <div class="sign-box">
                                         <button type="button"size="large" expand="block" class="btn save-btn">Save</button>
                                     </div>
                                 </div>
 
-                                <input type="button" name="previous" class="previous action-button-previous prv-btns" value="Previous" (click)="movePrevious()" />
+                                <input type="button" name="previous" class="previous action-button prv-btns" value="Previous" (click)="movePrevious()" />
 
-                                <input type="button" name="next" class="next action-button nxt-btns" value="Confirm" (click)="moveNext()" />
+                                <input *ngIf="show_conf_button"  type="button" name="next" class="next action-button nxt-btns" value="Confirm" (click)="confirm()" />
+                                <input *ngIf="!show_conf_button"  type="button" name="next" class="next action-button-previous nxt-btns" value="Confirm" />
                             </fieldset>
-
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>

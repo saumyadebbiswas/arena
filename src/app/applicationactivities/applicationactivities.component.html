@@ -20,7 +20,7 @@
             <div class="row justify-content-center mt-0">
                 <div class="col-11 text-center p-0">
                     <div class="col-md-12 mx-0">
-                        <form id="msform">
+                        <div id="msform">
                             <!-- progressbar -->
                             <ul id="progressbar">
                                 <li class="active" id="personal"><strong>Personal</strong></li>
@@ -35,43 +35,50 @@
                                 <div class="form-card">
                                     <h5 class="fs-title">Others Activities</h5>
                                     <ion-item class="frm">
-                                        <ion-input type="text" class="info-frm" id="email" placeholder="Games"></ion-input>
+                                        <ion-textarea rows="2" placeholder="Games (Optional)" [(ngModel)]="games"></ion-textarea>
                                     </ion-item>
                                     <ion-item class="frm">
-                                        <ion-input type="text" class="info-frm" id="email" placeholder="Social Activities"></ion-input>
+                                        <ion-textarea rows="2" placeholder="Social Activities (Optional)" [(ngModel)]="social_activity"></ion-textarea>
                                     </ion-item>
                                     <ion-item>
-                                        <ion-textarea rows="3" placeholder="Hobby"></ion-textarea>
+                                        <ion-textarea rows="2" placeholder="Hobbies (Optional)" [(ngModel)]="hobbies"></ion-textarea>
                                     </ion-item>
                                 
-                                    <p class="lang-lab"><ion-label>Languages Known</ion-label></p>
+                                    <p class="lang-lab">
+                                        <ion-label>Languages Known</ion-label>
+                                    </p>
                                     <div class="d-flex">
-                                            <p class="chq-inpt lng-box">
-                                                <ion-checkbox color="primary"></ion-checkbox> &nbsp;
-                                                <ion-label class="chq-lebl">English</ion-label><br><br>
+                                        <p class="chq-inpt lng-box">
+                                            <ion-checkbox *ngIf="check_eng" color="primary" checked="true" (ionChange)="chooselanguage($event, 'eng')"></ion-checkbox>
+                                            <ion-checkbox *ngIf="!check_eng" color="primary" (ionChange)="chooselanguage($event, 'eng')"></ion-checkbox> &nbsp;
+                                            <ion-label class="chq-lebl">English</ion-label><br><br>
 
-                                                <ion-checkbox color="primary"></ion-checkbox> &nbsp;
-                                                <ion-label class="chq-lebl">Hindi</ion-label>
-                                            </p>
-                                            <p class="chq-inpt lng-box">
-                                                <ion-checkbox color="primary"></ion-checkbox> &nbsp;
-                                                <ion-label class="chq-lebl">Bengali</ion-label><br><br>
+                                            <ion-checkbox *ngIf="check_hin" color="primary" checked="true" (ionChange)="chooselanguage($event, 'hin')"></ion-checkbox>
+                                            <ion-checkbox *ngIf="!check_hin" color="primary" (ionChange)="chooselanguage($event, 'hin')"></ion-checkbox> &nbsp;
+                                            <ion-label class="chq-lebl">Hindi</ion-label>
+                                        </p>
+                                        <p class="chq-inpt lng-box">
+                                            <ion-checkbox *ngIf="check_beng" color="primary" checked="true" (ionChange)="chooselanguage($event, 'beng')"></ion-checkbox>
+                                            <ion-checkbox *ngIf="!check_beng" color="primary" (ionChange)="chooselanguage($event, 'beng')"></ion-checkbox> &nbsp;
+                                            <ion-label class="chq-lebl">Bengali</ion-label><br><br>
 
-                                                <ion-checkbox color="primary"></ion-checkbox> &nbsp;
-                                                <ion-label class="chq-lebl">Others</ion-label>
-                                            </p>
+                                            <ion-checkbox *ngIf="check_oth" color="primary" checked="true" (ionChange)="chooselanguage($event, 'oth')"></ion-checkbox>
+                                            <ion-checkbox *ngIf="!check_oth" color="primary" (ionChange)="chooselanguage($event, 'oth')"></ion-checkbox> &nbsp;
+                                            <ion-label class="chq-lebl">Others</ion-label>
+                                        </p>
                                     </div>
                                     <div class="sign-box">
-                                        <button type="button"size="large" expand="block" class="btn save-btn">Save</button>
+                                        <button *ngIf="!id" type="button"size="large" expand="block" class="btn save-btn" (click)="onSubmit()">Save</button>
+                                        <button *ngIf="id" type="button"size="large" expand="block" class="btn save-btn" (click)="onUpdate()">Update</button>
                                     </div>
                                 </div>
 
-                                <input type="button" name="previous" class="previous action-button-previous prv-btns" value="Previous" (click)="movePrevious()" />
+                                <input type="button" name="previous" class="previous action-button prv-btns" value="Previous" (click)="movePrevious()" />
 
-                                <input type="button" name="make_payment" class="next action-button nxt-btns" value="Next Step" (click)="moveNext()" />
+                                <input type="button" *ngIf="show_next_button" class="next action-button nxt-btns" value="Next Step" (click)="moveNext()" />
+                                <input type="button" *ngIf="!show_next_button" class="next action-button-previous nxt-btns" value="Next Step" />
                             </fieldset>
-
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
