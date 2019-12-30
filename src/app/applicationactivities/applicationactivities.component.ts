@@ -77,12 +77,15 @@ export class ApplicationactivitiesComponent implements OnInit {
         this.setLanguages(response.data[0].languages);
         this.show_next_button = true;
       } else {
-        const alert = await this.alertCtrl.create({
-          header: 'Error!',
+        const toast = await this.toastController.create({
           message: response.message,
-          buttons: ['OK']
+          color: "dark",
+          position: "bottom",
+          duration: 2000
         });
-        alert.present();
+        toast.present();
+
+        this.show_next_button = false;
       }
     }, async error => {
       //--- In case of any error - dismiss loader, show error message

@@ -37,40 +37,46 @@
                             <fieldset>
                                 <div class="form-card">
                                     <h5 class="fs-title">Official Information</h5>
-                                    <ion-item class="dropdown frm">
+                                    <!-- <ion-item class="dropdown frm">
                                         <ion-label class="drop-mnu">Accepted By</ion-label>
-                                            <ion-select placeholder="Select One">
+                                        <ion-select placeholder="Select One">
                                             <ion-select-option value="s">Xyz</ion-select-option>
-                                            <ion-select-option value="m">Others</ion-select-option>
-                                            <ion-select-option value="w">Abc</ion-select-option>
-                                            </ion-select>
+                                        </ion-select>
+                                    </ion-item> -->
+
+                                    <ion-item class="frm">
+                                        <ion-input type="text" class="info-frm" id="accepted_by" placeholder="Accepted By" value="{{admin_name}}" readonly="true"></ion-input>
+
+                                        <span data-toggle="tooltip" data-placement="top" title="Can't update" (click)="tooltipMsg('Cant change!')"><i class="fa fa-question-circle toolp"></i></span>
                                     </ion-item>
 
                                     <ion-item class="frm">
-                                        <ion-input type="text" class="info-frm" id="email" placeholder="At"></ion-input>
+                                        <ion-input type="text" class="info-frm" id="accept_at" placeholder="At" [(ngModel)]="accept_at"></ion-input>
                                     </ion-item>
                                     
                                     <ion-item class="frm">
-                                        <ion-input type="text" class="info-frm" id="email" placeholder="Booking Confirmation No"></ion-input>
+                                        <ion-input type="text" class="info-frm" id="confirm_no" placeholder="Booking Confirmation No" [(ngModel)]="confirm_no"></ion-input>
                                     </ion-item>
 
                                     <ion-item class="dropdown frm">
                                         <ion-label class="drop-mnu">Center</ion-label>
-                                        <ion-select placeholder="Select One">
+                                        <ion-select id="campus_id" placeholder="Select One" [(ngModel)]="campus_id">
                                             <ion-select-option *ngFor="let campus of campus_list" value="{{campus.id}}">{{campus.name}}</ion-select-option>
                                         </ion-select>
                                     </ion-item>
 
                                     <ion-item class="frm">
-                                        <ion-input type="date" class="info-frm drop-mnu" id="date" placeholder="Date"></ion-input>
+                                        <ion-datetime id="date" class="info-frm drop-mnu" displayFormat="MMM DD, YYYY" placeholder="Date" [(ngModel)]="date"></ion-datetime>
                                     </ion-item>
 
                                     <ion-item class="frm">
-                                        <ion-input type="text" class="info-frm" id="roll" placeholder="Roll No"></ion-input>
+                                        <ion-input type="text" class="info-frm" id="roll_no" placeholder="Roll No" [(ngModel)]="roll_no"></ion-input>
                                     </ion-item>
 
                                     <div class="sign-box">
-                                        <button type="button"size="large" expand="block" class="btn save-btn">Save</button>
+                                        <button *ngIf="id == null" type="button" size="large" expand="block" class="btn save-btn" (click)="onSubmit()">Save</button>
+
+                                        <button *ngIf="id != null" type="button" size="large" expand="block" class="btn save-btn" (click)="onUpdate()">Update</button>
                                     </div>
                                 </div>
 

@@ -55,4 +55,20 @@ export class ApplicationService {
   activities_update(sendData: any): Observable<any> {
     return this.http.post<any>(this.api_url+'/application/activity/edit', sendData, {headers: this.requestHeader});
   }
+	
+  official_detail(student_id: any) {
+    return this.http.get<any>(this.api_url+'/application/officials/student/'+student_id, {headers: this.requestHeader});
+  }
+	
+  official_insert(sendData: any): Observable<any> {
+    return this.http.post<any>(this.api_url+'/application/official/insert', sendData, {headers: this.requestHeader});
+  }
+	
+  official_update(sendData: any): Observable<any> {
+    return this.http.post<any>(this.api_url+'/application/official/edit', sendData, {headers: this.requestHeader});
+  }
+	
+  official_confirm(sendData: any): Observable<any> {
+    return this.http.post<any>(this.api_url+'/application/official/confirm', sendData, {headers: this.requestHeader});
+  }
 }
