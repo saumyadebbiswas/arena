@@ -238,7 +238,7 @@ export class ApplicationformComponent implements OnInit {
     } else if(!phone_num_format.test(this.mobile)) {
       const alert = await this.alertCtrl.create({
         header: 'Error!',
-        message: "Enter valid mobile no!",
+        message: "Enter valid mobile number!",
         buttons: ['OK']
         });
       alert.present();

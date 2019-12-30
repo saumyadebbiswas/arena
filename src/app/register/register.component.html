@@ -14,39 +14,41 @@
               
             <!-- <ion-item class="form-group frm"> -->
             <div class="form-group">
-            <span class="icon2"><i class="fa fa-user"></i></span>
-            <ion-input type="text" class="info-frm" id="name" [(ngModel)]="name" placeholder="Your Name"></ion-input>
-          </div>  
+              <span class="icon2"><i class="fa fa-user"></i></span>
+              <ion-input type="text" class="info-frm" id="name" [(ngModel)]="name" placeholder="Your Name"></ion-input>
+            </div>  
             <!-- </ion-item> -->
 
             <!-- <ion-item class="form-group frm"> -->
-                <div class="form-group">
-            <span class="icon2"><i class="fa fa-envelope"></i></span>
-            <ion-input type="text" class="info-frm" id="email" [(ngModel)]="email" placeholder="Email ID (Optional)"></ion-input>
-            </div>
-            <!-- </ion-item> -->
-
-            <!-- <ion-item class="form-group frm"> -->
-                <div class="form-group">
-            <span class="icon2"><i class="fa fa-phone "></i></span>
-            <ion-input type="text" class="info-frm" id="phone" [(ngModel)]="phone" placeholder="Phone Number"></ion-input>
-            </div>
-            <!-- </ion-item> -->
-
-            <!-- <ion-item class="form-group frm"> -->
-                <div class="form-group">
-            <span class="icon2"><i class="fa fa-lock"></i></span>
-            <ion-input type="password" class="info-frm" id="password" [(ngModel)]="password" placeholder="Password" ></ion-input>
-            </div>
-            <!-- </ion-item> -->
             <div class="form-group">
-            <span class="icon2"><i class="fa fa-book"></i></span>
-            <div class="dropdown frm select-dropdown">
-            <ion-select id="course_id" placeholder="Course of Interest" [(ngModel)]="course_id">
-              <ion-select-option *ngFor="let course of course_list" [value]="course.id">{{course.name}}</ion-select-option>
-            </ion-select>
-          </div>
-        </div> 
+              <span class="icon2"><i class="fa fa-envelope"></i></span>
+              <ion-input type="text" class="info-frm" id="email" [(ngModel)]="email" placeholder="Email ID (Optional)"></ion-input>
+            </div>
+            <!-- </ion-item> -->
+
+            <!-- <ion-item class="form-group frm"> -->
+            <div class="form-group">
+              <span class="icon2"><i class="fa fa-phone "></i></span>
+              <ion-input type="text" class="info-frm" id="phone" [(ngModel)]="phone" placeholder="Phone Number"></ion-input>
+            </div>
+            <!-- </ion-item> -->
+
+            <!-- <ion-item class="form-group frm"> -->
+            <div class="form-group">
+              <span class="icon2"><i class="fa fa-lock"></i></span>
+              <ion-input type="password" class="info-frm" id="password" [(ngModel)]="password" placeholder="Password" ></ion-input>
+            </div>
+            <!-- </ion-item> -->
+
+            <div class="form-group">
+              <span class="icon2"><i class="fa fa-book"></i></span>
+              <div class="dropdown frm select-dropdown">
+                <ion-select id="course_id" placeholder="Course of Interest" [(ngModel)]="course_id">
+                  <ion-select-option *ngFor="let course of course_list" [value]="course.id">{{course.name}}</ion-select-option>
+                </ion-select>
+              </div>
+            </div>
+
           </div>
 
           <div class="sign-box">

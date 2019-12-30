@@ -52,7 +52,7 @@ export class RegisterComponent implements OnInit {
     loading.present();
 
     this.visitorsService.course_list().subscribe(async response => {
-      console.log('Course list...', response);
+      //console.log('Course list...', response);
       //--- After get record - dismiss loader
       this.loadingController.dismiss();
 
@@ -73,6 +73,10 @@ export class RegisterComponent implements OnInit {
   }
 
   async onSubmit() {
+    var mail_format = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/; //--- String, format: demo@domain.co
+
+    var phone_num_format = /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/; //--- Numeric, min 10 and max 13, fromat: 9876543210
+
     //--- Check empty credentials
     if(this.name.length == 0) {
       const alert = await this.alertCtrl.create({
@@ -81,10 +85,24 @@ export class RegisterComponent implements OnInit {
         buttons: ['OK']
         });
       alert.present();
+    } else if(this.email.length != 0 && (!mail_format.test(this.email))) {
+      const alert = await this.alertCtrl.create({
+        header: 'Error!',
+        message: "Enter valid email ID!",
+        buttons: ['OK']
+      });
+      alert.present();
     } else if(this.phone.length == 0) {
       const alert = await this.alertCtrl.create({
         header: 'Error!',
         message: "Enter phone number!",
+        buttons: ['OK']
+        });
+      alert.present();
+    } else if(!phone_num_format.test(this.phone)) {
+      const alert = await this.alertCtrl.create({
+        header: 'Error!',
+        message: "Enter valid phone number!",
         buttons: ['OK']
         });
       alert.present();

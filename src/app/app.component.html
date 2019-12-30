@@ -15,7 +15,7 @@
               <li *ngFor="let page of appPages">
                 <span [routerLink]="[page.url]"> {{page.title}}</span>
               </li>
-              <li (click)="moveApplicationForm()">Application Form</li>
+              <li *ngIf="show_application_form_link" (click)="moveApplicationForm()">Application Form</li>
               
               <li></li>
               <li (click)="signOut()">Log Out</li>

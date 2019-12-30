@@ -16,6 +16,7 @@ export class AppComponent {
   name: string = "Guest";
   phone: string = "0000000000";
   public appPages = [];
+  show_application_form_link: boolean = false;
 
   constructor(
     public menuCtrl: MenuController,
@@ -41,34 +42,50 @@ export class AppComponent {
 
       //--- Select user type and load menu tabs accordingly
       if(this.user_info.user_type == 'student') {
-        this.appPages = [
-          {
-            title: 'Courses',
-            url: '/course',
-            icon: 'list'
-          },
-          {
-            title: 'Student Artwork',
-            url: '/art-work',
-            icon: 'list'
-          },
-          {
-            title: 'Placement Record',
-            url: '/placement',
-            icon: 'list'
-          },
-          {
-            title: 'Infrastructure',
-            url: '/infrastructure',
-            icon: 'list'
-          },
-          {
-            title: 'Videos',
-            url: '/videos',
-            icon: 'list'
-          }
-        ];
+        if(this.user_info.details.type == '1') {
+          this.show_application_form_link = true;
+
+          this.appPages = [
+            {
+              title: 'Courses',
+              url: '/course',
+              icon: 'list'
+            },
+            {
+              title: 'Student Artwork',
+              url: '/art-work',
+              icon: 'list'
+            },
+            {
+              title: 'Placement Record',
+              url: '/placement',
+              icon: 'list'
+            },
+            {
+              title: 'Infrastructure',
+              url: '/infrastructure',
+              icon: 'list'
+            },
+            {
+              title: 'Videos',
+              url: '/videos',
+              icon: 'list'
+            }
+          ];
+        } else if(this.user_info.details.type == '2') {
+          this.show_application_form_link = false;
+
+          this.appPages = [
+            {
+              title: 'Courses',
+              url: '/course',
+              icon: 'list'
+            }
+          ];
+        }
       } else if(this.user_info.user_type == 'admin') {
+        this.show_application_form_link = true;
+
         this.appPages = [
           {
             title: 'Register Students',
@@ -104,34 +121,50 @@ export class AppComponent {
 
         //--- Select user type and load menu tabs accordingly
         if(this.user_info.user_type == 'student') {
-          this.appPages = [
-            {
-              title: 'Courses',
-              url: '/course',
-              icon: 'list'
-            },
-            {
-              title: 'Student Artwork',
-              url: '/art-work',
-              icon: 'list'
-            },
-            {
-              title: 'Placement Record',
-              url: '/placement',
-              icon: 'list'
-            },
-            {
-              title: 'Infrastructure',
-              url: '/infrastructure',
-              icon: 'list'
-            },
-            {
-              title: 'Videos',
-              url: '/videos',
-              icon: 'list'
-            }
-          ];
+          if(this.user_info.details.type == '1') {
+            this.show_application_form_link = true;
+
+            this.appPages = [
+              {
+                title: 'Courses',
+                url: '/course',
+                icon: 'list'
+              },
+              {
+                title: 'Student Artwork',
+                url: '/art-work',
+                icon: 'list'
+              },
+              {
+                title: 'Placement Record',
+                url: '/placement',
+                icon: 'list'
+              },
+              {
+                title: 'Infrastructure',
+                url: '/infrastructure',
+                icon: 'list'
+              },
+              {
+                title: 'Videos',
+                url: '/videos',
+                icon: 'list'
+              }
+            ];
+          } else if(this.user_info.details.type == '2') {
+            this.show_application_form_link = false;
+
+            this.appPages = [
+              {
+                title: 'Courses',
+                url: '/course',
+                icon: 'list'
+              }
+            ];
+          }
         } else if(this.user_info.user_type == 'admin') {
+          this.show_application_form_link = true;
+          
           this.appPages = [
             {
               title: 'Register Students',

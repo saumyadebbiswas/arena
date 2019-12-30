@@ -10,8 +10,9 @@ import { UserService } from '../services';
 })
 export class LoginComponent implements OnInit {
 
-  username: string = "";
+  phone: string = "";
   password: string = "";
+
   showLoader: boolean;
   showErrorAlert: boolean;
   error_message: string;
@@ -51,16 +52,30 @@ export class LoginComponent implements OnInit {
   }
 
   async onSubmit() {
-    //--- Check empty credentials
-    if(this.username.length == 0 || this.password.length == 0) {
+    var phone_num_format = /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/; //--- Numeric, min 10 and max 13, fromat: 9876543210
 
+    //--- Check empty credentials
+    if(this.phone.length == 0) {
       const alert = await this.alertCtrl.create({
         header: 'Error!',
-        message: "Enter full Credentials!",
+        message: "Enter phone number!",
         buttons: ['OK']
         });
       alert.present();
-
+    } else if(!phone_num_format.test(this.phone)) {
+      const alert = await this.alertCtrl.create({
+        header: 'Error!',
+        message: "Enter valid phone number!",
+        buttons: ['OK']
+        });
+      alert.present();
+    } else if(this.password.length == 0) {
+      const alert = await this.alertCtrl.create({
+        header: 'Error!',
+        message: "Enter password!",
+        buttons: ['OK']
+        });
+      alert.present();
     } else {
       //--- Start loader
       const loading = await this.loadingController.create({
@@ -70,7 +85,7 @@ export class LoginComponent implements OnInit {
       loading.present();
 
       let sendData = {
-        username: this.username,
+        username: this.phone,
         password: this.password
       }
       //console.log('Login sendData...', sendData);
