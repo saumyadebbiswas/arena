@@ -13,13 +13,14 @@
     float: left;
     overflow: hidden;
     padding: 10px 0;
+    position: relative;
 }
 .cours-detal{
     // display: flex;
-    width: 65%;
+    width: 100%;
     float: left;
   }
-  .application-btn{ float: right; border: 2px #d07b7f solid; border-radius: 5px; font-size: 13px; background: #fff; height: 30px;}
+  .application-btn{ float: right; border: 2px #d07b7f solid; border-radius: 5px; font-size: 13px; background: #fff; height: 30px; position: absolute; right: 0px;}
   .place-box li h4{
     color: #5a5959;
     margin-top: 0;
@@ -37,12 +38,13 @@
     font-size: 11px;
     color: #eb1d23;
   }
-
+.from-date{ width: 47%; margin-right: 6%; display: inline-block;}
+.to-date{ width: 47%; display: inline-block;}
   .frm{
     width: 100%;
     padding-left: 0px;
     padding-right: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 0;
   }
   
   .info-frm{

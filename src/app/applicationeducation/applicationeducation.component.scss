@@ -21,7 +21,7 @@
     overflow-x: hidden;
     overflow-y: scroll;
 }
-
+.datetime-placeholder{ padding-left: 0px !important;}
 #msform fieldset {
     background: white;
     border: 0 none;
@@ -285,22 +285,16 @@ select.list-dt:focus {
 }
 
 .nxt-btns{
-    position: fixed;
-    bottom: 15px;
-    right: 10px;
-    width: 100%;
-    z-index: 9;
+    // position: fixed;
+    z-index: 9; margin-left: 15px !important;
    
 
 }
 .prv-btns{
-    position: fixed;
-    bottom: 15px;
-    left: 10px;
-    width: 100%;
-    background: #ffffff;
+    // position: fixed;
     z-index: 9;
 }
+.btn-col{ width: 100%; height:8vh; background: #fff;}
 .chq-inpt{
     margin-top: 20px;
     margin-bottom: 0px;
@@ -321,7 +315,7 @@ select.list-dt:focus {
   }
 
   .drop-mnu{
-    color: #a6a6a6 !important;   
+    color: #a6a6a6 !important; padding-left: 0px !important;   
   }
   
   ::-ms-input-placeholder { /* Microsoft Edge */
@@ -355,11 +349,16 @@ select.list-dt:focus {
     content: "\f068";
     float: right; 
 }
+.accordion .card-header.active:after{
+    font-family: 'FontAwesome';  
+    content: "\f068" !important;
+}
 .accordion .card-header.collapsed:after {
     /* symbol for "collapsed" panels */
     content: "\f067"; 
 }
-
+.from-date{ width: 47%; display: inline-block; margin-right:6%;}
+.to-date{ width: 47%; display: inline-block; margin-right:0;}
 .period-inpt{
     display: flex;
 }
@@ -387,6 +386,16 @@ select.list-dt:focus {
     margin-bottom: 10px;
     margin-top: 10px;
     
+}
+.disable{ background: lightgray; color: #808080;}
+.accordion .disable:after {
+    font-family: 'FontAwesome';  
+    content: "" !important;
+    float: right; 
+}
+.accordion .disable.collapsed:after {
+    /* symbol for "collapsed" panels */
+    content: "" !important; 
 }
 .show{
     // box-shadow: rgba(178, 177, 177, 0.5) 0px 16px 26px -10px, rgba(0, 0, 0, 0.12) 0px 4px 25px 0px, rgba(134, 133, 133, 0.24) 0px 8px 10px -5px;

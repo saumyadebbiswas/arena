@@ -14,8 +14,18 @@
 
 <ion-content>
   <div padding class="ex-pad" >
+    <!-- <div class="from-date">
+      <ion-item class="frm">
+          <ion-datetime id="dob" class="info-frm" displayFormat="MMM DD, YYYY" placeholder="From"></ion-datetime>
+      </ion-item>
+    </div>
+    <div class="to-date">
+      <ion-item class="frm">
+          <ion-datetime id="dob" class="info-frm" displayFormat="MMM DD, YYYY" placeholder="To"></ion-datetime>
+      </ion-item>
+    </div> -->
     <ion-row justify-content-center class="product-sec">
-      <ion-item class="form-group frm">
+      <ion-item class="form-group frm" style="margin-bottom:10px;">
         <span><i class="fa fa-search"></i></span>
         <ion-input type="text" class="info-frm" id="search" placeholder="Search By Name" (keyup)="updateList($event)" ></ion-input>
       </ion-item>
@@ -25,8 +35,9 @@
         <li *ngFor="let student of student_list; let i = index">
           <div class="cours-detal">
             <h4>{{student.name}}</h4>
+            <p>Phone: {{student.phone}}</p>
             <p *ngIf="student.email">Email: {{student.email}}</p>
-          <p>Phone: {{student.phone}}</p>
+          
           <p *ngIf="student.applied_course">Applied Course: {{student.applied_course}}</p>
           </div>
           
