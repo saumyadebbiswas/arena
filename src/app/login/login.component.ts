@@ -35,6 +35,23 @@ export class LoginComponent implements OnInit {
     if(this.userService.currentUserValue) { 
       this.menuCtrl.enable(true);
       this.router.navigate(['/course']);
+      let currentUser = this.userService.currentUserValue;
+
+      //--- Check if user is either a student or a normal staff (not super admin, whose type is 1)
+      if(currentUser.user_type == 'student') {
+        if(currentUser.details.type == '1') { //--- If visitor student
+          this.router.navigate(['/course']);
+        } else if(currentUser.details.type == '2') { //--- If active student
+          this.router.navigate(['/course']);
+        }
+      } else if(currentUser.user_type == 'admin') {
+        if(currentUser.details.type == '2') { //--- If councellor staff
+          this.router.navigate(['/visitor-students']);
+        } else if(currentUser.details.type == '3') { //--- If Academic Head staff
+          this.router.navigate(['/batch-assign']);
+        }
+      }
+      
     } else {
       this.menuCtrl.enable(false);
       console.log('Location: LoginComponent');
@@ -91,19 +108,37 @@ export class LoginComponent implements OnInit {
       //console.log('Login sendData...', sendData);
 
       this.userService.login(sendData).subscribe(async response => {
-        //console.log('Login response...', response);
+        //console.log('Login response: ', response);
         //--- After successful login - dismiss loader, enable side menu, navigate to dashboard
         this.loadingController.dismiss();
-
+        
         if(response.status == true) {
           //--- Set event data which will access from app component page after login
           this.events.publish('userLogin', {loggedin: true});
           this.menuCtrl.enable(true);
 
+          //--- Check if user is either a student or a normal staff (not super admin, whose type is 1)
           if(response.data.user_type == 'student') {
-            this.router.navigate(['/course']);
-          } else if(response.data.user_type == 'admin') {
-            this.router.navigate(['/reg-students']);
+            if(response.data.details.type == '1') { //--- If visitor student
+              this.router.navigate(['/course']);
+            } else if(response.data.details.type == '2') { //--- If active student
+              this.router.navigate(['/course']);
+            }
+          } else if(response.data.user_type == 'admin' && response.data.details.type != '1') {
+            if(response.data.details.type == '2') { //--- If councellor staff
+              this.router.navigate(['/visitor-students']);
+            } else if(response.data.details.type == '3') { //--- If Academic Head staff
+              this.router.navigate(['/batch-assign']);
+            }
+          } else {
+            this.userService.logout();
+            
+            const alert = await this.alertCtrl.create({
+              header: 'Opps!',
+              message: 'Sorry! You are not permitted.',
+              buttons: ['OK']
+            });
+            alert.present();
           }
 
         } else {
@@ -111,11 +146,11 @@ export class LoginComponent implements OnInit {
             header: 'Error!',
             message: response.message,
             buttons: ['OK']
-            });
+          });
           alert.present();
         }
       }, async error => {
-        console.log('Login error...', error);
+        console.log('Login error: ', error);
         
         //--- In case of login error - dismiss loader, show error message
         this.loadingController.dismiss();
@@ -123,7 +158,7 @@ export class LoginComponent implements OnInit {
           header: 'Error!',
           message: "Internal problem!",
           buttons: ['OK']
-          });
+        });
         alert.present();
       });
     }

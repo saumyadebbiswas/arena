@@ -25,14 +25,12 @@ import { File } from "@ionic-native/file/ngx";
 import { FileTransfer } from "@ionic-native/file-transfer/ngx";
 import { PdfViewerService } from "./services/pdf-viewer.service";
 import { ApplicationformComponent } from './applicationform/applicationform.component';
-import { NotificationComponent } from './notification/notification.component';
-import { RegisterStudentComponent } from './register-student/register-student.component';
+//import { NotificationComponent } from './notification/notification.component';
 import { ApplicationeducationComponent } from './applicationeducation/applicationeducation.component';
 import { ApplicationactivitiesComponent } from './applicationactivities/applicationactivities.component';
 import { ApplicationofficeComponent } from './applicationoffice/applicationoffice.component';
 import { ApplicationfinishComponent } from './applicationfinish/applicationfinish.component';
-import { StudentBachListComponent } from './student-bach-list/student-bach-list.component';
-import { RoutineComponent } from './routine/routine.component';
+import { StaffModuleModule } from './staff-module/staff-module.module';
 
 @NgModule({
   declarations: [
@@ -45,15 +43,12 @@ import { RoutineComponent } from './routine/routine.component';
     WorkComponent,
     CoursedetailsComponent,
     CourseComponent,
-    NotificationComponent,
-    RegisterStudentComponent,
+    //NotificationComponent,
     ApplicationformComponent,
     ApplicationeducationComponent,
     ApplicationactivitiesComponent,
     ApplicationofficeComponent,
-    ApplicationfinishComponent,
-    StudentBachListComponent,
-    RoutineComponent
+    ApplicationfinishComponent
   ],
   entryComponents: [],
   imports: [
@@ -62,7 +57,8 @@ import { RoutineComponent } from './routine/routine.component';
     HttpClientModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    StaffModuleModule
   ],
   providers: [
     StatusBar,

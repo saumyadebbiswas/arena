@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService, VisitorsService } from '../services';
 import { Platform, AlertController, LoadingController } from '@ionic/angular';
-import { SITE_URL } from '../services/constants';
+import { UserService, VisitorsService } from 'src/app/services';
+import { SITE_URL } from 'src/app/services/constants';
 
 @Component({
-  selector: 'app-register-student',
-  templateUrl: './register-student.component.html',
-  styleUrls: ['./register-student.component.scss'],
+  selector: 'app-visitor-students',
+  templateUrl: './visitor-students.component.html',
+  styleUrls: ['./visitor-students.component.scss'],
 })
-export class RegisterStudentComponent implements OnInit {
+export class VisitorStudentsComponent implements OnInit {
   
   subscription:any;
   message: string = "Loading...";

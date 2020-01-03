@@ -42,67 +42,9 @@ export class AppComponent {
 
       //--- Select user type and load menu tabs accordingly
       if(this.user_info.user_type == 'student') {
-        if(this.user_info.details.type == '1') {
-          this.show_application_form_link = true;
-
-          this.appPages = [
-            {
-              title: 'Courses',
-              url: '/course',
-              icon: 'list'
-            },
-            {
-              title: 'Student Artwork',
-              url: '/art-work',
-              icon: 'list'
-            },
-            {
-              title: 'Placement Record',
-              url: '/placement',
-              icon: 'list'
-            },
-            {
-              title: 'Infrastructure',
-              url: '/infrastructure',
-              icon: 'list'
-            },
-            {
-              title: 'Videos',
-              url: '/videos',
-              icon: 'list'
-            }
-          ];
-        } else if(this.user_info.details.type == '2') {
-          this.show_application_form_link = false;
-
-          this.appPages = [
-            {
-              title: 'Courses',
-              url: '/course',
-              icon: 'list'
-            }
-          ];
-        }
+        this.student_pages(this.user_info.details.type);
       } else if(this.user_info.user_type == 'admin') {
-        this.show_application_form_link = true;
-
-        this.appPages = [
-          {
-            title: 'Register Students',
-            url: '/reg-students',
-            icon: 'list'
-          },
-          {
-            title: 'Batch Create',
-            url: '/student-batch',
-            icon: 'list'
-          },
-          {
-            title: 'Routine Create',
-            url: '/routine',
-            icon: 'list'
-          }
-        ];
+        this.staff_pages(this.user_info.details.type);
       }
     }
 
@@ -121,70 +63,91 @@ export class AppComponent {
 
         //--- Select user type and load menu tabs accordingly
         if(this.user_info.user_type == 'student') {
-          if(this.user_info.details.type == '1') {
-            this.show_application_form_link = true;
-
-            this.appPages = [
-              {
-                title: 'Courses',
-                url: '/course',
-                icon: 'list'
-              },
-              {
-                title: 'Student Artwork',
-                url: '/art-work',
-                icon: 'list'
-              },
-              {
-                title: 'Placement Record',
-                url: '/placement',
-                icon: 'list'
-              },
-              {
-                title: 'Infrastructure',
-                url: '/infrastructure',
-                icon: 'list'
-              },
-              {
-                title: 'Videos',
-                url: '/videos',
-                icon: 'list'
-              }
-            ];
-          } else if(this.user_info.details.type == '2') {
-            this.show_application_form_link = false;
-
-            this.appPages = [
-              {
-                title: 'Courses',
-                url: '/course',
-                icon: 'list'
-              }
-            ];
-          }
+          this.student_pages(this.user_info.details.type);
         } else if(this.user_info.user_type == 'admin') {
-          this.show_application_form_link = true;
-          
-          this.appPages = [
-            {
-              title: 'Register Students',
-              url: '/reg-students',
-              icon: 'list'
-            },
-            {
-              title: 'Batch Create',
-              url: '/student-batch',
-              icon: 'list'
-            },
-            {
-              title: 'Routine Create',
-              url: '/routine',
-              icon: 'list'
-            }
-          ];
+          this.staff_pages(this.user_info.details.type);
         }
       }
     });
+  }
+
+  student_pages(student_type) {
+    if(student_type == '1') { //--- If visitor student
+      this.show_application_form_link = true;
+
+      this.appPages = [
+        {
+          title: 'Courses',
+          url: '/course',
+          icon: 'list'
+        },
+        {
+          title: 'Student Artwork',
+          url: '/art-work',
+          icon: 'list'
+        },
+        {
+          title: 'Placement Record',
+          url: '/placement',
+          icon: 'list'
+        },
+        {
+          title: 'Infrastructure',
+          url: '/infrastructure',
+          icon: 'list'
+        },
+        {
+          title: 'Videos',
+          url: '/videos',
+          icon: 'list'
+        }
+      ];
+    } else if(student_type == '2') { //--- If active student
+      this.show_application_form_link = false;
+
+      this.appPages = [
+        {
+          title: 'Courses',
+          url: '/course',
+          icon: 'list'
+        }
+      ];
+    } else {
+      this.show_application_form_link = false;
+      this.appPages = [];
+    }
+  }
+
+  staff_pages(staff_type) {
+    if(staff_type == '2') { //--- If councellor staff
+      this.show_application_form_link = true;
+  
+      this.appPages = [
+        {
+          title: 'Register Students',
+          url: '/visitor-students',
+          icon: 'list'
+        }
+      ];
+    } else if(staff_type == '3') { //--- If Academic Head staff
+      this.show_application_form_link = false;
+  
+      this.appPages = [
+        {
+          title: 'Batch Assign',
+          url: '/batch-assign',
+          icon: 'list'
+        },
+        {
+          title: 'Routine Assign',
+          url: '/routine-assign',
+          icon: 'list'
+        }
+      ];
+    } else {
+      this.show_application_form_link = false;
+      this.appPages = [];
+    }
   }
 
   initializeApp() {

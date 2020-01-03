@@ -9,15 +9,12 @@ import { WorkComponent } from './work/work.component';
 import { CoursedetailsComponent } from './coursedetails/coursedetails.component';
 import { CourseComponent } from './course/course.component';
 import { ApplicationformComponent } from './applicationform/applicationform.component';
-import { RegisterStudentComponent } from './register-student/register-student.component';
 import { StudentGuard } from './guards/student.guard';
 import { AdminGuard } from './guards/admin.guard';
 import { ApplicationeducationComponent } from './applicationeducation/applicationeducation.component';
 import { ApplicationactivitiesComponent } from './applicationactivities/applicationactivities.component';
 import { ApplicationofficeComponent } from './applicationoffice/applicationoffice.component';
 import { ApplicationfinishComponent } from './applicationfinish/applicationfinish.component';
-import { StudentBachListComponent } from './student-bach-list/student-bach-list.component';
-import { RoutineComponent } from './routine/routine.component';
 
 const routes: Routes = [
   {
@@ -25,6 +22,10 @@ const routes: Routes = [
     redirectTo: 'login',
     pathMatch: 'full'
   },
+  // {
+  //   path: 'visitor-students',
+  //   loadChildren: () => import('./staff-module/staff-module.module').then(mod => mod.StaffModuleModule)
+  // },
   { path: "login", component: LoginComponent},
   { path: "register", component: RegisterComponent},
   { path: "placement", component: PlacementrecordComponent, canActivate: [StudentGuard]},
@@ -37,10 +38,7 @@ const routes: Routes = [
   { path: "application-education",  component: ApplicationeducationComponent},
   { path: "application-activity",  component: ApplicationactivitiesComponent},
   { path: "application-official",  component: ApplicationofficeComponent, canActivate: [AdminGuard]},
-  { path: "application-finish",  component: ApplicationfinishComponent},
-  { path: "student-batch",  component: StudentBachListComponent, canActivate: [AdminGuard]},
-  { path: "routine",  component: RoutineComponent, canActivate: [AdminGuard]},
-  { path: "reg-students", component: RegisterStudentComponent, canActivate: [AdminGuard]}
+  { path: "application-finish",  component: ApplicationfinishComponent}
 ];
 
 @NgModule({

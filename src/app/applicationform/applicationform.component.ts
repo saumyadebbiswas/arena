@@ -108,7 +108,7 @@ export class ApplicationformComponent implements OnInit {
 
       const alert = await this.alertCtrl.create({
         header: 'Error!',
-        message: "internal Error! Unable to load courses.",
+        message: "Unable to load courses!",
         buttons: ['OK']
       });
       alert.present();

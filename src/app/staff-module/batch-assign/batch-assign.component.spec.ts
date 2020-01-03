@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { StudentBachListComponent } from './student-bach-list.component';
+import { BatchAssignComponent } from './batch-assign.component';
 
-describe('StudentBachListComponent', () => {
-  let component: StudentBachListComponent;
-  let fixture: ComponentFixture<StudentBachListComponent>;
+describe('BatchAssignComponent', () => {
+  let component: BatchAssignComponent;
+  let fixture: ComponentFixture<BatchAssignComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ StudentBachListComponent ],
+      declarations: [ BatchAssignComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(StudentBachListComponent);
+    fixture = TestBed.createComponent(BatchAssignComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));
