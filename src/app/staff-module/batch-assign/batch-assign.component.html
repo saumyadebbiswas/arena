@@ -12,30 +12,30 @@
   </div>
 </ion-header>
 
-<ion-content>
-    <div class="container-fluid" id="grad1">
-      <ion-item class="frm">
-          <ion-input type="text" class="info-frm" placeholder="Batch Name"></ion-input>
-      </ion-item>
+<ion-content *ngIf="!showloader">
+  <div class="container-fluid" id="grad1">
+    <ion-item class="frm">
+      <ion-input type="text" [(ngModel)]="batch_name" class="info-frm" placeholder="Batch Name"></ion-input>
+    </ion-item>
 
-      <div class="dropdown frm select-dropdown">
-        <ion-select [(ngModel)]="course_id" (ionChange)="filter_student_by_course($event)" placeholder="Select Course">
-          <ion-select-option *ngFor="let course of course_list" [value]="course.id">{{course.name}}</ion-select-option>
-        </ion-select>
-      </div>
-
-      <div class="student-col">
-        <h5>Select Student</h5>
-        <ul class="student-list">
-          <li *ngFor="let active_student of active_student_list">
-              <p class="chq-inpt">
-                <ion-label class="chq-lebl">{{active_student.name}}</ion-label>
-                <ion-checkbox class="checkbox" (ionChange)="changeChkbx($event, active_student.id)" color="primary"></ion-checkbox>
-              </p>
-          </li>
-        </ul>
-
-        <button type="submit" class="batch-btn">Create Batch</button>
-      </div>
+    <div class="dropdown frm select-dropdown">
+      <ion-select [(ngModel)]="course_id" (ionChange)="filter_student_by_course($event)" placeholder="Select Course">
+        <ion-select-option *ngFor="let course of course_list" [value]="course.id">{{course.name}}</ion-select-option>
+      </ion-select>
     </div>
+
+    <div class="student-col">
+      <h5>Select Student</h5>
+      <ul class="student-list">
+        <li *ngFor="let active_student of active_student_list">
+            <p class="chq-inpt">
+              <ion-label class="chq-lebl">{{active_student.name}} {{active_student?.find_mark}}</ion-label>
+              <ion-checkbox class="checkbox" (ionChange)="changeChkbx(active_student.id)" color="primary" checked="{{active_student?.isChecked}}"></ion-checkbox>
+            </p>
+        </li>
+      </ul>
+
+      <button type="button" class="batch-btn">Create Batch</button>
+    </div>
+  </div>
 </ion-content>

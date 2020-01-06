@@ -10,8 +10,10 @@ import { LoadingController, AlertController, ToastController } from '@ionic/angu
 })
 export class BatchAssignComponent implements OnInit {
 
+  showloader: boolean = false;
   course_list: any = [];
   active_student_list: any = [];
+  batch_name: string = "";
   course_id: string = null;
 
   checkbox_list: any = [];
@@ -26,21 +28,22 @@ export class BatchAssignComponent implements OnInit {
     public userService: UserService
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.course_all();
+  }
 
   ionViewWillEnter() { 
     if(this.userService.currentUserValue == null) {
       this.router.navigate(['/login']);
     } else {
       console.log('Location: BatchAssignComponent');
-
-      this.course_all();
     }
     
   }
 
   async course_all() {
     //--- Start loader
+    this.showloader = true;
     const loading = await this.loadingController.create({
       message: 'Please wait...',
       spinner: 'bubbles'
@@ -50,6 +53,7 @@ export class BatchAssignComponent implements OnInit {
     this.visitorsService.course_list().subscribe(async response => {
       //console.log('Course list...', response);
       //--- After get record - dismiss loader
+      this.showloader = false;
       this.loadingController.dismiss();
 
       if(response.status == true) {
@@ -59,7 +63,7 @@ export class BatchAssignComponent implements OnInit {
       this.activeStudent_list();
     }, async error => {
       //--- In case of any error - dismiss loader, show error message
-      this.loadingController.dismiss();
+      this.loadingController.dismiss(); this.showloader = false;
 
       const alert = await this.alertCtrl.create({
         header: 'Error!',
@@ -79,14 +83,19 @@ export class BatchAssignComponent implements OnInit {
       spinner: 'bubbles'
     });
     loading.present();
+    this.showloader = true;
 
     this.staffWorkService.active_student_list().subscribe(async response => {
       //console.log('Active student list...', response);
       //--- After get record - dismiss loader
       this.loadingController.dismiss();
+      this.showloader = false;
 
       if(response.status == true) {
-        this.active_student_list = response.data;
+        response.data.forEach(element => {
+          element.isChecked = false; //-- Set by default all checkbox unchecked
+          this.active_student_list.push(element);
+        });
       } else {
         const toast = await this.toastController.create({
           message: response.message,
@@ -99,6 +108,7 @@ export class BatchAssignComponent implements OnInit {
     }, async error => {
       //--- In case of any error - dismiss loader, show error message
       this.loadingController.dismiss();
+      this.showloader = false;
 
       const alert = await this.alertCtrl.create({
         header: 'Error!',
@@ -127,13 +137,28 @@ export class BatchAssignComponent implements OnInit {
 
       this.active_student_list = [];
       temp_find_list.forEach(element => {
+        element.find_mark = '*';
         this.active_student_list.push(element);
       });
       temp_not_find_list.forEach(element => {
+        element.find_mark = '';
         this.active_student_list.push(element);
       });
       //console.log('Sorted student list: ', this.active_student_list);
     }
+  }
+
+  changeChkbx(student_id) {
+    let i = 0;
+    this.active_student_list.forEach(element => {
+      if(element.id == student_id && element.isChecked) {
+        this.active_student_list[i].isChecked = false;
+      } else if(element.id == student_id && !element.isChecked) {
+        this.active_student_list[i].isChecked = true;
+      }
+      i++;
+    });
+    //console.log(this.active_student_list);
   }
 
 }
