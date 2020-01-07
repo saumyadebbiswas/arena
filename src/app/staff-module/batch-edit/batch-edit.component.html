@@ -6,7 +6,7 @@
       </ion-menu-button>
     </ion-buttons>
 
-    <ion-title class="text-center">Batch Assign</ion-title>
+    <ion-title class="text-center">Batch Edit</ion-title>
 
     <app-notification></app-notification>
   </div>
@@ -29,7 +29,21 @@
     </ion-item>
 
     <div class="student-col">
+      <h5>Assigned Students</h5>
+      <p>(Select to remove)</p>
+      <ul class="student-list">
+        <li *ngFor="let student of students_assign">
+            <p class="chq-inpt">
+              <ion-label class="chq-lebl">{{student.student_name}}</ion-label>
+              <ion-checkbox class="checkbox" (ionChange)="changeASChkbx(student.id)" color="primary" checked="{{student?.isChecked}}"></ion-checkbox>
+            </p>
+        </li>
+      </ul>
+    </div>
+
+    <div class="student-col">
       <h5>Select Student</h5>
+      <p>(Select to assign)</p>
       <ul class="student-list">
         <li *ngFor="let active_student of active_student_list">
             <p class="chq-inpt">
@@ -39,7 +53,7 @@
         </li>
       </ul>
 
-      <button type="button" (click)="onSubmit()" class="batch-btn">Create Batch</button>
+      <button type="button" (click)="onUpdate()" class="batch-btn">Update</button>
     </div>
   </div>
 </ion-content>

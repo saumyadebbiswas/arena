@@ -9,12 +9,16 @@ import { VisitorStudentsComponent } from './visitor-students/visitor-students.co
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { BatchListComponent } from './batch-list/batch-list.component';
+import { BatchEditComponent } from './batch-edit/batch-edit.component';
 
 
 @NgModule({
   declarations: [
     VisitorStudentsComponent,
     BatchAssignComponent,
+    BatchListComponent,
+    BatchEditComponent,
     RoutineComponent,
     NotificationComponent
   ],

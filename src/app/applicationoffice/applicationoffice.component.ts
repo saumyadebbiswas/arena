@@ -15,6 +15,8 @@ export class ApplicationofficeComponent implements OnInit {
   admin_id: string;
   admin_name: string;
   id: string = null;
+  minDate: String = new Date(new Date().setDate(new Date().getDate() - 365)).toISOString(); //--- Remove one year as min date
+  maxDate: any = new Date(new Date().setDate(new Date().getDate() + 30)).toISOString(); //--- Add one month to get max date
 
   student_id: string = null;
   accept_at: string = "";

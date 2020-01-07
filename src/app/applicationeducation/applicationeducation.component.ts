@@ -19,6 +19,9 @@ export class ApplicationeducationComponent implements OnInit {
   show_grad4thyr: boolean = false;
   show_pg2yr: boolean = false;
   year_list:any = [];
+  ssc_class_active: boolean = true;
+  grad1st_class_active: boolean = true;
+  pg1st_class_active: boolean = true;
   
   student_id: string = null;
 
@@ -2923,6 +2926,18 @@ export class ApplicationeducationComponent implements OnInit {
     } else {
       this.grad_type = grad_type;
     }
+  }
+
+  removeSSCActive() {
+    this.ssc_class_active = false;
+  }
+
+  removeGrad1stActive() {
+    this.grad1st_class_active = false;
+  }
+
+  removePG1stActive() {
+    this.pg1st_class_active = false;
   }
 
   movePrevious() {

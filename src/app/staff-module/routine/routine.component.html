@@ -15,101 +15,63 @@
 <ion-content>
     <div class="container-fluid routine-col" id="grad1">
         <div class="dropdown frm select-dropdown">
-            <!-- <ion-label class="drop-mnu"></ion-label> -->
-            <ion-select placeholder="Select No of Day">
-                <ion-select-option value="Day1">Day 1</ion-select-option>
-                <ion-select-option value="Day2">Day 2</ion-select-option>
-                <ion-select-option value="Day3">Day 3</ion-select-option>
-                <ion-select-option value="Day4">Day 4</ion-select-option>
+            <ion-select [(ngModel)]="batch_id" placeholder="Select Batch">
+                <ion-select-option *ngFor="let batch of batch_list"  [value]="batch.id">{{batch.name}}</ion-select-option>
             </ion-select>
         </div>
+
+        <ion-item class="dropdown frm select-dropdown">
+            <ion-label class="drop-mnu">Select No of Day</ion-label>
+            <ion-select [(ngModel)]="no_of_days" (ionChange)="changeDays($event)" placeholder="Select No of Day">
+                <ion-select-option value="1">1</ion-select-option>
+                <ion-select-option value="2">2</ion-select-option>
+                <ion-select-option value="3">3</ion-select-option>
+                <ion-select-option value="4">4</ion-select-option>
+                <ion-select-option value="5">5</ion-select-option>
+                <ion-select-option value="6">6</ion-select-option>
+                <ion-select-option value="7">7</ion-select-option>
+            </ion-select>
+        </ion-item>
+
         <ul class="routine-list">
-          <li>
-            <h6>Day 1</h6>
-            <div class="routine-field" style="width:100%; padding-right: 0px;">
-                <ion-label>Select Day</ion-label>
-                <div class="dropdown frm select-dropdown">
-                    <!-- <ion-label class="drop-mnu"></ion-label> -->
-                    
-                    <ion-select placeholder="Select Day">
-                        <ion-select-option value="Sun">Su</ion-select-option>
-                        <ion-select-option value="Mon">Mo</ion-select-option>
-                        <ion-select-option value="Tus">Tu</ion-select-option>
-                        <ion-select-option value="Wed">We</ion-select-option>
-                        <ion-select-option value="Fri">Fr</ion-select-option>
-                        <ion-select-option value="Sat">Sa</ion-select-option>
-                    </ion-select>
+            <li *ngFor="let day_details of day_details; let i = index">
+                <h6>Day {{i+1}}</h6>
+
+                <div class="routine-field" style="width:100%; padding-right: 0px;">
+                    <ion-label>Select Day</ion-label>
+                    <div class="dropdown frm select-dropdown">
+                        <ion-select [(ngModel)]="day_details.week_day" placeholder="Select Day">
+                            <ion-select-option *ngFor="let days of week_days" [value]="days.value">{{days.day}}</ion-select-option>
+                        </ion-select>
+                    </div>
                 </div>
-            </div>
-            <div class="routine-field">
-                <ion-label>Set Time</ion-label>
-                <div class="select-dropdown">
-                    <ion-datetime displayFormat="h:mm a" placeholder="Set Time"></ion-datetime>
+
+                <div class="routine-field">
+                    <ion-label>Start Time</ion-label>
+                    <div class="select-dropdown">
+                        <ion-datetime displayFormat="h:mm a" [(ngModel)]="day_details.start_time" placeholder="Start Time"></ion-datetime>
+                    </div>
                 </div>
-            </div>
-            <div class="routine-field">
-                <ion-label>Time Duration</ion-label>
-                <div class="select-dropdown">
-                    <ion-datetime displayFormat="h:mm" placeholder="Time Duration"></ion-datetime>
+
+                <div class="routine-field">
+                    <ion-label>Duration</ion-label>
+                    <div class="select-dropdown">
+                        <ion-datetime displayFormat="h:mm" [(ngModel)]="day_details.duration" placeholder="Duration"></ion-datetime>
+                    </div>
                 </div>
-            </div>
-            <div class="routine-field" style="width:100%;">
-            <ion-label>Select Teacher</ion-label>
-            <div class="dropdown frm select-dropdown">
-                <!-- <ion-label class="drop-mnu"></ion-label> -->
-                
-                <ion-select placeholder="Select Teacher">
-                    <ion-select-option value="Sun">Teacher 1</ion-select-option>
-                    <ion-select-option value="Mon">Teacher 2</ion-select-option>
-                    <ion-select-option value="Tus">Teacher 3</ion-select-option>
-                </ion-select>
-            </div>
-          </div>
-          </li>
-          <li>
-              <h6>Day 2</h6>
-              <div class="routine-field" style="width:100%;">
-                  <ion-label>Select Day</ion-label>
-                  <div class="dropdown frm select-dropdown">
-                      <!-- <ion-label class="drop-mnu"></ion-label> -->
-                      
-                      <ion-select placeholder="Select Day">
-                          <ion-select-option value="Sun">Su</ion-select-option>
-                          <ion-select-option value="Mon">Mo</ion-select-option>
-                          <ion-select-option value="Tus">Tu</ion-select-option>
-                          <ion-select-option value="Wed">We</ion-select-option>
-                          <ion-select-option value="Fri">Fr</ion-select-option>
-                          <ion-select-option value="Sat">Sa</ion-select-option>
-                      </ion-select>
-                  </div>
-              </div>
-              <div class="routine-field">
-                  <ion-label>Set Time</ion-label>
-                  <div class="select-dropdown">
-                      <ion-datetime displayFormat="h:mm a" placeholder="Set Time"></ion-datetime>
-                  </div>
-              </div>
-              <div class="routine-field">
-                  <ion-label>Time Duration</ion-label>
-                  <div class="select-dropdown">
-                      <ion-datetime displayFormat="h:mm" placeholder="Time Duration"></ion-datetime>
-                  </div>
-              </div>
-              <div class="routine-field" style="width:100%;">
-              <ion-label>Select Teacher</ion-label>
-              <div class="dropdown frm select-dropdown">
-                  <!-- <ion-label class="drop-mnu"></ion-label> -->
-                  
-                  <ion-select placeholder="Select Teacher">
-                      <ion-select-option value="Sun">Teacher 1</ion-select-option>
-                      <ion-select-option value="Mon">Teacher 2</ion-select-option>
-                      <ion-select-option value="Tus">Teacher 3</ion-select-option>
-                      
-                  </ion-select>
-              </div>
-            </div>
+
+                <div class="routine-field" style="width:100%;">
+                    <ion-label>Select Teacher</ion-label>
+                    <div class="dropdown frm select-dropdown">
+                        <ion-select [(ngModel)]="day_details.teacher_id" placeholder="Select Teacher">
+                            <ion-select-option value="Sun">Teacher 1</ion-select-option>
+                            <ion-select-option value="Mon">Teacher 2</ion-select-option>
+                        </ion-select>
+                    </div>
+                </div>
             </li>
         </ul>
+
         <button type="submit" class="batch-btn">Submit</button>
     </div>
 </ion-content>

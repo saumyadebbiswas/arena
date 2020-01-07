@@ -38,7 +38,7 @@
                                     <div id="accordion" class="accordion">
                                         <div class="card mb-0">
                                             <!-- SSC - start -->
-                                            <div class="card-header collapsed active" data-toggle="collapse" href="#collapseOne">
+                                            <div class="card-header collapsed" [ngClass]="ssc_class_active ? 'active' : ''" (click)="removeSSCActive()" data-toggle="collapse" href="#collapseOne">
                                                 <a class="card-title">SSC</a>
                                             </div>
                                             <div id="collapseOne" class="collapse show" data-parent="#accordion" >
@@ -195,7 +195,7 @@
                                                 <!-- graduation year - start -->
                                                 <div id="accordion2" class="accordion marks-box">
                                                     <!-- 1st year - start -->
-                                                    <div class="card-header collapsed active" data-toggle="collapse" data-parent="#accordion2" href="#collapseThreeOne">
+                                                    <div class="card-header collapsed" [ngClass]="grad1st_class_active ? 'active' : ''" (click)="removeGrad1stActive()" data-toggle="collapse" data-parent="#accordion2" href="#collapseThreeOne">
                                                         <a class="card-title">
                                                         1st Year
                                                         </a>
@@ -435,7 +435,7 @@
                                             <div id="collapseFour" class="collapse inner-acc" data-parent="#accordion" >
                                                 <div id="accordion3" class="accordion marks-box">
                                                     <!-- 1st year - start -->
-                                                    <div class="card-header collapsed" data-toggle="collapse" data-parent="#accordion3" href="#collapseFourOne">
+                                                    <div class="card-header collapsed" [ngClass]="pg1st_class_active ? 'active' : ''" (click)="removePG1stActive()" data-toggle="collapse" data-parent="#accordion3" href="#collapseFourOne">
                                                         <a class="card-title">
                                                         1st Year
                                                         </a>

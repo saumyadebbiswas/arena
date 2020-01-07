@@ -139,6 +139,11 @@ export class AppComponent {
           icon: 'list'
         },
         {
+          title: 'Batch List',
+          url: '/batch-list',
+          icon: 'list'
+        },
+        {
           title: 'Routine Assign',
           url: '/routine-assign',
           icon: 'list'

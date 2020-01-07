@@ -66,7 +66,7 @@
                                     </ion-item>
 
                                     <ion-item class="frm">
-                                        <ion-datetime id="date" class="info-frm drop-mnu" displayFormat="MMM DD, YYYY" placeholder="Date" [(ngModel)]="date"></ion-datetime>
+                                        <ion-datetime id="date" class="info-frm drop-mnu" displayFormat="MMM DD, YYYY" [min]="minDate" [max]="maxDate" placeholder="Date" [(ngModel)]="date"></ion-datetime>
                                     </ion-item>
 
                                     <ion-item class="frm">
