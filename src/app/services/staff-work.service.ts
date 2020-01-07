@@ -37,6 +37,6 @@ export class StaffWorkService {
   }
 	
   teacher_list() {
-    return this.http.get<any>(this.api_url+'/teacher/list', {headers: this.requestHeader});
+    return this.http.get<any>(this.api_url+'/teachers/details', {headers: this.requestHeader});
   }
 }

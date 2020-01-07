@@ -11,7 +11,7 @@ import { LoadingController, AlertController, ToastController } from '@ionic/angu
 })
 export class BatchEditComponent implements OnInit {
 
-  showloader: boolean = false;
+  showloader: boolean = true;
   course_list: any = [];
   active_student_list: any = [];
   batch_name: string = "";

@@ -12,7 +12,7 @@
   </div>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="!showloader">
     <div class="container-fluid routine-col" id="grad1">
         <div class="dropdown frm select-dropdown">
             <ion-select [(ngModel)]="batch_id" placeholder="Select Batch">
@@ -40,7 +40,7 @@
                 <div class="routine-field" style="width:100%; padding-right: 0px;">
                     <ion-label>Select Day</ion-label>
                     <div class="dropdown frm select-dropdown">
-                        <ion-select [(ngModel)]="day_details.week_day" placeholder="Select Day">
+                        <ion-select [(ngModel)]="day_details.week_day" (ionChange)="checkDayTimeAvl(i)" placeholder="Select Day">
                             <ion-select-option *ngFor="let days of week_days" [value]="days.value">{{days.day}}</ion-select-option>
                         </ion-select>
                     </div>
@@ -49,14 +49,14 @@
                 <div class="routine-field">
                     <ion-label>Start Time</ion-label>
                     <div class="select-dropdown">
-                        <ion-datetime displayFormat="h:mm a" [(ngModel)]="day_details.start_time" placeholder="Start Time"></ion-datetime>
+                        <ion-datetime displayFormat="h:mm a" (ionChange)="checkDayTimeAvl(i)" [(ngModel)]="day_details.start_time" placeholder="Start Time"></ion-datetime>
                     </div>
                 </div>
 
                 <div class="routine-field">
                     <ion-label>Duration</ion-label>
                     <div class="select-dropdown">
-                        <ion-datetime displayFormat="h:mm" [(ngModel)]="day_details.duration" placeholder="Duration"></ion-datetime>
+                        <ion-datetime displayFormat="h:mm" (ionChange)="checkDayTimeAvl(i)" [(ngModel)]="day_details.duration" placeholder="Duration"></ion-datetime>
                     </div>
                 </div>
 
@@ -64,8 +64,7 @@
                     <ion-label>Select Teacher</ion-label>
                     <div class="dropdown frm select-dropdown">
                         <ion-select [(ngModel)]="day_details.teacher_id" placeholder="Select Teacher">
-                            <ion-select-option value="Sun">Teacher 1</ion-select-option>
-                            <ion-select-option value="Mon">Teacher 2</ion-select-option>
+                            <ion-select-option *ngFor="let teacher of teacher_list" [value]="teacher.id">{{teacher.name}}</ion-select-option>
                         </ion-select>
                     </div>
                 </div>

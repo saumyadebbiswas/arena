@@ -10,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class RoutineComponent implements OnInit {
 
+  showloader: boolean = true;
   batch_list: any = [];
   teacher_list: any = [];
   admin_id: string;
@@ -27,10 +28,10 @@ export class RoutineComponent implements OnInit {
   ];
   day_details: any = [
     {
-      "week_day" : "",
-      "start_time" : "",
-      "duration" : "",
-      "teacher_id" : ""
+      "week_day" : null,
+      "start_time" : null,
+      "duration" : null,
+      "teacher_id" : null
     }
   ];
 
@@ -60,11 +61,13 @@ export class RoutineComponent implements OnInit {
       spinner: 'bubbles'
     });
     loading.present();
+    this.showloader = true;
 
     this.staffWorkService.active_batch_list().subscribe(async response => {
       //console.log('Active batch list...', response);
       //--- After get record - dismiss loader
       this.loadingController.dismiss();
+      this.showloader = false;
 
       if(response.status == true) {
         this.batch_list = response.data;
@@ -98,7 +101,7 @@ export class RoutineComponent implements OnInit {
       this.batch_id = this.route.snapshot.paramMap.get('id');
     }
     
-    //this.teacher_all();
+    this.teacher_all();
   }
 
   async teacher_all() {
@@ -108,11 +111,13 @@ export class RoutineComponent implements OnInit {
       spinner: 'bubbles'
     });
     loading.present();
+    this.showloader = true;
 
     this.staffWorkService.teacher_list().subscribe(async response => {
-      console.log('Teacher list: ', response);
+      //console.log('Teacher list: ', response);
       //--- After get record - dismiss loader
       this.loadingController.dismiss();
+      this.showloader = false;
 
       if(response.status == true) {
         this.teacher_list = response.data;
@@ -124,8 +129,6 @@ export class RoutineComponent implements OnInit {
         });
         alert.present();
       }
-
-      this.getBatchId();
     }, async error => {
       //--- In case of any error - dismiss loader, show error message
       this.loadingController.dismiss();
@@ -136,33 +139,60 @@ export class RoutineComponent implements OnInit {
         buttons: ['OK']
       });
       alert.present();
-
-      this.getBatchId();
     });
   }
 
   changeDays(event) {
     let days_select = event.target.value;
+    //console.log('this.current_days: ', days_select, this.current_days);
     
     if(days_select > this.current_days) {
       for(let i = this.current_days; i < days_select; i++) {
+        //console.log('counter increment : ', i);
         this.day_details[i] = {
-          "week_day" : "",
-          "start_time" : "",
-          "duration" : "",
-          "teacher_id" : ""
+          "week_day" : null,
+          "start_time" : null,
+          "duration" : null,
+          "teacher_id" : null
         }
       }
     } else if(days_select < this.current_days) {
-      // Error logic
-      // for(let i = this.current_days; i > days_select; i--) {
-      //   console.log('counter: ', i);
-      //   this.day_details.splice(i, 1);
-      // }
+      for(let i = this.current_days; i >= days_select; i--) {
+        //console.log('counter decrement : ', i);
+        this.day_details.splice(i, 1);
+      }
     }
 
     this.current_days = days_select;
-    console.log('this.day_details: ', this.day_details);
+    //console.log('this.day_details: ', this.day_details);
+  }
+
+  checkDayTimeAvl(day_index) {
+    let count = 0;
+    this.day_details.forEach(element => {
+      //--- Skip current filling up day and check other day details week day m
+      if(count != day_index) {
+        let start_time_select = this.day_details[day_index].start_time;
+        let duration_select = this.day_details[day_index].duration;
+        let end_time_select = null;
+        if(start_time_select != null && duration_select != null) {
+          end_time_select = start_time_select + duration_select;
+        }
+
+        if(element.week_day == this.day_details[day_index].week_day) {
+          let start_time = element.start_time;
+          let duration = element.duration;
+          
+          if(start_time != null && duration != null) {
+            let end_time = start_time + duration;
+            console.log('Value select at: ', start_time_select, duration_select, end_time_select);
+            console.log('Day found at: ', count, start_time, duration, end_time);
+          }
+        }
+      }
+
+      count++;
+    });
   }
 
 }
