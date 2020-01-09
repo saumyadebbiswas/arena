@@ -133,10 +133,12 @@
                                     </div> 
                                 </div>
 
-                                <input *ngIf="show_next_button" type="button" name="next" class="next action-button nxt-btns fst-btn" value="Next Step" (click)="moveNext()" />
-
-                                <input *ngIf="!show_next_button" type="button" name="next" class="next action-button-previous nxt-btns fst-btn" value="Next Step" />
                             </fieldset>
+                            <div class="next-step-btn">
+                                <input *ngIf="show_next_button" type="button" name="next" class="next action-button fst-btn" value="Next Step" (click)="moveNext()" />
+
+                                <input *ngIf="!show_next_button" type="button" name="next" class="next action-button-previous fst-btn" value="Next Step" />
+                            </div>
                         </div>
                     </div>
                 </div>

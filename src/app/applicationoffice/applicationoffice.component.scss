@@ -81,13 +81,13 @@
     padding: 10px 5px;
     margin: 10px 5px;
     width: 45%;
-    background: #3880ff;
+    background: #eb1d23;
     font-family: roboto;
     color: #fff;
     margin: auto;
     border-radius: 20px;
     font-weight: 500;
-    box-shadow: 0 16px 26px -10px #3880ffa6, 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(56, 128, 255, 0.25);
+    box-shadow: 0 16px 26px -10px rgba(244, 67, 54, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(244, 67, 54, 0.2);
 
 }
 .fst-btn{
@@ -110,7 +110,7 @@
     padding: 10px 5px;
     margin: 10px 5px;
     width: 45%;
-    background: #868585;
+    background: #c3c3c3;
     font-family: roboto;
     color: #fff;
     margin: auto;
@@ -312,7 +312,7 @@ select.list-dt:focus {
     left: -4px;
 }
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: #a6a6a6 !important;
+    color: #000000 !important;
     opacity: 1; /* Firefox */
   }
   
@@ -325,20 +325,13 @@ select.list-dt:focus {
   }
   
   ::-ms-input-placeholder { /* Microsoft Edge */
-    color: #a6a6a6;
+    color: #000000;
   }
   .sign-box{
     text-align: center;
     margin-top: 20px;
   }
-  .save-btn{
-    width: 30%;
-    background: #3880ff;
-    color: #fff;
-    margin: auto;
-    border-radius: 20px;
-    font-weight: 500;
-  }
+  
 
   .lng-box{
       width: 50%;
@@ -347,6 +340,7 @@ select.list-dt:focus {
     margin-top: 15px;
     margin-left: 15px;
   }
+  .select-dropdown{ width: 100%; border-bottom: 1px rgba(0, 0, 0, 0.12) solid; font-size: 14px; color: rgba(0, 0, 0, 0.9);}
 
 //   -------accordion-------
 
@@ -377,7 +371,7 @@ select.list-dt:focus {
 }
 
 .toolp{
-    color: #3880ff;
+    color: #b9b8b8;
     font-size: 18px;
 }
 .card-header{

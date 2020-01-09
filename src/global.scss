@@ -305,6 +305,7 @@ display: none;
 .sc-ion-textarea-md{ font-size: 14px !important;}
 .sc-ion-label-md-s{ font-size: 14px !important;}
 
+<<<<<<< HEAD
 button:focus{
   outline: none !important;
   box-shadow: none !important;
@@ -313,4 +314,22 @@ button:focus{
 a:focus{
   outline: none !important;
   box-shadow: none !important;
+=======
+// --------application from-----------
+.save-btn{
+  width: 30%;
+  background: #eb1d23;
+  color: #fff;
+  margin: auto;
+  border-radius: 20px;
+  font-weight: 500;
+}
+.next-step-btn{
+  background: #ffffff;
+  width: 91%;
+ 
+  position: fixed;
+  bottom: 15px;
+  text-align: center;
+>>>>>>> bfa5de554cb895d02c9f63d2bfb9496290b6633f
 }

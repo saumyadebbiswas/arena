@@ -15,7 +15,7 @@
 <ion-content *ngIf="!showloader">
     <div class="container-fluid routine-col" id="grad1">
         <div class="dropdown frm select-dropdown">
-            <ion-select *ngIf="batch_id == null" [(ngModel)]="batch_id" placeholder="Select Batch">
+            <ion-select [(ngModel)]="batch_id" placeholder="Select Batch" [disabled]="page_type == 'edit'">
                 <ion-select-option *ngFor="let batch of batch_list"  [value]="batch.id">{{batch.name}}</ion-select-option>
             </ion-select>
 
@@ -73,11 +73,36 @@
                         </ion-select>
                     </div>
                 </div>
+                
+                <div class="routine-field">
+                    <ion-checkbox class="checkbox" (ionChange)="changeChkbx(i)" color="primary" [checked]="day_details.type == 2"></ion-checkbox>
+                    <ion-label class="chq-lebl">Is Temporary?</ion-label>
+                </div>
+
+                <div *ngIf="day_details.type == 2" class="routine-field" style="width:100%;">
+                    <ion-label>Week For</ion-label>
+                    <div class="dropdown frm select-dropdown">
+                        <ion-select [(ngModel)]="day_details.week_for" placeholder="Week For">
+                            <ion-select-option [value]="1">1 Week</ion-select-option>
+                            <ion-select-option [value]="2">2 Week</ion-select-option>
+                            <ion-select-option [value]="3">3 Week</ion-select-option>
+                            <ion-select-option [value]="4">4 Week</ion-select-option>
+                            <ion-select-option [value]="5">5 Week</ion-select-option>
+                            <ion-select-option [value]="6">6 Week</ion-select-option>
+                            <ion-select-option [value]="7">7 Week</ion-select-option>
+                            <ion-select-option [value]="8">8 Week</ion-select-option>
+                        </ion-select>
+                    </div>
+                </div>
+
+                <button *ngIf="day_details.id == null" type="button" (click)="onSubmit(i)" class="batch-btn">Insert</button>
+                <button *ngIf="day_details.id != null" type="button" (click)="onUpdate(i)" class="batch-btn">Edit</button>
+
+                <button type="button" (click)="remove_routine(i)" class="batch-btn">Remove</button>
             </li>
         </ul>
 
-        <button *ngIf="show_add_more_btn" type="button" (click)="addroutine()" class="batch-btn">Add More</button>
-        <button *ngIf="!show_add_more_btn" type="button" class="batch-btn-disable">Add More</button>
-        <!-- <button type="button" (click)="onSubmit()" class="batch-btn">Submit</button> -->
+        <button *ngIf="show_add_button" type="button" (click)="add_routine()" class="batch-btn">Add More</button>
+        <button *ngIf="!show_add_button" type="button" class="batch-btn-disable">Add More</button>
     </div>
 </ion-content>
