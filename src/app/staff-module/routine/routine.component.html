@@ -19,9 +19,6 @@
                 <ion-select-option *ngFor="let batch of batch_list"  [value]="batch.id">{{batch.name}}</ion-select-option>
             </ion-select>
 
-            <ion-select *ngIf="batch_id != null" [(ngModel)]="batch_id" placeholder="Select Batch" disabled=true>
-                <ion-select-option *ngFor="let batch of batch_list"  [value]="batch.id">{{batch.name}}</ion-select-option>
-            </ion-select>
             <span *ngIf="batch_id != null" data-toggle="tooltip" data-placement="top" title="Can't change!" (click)="tooltipMsg('Cant change')"><i class="fa fa-question-circle toolp"></i></span>
         </div>
 
@@ -74,7 +71,7 @@
                     </div>
                 </div>
                 
-                <div class="routine-field">
+                <div class="routine-field" style="width: 100%;">
                     <ion-checkbox class="checkbox" (ionChange)="changeChkbx(i)" color="primary" [checked]="day_details.type == 2"></ion-checkbox>
                     <ion-label class="chq-lebl">Is Temporary?</ion-label>
                 </div>
@@ -102,7 +99,7 @@
             </li>
         </ul>
 
-        <button *ngIf="show_add_button" type="button" (click)="add_routine()" class="batch-btn">Add More</button>
+        <button *ngIf="show_add_button" type="button" (click)="add_routine()" class="batch-btn-lrg">Add More</button>
         <button *ngIf="!show_add_button" type="button" class="batch-btn-disable">Add More</button>
     </div>
 </ion-content>

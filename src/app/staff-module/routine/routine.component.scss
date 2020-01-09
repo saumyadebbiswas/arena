@@ -9,7 +9,20 @@ ul.student-list li{ margin-bottom: 10px; line-height: 17px;}
 
 .student-col{ width: 100%; margin-top: 20px;}
 .student-col h5{ font-size: 18px; color: #373535;  margin-bottom: 25px;}
-.batch-btn{ width: 80%; margin: 20px auto 20px; display: block; background-color: #eb1d23; text-align: center; height: 40px; border-radius: 50px; color: #fff; font-size: 14px;}
+.batch-btn{ width: 43%;
+    margin: 20px 10px 20px;
+    display: block;
+    background-color: #eb1d23;
+    text-align: center;
+    height: 40px;
+    border-radius: 50px;
+    color: #fff;
+    font-size: 14px;
+    float: left;
+}
+.batch-btn-lrg{ 
+    width: 80%; margin: 20px auto 20px; display: block; background-color: #eb1d23; text-align: center; height: 40px; border-radius: 50px; color: #fff; font-size: 14px;
+}
 .batch-btn-disable{ width: 80%; margin: 20px auto 20px; display: block; background-color: #ecebeb; text-align: center; height: 40px; border-radius: 50px; color: #fff; font-size: 14px;}
 .routine-col{ margin-top: 20px;}
 .routine-field{ width: 50%; float: left; padding-right: 10px; padding-left: 10px; margin-bottom: 10px;}
@@ -27,3 +40,8 @@ ul.routine-list li:last-child{ margin-bottom: 25px;}
 ul.routine-list li h6{ margin-top: 0px; color: #353333; background: #ecebeb;
     padding: 10px; text-align: center;} 
 .sc-ion-label-md-s{ color: #7f7f7f !important; font-size: 14px; font-weight: normal !important;}
+.toolp{
+    float: right;
+    margin-top: -29px;
+    margin-right: 20px;
+}

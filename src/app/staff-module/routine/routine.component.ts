@@ -369,16 +369,6 @@ export class RoutineComponent implements OnInit {
   //   }
   // }
 
-  async tooltipMsg(message) {
-    const toast = await this.toastController.create({
-      message: message,
-      color: "dark",
-      position: "bottom",
-      duration: 2000
-    });
-    toast.present();
-  }
-
   changeChkbx(day_index) {
     if(this.day_details[day_index].type == 1) {
       this.day_details[day_index].type = 2;
@@ -497,6 +487,16 @@ export class RoutineComponent implements OnInit {
       //   alert.present();
       // });
     }
+  }
+
+  async tooltipMsg(message) {
+    const toast = await this.toastController.create({
+      message: message,
+      color: "dark",
+      position: "bottom",
+      duration: 2000
+    });
+    toast.present();
   }
 
 }
