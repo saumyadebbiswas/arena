@@ -15,12 +15,17 @@
 <ion-content *ngIf="!showloader">
     <div class="container-fluid routine-col" id="grad1">
         <div class="dropdown frm select-dropdown">
-            <ion-select [(ngModel)]="batch_id" placeholder="Select Batch">
+            <ion-select *ngIf="batch_id == null" [(ngModel)]="batch_id" placeholder="Select Batch">
                 <ion-select-option *ngFor="let batch of batch_list"  [value]="batch.id">{{batch.name}}</ion-select-option>
             </ion-select>
+
+            <ion-select *ngIf="batch_id != null" [(ngModel)]="batch_id" placeholder="Select Batch" disabled=true>
+                <ion-select-option *ngFor="let batch of batch_list"  [value]="batch.id">{{batch.name}}</ion-select-option>
+            </ion-select>
+            <span *ngIf="batch_id != null" data-toggle="tooltip" data-placement="top" title="Can't change!" (click)="tooltipMsg('Cant change')"><i class="fa fa-question-circle toolp"></i></span>
         </div>
 
-        <ion-item class="dropdown frm select-dropdown">
+        <!-- <ion-item class="dropdown frm select-dropdown">
             <ion-label class="drop-mnu">Select No of Day</ion-label>
             <ion-select [(ngModel)]="no_of_days" (ionChange)="changeDays($event)" placeholder="Select No of Day">
                 <ion-select-option value="1">1</ion-select-option>
@@ -31,16 +36,16 @@
                 <ion-select-option value="6">6</ion-select-option>
                 <ion-select-option value="7">7</ion-select-option>
             </ion-select>
-        </ion-item>
+        </ion-item> -->
 
         <ul class="routine-list">
             <li *ngFor="let day_details of day_details; let i = index">
-                <h6>Day {{i+1}}</h6>
+                <h6>Routine {{i+1}}</h6>
 
-                <div class="routine-field" style="width:100%; padding-right: 0px;">
+                <div class="routine-field" style="width:100%;">
                     <ion-label>Select Day</ion-label>
                     <div class="dropdown frm select-dropdown">
-                        <ion-select [(ngModel)]="day_details.week_day" (ionChange)="checkDayTimeAvl(i)" placeholder="Select Day">
+                        <ion-select [(ngModel)]="day_details.week_day" (ionChange)="checkDayTimeAvl(i, 'wd')" placeholder="Select Day">
                             <ion-select-option *ngFor="let days of week_days" [value]="days.value">{{days.day}}</ion-select-option>
                         </ion-select>
                     </div>
@@ -49,14 +54,14 @@
                 <div class="routine-field">
                     <ion-label>Start Time</ion-label>
                     <div class="select-dropdown">
-                        <ion-datetime displayFormat="h:mm a" (ionChange)="checkDayTimeAvl(i)" [(ngModel)]="day_details.start_time" placeholder="Start Time"></ion-datetime>
+                        <ion-datetime displayFormat="h:mm a" (ionChange)="checkDayTimeAvl(i, 'st')" [(ngModel)]="day_details.start_time_temp" placeholder="Start Time"></ion-datetime>
                     </div>
                 </div>
 
                 <div class="routine-field">
                     <ion-label>Duration</ion-label>
                     <div class="select-dropdown">
-                        <ion-datetime displayFormat="h:mm" (ionChange)="checkDayTimeAvl(i)" [(ngModel)]="day_details.duration" placeholder="Duration"></ion-datetime>
+                        <ion-datetime displayFormat="h:mm" (ionChange)="checkDayTimeAvl(i, 'du')" [(ngModel)]="day_details.duration_temp" placeholder="Duration"></ion-datetime>
                     </div>
                 </div>
 
@@ -71,6 +76,8 @@
             </li>
         </ul>
 
-        <button type="submit" class="batch-btn">Submit</button>
+        <button *ngIf="show_add_more_btn" type="button" (click)="addroutine()" class="batch-btn">Add More</button>
+        <button *ngIf="!show_add_more_btn" type="button" class="batch-btn-disable">Add More</button>
+        <!-- <button type="button" (click)="onSubmit()" class="batch-btn">Submit</button> -->
     </div>
 </ion-content>

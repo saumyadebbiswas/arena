@@ -20,6 +20,10 @@ export class StaffWorkService {
     return this.http.get<any>(this.api_url+'/student/activelist', {headers: this.requestHeader});
   }
 	
+  teacher_list() {
+    return this.http.get<any>(this.api_url+'/teachers/details', {headers: this.requestHeader});
+  }
+	
   batch_insert(sendData: any): Observable<any> {
     return this.http.post<any>(this.api_url+'/batch/insert', sendData, {headers: this.requestHeader});
   }
@@ -36,7 +40,7 @@ export class StaffWorkService {
     return this.http.get<any>(this.api_url+'/batch/details/'+batch_id, {headers: this.requestHeader});
   }
 	
-  teacher_list() {
-    return this.http.get<any>(this.api_url+'/teachers/details', {headers: this.requestHeader});
+  routine_assign(sendData: any): Observable<any> {
+    return this.http.post<any>(this.api_url+'/routine/insert', sendData, {headers: this.requestHeader});
   }
 }
