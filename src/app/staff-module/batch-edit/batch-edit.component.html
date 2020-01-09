@@ -14,46 +14,48 @@
 
 <ion-content *ngIf="!showloader">
   <div class="container-fluid" id="grad1">
-    <ion-item class="frm">
+    <div class="dropdown frm select-dropdown mar-top-ex">
       <ion-input type="text" [(ngModel)]="batch_name" class="info-frm" placeholder="Batch Name"></ion-input>
-    </ion-item>
+    </div>
 
-    <div class="dropdown frm select-dropdown">
-      <ion-select [(ngModel)]="course_id" (ionChange)="filter_student_by_course($event)" placeholder="Select Course">
+    <div class="dropdown frm select-dropdown mar-top-ex ">
+      <ion-select [(ngModel)]="course_id" (ionChange)="filter_student_by_course($event)" class="remove-lt-pad" placeholder="Select Course">
         <ion-select-option *ngFor="let course of course_list" [value]="course.id">{{course.name}}</ion-select-option>
       </ion-select>
     </div>
     
-    <ion-item class="frm">
-      <ion-datetime id="date" class="info-frm drop-mnu" displayFormat="MMM DD, YYYY" [min]="minDate" [max]="maxDate" placeholder="Start Date" [(ngModel)]="start_date"></ion-datetime>
-    </ion-item>
-
-    <div class="student-col">
-      <h5>Assigned Students</h5>
-      <p>(Select to remove)</p>
-      <ul class="student-list">
-        <li *ngFor="let student of students_assign">
-            <p class="chq-inpt">
-              <ion-label class="chq-lebl">{{student.student_name}}</ion-label>
-              <ion-checkbox class="checkbox" (ionChange)="changeASChkbx(student.id)" color="primary" checked="{{student?.isChecked}}"></ion-checkbox>
-            </p>
-        </li>
-      </ul>
+    <div class="dropdown frm select-dropdown mar-top-ex ">
+      <ion-datetime id="date" class="info-frm drop-mnu remove-lt-pad" displayFormat="MMM DD, YYYY" [min]="minDate" [max]="maxDate" placeholder="Start Date" [(ngModel)]="start_date"></ion-datetime>
     </div>
 
-    <div class="student-col">
-      <h5>Select Student</h5>
-      <p>(Select to assign)</p>
-      <ul class="student-list">
-        <li *ngFor="let active_student of active_student_list">
-            <p class="chq-inpt">
-              <ion-label class="chq-lebl">{{active_student.name}} {{active_student?.find_mark}}</ion-label>
-              <ion-checkbox class="checkbox" (ionChange)="changeChkbx(active_student.id)" color="primary" checked="{{active_student?.isChecked}}"></ion-checkbox>
-            </p>
-        </li>
-      </ul>
+    <div class="student-list-box">
+      <div class="student-col">
+        <h5>Assigned Students <span class="sub-head">(Select to remove)</span></h5>
+      
+        <ul class="student-list">
+          <li *ngFor="let student of students_assign">
+              <p class="chq-inpt">
+                <ion-label class="chq-lebl">{{student.student_name}}</ion-label>
+                <ion-checkbox class="checkbox" (ionChange)="changeASChkbx(student.id)" color="primary" checked="{{student?.isChecked}}"></ion-checkbox>
+              </p>
+          </li>
+        </ul>
+      </div>
 
+      <div class="student-col">
+        <h5>Select Student <span class="sub-head">(Select to assign)</span></h5>
+        
+        <ul class="student-list">
+          <li *ngFor="let active_student of active_student_list">
+              <p class="chq-inpt">
+                <ion-label class="chq-lebl">{{active_student.name}} {{active_student?.find_mark}}</ion-label>
+                <ion-checkbox class="checkbox" (ionChange)="changeChkbx(active_student.id)" color="primary" checked="{{active_student?.isChecked}}"></ion-checkbox>
+              </p>
+          </li>
+        </ul>
+
+      </div>
+    </div>
       <button type="button" (click)="onUpdate()" class="batch-btn">Update</button>
-    </div>
   </div>
 </ion-content>

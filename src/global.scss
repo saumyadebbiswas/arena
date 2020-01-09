@@ -305,16 +305,6 @@ display: none;
 .sc-ion-textarea-md{ font-size: 14px !important;}
 .sc-ion-label-md-s{ font-size: 14px !important;}
 
-<<<<<<< HEAD
-button:focus{
-  outline: none !important;
-  box-shadow: none !important;
-}
-
-a:focus{
-  outline: none !important;
-  box-shadow: none !important;
-=======
 // --------application from-----------
 .save-btn{
   width: 30%;
@@ -331,5 +321,7 @@ a:focus{
   position: fixed;
   bottom: 15px;
   text-align: center;
->>>>>>> bfa5de554cb895d02c9f63d2bfb9496290b6633f
+}
+.mar-top-ex{
+  margin-top: 10px;
 }

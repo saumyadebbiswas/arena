@@ -28,11 +28,11 @@
             <p>Start Date: {{batch.start_date | date: "MMM dd, yyyy"}}</p>
 
             <p>Course: {{batch.course_name}}</p>
-
-            <input type="button" (click)="moveRoutineAssign(batch.id)" value="Routine Assign" />
+            <input type="button" class="application-btn" (click)="moveBatchEdit(batch.id)" value="Edit Now" />
+            <input type="button" class="routin-asg-btn" (click)="moveRoutineAssign(batch.id)" value="Routine Assign" />
           </div>
 
-          <input type="button" class="application-btn" (click)="moveBatchEdit(batch.id)" value="Edit Now" />
+         
         </li>
         
       </ul>
