@@ -58,15 +58,15 @@
                                         <ion-input type="text" class="info-frm" id="confirm_no" placeholder="Booking Confirmation No" [(ngModel)]="confirm_no"></ion-input>
                                     </ion-item>
 
-                                    <ion-item class="dropdown frm">
-                                        <ion-label class="drop-mnu">Center</ion-label>
-                                        <ion-select id="campus_id" placeholder="Select One" [(ngModel)]="campus_id">
+                                    <div class="dropdown frm select-dropdown">
+                                        <!-- <ion-label class="drop-mnu">Center</ion-label> -->
+                                        <ion-select id="campus_id" placeholder="Select Center" [(ngModel)]="campus_id">
                                             <ion-select-option *ngFor="let campus of campus_list" value="{{campus.id}}">{{campus.name}}</ion-select-option>
                                         </ion-select>
-                                    </ion-item>
+                                    </div>
 
                                     <ion-item class="frm">
-                                        <ion-datetime id="date" class="info-frm drop-mnu" displayFormat="MMM DD, YYYY" [min]="minDate" [max]="maxDate" placeholder="Date" [(ngModel)]="date"></ion-datetime>
+                                        <ion-datetime id="date" class="info-frm drop-mnu" style="padding-left: 0;" displayFormat="MMM DD, YYYY" [min]="minDate" [max]="maxDate" placeholder="Date" [(ngModel)]="date"></ion-datetime>
                                     </ion-item>
 
                                     <ion-item class="frm">

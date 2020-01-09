@@ -81,13 +81,13 @@
     padding: 10px 5px;
     margin: 10px 5px;
     width: 45%;
-    background: #3880ff;
+    background: #eb1d23;
     font-family: roboto;
     color: #fff;
     margin: auto;
     border-radius: 20px;
     font-weight: 500;
-    box-shadow: 0 16px 26px -10px #3880ffa6, 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(56, 128, 255, 0.25);
+    box-shadow: 0 16px 26px -10px rgba(244, 67, 54, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(244, 67, 54, 0.2);
 
 }
 .fst-btn{
@@ -110,7 +110,7 @@
     padding: 10px 5px;
     margin: 10px 5px;
     width: 45%;
-    background: #868585;
+    background: #c3c3c3;
     font-family: roboto;
     color: #fff;
     margin: auto;
@@ -184,8 +184,9 @@ select.list-dt:focus {
     list-style-type: none;
     font-size: 12px;
     width: 20%;
-    float: left;
-    position: relative
+    // float: left;
+    position: relative;
+    display: inline-block;
 }
 
 
@@ -325,15 +326,7 @@ select.list-dt:focus {
     text-align: center;
     margin-top: 20px;
   }
-  .save-btn{
-    width: 30%;
-    background: #3880ff;
-    color: #fff;
-    margin: auto;
-    border-radius: 20px;
-    font-weight: 500;
-  }
-
+ 
   .lng-box{
       width: 50%;
   }

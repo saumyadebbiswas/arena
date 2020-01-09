@@ -183,4 +183,21 @@ div.card .card-header-danger {
     padding: 0;
 }
 
+@media only screen and (max-width: 372px){
+
+.nav-tabs .nav-item .nav-link {
+    color: #fff;
+    border: 0;
+    margin: 0;
+    border-radius: 3px;
+    line-height: 24px;
+    text-transform: uppercase;
+    font-size: 11px;
+    padding: 10px 11px;
+    background-color: transparent;
+    transition: background-color .3s 0s;
+}
+
+}
+
 

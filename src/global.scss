@@ -304,3 +304,21 @@ display: none;
 #dob{ padding-left: 0px !important; font-size: 14px;}
 .sc-ion-textarea-md{ font-size: 14px !important;}
 .sc-ion-label-md-s{ font-size: 14px !important;}
+
+// --------application from-----------
+.save-btn{
+  width: 30%;
+  background: #eb1d23;
+  color: #fff;
+  margin: auto;
+  border-radius: 20px;
+  font-weight: 500;
+}
+.next-step-btn{
+  background: #ffffff;
+  width: 91%;
+ 
+  position: fixed;
+  bottom: 15px;
+  text-align: center;
+}
