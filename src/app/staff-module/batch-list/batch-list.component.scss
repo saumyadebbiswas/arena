@@ -21,14 +21,22 @@
     float: left;
   }
   .application-btn{ 
-    float: right; 
-    border: 2px #d07b7f solid; 
-    border-radius: 5px; 
-    font-size: 13px; 
-    background: #fff; 
-    height: 30px; position: 
-    absolute; 
-    right: 0px;
+    
+    border: 2px #eb1d23 solid;
+    border-radius: 5px;
+    font-size: 13px;
+    margin-right: 10px;
+    background: #fff;
+    height: 30px;
+    /* position: absolute; */
+    /* right: 0px;*/
+  }
+  .routin-asg-btn{
+    background: #fff;
+    border: 2px solid #eb1d23;
+    border-radius: 5px;
+    font-size: 13px;
+    height: 30px;
   }
   .place-box li h4{
     color: #5a5959;
