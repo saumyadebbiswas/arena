@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController, LoadingController } from '@ionic/angular';
+import { AlertController, LoadingController, ToastController } from '@ionic/angular';
 import { StaffWorkService, UserService } from 'src/app/services';
 import { ActivatedRoute } from '@angular/router';
 
@@ -11,12 +11,14 @@ import { ActivatedRoute } from '@angular/router';
 export class RoutineComponent implements OnInit {
 
   showloader: boolean = true;
+  show_add_button: boolean = false;
+  page_type: string = "insert";
   batch_list: any = [];
   teacher_list: any = [];
   admin_id: string;
   batch_id: string = null;
-  no_of_days: any = "1";
-  current_days: number = 1;
+  //no_of_days: any = "1";
+  //current_days: number = 1;
   week_days: any = [
     { "value": "1", "day": "Sunday" },
     { "value": "2", "day": "Monday" },
@@ -28,16 +30,20 @@ export class RoutineComponent implements OnInit {
   ];
   day_details: any = [
     {
+      "id": null,
       "week_day" : null,
       "start_time" : null,
       "duration" : null,
-      "teacher_id" : null
+      "teacher_id" : null,
+      "type": 1,
+      "week_for": null
     }
   ];
 
   constructor(
     private route: ActivatedRoute,
     public alertCtrl: AlertController,
+    public toastController: ToastController,
     public loadingController: LoadingController,
     public staffWorkService: StaffWorkService,
     public userService: UserService
@@ -99,6 +105,7 @@ export class RoutineComponent implements OnInit {
   getBatchId() {
     if(this.route.snapshot.paramMap.get('id') != null) {
       this.batch_id = this.route.snapshot.paramMap.get('id');
+      this.page_type = 'edit';
     }
     
     this.teacher_all();
@@ -142,29 +149,37 @@ export class RoutineComponent implements OnInit {
     });
   }
 
-  changeDays(event) {
-    let days_select = event.target.value;
-    //console.log('this.current_days: ', days_select, this.current_days);
-    
-    if(days_select > this.current_days) {
-      for(let i = this.current_days; i < days_select; i++) {
-        //console.log('counter increment : ', i);
-        this.day_details[i] = {
-          "week_day" : null,
-          "start_time" : null,
-          "duration" : null,
-          "teacher_id" : null
-        }
-      }
-    } else if(days_select < this.current_days) {
-      for(let i = this.current_days; i >= days_select; i--) {
-        //console.log('counter decrement : ', i);
-        this.day_details.splice(i, 1);
-      }
-    }
+  add_routine() {
+    this.day_details.push({
+      "id": null,
+      "week_day" : null,
+      "start_time" : null,
+      "duration" : null,
+      "teacher_id" : null,
+      "type": 1,
+      "week_for": null
+    });
 
-    this.current_days = days_select;
-    //console.log('this.day_details: ', this.day_details);
+    this.show_add_button = false;
+  }
+  
+  async remove_routine(day_index) {
+    if(this.day_details.length > 1) {
+      if(this.day_details[day_index].id == null) {
+        this.day_details.splice(day_index, 1);
+        this.show_add_button = true;
+      } else {
+        
+      }
+    } else {
+      const toast = await this.toastController.create({
+        message: "Minimum one routine need to remain",
+        color: "dark",
+        position: "bottom",
+        duration: 2000
+      });
+      toast.present();
+    }
   }
 
   checkDayTimeAvl(day_index) {
@@ -193,6 +208,126 @@ export class RoutineComponent implements OnInit {
 
       count++;
     });
+  }
+
+  changeChkbx(day_index) {
+    if(this.day_details[day_index].type == 1) {
+      this.day_details[day_index].type = 2;
+    } else {
+      this.day_details[day_index].type = 1;
+      this.day_details[day_index].week_for = null;
+    }
+  }
+
+  async onSubmit(day_index) {
+    //--- Check empty and invalid credentials
+    if(this.admin_id == null) {
+      const alert = await this.alertCtrl.create({
+        header: 'Error!',
+        message: "Unable to assign routine!",
+        buttons: ['OK']
+      });
+      alert.present();
+    } else if(this.batch_id == null) {
+      const alert = await this.alertCtrl.create({
+        header: 'Error!',
+        message: "Select batch!",
+        buttons: ['OK']
+      });
+      alert.present();
+    } else if(this.day_details[day_index].week_day == null) {
+      const alert = await this.alertCtrl.create({
+        header: 'Error!',
+        message: "Select day!",
+        buttons: ['OK']
+      });
+      alert.present();
+    } else if(this.day_details[day_index].start_time == null) {
+      const alert = await this.alertCtrl.create({
+        header: 'Error!',
+        message: "Select start time!",
+        buttons: ['OK']
+      });
+      alert.present();
+    } else if(this.day_details[day_index].duration == null) {
+      const alert = await this.alertCtrl.create({
+        header: 'Error!',
+        message: "Select duration!",
+        buttons: ['OK']
+      });
+      alert.present();
+    } else if(this.day_details[day_index].teacher_id == null) {
+      const alert = await this.alertCtrl.create({
+        header: 'Error!',
+        message: "Select teacher!",
+        buttons: ['OK']
+      });
+      alert.present();
+    } else if(this.day_details[day_index].type == 2 && this.day_details[day_index].week_for == null) {
+      const alert = await this.alertCtrl.create({
+        header: 'Error!',
+        message: "Select temporary week!",
+        buttons: ['OK']
+      });
+      alert.present();
+    } else {
+      //--- Start loader
+      const loading = await this.loadingController.create({
+        message: 'Please wait...',
+        spinner: 'bubbles'
+      });
+      loading.present();
+      this.loadingController.dismiss();
+      
+      let sendData = {
+        admin_id: this.admin_id,
+        batch_id: this.batch_id,
+        week_day: this.day_details[day_index].week_day,
+        start_time: this.day_details[day_index].start_time,
+        duration: this.day_details[day_index].duration,
+        teacher_id: this.day_details[day_index].teacher_id,
+        type: this.day_details[day_index].type,
+        week_for: this.day_details[day_index].week_for
+      }
+      console.log('Routine assign sendData: ', sendData);
+
+      this.day_details[day_index].id = 1;
+      this.show_add_button = true;
+      this.page_type = 'edit';
+
+      // this.staffWorkService.batch_insert(sendData).subscribe(async response => {
+      //   //console.log('Batch assign response: ', response);
+      //   //--- After record updated - dismiss loader
+      //   this.loadingController.dismiss();
+
+      //   if(response.status == true) {
+      //     const toast = await this.toastController.create({
+      //       message: response.message,
+      //       color: "dark",
+      //       position: "bottom",
+      //       duration: 2000
+      //     });
+      //     toast.present();
+      //   } else {
+      //     const alert = await this.alertCtrl.create({
+      //       header: 'Error!',
+      //       message: response.message,
+      //       buttons: ['OK']
+      //     });
+      //     alert.present();
+      //   }
+      // }, async error => {
+      //   console.log('Routine assign error: ', error);
+      //   //--- In case of login error - dismiss loader, show error message
+      //   this.loadingController.dismiss();
+      //   const alert = await this.alertCtrl.create({
+      //     header: 'Error!',
+      //     message: "Internal problem!",
+      //     buttons: ['OK']
+      //   });
+      //   alert.present();
+      // });
+    }
   }
 
 }
