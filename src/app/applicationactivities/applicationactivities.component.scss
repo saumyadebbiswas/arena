@@ -70,7 +70,6 @@
     outline-width: 0
 }
 #msform .action-button {
-    width: 100px;
     background: skyblue;
     font-weight: bold;
     color: white;
@@ -78,8 +77,8 @@
     border-radius: 0px;
     cursor: pointer;
     padding: 10px 5px;
-    margin: 10px 5px;
-    width: 45%;
+    margin:0 5px !important;
+    width: 40%;
     background: #eb1d23;
     font-family: roboto;
     color: #fff;
@@ -101,15 +100,14 @@
 }
 
 #msform .action-button-previous {
-    width: 100px;
     font-weight: bold;
     color: white;
     border: 0 none;
     border-radius: 0px;
     cursor: pointer;
     padding: 10px 5px;
-    margin: 10px 5px;
-    width: 45%;
+    margin: 0 5px !important;
+    width: 40%;
     background: #c3c3c3;
     font-family: roboto;
     color: #fff;
@@ -286,7 +284,7 @@ select.list-dt:focus {
 }
 
 .nxt-btns{
-    position: fixed;
+    // position: fixed;
     bottom: 15px;
     right: 10px;
     width: 100%;
