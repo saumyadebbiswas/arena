@@ -40,7 +40,11 @@ export class StaffWorkService {
     return this.http.get<any>(this.api_url+'/batch/details/'+batch_id, {headers: this.requestHeader});
   }
 	
-  routine_assign(sendData: any): Observable<any> {
-    return this.http.post<any>(this.api_url+'/routine/insert', sendData, {headers: this.requestHeader});
+  routine_day_assign(sendData: any): Observable<any> {
+    return this.http.post<any>(this.api_url+'/routine/day/insert', sendData, {headers: this.requestHeader});
+  }
+	
+  routine_list(batch_id: any) {
+    return this.http.get<any>(this.api_url+'/routine/detailbybatch/'+batch_id, {headers: this.requestHeader});
   }
 }

@@ -10,15 +10,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class RoutineComponent implements OnInit {
 
-  showloader: boolean = true;
-  show_add_button: boolean = false;
-  page_type: string = "insert";
-  batch_list: any = [];
-  teacher_list: any = [];
+  showloader: boolean;
+  show_add_button: boolean;
+  page_type: string;
+  batch_list: any;
+  teacher_list: any;
   admin_id: string;
-  batch_id: string = null;
-  //no_of_days: any = "1";
-  //current_days: number = 1;
+  batch_id: string;
   week_days: any = [
     { "value": "1", "day": "Sunday" },
     { "value": "2", "day": "Monday" },
@@ -38,6 +36,7 @@ export class RoutineComponent implements OnInit {
       "duration" : null,
       "teacher_id" : null,
       "type": 1,
+      "alt_routine_day_id": null,
       "week_for": null
     }
   ];
@@ -60,6 +59,12 @@ export class RoutineComponent implements OnInit {
   ionViewWillEnter() { 
     console.log('Location: RoutineComponent');
 
+    this.showloader = true;
+    this.show_add_button = false;
+    this.page_type = "insert";
+    this.batch_list = [];
+    this.teacher_list = [];
+    this.batch_id = null;
     this.active_batch_all();
   }
 
@@ -139,7 +144,11 @@ export class RoutineComponent implements OnInit {
         });
         alert.present();
       }
+
+      if(this.batch_id != null) { this.routine_all(); }
     }, async error => {
+      if(this.batch_id != null) { this.routine_all(); }
+
       //--- In case of any error - dismiss loader, show error message
       this.loadingController.dismiss();
 
@@ -152,6 +161,101 @@ export class RoutineComponent implements OnInit {
     });
   }
 
+  async routine_all() {
+    //--- Start loader
+    const loading = await this.loadingController.create({
+      message: 'Please wait...',
+      spinner: 'bubbles'
+    });
+    loading.present();
+    this.showloader = true;
+
+    this.staffWorkService.routine_list(this.batch_id).subscribe(async response => {
+      console.log('Routine list: ', response);
+      //--- After get record - dismiss loader
+      this.loadingController.dismiss();
+      this.showloader = false;
+
+      if(response.status == true) {
+        this.day_details = [];
+
+        response.data.forEach(element => {
+          this.day_details.push(
+            {
+              "id": element.id,
+              "week_day" : element.week_day,
+              "start_time_temp" : this.format_date(element.start_time),
+              "start_time" : element.start_time,
+              "duration_temp" : this.format_date(element.duration),
+              "duration" : element.duration,
+              "teacher_id" : element.teacher_id,
+              "type": element.type,
+              "alt_routine_day_id": element.alt_routine_day_id,
+              "week_for": element.temp_week
+            }
+          );
+        });
+
+        this.show_add_button = true;
+      } else {
+        const toast = await this.toastController.create({
+          message: response.message,
+          color: "dark",
+          position: "bottom",
+          duration: 2000
+        });
+        toast.present();
+
+        this.day_details = [
+          {
+            "id": null,
+            "week_day" : null,
+            "start_time_temp" : null,
+            "start_time" : null,
+            "duration_temp" : null,
+            "duration" : null,
+            "teacher_id" : null,
+            "type": 1,
+            "alt_routine_day_id": null,
+            "week_for": null
+          }
+        ];
+        this.show_add_button = false;
+      }
+    }, async error => {
+      //--- In case of any error - dismiss loader, show error message
+      this.loadingController.dismiss();
+
+      const alert = await this.alertCtrl.create({
+        header: 'Error!',
+        message: "Unable to load routine list!",
+        buttons: ['OK']
+      });
+      alert.present();
+
+      this.day_details = [
+        {
+          "id": null,
+          "week_day" : null,
+          "start_time_temp" : null,
+          "start_time" : null,
+          "duration_temp" : null,
+          "duration" : null,
+          "teacher_id" : null,
+          "type": 1,
+          "alt_routine_day_id": null,
+          "week_for": null
+        }
+      ];
+      this.show_add_button = false;
+    });
+  }
+
+  change_Batch(event) {
+    //let batch_id = event.target.value;
+    this.routine_all();
+  }
+
   add_routine() {
     this.day_details.push({
       "id": null,
@@ -160,6 +264,7 @@ export class RoutineComponent implements OnInit {
       "duration" : null,
       "teacher_id" : null,
       "type": 1,
+      "alt_routine_day_id": null,
       "week_for": null
     });
 
@@ -188,6 +293,7 @@ export class RoutineComponent implements OnInit {
   checkDayTimeAvl(day_index, field_type) {
     let error = false;
     let count = 0;
+    //console.log('this.day_details[day_index].start_time_temp', this.day_details[day_index].start_time_temp);
     let start_time_temp_select = this.format_time(this.day_details[day_index].start_time_temp);
     let duration_temp_select = this.format_time(this.day_details[day_index].duration_temp);
     let end_time_select = null;
@@ -254,6 +360,10 @@ export class RoutineComponent implements OnInit {
     }
   }
 
+  format_date(time) {
+    return '2020-01-01T'+time+'.123+05:30';
+  }
+
   cal_end_time(start_time_temp, duration_temp) {
     let start_time_temp_arr = start_time_temp.split(':');
     let duration_temp_arr = duration_temp.split(':');
@@ -270,104 +380,6 @@ export class RoutineComponent implements OnInit {
 
     return end_time_hour_new+':'+end_time_min_new;
   }
-
-  // async onSubmit() {
-  //   //--- Check empty and invalid credentials
-  //   if(this.admin_id == null) {
-  //     const alert = await this.alertCtrl.create({
-  //       header: 'Error!',
-  //       message: "Unable to assign!",
-  //       buttons: ['OK']
-  //     });
-  //     alert.present();
-  //   } else if(this.batch_id == null) {
-  //     const alert = await this.alertCtrl.create({
-  //       header: 'Error!',
-  //       message: "Select batch!",
-  //       buttons: ['OK']
-  //     });
-  //     alert.present();
-  //   } else {
-  //     let day_details_msg = "";
-
-  //     let count = 1;
-  //     this.day_details.forEach(async element => {
-  //       if(element.week_day == null) {
-  //         day_details_msg += "Select day "+count+" week day! <br>";
-  //       }
-  //       if(element.start_time == null) {
-  //         day_details_msg += "Select day "+count+" start time! <br>";
-  //       }
-  //       if(element.duration == null) {
-  //         day_details_msg += "Select day "+count+" duration! <br>";
-  //       }
-  //       if(element.teacher_id == null) {
-  //         day_details_msg += "Select day "+count+" teacher! <br>";
-  //       }
-
-  //       count++;
-  //     });
-
-  //     if(day_details_msg.length != 0) {
-  //       const alert = await this.alertCtrl.create({
-  //         header: 'Error!',
-  //         message: day_details_msg,
-  //         buttons: ['OK']
-  //       });
-  //       alert.present();
-  //     } else {
-  //       //--- Start loader
-  //       const loading = await this.loadingController.create({
-  //         message: 'Please wait...',
-  //         spinner: 'bubbles'
-  //       });
-  //       loading.present();
-        
-  //       let sendData = {
-  //         admin_id: this.admin_id,
-  //         batch_id: this.batch_id,
-  //         //no_of_days_in_week: this.no_of_days,
-  //         day_details: this.day_details
-  //       }
-  //       //console.log('Routine assign sendData: ', sendData);
-
-  //       this.staffWorkService.routine_assign(sendData).subscribe(async response => {
-  //         //console.log('Routine assign response: ', response);
-  //         //--- After record updated - dismiss loader
-  //         this.loadingController.dismiss();
-
-  //         if(response.status == true) {
-  //           const toast = await this.toastController.create({
-  //             message: response.message,
-  //             color: "dark",
-  //             position: "bottom",
-  //             duration: 2000
-  //           });
-  //           toast.present();
-
-  //           this.router.navigate(['/batch-list']);
-  //         } else {
-  //           const alert = await this.alertCtrl.create({
-  //             header: 'Error!',
-  //             message: response.message,
-  //             buttons: ['OK']
-  //           });
-  //           alert.present();
-  //         }
-  //       }, async error => {
-  //         console.log('Routine assign error: ', error);
-  //         //--- In case of login error - dismiss loader, show error message
-  //         this.loadingController.dismiss();
-  //         const alert = await this.alertCtrl.create({
-  //           header: 'Error!',
-  //           message: "Internal problem!",
-  //           buttons: ['OK']
-  //         });
-  //         alert.present();
-  //       });
-  //     }
-  //   }
-  // }
 
   changeChkbx(day_index) {
     if(this.day_details[day_index].type == 1) {
@@ -436,7 +448,6 @@ export class RoutineComponent implements OnInit {
         spinner: 'bubbles'
       });
       loading.present();
-      this.loadingController.dismiss();
       
       let sendData = {
         admin_id: this.admin_id,
@@ -448,44 +459,154 @@ export class RoutineComponent implements OnInit {
         type: this.day_details[day_index].type,
         week_for: this.day_details[day_index].week_for
       }
-      console.log('Routine assign sendData: ', sendData);
+      //console.log('Routine assign sendData: ', sendData);
 
-      this.day_details[day_index].id = 1;
-      this.show_add_button = true;
-      this.page_type = 'edit';
+      this.staffWorkService.routine_day_assign(sendData).subscribe(async response => {
+        //console.log('Routine assign response: ', response);
+        //--- After record updated - dismiss loader
+        this.loadingController.dismiss();
 
-      // this.staffWorkService.batch_insert(sendData).subscribe(async response => {
-      //   //console.log('Batch assign response: ', response);
-      //   //--- After record updated - dismiss loader
-      //   this.loadingController.dismiss();
+        if(response.status == true) {
+          const toast = await this.toastController.create({
+            message: response.message,
+            color: "dark",
+            position: "bottom",
+            duration: 2000
+          });
+          toast.present();
 
-      //   if(response.status == true) {
-      //     const toast = await this.toastController.create({
-      //       message: response.message,
-      //       color: "dark",
-      //       position: "bottom",
-      //       duration: 2000
-      //     });
-      //     toast.present();
-      //   } else {
-      //     const alert = await this.alertCtrl.create({
-      //       header: 'Error!',
-      //       message: response.message,
-      //       buttons: ['OK']
-      //     });
-      //     alert.present();
-      //   }
-      // }, async error => {
-      //   console.log('Routine assign error: ', error);
-      //   //--- In case of login error - dismiss loader, show error message
-      //   this.loadingController.dismiss();
-      //   const alert = await this.alertCtrl.create({
-      //     header: 'Error!',
-      //     message: "Internal problem!",
-      //     buttons: ['OK']
-      //   });
-      //   alert.present();
-      // });
+          this.day_details[day_index].id = response.inserted_id;
+          this.show_add_button = true;
+          this.page_type = 'edit';
+        } else {
+          const alert = await this.alertCtrl.create({
+            header: 'Error!',
+            message: response.message,
+            buttons: ['OK']
+          });
+          alert.present();
+        }
+      }, async error => {
+        console.log('Routine assign error: ', error);
+        //--- In case of login error - dismiss loader, show error message
+        this.loadingController.dismiss();
+        const alert = await this.alertCtrl.create({
+          header: 'Error!',
+          message: "Internal problem!",
+          buttons: ['OK']
+        });
+        alert.present();
+      });
+    }
+  }
+
+  async onUpdate(day_index) {
+    //--- Check empty and invalid credentials
+    if(this.admin_id == null) {
+      const alert = await this.alertCtrl.create({
+        header: 'Error!',
+        message: "Unable to assign routine!",
+        buttons: ['OK']
+      });
+      alert.present();
+    } else if(this.batch_id == null) {
+      const alert = await this.alertCtrl.create({
+        header: 'Error!',
+        message: "Select batch!",
+        buttons: ['OK']
+      });
+      alert.present();
+    } else if(this.day_details[day_index].week_day == null) {
+      const alert = await this.alertCtrl.create({
+        header: 'Error!',
+        message: "Select day!",
+        buttons: ['OK']
+      });
+      alert.present();
+    } else if(this.day_details[day_index].start_time == null) {
+      const alert = await this.alertCtrl.create({
+        header: 'Error!',
+        message: "Select start time!",
+        buttons: ['OK']
+      });
+      alert.present();
+    } else if(this.day_details[day_index].duration == null) {
+      const alert = await this.alertCtrl.create({
+        header: 'Error!',
+        message: "Select duration!",
+        buttons: ['OK']
+      });
+      alert.present();
+    } else if(this.day_details[day_index].teacher_id == null) {
+      const alert = await this.alertCtrl.create({
+        header: 'Error!',
+        message: "Select teacher!",
+        buttons: ['OK']
+      });
+      alert.present();
+    } else if(this.day_details[day_index].type == 2 && this.day_details[day_index].week_for == null) {
+      const alert = await this.alertCtrl.create({
+        header: 'Error!',
+        message: "Select temporary week!",
+        buttons: ['OK']
+      });
+      alert.present();
+    } else {
+      //--- Start loader
+      const loading = await this.loadingController.create({
+        message: 'Please wait...',
+        spinner: 'bubbles'
+      });
+      loading.present();
+      
+      let sendData = {
+        admin_id: this.admin_id,
+        batch_id: this.batch_id,
+        week_day: this.day_details[day_index].week_day,
+        start_time: this.day_details[day_index].start_time,
+        duration: this.day_details[day_index].duration,
+        teacher_id: this.day_details[day_index].teacher_id,
+        type: this.day_details[day_index].type,
+        week_for: this.day_details[day_index].week_for
+      }
+      //console.log('Routine assign sendData: ', sendData);
+
+      this.staffWorkService.routine_day_assign(sendData).subscribe(async response => {
+        //console.log('Routine assign response: ', response);
+        //--- After record updated - dismiss loader
+        this.loadingController.dismiss();
+
+        if(response.status == true) {
+          const toast = await this.toastController.create({
+            message: response.message,
+            color: "dark",
+            position: "bottom",
+            duration: 2000
+          });
+          toast.present();
+
+          this.day_details[day_index].id = response.inserted_id;
+          this.show_add_button = true;
+          this.page_type = 'edit';
+        } else {
+          const alert = await this.alertCtrl.create({
+            header: 'Error!',
+            message: response.message,
+            buttons: ['OK']
+          });
+          alert.present();
+        }
+      }, async error => {
+        console.log('Routine assign error: ', error);
+        //--- In case of login error - dismiss loader, show error message
+        this.loadingController.dismiss();
+        const alert = await this.alertCtrl.create({
+          header: 'Error!',
+          message: "Internal problem!",
+          buttons: ['OK']
+        });
+        alert.present();
+      });
     }
   }
 

@@ -15,25 +15,12 @@
 <ion-content *ngIf="!showloader">
     <div class="container-fluid routine-col" id="grad1">
         <div class="dropdown frm select-dropdown">
-            <ion-select [(ngModel)]="batch_id" placeholder="Select Batch" [disabled]="page_type == 'edit'">
+            <ion-select (ionChange)="change_Batch($event)" [(ngModel)]="batch_id" placeholder="Select Batch">
                 <ion-select-option *ngFor="let batch of batch_list"  [value]="batch.id">{{batch.name}}</ion-select-option>
             </ion-select>
 
-            <span *ngIf="batch_id != null" data-toggle="tooltip" data-placement="top" title="Can't change!" (click)="tooltipMsg('Cant change')"><i class="fa fa-question-circle toolp"></i></span>
+            <!-- <span *ngIf="batch_id != null" data-toggle="tooltip" data-placement="top" title="Can't change!" (click)="tooltipMsg('Cant change')"><i class="fa fa-question-circle toolp"></i></span> -->
         </div>
-
-        <!-- <ion-item class="dropdown frm select-dropdown">
-            <ion-label class="drop-mnu">Select No of Day</ion-label>
-            <ion-select [(ngModel)]="no_of_days" (ionChange)="changeDays($event)" placeholder="Select No of Day">
-                <ion-select-option value="1">1</ion-select-option>
-                <ion-select-option value="2">2</ion-select-option>
-                <ion-select-option value="3">3</ion-select-option>
-                <ion-select-option value="4">4</ion-select-option>
-                <ion-select-option value="5">5</ion-select-option>
-                <ion-select-option value="6">6</ion-select-option>
-                <ion-select-option value="7">7</ion-select-option>
-            </ion-select>
-        </ion-item> -->
 
         <ul class="routine-list">
             <li *ngFor="let day_details of day_details; let i = index">
