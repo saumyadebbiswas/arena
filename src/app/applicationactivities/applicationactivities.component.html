@@ -73,11 +73,14 @@
                                     </div>
                                 </div>
 
+                               
+                            </fieldset>
+                            <div class="btn-col">
                                 <input type="button" name="previous" class="previous action-button prv-btns" value="Previous" (click)="movePrevious()" />
 
                                 <input type="button" *ngIf="show_next_button" class="next action-button nxt-btns" value="Next Step" (click)="moveNext()" />
                                 <input type="button" *ngIf="!show_next_button" class="next action-button-previous nxt-btns" value="Next Step" />
-                            </fieldset>
+                            </div>
                         </div>
                     </div>
                 </div>
