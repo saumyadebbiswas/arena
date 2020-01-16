@@ -26,6 +26,9 @@
             <li *ngFor="let day_details of day_details; let i = index">
                 <h6>Routine {{i+1}}</h6>
 
+                <p *ngIf="day_details.week_for != null && day_details.alt_routine_day_id == null">This routine will <strong>remove</strong> after {{day_details.week_for}} week. By remove now it will be deleted permanently.</p>
+                <p *ngIf="day_details.week_for != null && day_details.alt_routine_day_id != null">This routine will <strong>alter</strong> after {{day_details.week_for}} week. By remove now it will be altered by it's previous routine.</p>
+
                 <div class="routine-field" style="width:100%;">
                     <ion-label>Select Day</ion-label>
                     <div class="dropdown frm select-dropdown">
@@ -59,7 +62,7 @@
                 </div>
                 
                 <div class="routine-field" style="width: 100%;">
-                    <ion-checkbox class="checkbox" (ionChange)="changeChkbx(i)" color="primary" [checked]="day_details.type == 2"></ion-checkbox>
+                    <ion-checkbox class="checkbox" (ionChange)="changeChkbx(i)" color="primary" [checked]="day_details.type == 2" [disabled]="day_details.alt_routine_day_id != null"></ion-checkbox>
                     <ion-label class="chq-lebl">Is Temporary?</ion-label>
                 </div>
 
@@ -67,14 +70,14 @@
                     <ion-label>Week For</ion-label>
                     <div class="dropdown frm select-dropdown">
                         <ion-select [(ngModel)]="day_details.week_for" placeholder="Week For">
-                            <ion-select-option [value]="1">1 Week</ion-select-option>
-                            <ion-select-option [value]="2">2 Week</ion-select-option>
-                            <ion-select-option [value]="3">3 Week</ion-select-option>
-                            <ion-select-option [value]="4">4 Week</ion-select-option>
-                            <ion-select-option [value]="5">5 Week</ion-select-option>
-                            <ion-select-option [value]="6">6 Week</ion-select-option>
-                            <ion-select-option [value]="7">7 Week</ion-select-option>
-                            <ion-select-option [value]="8">8 Week</ion-select-option>
+                            <ion-select-option value="1">1 Week</ion-select-option>
+                            <ion-select-option value="2">2 Week</ion-select-option>
+                            <ion-select-option value="3">3 Week</ion-select-option>
+                            <ion-select-option value="4">4 Week</ion-select-option>
+                            <ion-select-option value="5">5 Week</ion-select-option>
+                            <ion-select-option value="6">6 Week</ion-select-option>
+                            <ion-select-option value="7">7 Week</ion-select-option>
+                            <ion-select-option value="8">8 Week</ion-select-option>
                         </ion-select>
                     </div>
                 </div>
@@ -82,7 +85,10 @@
                 <button *ngIf="day_details.id == null" type="button" (click)="onSubmit(i)" class="batch-btn">Insert</button>
                 <button *ngIf="day_details.id != null" type="button" (click)="onUpdate(i)" class="batch-btn">Edit</button>
 
-                <button type="button" (click)="remove_routine(i)" class="batch-btn">Remove</button>
+                <button *ngIf="day_details.show_alter_btn" type="button" (click)="onAlter(i)" class="batch-btn">Alter</button>
+
+                <button *ngIf="i == 0" type="button" (click)="tooltipMsg('Minimum one routine need to remain')"  class="batch-btn-sml-disable">Remove</button>
+                <button *ngIf="i > 0" type="button" (click)="remove_routine(i)" class="batch-btn">Remove</button>
             </li>
         </ul>
 

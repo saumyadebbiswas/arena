@@ -12,7 +12,7 @@ export class RoutineComponent implements OnInit {
 
   showloader: boolean;
   show_add_button: boolean;
-  page_type: string;
+  //page_type: string;
   batch_list: any;
   teacher_list: any;
   admin_id: string;
@@ -35,9 +35,11 @@ export class RoutineComponent implements OnInit {
       "duration_temp" : null,
       "duration" : null,
       "teacher_id" : null,
+      "old_type": 1,
       "type": 1,
       "alt_routine_day_id": null,
-      "week_for": null
+      "week_for": null,
+      "show_alter_btn": false
     }
   ];
 
@@ -61,7 +63,7 @@ export class RoutineComponent implements OnInit {
 
     this.showloader = true;
     this.show_add_button = false;
-    this.page_type = "insert";
+    //this.page_type = "insert";
     this.batch_list = [];
     this.teacher_list = [];
     this.batch_id = null;
@@ -113,7 +115,7 @@ export class RoutineComponent implements OnInit {
   getBatchId() {
     if(this.route.snapshot.paramMap.get('id') != null) {
       this.batch_id = this.route.snapshot.paramMap.get('id');
-      this.page_type = 'edit';
+      //this.page_type = 'edit';
     }
     
     this.teacher_all();
@@ -171,7 +173,7 @@ export class RoutineComponent implements OnInit {
     this.showloader = true;
 
     this.staffWorkService.routine_list(this.batch_id).subscribe(async response => {
-      console.log('Routine list: ', response);
+      //console.log('Routine list: ', response);
       //--- After get record - dismiss loader
       this.loadingController.dismiss();
       this.showloader = false;
@@ -180,6 +182,7 @@ export class RoutineComponent implements OnInit {
         this.day_details = [];
 
         response.data.forEach(element => {
+
           this.day_details.push(
             {
               "id": element.id,
@@ -189,9 +192,11 @@ export class RoutineComponent implements OnInit {
               "duration_temp" : this.format_date(element.duration),
               "duration" : element.duration,
               "teacher_id" : element.teacher_id,
+              "old_type": element.type,
               "type": element.type,
               "alt_routine_day_id": element.alt_routine_day_id,
-              "week_for": element.temp_week
+              "week_for": element.temp_week,
+              "show_alter_btn": false
             }
           );
         });
@@ -263,31 +268,14 @@ export class RoutineComponent implements OnInit {
       "start_time" : null,
       "duration" : null,
       "teacher_id" : null,
+      "old_type": 1,
       "type": 1,
       "alt_routine_day_id": null,
-      "week_for": null
+      "week_for": null,
+      "show_alter_btn": false
     });
 
     this.show_add_button = false;
-  }
-  
-  async remove_routine(day_index) {
-    if(this.day_details.length > 1) {
-      if(this.day_details[day_index].id == null) {
-        this.day_details.splice(day_index, 1);
-        this.show_add_button = true;
-      } else {
-        
-      }
-    } else {
-      const toast = await this.toastController.create({
-        message: "Minimum one routine need to remain",
-        color: "dark",
-        position: "bottom",
-        duration: 2000
-      });
-      toast.present();
-    }
   }
 
   checkDayTimeAvl(day_index, field_type) {
@@ -383,10 +371,15 @@ export class RoutineComponent implements OnInit {
 
   changeChkbx(day_index) {
     if(this.day_details[day_index].type == 1) {
+      if( this.day_details[day_index].old_type == 1 && this.day_details[day_index].alt_routine_day_id == null) {
+        this.day_details[day_index].show_alter_btn = true;
+      }
+
       this.day_details[day_index].type = 2;
     } else {
       this.day_details[day_index].type = 1;
       this.day_details[day_index].week_for = null;
+      this.day_details[day_index].show_alter_btn = false;
     }
   }
 
@@ -477,7 +470,7 @@ export class RoutineComponent implements OnInit {
 
           this.day_details[day_index].id = response.inserted_id;
           this.show_add_button = true;
-          this.page_type = 'edit';
+          //this.page_type = 'edit';
         } else {
           const alert = await this.alertCtrl.create({
             header: 'Error!',
@@ -502,17 +495,10 @@ export class RoutineComponent implements OnInit {
 
   async onUpdate(day_index) {
     //--- Check empty and invalid credentials
-    if(this.admin_id == null) {
+    if(this.day_details[day_index].id == null) {
       const alert = await this.alertCtrl.create({
         header: 'Error!',
-        message: "Unable to assign routine!",
-        buttons: ['OK']
-      });
-      alert.present();
-    } else if(this.batch_id == null) {
-      const alert = await this.alertCtrl.create({
-        header: 'Error!',
-        message: "Select batch!",
+        message: "Unable to edit routine!",
         buttons: ['OK']
       });
       alert.present();
@@ -560,8 +546,7 @@ export class RoutineComponent implements OnInit {
       loading.present();
       
       let sendData = {
-        admin_id: this.admin_id,
-        batch_id: this.batch_id,
+        id: this.day_details[day_index].id,
         week_day: this.day_details[day_index].week_day,
         start_time: this.day_details[day_index].start_time,
         duration: this.day_details[day_index].duration,
@@ -569,10 +554,10 @@ export class RoutineComponent implements OnInit {
         type: this.day_details[day_index].type,
         week_for: this.day_details[day_index].week_for
       }
-      //console.log('Routine assign sendData: ', sendData);
+      //console.log('Routine edit sendData: ', sendData);
 
-      this.staffWorkService.routine_day_assign(sendData).subscribe(async response => {
-        //console.log('Routine assign response: ', response);
+      this.staffWorkService.routine_day_edit(sendData).subscribe(async response => {
+        //console.log('Routine edit response: ', response);
         //--- After record updated - dismiss loader
         this.loadingController.dismiss();
 
@@ -585,9 +570,8 @@ export class RoutineComponent implements OnInit {
           });
           toast.present();
 
-          this.day_details[day_index].id = response.inserted_id;
-          this.show_add_button = true;
-          this.page_type = 'edit';
+          this.day_details[day_index].old_type = this.day_details[day_index].type;
+          this.day_details[day_index].show_alter_btn = false;
         } else {
           const alert = await this.alertCtrl.create({
             header: 'Error!',
@@ -597,7 +581,7 @@ export class RoutineComponent implements OnInit {
           alert.present();
         }
       }, async error => {
-        console.log('Routine assign error: ', error);
+        console.log('Routine edit error: ', error);
         //--- In case of login error - dismiss loader, show error message
         this.loadingController.dismiss();
         const alert = await this.alertCtrl.create({
@@ -607,6 +591,230 @@ export class RoutineComponent implements OnInit {
         });
         alert.present();
       });
+    }
+  }
+
+  async onAlter(day_index) {
+    //--- Check empty and invalid credentials
+    if(this.day_details[day_index].id == null || this.day_details[day_index].type == 1 || this.batch_id == null || this.admin_id == null) {
+      const alert = await this.alertCtrl.create({
+        header: 'Error!',
+        message: "Unable to alter routine!",
+        buttons: ['OK']
+      });
+      alert.present();
+    } else if(this.day_details[day_index].week_day == null) {
+      const alert = await this.alertCtrl.create({
+        header: 'Error!',
+        message: "Select day!",
+        buttons: ['OK']
+      });
+      alert.present();
+    } else if(this.day_details[day_index].start_time == null) {
+      const alert = await this.alertCtrl.create({
+        header: 'Error!',
+        message: "Select start time!",
+        buttons: ['OK']
+      });
+      alert.present();
+    } else if(this.day_details[day_index].duration == null) {
+      const alert = await this.alertCtrl.create({
+        header: 'Error!',
+        message: "Select duration!",
+        buttons: ['OK']
+      });
+      alert.present();
+    } else if(this.day_details[day_index].teacher_id == null) {
+      const alert = await this.alertCtrl.create({
+        header: 'Error!',
+        message: "Select teacher!",
+        buttons: ['OK']
+      });
+      alert.present();
+    } else if(this.day_details[day_index].week_for == null) {
+      const alert = await this.alertCtrl.create({
+        header: 'Error!',
+        message: "Select temporary week!",
+        buttons: ['OK']
+      });
+      alert.present();
+    } else {
+      //--- Start loader
+      const loading = await this.loadingController.create({
+        message: 'Please wait...',
+        spinner: 'bubbles'
+      });
+      loading.present();
+      
+      let sendData = {
+        id: this.day_details[day_index].id,
+        batch_id: this.batch_id,
+        admin_id: this.admin_id,
+        week_day: this.day_details[day_index].week_day,
+        start_time: this.day_details[day_index].start_time,
+        duration: this.day_details[day_index].duration,
+        teacher_id: this.day_details[day_index].teacher_id,
+        week_for: this.day_details[day_index].week_for
+      }
+      //console.log('Routine alter sendData: ', sendData);
+
+      this.staffWorkService.routine_day_alter(sendData).subscribe(async response => {
+        //console.log('Routine alter response: ', response);
+        //--- After record updated - dismiss loader
+        this.loadingController.dismiss();
+
+        if(response.status == true) {
+          const toast = await this.toastController.create({
+            message: response.message,
+            color: "dark",
+            position: "bottom",
+            duration: 2000
+          });
+          toast.present();
+
+          this.day_details.push(
+            {
+              "id": response.inserted_id,
+              "week_day" : this.day_details[day_index].week_day,
+              "start_time_temp" : this.day_details[day_index].start_time_temp,
+              "start_time" : this.day_details[day_index].start_time,
+              "duration_temp" : this.day_details[day_index].duration_temp,
+              "duration" : this.day_details[day_index].duration,
+              "teacher_id" : this.day_details[day_index].teacher_id,
+              "old_type": 2,
+              "type": 2,
+              "alt_routine_day_id": this.day_details[day_index].id,
+              "week_for": this.day_details[day_index].week_for,
+              "show_alter_btn": false
+            }
+          );
+
+          if(response.type == 1) {
+            this.day_details.splice(day_index, 1);
+          }
+          //console.log('this.day_details: ', this.day_details);
+          
+        } else {
+          const alert = await this.alertCtrl.create({
+            header: 'Error!',
+            message: response.message,
+            buttons: ['OK']
+          });
+          alert.present();
+        }
+      }, async error => {
+        console.log('Routine alter error: ', error);
+        //--- In case of login error - dismiss loader, show error message
+        this.loadingController.dismiss();
+        const alert = await this.alertCtrl.create({
+          header: 'Error!',
+          message: "Internal problem!",
+          buttons: ['OK']
+        });
+        alert.present();
+      });
+    }
+  }
+  
+  async remove_routine(day_index) {
+    if(this.day_details.length > 1) {
+      if(this.day_details[day_index].id == null) {
+        //--- This routine yet not submitted
+        this.day_details.splice(day_index, 1);
+        this.show_add_button = true;
+      } else {
+        //--- This routine already submitted and have to be remove from databade
+
+        //--- Check empty and invalid credentials
+        if(this.day_details[day_index].id == null || (this.day_details[day_index].type == 2 && this.day_details[day_index].alt_routine_day_id == null)) {
+          const alert = await this.alertCtrl.create({
+            header: 'Error!',
+            message: "Unable to remove routine!",
+            buttons: ['OK']
+          });
+          alert.present();
+        } else {
+          //--- Start loader
+          const loading = await this.loadingController.create({
+            message: 'Please wait...',
+            spinner: 'bubbles'
+          });
+          loading.present();
+          
+          let sendData = {
+            id: this.day_details[day_index].id,
+            alt_routine_day_id: this.day_details[day_index].alt_routine_day_id
+          }
+          console.log('Routine remove sendData: ', sendData);
+
+          this.staffWorkService.routine_day_remove(sendData).subscribe(async response => {
+            console.log('Routine remove response: ', response);
+            //--- After record updated - dismiss loader
+            this.loadingController.dismiss();
+
+            if(response.status == true) {
+              const toast = await this.toastController.create({
+                message: response.message,
+                color: "dark",
+                position: "bottom",
+                duration: 2000
+              });
+              toast.present();
+
+              if(response.data != null) {
+                this.day_details.push(
+                  {
+                    "id": response.data.id,
+                    "week_day" : response.data.week_day,
+                    "start_time_temp" : this.format_date(response.data.start_time),
+                    "start_time" : response.data.start_time,
+                    "duration_temp" : this.format_date(response.data.duration),
+                    "duration" : response.data.duration,
+                    "teacher_id" : response.data.teacher_id,
+                    "old_type": response.data.type,
+                    "type": response.data.type,
+                    "alt_routine_day_id": response.data.alt_routine_day_id,
+                    "week_for": response.data.temp_week,
+                    "show_alter_btn": false
+                  }
+                );
+              }
+
+              if(response.type == 1) {
+                this.day_details.splice(day_index, 1);
+              }
+              //console.log('this.day_details: ', this.day_details);
+              
+            } else {
+              const alert = await this.alertCtrl.create({
+                header: 'Error!',
+                message: response.message,
+                buttons: ['OK']
+              });
+              alert.present();
+            }
+          }, async error => {
+            console.log('Routine remove error: ', error);
+            //--- In case of login error - dismiss loader, show error message
+            this.loadingController.dismiss();
+            const alert = await this.alertCtrl.create({
+              header: 'Error!',
+              message: "Internal problem!",
+              buttons: ['OK']
+            });
+            alert.present();
+          });
+        }
+
+      }
+    } else {
+      const toast = await this.toastController.create({
+        message: "Minimum one routine need to remain",
+        color: "dark",
+        position: "bottom",
+        duration: 2000
+      });
+      toast.present();
     }
   }
 
