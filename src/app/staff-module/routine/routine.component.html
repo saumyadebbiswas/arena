@@ -15,7 +15,7 @@
 <ion-content *ngIf="!showloader">
     <div class="container-fluid routine-col" id="grad1">
         <div class="dropdown frm select-dropdown">
-            <ion-select (ionChange)="change_Batch($event)" [(ngModel)]="batch_id" placeholder="Select Batch">
+            <ion-select (ionChange)="routine_all()" [(ngModel)]="batch_id" placeholder="Select Batch">
                 <ion-select-option *ngFor="let batch of batch_list"  [value]="batch.id">{{batch.name}}</ion-select-option>
             </ion-select>
 
@@ -55,8 +55,8 @@
                 <div class="routine-field" style="width:100%;">
                     <ion-label>Select Teacher</ion-label>
                     <div class="dropdown frm select-dropdown">
-                        <ion-select [(ngModel)]="day_details.teacher_id" placeholder="Select Teacher">
-                            <ion-select-option *ngFor="let teacher of teacher_list" [value]="teacher.id">{{teacher.name}}</ion-select-option>
+                        <ion-select [(ngModel)]="day_details.teacher_id"(ionChange)="checkTeacherAvl(i)" placeholder="Select Teacher">
+                            <ion-select-option *ngFor="let teacher of teacher_list" [value]="teacher.id" [disabled]="false">{{teacher.name}}</ion-select-option>
                         </ion-select>
                     </div>
                 </div>

@@ -30,8 +30,10 @@ export class RoutineComponent implements OnInit {
     {
       "id": null,
       "week_day" : null,
+      "start_time_temp_old" : null,
       "start_time_temp" : null,
       "start_time" : null,
+      "duration_temp_old" : null,
       "duration_temp" : null,
       "duration" : null,
       "teacher_id" : null,
@@ -124,7 +126,7 @@ export class RoutineComponent implements OnInit {
   async teacher_all() {
     //--- Start loader
     const loading = await this.loadingController.create({
-      message: 'Please wait...',
+      message: 'Loading teacher...',
       spinner: 'bubbles'
     });
     loading.present();
@@ -166,7 +168,7 @@ export class RoutineComponent implements OnInit {
   async routine_all() {
     //--- Start loader
     const loading = await this.loadingController.create({
-      message: 'Please wait...',
+      message: 'Loading routine...',
       spinner: 'bubbles'
     });
     loading.present();
@@ -182,13 +184,14 @@ export class RoutineComponent implements OnInit {
         this.day_details = [];
 
         response.data.forEach(element => {
-
           this.day_details.push(
             {
               "id": element.id,
               "week_day" : element.week_day,
+              "start_time_temp_old" : this.format_date(element.start_time),
               "start_time_temp" : this.format_date(element.start_time),
               "start_time" : element.start_time,
+              "duration_temp_old" : this.format_date(element.duration),
               "duration_temp" : this.format_date(element.duration),
               "duration" : element.duration,
               "teacher_id" : element.teacher_id,
@@ -256,16 +259,16 @@ export class RoutineComponent implements OnInit {
     });
   }
 
-  change_Batch(event) {
-    //let batch_id = event.target.value;
-    this.routine_all();
-  }
-
   add_routine() {
+    console.log('add_routine()');
     this.day_details.push({
       "id": null,
       "week_day" : null,
+      "start_time_temp_old" : null,
+      "start_time_temp" : null,
       "start_time" : null,
+      "duration_temp_old" : null,
+      "duration_temp" : null,
       "duration" : null,
       "teacher_id" : null,
       "old_type": 1,
@@ -278,21 +281,26 @@ export class RoutineComponent implements OnInit {
     this.show_add_button = false;
   }
 
-  checkDayTimeAvl(day_index, field_type) {
+  checkDayTimeAvl(routine_index, field_type) {
     let error = false;
     let count = 0;
-    //console.log('this.day_details[day_index].start_time_temp', this.day_details[day_index].start_time_temp);
-    let start_time_temp_select = this.format_time(this.day_details[day_index].start_time_temp);
-    let duration_temp_select = this.format_time(this.day_details[day_index].duration_temp);
+    //console.log('this.day_details[routine_index].start_time_temp', this.day_details[routine_index].start_time_temp);
+    let start_time_temp_select = this.format_time(this.day_details[routine_index].start_time_temp);
+    let duration_temp_select = this.format_time(this.day_details[routine_index].duration_temp);
     let end_time_select = null;
     if(start_time_temp_select != null && duration_temp_select != null) {
       end_time_select = this.cal_end_time(start_time_temp_select, duration_temp_select);
+
+      if(this.day_details[routine_index].week_day != null) {
+        //--- In every change check teacher is availavle or not
+        this.checkTeacherAvl(routine_index, field_type);
+      }
     }
 
     this.day_details.forEach(async element => {
       //--- Skip current filling up day and check other day details week day m
-      if(count != day_index) {
-        if(element.week_day == this.day_details[day_index].week_day) {
+      if(count != routine_index) {
+        if(element.week_day == this.day_details[routine_index].week_day) {
           let start_time_temp = this.format_time(element.start_time_temp);
           let duration_temp = this.format_time(element.duration_temp);
           
@@ -301,26 +309,37 @@ export class RoutineComponent implements OnInit {
 
             if((start_time_temp_select <= end_time) && (end_time_select >= start_time_temp)) {
               error = true;
-              // const alert = await this.alertCtrl.create({
-              //   header: 'Oops!',
-              //   message: 'Time conflict with Day ' + (count+1),
-              //   buttons: ['OK']
-              // });
-              // alert.present();
-              const toast = await this.toastController.create({
-                message: 'Time conflict with Day ' + (count+1),
-                color: "dark",
-                position: "bottom",
-                duration: 2000
-              });
-              toast.present();
 
               if(field_type == 'wd') {
-                this.day_details[day_index].week_day = null;
+                const toast = await this.toastController.create({
+                  message: 'Day conflict with Routine ' + (count+1),
+                  color: "dark",
+                  position: "bottom",
+                  duration: 2000
+                });
+                toast.present();
+
+                this.day_details[routine_index].week_day = null;
               } else if(field_type == 'st') {
-                this.day_details[day_index].start_time_temp = null;
+                const toast = await this.toastController.create({
+                  message: 'Start time conflict with Routine ' + (count+1),
+                  color: "dark",
+                  position: "bottom",
+                  duration: 2000
+                });
+                toast.present();
+
+                this.day_details[routine_index].start_time_temp = null;
               } else if(field_type == 'du') {
-                this.day_details[day_index].duration_temp = null;
+                const toast = await this.toastController.create({
+                  message: 'Duration conflict with Routine ' + (count+1),
+                  color: "dark",
+                  position: "bottom",
+                  duration: 2000
+                });
+                toast.present();
+
+                this.day_details[routine_index].duration_temp = null;
               }
             }
           }
@@ -331,8 +350,80 @@ export class RoutineComponent implements OnInit {
     });
 
     if(!error) {
-      this.day_details[day_index].start_time = start_time_temp_select;
-      this.day_details[day_index].duration = duration_temp_select;
+      this.day_details[routine_index].start_time = start_time_temp_select;
+      this.day_details[routine_index].duration = duration_temp_select;
+    }
+  }
+
+  async checkTeacherAvl(routine_index, field_type = 'wd') {
+    let start_time_temp_select = this.format_time(this.day_details[routine_index].start_time_temp);
+    let duration_temp_select = this.format_time(this.day_details[routine_index].duration_temp);
+    let end_time_select = null;
+
+    //--- If all time fields are filled up and start time or duration is changed or change working day
+    if(this.day_details[routine_index].week_day != null && start_time_temp_select != null && duration_temp_select != null && this.day_details[routine_index].teacher_id != null && (this.day_details[routine_index].start_time_temp_old != this.day_details[routine_index].start_time_temp || this.day_details[routine_index].duration_temp_old != this.day_details[routine_index].duration_temp || field_type == 'wd')) {
+
+      end_time_select = this.cal_end_time(start_time_temp_select, duration_temp_select);
+      
+      //--- Start loader
+      const loading = await this.loadingController.create({
+        message: 'Checking teacher avilability...',
+        spinner: 'bubbles'
+      });
+      loading.present();
+      
+      let sendData = {
+        teacher_id: this.day_details[routine_index].teacher_id,
+        week_day: this.day_details[routine_index].week_day
+        // start_time : start_time_temp_select,
+        // end_time: end_time_select
+      }
+      //console.log('Teacher routine sendData...', sendData);
+
+      this.staffWorkService.teacher_routine_list(sendData).subscribe(async response => {
+        //--- After get record - dismiss loader
+        this.loadingController.dismiss();
+        console.log('Teacher routine list...', response);
+  
+        if(response.status == true) {
+          let error = false;
+          console.log('Teacher routine list response.data: ', response.data);
+          response.data.forEach(element => {
+            if(this.day_details[routine_index].id != element.id) {
+              let end_time = this.cal_end_time(element.start_time, element.duration);
+
+              if((start_time_temp_select <= end_time) && (end_time_select >= element.start_time)) {
+                error = true;
+              }
+            }
+          });
+
+          if(error) {
+            this.day_details[routine_index].teacher_id = null;
+
+            const toast = await this.toastController.create({
+              message: "Teacher already assigned in this slot",
+              color: "dark",
+              position: "bottom",
+              duration: 2000
+            });
+            toast.present();
+          }
+        } else {
+          console.log('Teacher is available...');
+        }
+      }, async error => {
+        //--- In case of any error - dismiss loader, show error message
+        this.loadingController.dismiss();
+  
+        const alert = await this.alertCtrl.create({
+          header: 'Error!',
+          message: "Unable to load teacher routine list!",
+          buttons: ['OK']
+        });
+        alert.present();
+      });
+      
     }
   }
 
@@ -369,21 +460,22 @@ export class RoutineComponent implements OnInit {
     return end_time_hour_new+':'+end_time_min_new;
   }
 
-  changeChkbx(day_index) {
-    if(this.day_details[day_index].type == 1) {
-      if( this.day_details[day_index].old_type == 1 && this.day_details[day_index].alt_routine_day_id == null) {
-        this.day_details[day_index].show_alter_btn = true;
+  changeChkbx(routine_index) {
+    console.log('changeChkbx()');
+    if(this.day_details[routine_index].type == 1) {
+      if( this.day_details[routine_index].old_type == 1 && this.day_details[routine_index].alt_routine_day_id == null) {
+        this.day_details[routine_index].show_alter_btn = true;
       }
 
-      this.day_details[day_index].type = 2;
+      this.day_details[routine_index].type = 2;
     } else {
-      this.day_details[day_index].type = 1;
-      this.day_details[day_index].week_for = null;
-      this.day_details[day_index].show_alter_btn = false;
+      this.day_details[routine_index].type = 1;
+      this.day_details[routine_index].week_for = null;
+      this.day_details[routine_index].show_alter_btn = false;
     }
   }
 
-  async onSubmit(day_index) {
+  async onSubmit(routine_index) {
     //--- Check empty and invalid credentials
     if(this.admin_id == null) {
       const alert = await this.alertCtrl.create({
@@ -399,35 +491,35 @@ export class RoutineComponent implements OnInit {
         buttons: ['OK']
       });
       alert.present();
-    } else if(this.day_details[day_index].week_day == null) {
+    } else if(this.day_details[routine_index].week_day == null) {
       const alert = await this.alertCtrl.create({
         header: 'Error!',
         message: "Select day!",
         buttons: ['OK']
       });
       alert.present();
-    } else if(this.day_details[day_index].start_time == null) {
+    } else if(this.day_details[routine_index].start_time == null) {
       const alert = await this.alertCtrl.create({
         header: 'Error!',
         message: "Select start time!",
         buttons: ['OK']
       });
       alert.present();
-    } else if(this.day_details[day_index].duration == null) {
+    } else if(this.day_details[routine_index].duration == null) {
       const alert = await this.alertCtrl.create({
         header: 'Error!',
         message: "Select duration!",
         buttons: ['OK']
       });
       alert.present();
-    } else if(this.day_details[day_index].teacher_id == null) {
+    } else if(this.day_details[routine_index].teacher_id == null) {
       const alert = await this.alertCtrl.create({
         header: 'Error!',
         message: "Select teacher!",
         buttons: ['OK']
       });
       alert.present();
-    } else if(this.day_details[day_index].type == 2 && this.day_details[day_index].week_for == null) {
+    } else if(this.day_details[routine_index].type == 2 && this.day_details[routine_index].week_for == null) {
       const alert = await this.alertCtrl.create({
         header: 'Error!',
         message: "Select temporary week!",
@@ -445,12 +537,12 @@ export class RoutineComponent implements OnInit {
       let sendData = {
         admin_id: this.admin_id,
         batch_id: this.batch_id,
-        week_day: this.day_details[day_index].week_day,
-        start_time: this.day_details[day_index].start_time,
-        duration: this.day_details[day_index].duration,
-        teacher_id: this.day_details[day_index].teacher_id,
-        type: this.day_details[day_index].type,
-        week_for: this.day_details[day_index].week_for
+        week_day: this.day_details[routine_index].week_day,
+        start_time: this.day_details[routine_index].start_time,
+        duration: this.day_details[routine_index].duration,
+        teacher_id: this.day_details[routine_index].teacher_id,
+        type: this.day_details[routine_index].type,
+        week_for: this.day_details[routine_index].week_for
       }
       //console.log('Routine assign sendData: ', sendData);
 
@@ -468,7 +560,9 @@ export class RoutineComponent implements OnInit {
           });
           toast.present();
 
-          this.day_details[day_index].id = response.inserted_id;
+          this.day_details[routine_index].id = response.inserted_id;
+          this.day_details[routine_index].start_time_temp_old = this.day_details[routine_index].start_time_temp;
+          this.day_details[routine_index].duration_temp_old = this.day_details[routine_index].duration_temp;
           this.show_add_button = true;
           //this.page_type = 'edit';
         } else {
@@ -493,44 +587,44 @@ export class RoutineComponent implements OnInit {
     }
   }
 
-  async onUpdate(day_index) {
+  async onUpdate(routine_index) {
     //--- Check empty and invalid credentials
-    if(this.day_details[day_index].id == null) {
+    if(this.day_details[routine_index].id == null || this.batch_id == null) {
       const alert = await this.alertCtrl.create({
         header: 'Error!',
         message: "Unable to edit routine!",
         buttons: ['OK']
       });
       alert.present();
-    } else if(this.day_details[day_index].week_day == null) {
+    } else if(this.day_details[routine_index].week_day == null) {
       const alert = await this.alertCtrl.create({
         header: 'Error!',
         message: "Select day!",
         buttons: ['OK']
       });
       alert.present();
-    } else if(this.day_details[day_index].start_time == null) {
+    } else if(this.day_details[routine_index].start_time == null) {
       const alert = await this.alertCtrl.create({
         header: 'Error!',
         message: "Select start time!",
         buttons: ['OK']
       });
       alert.present();
-    } else if(this.day_details[day_index].duration == null) {
+    } else if(this.day_details[routine_index].duration == null) {
       const alert = await this.alertCtrl.create({
         header: 'Error!',
         message: "Select duration!",
         buttons: ['OK']
       });
       alert.present();
-    } else if(this.day_details[day_index].teacher_id == null) {
+    } else if(this.day_details[routine_index].teacher_id == null) {
       const alert = await this.alertCtrl.create({
         header: 'Error!',
         message: "Select teacher!",
         buttons: ['OK']
       });
       alert.present();
-    } else if(this.day_details[day_index].type == 2 && this.day_details[day_index].week_for == null) {
+    } else if(this.day_details[routine_index].type == 2 && this.day_details[routine_index].week_for == null) {
       const alert = await this.alertCtrl.create({
         header: 'Error!',
         message: "Select temporary week!",
@@ -546,13 +640,14 @@ export class RoutineComponent implements OnInit {
       loading.present();
       
       let sendData = {
-        id: this.day_details[day_index].id,
-        week_day: this.day_details[day_index].week_day,
-        start_time: this.day_details[day_index].start_time,
-        duration: this.day_details[day_index].duration,
-        teacher_id: this.day_details[day_index].teacher_id,
-        type: this.day_details[day_index].type,
-        week_for: this.day_details[day_index].week_for
+        id: this.day_details[routine_index].id,
+        batch_id: this.batch_id,
+        week_day: this.day_details[routine_index].week_day,
+        start_time: this.day_details[routine_index].start_time,
+        duration: this.day_details[routine_index].duration,
+        teacher_id: this.day_details[routine_index].teacher_id,
+        type: this.day_details[routine_index].type,
+        week_for: this.day_details[routine_index].week_for
       }
       //console.log('Routine edit sendData: ', sendData);
 
@@ -570,8 +665,10 @@ export class RoutineComponent implements OnInit {
           });
           toast.present();
 
-          this.day_details[day_index].old_type = this.day_details[day_index].type;
-          this.day_details[day_index].show_alter_btn = false;
+          this.day_details[routine_index].old_type = this.day_details[routine_index].type;
+          this.day_details[routine_index].start_time_temp_old = this.day_details[routine_index].start_time_temp;
+          this.day_details[routine_index].duration_temp_old = this.day_details[routine_index].duration_temp;
+          this.day_details[routine_index].show_alter_btn = false;
         } else {
           const alert = await this.alertCtrl.create({
             header: 'Error!',
@@ -594,44 +691,44 @@ export class RoutineComponent implements OnInit {
     }
   }
 
-  async onAlter(day_index) {
+  async onAlter(routine_index) {
     //--- Check empty and invalid credentials
-    if(this.day_details[day_index].id == null || this.day_details[day_index].type == 1 || this.batch_id == null || this.admin_id == null) {
+    if(this.day_details[routine_index].id == null || this.day_details[routine_index].type == 1 || this.batch_id == null || this.admin_id == null) {
       const alert = await this.alertCtrl.create({
         header: 'Error!',
         message: "Unable to alter routine!",
         buttons: ['OK']
       });
       alert.present();
-    } else if(this.day_details[day_index].week_day == null) {
+    } else if(this.day_details[routine_index].week_day == null) {
       const alert = await this.alertCtrl.create({
         header: 'Error!',
         message: "Select day!",
         buttons: ['OK']
       });
       alert.present();
-    } else if(this.day_details[day_index].start_time == null) {
+    } else if(this.day_details[routine_index].start_time == null) {
       const alert = await this.alertCtrl.create({
         header: 'Error!',
         message: "Select start time!",
         buttons: ['OK']
       });
       alert.present();
-    } else if(this.day_details[day_index].duration == null) {
+    } else if(this.day_details[routine_index].duration == null) {
       const alert = await this.alertCtrl.create({
         header: 'Error!',
         message: "Select duration!",
         buttons: ['OK']
       });
       alert.present();
-    } else if(this.day_details[day_index].teacher_id == null) {
+    } else if(this.day_details[routine_index].teacher_id == null) {
       const alert = await this.alertCtrl.create({
         header: 'Error!',
         message: "Select teacher!",
         buttons: ['OK']
       });
       alert.present();
-    } else if(this.day_details[day_index].week_for == null) {
+    } else if(this.day_details[routine_index].week_for == null) {
       const alert = await this.alertCtrl.create({
         header: 'Error!',
         message: "Select temporary week!",
@@ -647,14 +744,14 @@ export class RoutineComponent implements OnInit {
       loading.present();
       
       let sendData = {
-        id: this.day_details[day_index].id,
+        id: this.day_details[routine_index].id,
         batch_id: this.batch_id,
         admin_id: this.admin_id,
-        week_day: this.day_details[day_index].week_day,
-        start_time: this.day_details[day_index].start_time,
-        duration: this.day_details[day_index].duration,
-        teacher_id: this.day_details[day_index].teacher_id,
-        week_for: this.day_details[day_index].week_for
+        week_day: this.day_details[routine_index].week_day,
+        start_time: this.day_details[routine_index].start_time,
+        duration: this.day_details[routine_index].duration,
+        teacher_id: this.day_details[routine_index].teacher_id,
+        week_for: this.day_details[routine_index].week_for
       }
       //console.log('Routine alter sendData: ', sendData);
 
@@ -675,22 +772,24 @@ export class RoutineComponent implements OnInit {
           this.day_details.push(
             {
               "id": response.inserted_id,
-              "week_day" : this.day_details[day_index].week_day,
-              "start_time_temp" : this.day_details[day_index].start_time_temp,
-              "start_time" : this.day_details[day_index].start_time,
-              "duration_temp" : this.day_details[day_index].duration_temp,
-              "duration" : this.day_details[day_index].duration,
-              "teacher_id" : this.day_details[day_index].teacher_id,
+              "week_day" : this.day_details[routine_index].week_day,
+              "start_time_temp_old" : this.day_details[routine_index].start_time_temp,
+              "start_time_temp" : this.day_details[routine_index].start_time_temp,
+              "start_time" : this.day_details[routine_index].start_time,
+              "duration_temp_old" : this.day_details[routine_index].duration_temp,
+              "duration_temp" : this.day_details[routine_index].duration_temp,
+              "duration" : this.day_details[routine_index].duration,
+              "teacher_id" : this.day_details[routine_index].teacher_id,
               "old_type": 2,
               "type": 2,
-              "alt_routine_day_id": this.day_details[day_index].id,
-              "week_for": this.day_details[day_index].week_for,
+              "alt_routine_day_id": this.day_details[routine_index].id,
+              "week_for": this.day_details[routine_index].week_for,
               "show_alter_btn": false
             }
           );
 
           if(response.type == 1) {
-            this.day_details.splice(day_index, 1);
+            this.day_details.splice(routine_index, 1);
           }
           //console.log('this.day_details: ', this.day_details);
           
@@ -716,17 +815,17 @@ export class RoutineComponent implements OnInit {
     }
   }
   
-  async remove_routine(day_index) {
+  async remove_routine(routine_index) {
     if(this.day_details.length > 1) {
-      if(this.day_details[day_index].id == null) {
+      if(this.day_details[routine_index].id == null) {
         //--- This routine yet not submitted
-        this.day_details.splice(day_index, 1);
+        this.day_details.splice(routine_index, 1);
         this.show_add_button = true;
       } else {
         //--- This routine already submitted and have to be remove from databade
 
         //--- Check empty and invalid credentials
-        if(this.day_details[day_index].id == null || (this.day_details[day_index].type == 2 && this.day_details[day_index].alt_routine_day_id == null)) {
+        if(this.day_details[routine_index].id == null || (this.day_details[routine_index].type == 2 && this.day_details[routine_index].alt_routine_day_id == null)) {
           const alert = await this.alertCtrl.create({
             header: 'Error!',
             message: "Unable to remove routine!",
@@ -742,8 +841,8 @@ export class RoutineComponent implements OnInit {
           loading.present();
           
           let sendData = {
-            id: this.day_details[day_index].id,
-            alt_routine_day_id: this.day_details[day_index].alt_routine_day_id
+            id: this.day_details[routine_index].id,
+            alt_routine_day_id: this.day_details[routine_index].alt_routine_day_id
           }
           console.log('Routine remove sendData: ', sendData);
 
@@ -781,7 +880,7 @@ export class RoutineComponent implements OnInit {
               }
 
               if(response.type == 1) {
-                this.day_details.splice(day_index, 1);
+                this.day_details.splice(routine_index, 1);
               }
               //console.log('this.day_details: ', this.day_details);
               
