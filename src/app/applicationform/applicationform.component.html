@@ -26,8 +26,8 @@
                                 <li class="active" id="personal"><strong>Personal</strong></li>
                                 <li id="education"><strong>Education</strong></li>
                                 <li id="activity"><strong>Activities</strong></li>
-                                <li *ngIf="user_type == 'admin'" id="office"><strong>Office</strong></li>
-                                <li id="confirm"><strong>Finish</strong></li>
+                                <li id="office" *ngIf="user_type == 'admin' && student_type == 1"><strong>Office</strong></li>
+                                <li id="confirm" *ngIf="student_type == 1"><strong>Finish</strong></li>
                             </ul> 
 
                             <!-- fieldset - Personal -->
@@ -35,13 +35,26 @@
                                 <div class="form-card">
                                     <h5 class="fs-title">Personal Information</h5>
                                     <div class="inpt-box">
-
-                                        <!-- Course Applied For -->
-                                        <div class="dropdown frm select-dropdown">
+                                        <div *ngIf="student_type == 1" class="dropdown frm select-dropdown">
                                             <!-- <ion-label class="drop-mnu"></ion-label> -->
                                             <ion-select id="course_id" [(ngModel)]="course_id" placeholder="Course Applied For">
                                                 <ion-select-option *ngFor="let course of course_list" [value]="course.id">{{course.name}}</ion-select-option>
                                             </ion-select>
+                                        </div>
+
+                                        <!-- Course Applied For -->
+                                        <div *ngIf="student_type == 2">
+                                            <div *ngFor="let courses of applied_course_list; let i = index">
+                                                <div class="dropdown frm select-dropdown">
+                                                    <ion-select [(ngModel)]="courses.course_id" placeholder="Course Applied For">
+                                                        <ion-select-option *ngFor="let course of course_list" [value]="course.id">{{course.name}}</ion-select-option>
+                                                    </ion-select>
+                                                </div>
+                                                <p *ngIf="courses.id == null" (click)="insert_applied_course(i)">Insert</p>
+                                                <p *ngIf="courses.id != null" (click)="edit_applied_course(i)">Edit</p>
+                                                <p *ngIf="applied_course_list.length > 1" (click)="remove_applied_course(i)">Remove</p>
+                                            </div>
+                                            <p *ngIf="show_add_course_btn" (click)="apply_new_course()">Add Course</p>
                                         </div>
 
                                         <!-- Name -->
@@ -128,7 +141,8 @@
                                         <div class="sign-box">
                                             <button *ngIf="student_id == null" type="button"size="large" expand="block" class="btn save-btn" (click)="onSubmit()">Save</button>
 
-                                            <button *ngIf="student_id != null" type="button"size="large" expand="block" class="btn save-btn" (click)="onUpdate()">Update</button>
+                                            <button *ngIf="student_id != null && student_type == 1" type="button"size="large" expand="block" class="btn save-btn" (click)="onUpdateVisitor()">Update</button>
+                                            <button *ngIf="student_id != null && student_type == 2" type="button"size="large" expand="block" class="btn save-btn" (click)="onUpdateActive()">Update</button>
                                         </div>
                                     </div> 
                                 </div>

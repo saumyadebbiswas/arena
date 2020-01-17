@@ -18,6 +18,7 @@ export class ApplicationactivitiesComponent implements OnInit {
   check_oth: boolean = false;
   
   student_id: string = null;
+  student_type: string = "1";
   id: string = null;
   games: string = "";
   social_activity: string = "";
@@ -45,6 +46,7 @@ export class ApplicationactivitiesComponent implements OnInit {
       this.user_type = this.userService.currentUserValue.user_type;
 
       this.student_id = this.route.snapshot.paramMap.get('id');
+      this.student_type = localStorage.getItem("student_type");
 
       this.activity_details();
     }

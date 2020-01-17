@@ -6,7 +6,7 @@
       </ion-menu-button>
     </ion-buttons>
 
-    <ion-title class="text-center">Register Student List</ion-title>
+    <ion-title class="text-center">Active Student List</ion-title>
 
     <app-notification></app-notification>
   </div>
@@ -24,7 +24,7 @@
           <ion-datetime id="dob" class="info-frm" displayFormat="MMM DD, YYYY" placeholder="To"></ion-datetime>
       </ion-item>
     </div> -->
-
+    
     <ion-row justify-content-center class="product-sec">
       <ion-item class="form-group frm" style="margin-bottom:10px;">
         <span><i class="fa fa-search"></i></span>
@@ -38,10 +38,10 @@
             <h4>{{student.name}}</h4>
             <p>Phone: {{student.phone}}</p>
             <p *ngIf="student.email">Email: {{student.email}}</p>
-            <p *ngIf="student.applied_course">Applied Course: {{student.applied_course}}</p>
+            <!-- <p *ngIf="student.applied_course">Applied Course: {{student.applied_course}}</p> -->
           </div>
 
-          <input type="button" class="application-btn" (click)="moveApplicationForm(student.id)" value="Fill Application" />
+          <input type="button" class="application-btn" (click)="moveApplicationForm(student.id)" value="Show Application" />
         </li>
         
       </ul>

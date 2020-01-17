@@ -127,6 +127,11 @@ export class AppComponent {
           title: 'Register Students',
           url: '/visitor-students',
           icon: 'list'
+        },
+        {
+          title: 'Active Students',
+          url: '/active-students',
+          icon: 'list'
         }
       ];
     } else if(staff_type == '3') { //--- If Academic Head staff
