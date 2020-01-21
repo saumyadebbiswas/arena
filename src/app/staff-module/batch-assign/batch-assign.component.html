@@ -35,7 +35,7 @@
             <p class="chq-inpt">
               <ion-label class="chq-lebl">{{active_student.name}} {{active_student?.find_mark}}</ion-label>
               <!-- <ion-label class="chq-lebl"> <strong>{{active_student.name}}</strong></ion-label> -->
-              <ion-checkbox class="checkbox" (ionChange)="changeChkbx(active_student.id)" color="primary" checked="{{active_student?.isChecked}}"></ion-checkbox>
+              <ion-checkbox class="checkbox" (ionChange)="changeChkbx(active_student.id)" color="primary" checked="{{active_student?.isChecked}}" [disabled]="active_student?.isDisabled"></ion-checkbox>
             </p>
         </li>
       </ul>

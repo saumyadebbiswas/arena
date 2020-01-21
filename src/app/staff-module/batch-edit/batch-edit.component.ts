@@ -3,7 +3,6 @@ import { VisitorsService, UserService, StaffWorkService } from 'src/app/services
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoadingController, AlertController, ToastController } from '@ionic/angular';
 
-
 @Component({
   selector: 'app-batch-edit',
   templateUrl: './batch-edit.component.html',
@@ -13,16 +12,17 @@ export class BatchEditComponent implements OnInit {
 
   showloader: boolean = true;
   course_list: any = [];
-  active_student_list: any = [];
-  batch_name: string = "";
-  course_id: string = null;
-  start_date: string = null;
-  minDate: String = new Date(new Date().setDate(new Date().getDate() + 1)).toISOString(); //--- Get tommorow date as min date
-  maxDate: any = new Date(new Date().setDate(new Date().getDate() + 365)).toISOString(); //--- Add one year to get max date
+  active_student_list: any;
+  batch_name: string;
+  course_id: string;
+  start_date: string;
+  minDate: any;
+  maxDate: any;
   admin_id: string;
-  checkbox_list: any = [];
-  batch_id: string = null;
-  students_assign: any = [];
+  checkbox_list: any;
+  batch_id: string;
+  students_assign: any;
+  is_show_modal: boolean;
 
   constructor(
     private router: Router,
@@ -46,6 +46,13 @@ export class BatchEditComponent implements OnInit {
     this.active_student_list = [];
     this.students_assign = [];
     this.batch_id = this.route.snapshot.paramMap.get('id');
+    this.batch_name = "";
+    this.course_id = null;
+    this.start_date = null;
+    this.minDate = new Date(new Date().setDate(new Date().getDate() + 1)).toISOString(); //--- Get tommorow date as min date
+    this.maxDate = new Date(new Date().setDate(new Date().getDate() + 365)).toISOString(); //--- Add one year to get max date
+    this.checkbox_list = [];
+    this.is_show_modal = false;
 
     this.batch_detail();
   }
@@ -73,6 +80,7 @@ export class BatchEditComponent implements OnInit {
           element.isChecked = false; //-- Set by default all checkbox unchecked
           this.students_assign.push(element);
         });
+        //console.log('this.students_assign: ', this.students_assign);
       } else {
         const alert = await this.alertCtrl.create({
           header: 'Error!',
@@ -149,12 +157,37 @@ export class BatchEditComponent implements OnInit {
       this.loadingController.dismiss();
       this.showloader = false;
 
+      let temp_find_list = [];
+      let temp_not_find_list = [];
+
       if(response.status == true) {
         response.data.forEach(element => {
-          if(this.students_assign.find(ob => ob['student_id'] === element.id) == null) {
+          //--- Old logic || Not require || From active student list reomve those students who already assigned in this batch
+          // if(this.students_assign.find(ob => ob['student_id'] === element.id) == null) {
+          //   element.isChecked = false; //-- Set by default all checkbox unchecked
+          //   this.active_student_list.push(element);
+          // }
+
+          if(element.applied_course_id == this.course_id) {;
             element.isChecked = false; //-- Set by default all checkbox unchecked
-            this.active_student_list.push(element);
+            element.isDisabled = false; //-- Set course wise selected students checkbox enable
+            element.find_mark = '*'; //-- Set course wise selected students a find mark
+            temp_find_list.push(element)
+          } else {
+            element.isChecked = false; //-- Set by default all checkbox unchecked
+            element.isDisabled = true; //-- Set other students checkbox disable
+            element.find_mark = ''; //-- Set other students find mark as blank
+            temp_not_find_list.push(element);
           }
+        });
+
+        //--- To short list the selected students at the top
+        temp_find_list.forEach(element => {
+          this.active_student_list.push(element);
+        });
+        temp_not_find_list.forEach(element => {
+          element.find_mark = '';
+          this.active_student_list.push(element);
         });
       } else {
         const toast = await this.toastController.create({
@@ -188,16 +221,20 @@ export class BatchEditComponent implements OnInit {
       let temp_not_find_list = [];
       
       this.active_student_list.forEach(element => {
-        if(element.applied_course_id == course_id) {
-          temp_find_list.push(element);
+        if(element.applied_course_id == course_id) {;
+          element.isDisabled = false; //-- Set course wise selected students checkbox enable
+          element.find_mark = '*'; //-- Set course wise selected students a find mark
+          temp_find_list.push(element)
         } else {
+          element.isDisabled = true; //-- Set other students checkbox disable
+          element.find_mark = ''; //-- Set other students find mark as blank
           temp_not_find_list.push(element);
         }
       });
 
+      //--- To short list the selected students at the top
       this.active_student_list = [];
       temp_find_list.forEach(element => {
-        element.find_mark = '*';
         this.active_student_list.push(element);
       });
       temp_not_find_list.forEach(element => {
@@ -335,6 +372,60 @@ export class BatchEditComponent implements OnInit {
         alert.present();
       });
     }
+  }
+
+  onShowModal() {
+    this.is_show_modal = true;
+  }
+
+  onHideModal() {
+    this.is_show_modal = false;
+  }
+
+  async onRemove() {
+    this.is_show_modal = false;
+
+    //--- Start loader
+    const loading = await this.loadingController.create({
+      message: 'Please wait...',
+      spinner: 'bubbles'
+    });
+    loading.present();
+
+    this.staffWorkService.batch_remove(this.batch_id).subscribe(async response => {
+      //console.log('Batch remove response: ', response);
+      //--- After record updated - dismiss loader
+      this.loadingController.dismiss();
+
+      if(response.status == true) {
+        const toast = await this.toastController.create({
+          message: response.message,
+          color: "dark",
+          position: "bottom",
+          duration: 2000
+        });
+        toast.present();
+
+        this.router.navigate(['/batch-list']);
+      } else {
+        const alert = await this.alertCtrl.create({
+          header: 'Error!',
+          message: response.message,
+          buttons: ['OK']
+        });
+        alert.present();
+      }
+    }, async error => {
+      console.log('Batch remove error: ', error);
+      //--- In case of login error - dismiss loader, show error message
+      this.loadingController.dismiss();
+      const alert = await this.alertCtrl.create({
+        header: 'Error!',
+        message: "Internal problem!",
+        buttons: ['OK']
+      });
+      alert.present();
+    });
   }
 
 }

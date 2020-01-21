@@ -17,6 +17,7 @@ export class RoutineComponent implements OnInit {
   teacher_list: any;
   admin_id: string;
   batch_id: string;
+  student_list_details: any;
   week_days: any = [
     { "value": "1", "day": "Sunday" },
     { "value": "2", "day": "Monday" },
@@ -69,6 +70,7 @@ export class RoutineComponent implements OnInit {
     this.batch_list = [];
     this.teacher_list = [];
     this.batch_id = null;
+    this.student_list_details = [];
     this.active_batch_all();
   }
 
@@ -205,6 +207,8 @@ export class RoutineComponent implements OnInit {
         });
 
         this.show_add_button = true;
+
+        this.batch_student_details();
       } else {
         const toast = await this.toastController.create({
           message: response.message,
@@ -229,6 +233,7 @@ export class RoutineComponent implements OnInit {
           }
         ];
         this.show_add_button = false;
+        this.batch_student_details();
       }
     }, async error => {
       //--- In case of any error - dismiss loader, show error message
@@ -256,6 +261,46 @@ export class RoutineComponent implements OnInit {
         }
       ];
       this.show_add_button = false;
+      this.batch_student_details();
+    });
+  }
+
+  async batch_student_details() {
+    //--- Start loader
+    const loading = await this.loadingController.create({
+      message: 'Loading student details...',
+      spinner: 'bubbles'
+    });
+    loading.present();
+    this.showloader = true;
+
+    this.staffWorkService.routine_of_students(this.batch_id).subscribe(async response => {
+      console.log('student details response: ', response);
+      //--- After get record - dismiss loader
+      this.loadingController.dismiss();
+      this.showloader = false;
+
+      if(response.status == true) {
+        this.student_list_details = response.data;
+      } else {
+        const toast = await this.toastController.create({
+          message: response.message,
+          color: "dark",
+          position: "bottom",
+          duration: 2000
+        });
+        toast.present();
+      }
+    }, async error => {
+      //--- In case of any error - dismiss loader, show error message
+      this.loadingController.dismiss();
+
+      const alert = await this.alertCtrl.create({
+        header: 'Error!',
+        message: "Unable to load student details!",
+        buttons: ['OK']
+      });
+      alert.present();
     });
   }
 
@@ -461,7 +506,6 @@ export class RoutineComponent implements OnInit {
   }
 
   changeChkbx(routine_index) {
-    console.log('changeChkbx()');
     if(this.day_details[routine_index].type == 1) {
       if( this.day_details[routine_index].old_type == 1 && this.day_details[routine_index].alt_routine_day_id == null) {
         this.day_details[routine_index].show_alter_btn = true;

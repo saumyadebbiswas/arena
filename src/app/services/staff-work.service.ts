@@ -17,7 +17,7 @@ export class StaffWorkService {
   }
 	
   active_student_list() {
-    return this.http.get<any>(this.api_url+'/student/activelist', {headers: this.requestHeader});
+    return this.http.get<any>(this.api_url+'/student/activefreelist', {headers: this.requestHeader});
   }
 	
   teacher_list() {
@@ -36,6 +36,10 @@ export class StaffWorkService {
     return this.http.post<any>(this.api_url+'/batch/edit', sendData, {headers: this.requestHeader});
   }
 	
+  batch_remove(batch_id: any) {
+    return this.http.delete<any>(this.api_url+'/batch/remove/'+batch_id, {headers: this.requestHeader});
+  }
+	
   active_batch_list() {
     return this.http.get<any>(this.api_url+'/batch/activelist', {headers: this.requestHeader});
   }
@@ -46,6 +50,10 @@ export class StaffWorkService {
 	
   routine_list(batch_id: any) {
     return this.http.get<any>(this.api_url+'/routine/detailbybatch/'+batch_id, {headers: this.requestHeader});
+  }
+	
+  routine_of_students(batch_id: any) {
+    return this.http.get<any>(this.api_url+'/routine/studentsdetails/'+batch_id, {headers: this.requestHeader});
   }
 	
   routine_day_assign(sendData: any): Observable<any> {
