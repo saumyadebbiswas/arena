@@ -208,7 +208,7 @@ export class RoutineComponent implements OnInit {
 
         this.show_add_button = true;
 
-        this.batch_student_details();
+        //this.batch_student_details();
       } else {
         const toast = await this.toastController.create({
           message: response.message,
@@ -233,7 +233,7 @@ export class RoutineComponent implements OnInit {
           }
         ];
         this.show_add_button = false;
-        this.batch_student_details();
+        //this.batch_student_details();
       }
     }, async error => {
       //--- In case of any error - dismiss loader, show error message
@@ -261,7 +261,7 @@ export class RoutineComponent implements OnInit {
         }
       ];
       this.show_add_button = false;
-      this.batch_student_details();
+      //this.batch_student_details();
     });
   }
 
@@ -305,7 +305,6 @@ export class RoutineComponent implements OnInit {
   }
 
   add_routine() {
-    console.log('add_routine()');
     this.day_details.push({
       "id": null,
       "week_day" : null,
@@ -428,13 +427,14 @@ export class RoutineComponent implements OnInit {
       this.staffWorkService.teacher_routine_list(sendData).subscribe(async response => {
         //--- After get record - dismiss loader
         this.loadingController.dismiss();
-        console.log('Teacher routine list...', response);
+        //console.log('Teacher routine list...', response);
   
         if(response.status == true) {
           let error = false;
-          console.log('Teacher routine list response.data: ', response.data);
+          //console.log('Teacher routine list response.data: ', response.data);
           response.data.forEach(element => {
-            if(this.day_details[routine_index].id != element.id) {
+            //--- If routine day id and alternative routine day id not match
+            if(this.day_details[routine_index].id != element.id && this.day_details[routine_index].id != element.alt_routine_day_id) {
               let end_time = this.cal_end_time(element.start_time, element.duration);
 
               if((start_time_temp_select <= end_time) && (end_time_select >= element.start_time)) {
@@ -454,8 +454,6 @@ export class RoutineComponent implements OnInit {
             });
             toast.present();
           }
-        } else {
-          console.log('Teacher is available...');
         }
       }, async error => {
         //--- In case of any error - dismiss loader, show error message
@@ -610,12 +608,23 @@ export class RoutineComponent implements OnInit {
           this.show_add_button = true;
           //this.page_type = 'edit';
         } else {
-          const alert = await this.alertCtrl.create({
-            header: 'Error!',
-            message: response.message,
-            buttons: ['OK']
-          });
-          alert.present();
+          if(response.type == 1) {
+            console.log('Error response.data: ', response.data);
+
+            const alert = await this.alertCtrl.create({
+              header: 'Error!',
+              message: response.message,
+              buttons: ['OK']
+            });
+            alert.present();
+          } else {
+            const alert = await this.alertCtrl.create({
+              header: 'Error!',
+              message: response.message,
+              buttons: ['OK']
+            });
+            alert.present();
+          }
         }
       }, async error => {
         console.log('Routine assign error: ', error);
@@ -888,10 +897,10 @@ export class RoutineComponent implements OnInit {
             id: this.day_details[routine_index].id,
             alt_routine_day_id: this.day_details[routine_index].alt_routine_day_id
           }
-          console.log('Routine remove sendData: ', sendData);
+          //console.log('Routine remove sendData: ', sendData);
 
           this.staffWorkService.routine_day_remove(sendData).subscribe(async response => {
-            console.log('Routine remove response: ', response);
+            //console.log('Routine remove response: ', response);
             //--- After record updated - dismiss loader
             this.loadingController.dismiss();
 
@@ -909,8 +918,10 @@ export class RoutineComponent implements OnInit {
                   {
                     "id": response.data.id,
                     "week_day" : response.data.week_day,
+                    "start_time_temp_old" : this.format_date(response.data.start_time),
                     "start_time_temp" : this.format_date(response.data.start_time),
                     "start_time" : response.data.start_time,
+                    "duration_temp_old" : this.format_date(response.data.duration),
                     "duration_temp" : this.format_date(response.data.duration),
                     "duration" : response.data.duration,
                     "teacher_id" : response.data.teacher_id,
