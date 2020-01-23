@@ -278,12 +278,14 @@ export class BatchEditComponent implements OnInit {
         students_new.push({'student_id': element.id});
       }
     });
-
     
     let students_remove = [];
     this.students_assign.forEach(element => {
       if(element.isChecked) {
-        students_remove.push({'id': element.id});
+        students_remove.push({
+          'id': element.id,
+          'student_id': element.student_id
+        });
       }
     });
 

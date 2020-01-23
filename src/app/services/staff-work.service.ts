@@ -52,9 +52,9 @@ export class StaffWorkService {
     return this.http.get<any>(this.api_url+'/routine/detailbybatch/'+batch_id, {headers: this.requestHeader});
   }
 	
-  routine_of_students(batch_id: any) {
-    return this.http.get<any>(this.api_url+'/routine/studentsdetails/'+batch_id, {headers: this.requestHeader});
-  }
+  // routine_of_students(batch_id: any) {
+  //   return this.http.get<any>(this.api_url+'/routine/studentsdetails/'+batch_id, {headers: this.requestHeader});
+  // }
 	
   routine_day_assign(sendData: any): Observable<any> {
     return this.http.post<any>(this.api_url+'/routine/day/insert', sendData, {headers: this.requestHeader});
