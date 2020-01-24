@@ -107,8 +107,8 @@ export class AppComponent {
 
       this.appPages = [
         {
-          title: 'Courses',
-          url: '/course',
+          title: 'Routine Details',
+          url: '/student-routine',
           icon: 'list'
         }
       ];

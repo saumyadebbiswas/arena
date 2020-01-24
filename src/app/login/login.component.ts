@@ -122,7 +122,7 @@ export class LoginComponent implements OnInit {
             if(response.data.details.type == '1') { //--- If visitor student
               this.router.navigate(['/course']);
             } else if(response.data.details.type == '2') { //--- If active student
-              this.router.navigate(['/course']);
+              this.router.navigate(['/student-routine']);
             }
           } else if(response.data.user_type == 'admin' && response.data.details.type != '1') {
             if(response.data.details.type == '2') { //--- If councellor staff

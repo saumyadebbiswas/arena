@@ -108,15 +108,48 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" (click)="onHideModal()" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Oops! Time Conflict</h4>
+                    <h4 class="modal-title">Oops! Teacher Time Conflict</h4>
                 </div>
                 <div class="modal-body">
-                    <p>Teacher's {{teachers_time_conflict_details.length}} date time conflict!</p>
+                    <p>{{teachers_time_conflict_details.length}} times, teacher's({{teachers_time_conflict_details[0]?.teacher_name}}) routine-time conflict in  {{dayName(teachers_time_conflict_details[0]?.week_day)}}!</p>
+
+                    <p *ngFor="let conflict_details of teachers_time_conflict_details">
+                        Batch name: {{conflict_details?.batch_name}},
+                        Start time: {{time_24to12_convert(conflict_details?.start_time)}}, 
+                        End time: {{time_24to12_convert(conflict_details?.end_time)}}
+                    </p>
                 </div>
                 <div class="modal-footer">
-                    <button *ngIf="teachers_time_conflict_details.length == 1" type="button" class="btn btn-default" data-dismiss="modal">Fix Other Time</button>
+                    <button *ngIf="teachers_time_conflict_details.length == 1" type="button" class="btn btn-default" data-dismiss="modal" (click)="moveRoutineAssigntofix(teachers_time_conflict_details[0]?.batch_id)">Fix Other Time</button>
     
                     <button type="button" (click)="onHideModal()" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal-2 for students's time conflict -->
+    <div class="show_modal" *ngIf="students_time_conflict_details != null">
+        <div class="modal-body-content">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" (click)="onHideModal2()" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Oops! Student Time Conflict</h4>
+                </div>
+                <div class="modal-body">
+                    <p>{{students_time_conflict_details.length}} times, students routine-time conflict in {{dayName(students_time_conflict_details[0]?.week_day)}}!</p>
+
+                    <p *ngFor="let conflict_details of students_time_conflict_details">
+                        Student name: {{conflict_details?.student_name}},
+                        Batch name: {{conflict_details?.batch_name}},
+                        Start time: {{time_24to12_convert(conflict_details?.start_time)}}, 
+                        End time: {{time_24to12_convert(conflict_details?.end_time)}}
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button *ngIf="students_time_conflict_details.length == 1" type="button" class="btn btn-default" data-dismiss="modal" (click)="moveRoutineAssigntofix(students_time_conflict_details[0]?.batch_id)">Fix Other Time</button>
+    
+                    <button type="button" (click)="onHideModal2()" class="btn btn-default" data-dismiss="modal">Cancel</button>
                 </div>
             </div>
         </div>

@@ -12,13 +12,13 @@ export class RoutineComponent implements OnInit {
 
   showloader: boolean;
   show_add_button: boolean;
-  //page_type: string;
   batch_list: any;
   teacher_list: any;
   admin_id: string;
   batch_id: string;
   student_list_details: any;
   teachers_time_conflict_details: any = [];
+  students_time_conflict_details: any = [];
   week_days: any = [
     { "value": "1", "day": "Sunday" },
     { "value": "2", "day": "Monday" },
@@ -28,26 +28,7 @@ export class RoutineComponent implements OnInit {
     { "value": "6", "day": "Friday" },
     { "value": "7", "day": "Saturday" },
   ];
-  day_details: any = [
-    {
-      "id": null,
-      "week_day_old" : null,
-      "week_day" : null,
-      "start_time_temp_old" : null,
-      "start_time_temp" : null,
-      "start_time" : null,
-      "duration_temp_old" : null,
-      "duration_temp" : null,
-      "duration" : null,
-      "teacher_id_old" : null,
-      "teacher_id" : null,
-      "old_type": 1,
-      "type": 1,
-      "alt_routine_day_id": null,
-      "week_for": null,
-      "show_alter_btn": false
-    }
-  ];
+  day_details: any;
 
   constructor(
     private router: Router,
@@ -69,12 +50,31 @@ export class RoutineComponent implements OnInit {
 
     this.showloader = true;
     this.show_add_button = false;
-    //this.page_type = "insert";
     this.batch_list = [];
     this.teacher_list = [];
     this.batch_id = null;
     this.student_list_details = [];
     this.teachers_time_conflict_details = null;
+    this.students_time_conflict_details = null;
+    this.day_details = [{
+      "id": null,
+      "week_day_old" : null,
+      "week_day" : null,
+      "start_time_temp_old" : null,
+      "start_time_temp" : null,
+      "start_time" : null,
+      "duration_temp_old" : null,
+      "duration_temp" : null,
+      "duration" : null,
+      "teacher_id_old" : null,
+      "teacher_id" : null,
+      "old_type": 1,
+      "type": 1,
+      "alt_routine_day_id": null,
+      "week_for": null,
+      "show_alter_btn": false
+    }];
+
     this.active_batch_all();
   }
 
@@ -412,15 +412,11 @@ export class RoutineComponent implements OnInit {
           this.teachers_time_conflict_details = response.data;
           //console.log('this.teachers_time_conflict_details: ', this.teachers_time_conflict_details);
           
-          this.day_details[routine_index].teacher_id = this.day_details[routine_index].teacher_id_old; //--- Set old value
-
-          // const toast = await this.toastController.create({
-          //   message: response.message,
-          //   color: "dark",
-          //   position: "bottom",
-          //   duration: 2000
-          // });
-          // toast.present();
+          if(this.day_details[routine_index].teacher_id == this.day_details[routine_index].teacher_id_old) {
+            this.day_details[routine_index].teacher_id = null;
+          } else {
+            this.day_details[routine_index].teacher_id = this.day_details[routine_index].teacher_id_old; //--- Set old value
+          }
         }
       }, async error => {
         //--- In case of any error - dismiss loader, show error message
@@ -576,14 +572,9 @@ export class RoutineComponent implements OnInit {
           this.show_add_button = true;
         } else {
           if(response.type == 1) {
-            console.log('Error insert response.data: ', response.data);
-
-            const alert = await this.alertCtrl.create({
-              header: 'Error!',
-              message: response.message,
-              buttons: ['OK']
-            });
-            alert.present();
+            this.students_time_conflict_details = [];
+            this.students_time_conflict_details = response.data;
+            //console.log('Error insert response.data: ', response.data);
           } else {
             const alert = await this.alertCtrl.create({
               header: 'Error!',
@@ -693,14 +684,9 @@ export class RoutineComponent implements OnInit {
           this.day_details[routine_index].show_alter_btn = false;
         } else {
           if(response.type == 1) {
-            console.log('Error update response.data: ', response.data);
-
-            const alert = await this.alertCtrl.create({
-              header: 'Error!',
-              message: response.message,
-              buttons: ['OK']
-            });
-            alert.present();
+            this.students_time_conflict_details = [];
+            this.students_time_conflict_details = response.data;
+            //console.log('Error update response.data: ', response.data);
           } else {
             const alert = await this.alertCtrl.create({
               header: 'Error!',
@@ -827,14 +813,9 @@ export class RoutineComponent implements OnInit {
           
         } else {
           if(response.type == 1) {
-            console.log('Error alter response.data: ', response.data);
-
-            const alert = await this.alertCtrl.create({
-              header: 'Error!',
-              message: response.message,
-              buttons: ['OK']
-            });
-            alert.present();
+            this.students_time_conflict_details = [];
+            this.students_time_conflict_details = response.data;
+            //console.log('Error alter response.data: ', response.data);
           } else {
             const alert = await this.alertCtrl.create({
               header: 'Error!',
@@ -962,12 +943,57 @@ export class RoutineComponent implements OnInit {
     }
   }
 
+  //--- Function to move selected batch's routine page
   moveRoutineAssign() {
     this.router.navigate(['/routine-assign', {id: this.batch_id}]);
   }
 
+  //--- Function to move selected batch's routine page for time fixing when taecher's time conflict
+  moveRoutineAssigntofix(batch_id) {
+    this.router.navigate(['/routine-assign', {id: batch_id}]);
+  }
+
   onHideModal() {
     this.teachers_time_conflict_details = null;
+  }
+
+  onHideModal2() {
+    this.students_time_conflict_details = null;
+  }
+  
+  //--- Function to convert 24-hour time format(i.e. 14:30) to 12-hourtime format(i.e. 02:30 PM)
+  time_24to12_convert(time) {
+    let hour = (time.split(':'))[0];
+    let min = (time.split(':'))[1];
+    let part = hour >= 12 ? 'PM' : 'AM';
+
+    min = (min + '').length == 1 ? '0'+min : min;
+    hour = hour > 12 ? hour - 12 : hour;
+    hour = (hour + '').length == 1 ? '0'+hour : hour;
+
+    return hour+':'+min+' '+part;
+  }
+
+  //--- Function to return day name by day index
+  dayName(day_index) {
+    //--- 1: Sunday, ..., 7: Saturday
+    if(day_index == '1') {
+      return 'Sunday';
+    } else if(day_index == '2') {
+      return 'Monday';
+    } else if(day_index == '3') {
+      return 'Tuesday';
+    } else if(day_index == '4') {
+      return 'Wednesday';
+    } else if(day_index == '5') {
+      return 'Thursday';
+    } else if(day_index == '6') {
+      return 'Friday';
+    } else if(day_index == '7') {
+      return 'Saturday';
+    } else {
+      return null;
+    }
   }
 
   async tooltipMsg(message) {

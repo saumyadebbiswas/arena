@@ -26,6 +26,8 @@ export class BatchEditComponent implements OnInit {
   count_students_assign_chkd: number;
   today_timestamp: any;
   batch_date_status: number;
+  students_time_conflict_details: any = [];
+  students_time_conflict_details_length: number;
 
   constructor(
     private router: Router,
@@ -60,6 +62,8 @@ export class BatchEditComponent implements OnInit {
     let today = ""+Date.now(); //--- Get today's date-time timestamp
     this.today_timestamp = today.substring(0,5); //--- Substract today's date timestamp
     this.batch_date_status = -1; //--- -1:Undefined, 1:Yet not started, 2:Started today, 3:Start date crossed
+    this.students_time_conflict_details = null;
+    this.students_time_conflict_details_length = 0;
 
     this.batch_detail();
   }
@@ -366,17 +370,16 @@ export class BatchEditComponent implements OnInit {
 
         if(response.status == true) {
           if(response.type == 1) {
-            console.log('Conflict students data: ', response.data);
-            
-            const toast = await this.toastController.create({
-              message: response.message,
-              color: "dark",
-              position: "bottom",
-              duration: 2000
-            });
-            toast.present();
+            this.students_time_conflict_details = [];
+            this.students_time_conflict_details_length = 0;
 
-            this.router.navigate(['/batch-list']);
+            response.data.forEach(element => {
+              element.forEach(element_sub => {
+                this.students_time_conflict_details.push(element_sub);
+              });
+              this.students_time_conflict_details_length = this.students_time_conflict_details_length + element.length;
+            });
+            //console.log('Conflict students data: ', this.students_time_conflict_details, this.students_time_conflict_details_length);
           } else {
             const toast = await this.toastController.create({
               message: response.message,
@@ -416,6 +419,49 @@ export class BatchEditComponent implements OnInit {
 
   onHideModal() {
     this.is_show_modal = false;
+  }
+
+  onHideModal2() {
+    this.router.navigate(['/batch-list']);
+  }
+  
+  //--- Function to convert 24-hour time format(i.e. 14:30) to 12-hourtime format(i.e. 02:30 PM)
+  time_24to12_convert(time) {
+    let hour = (time.split(':'))[0];
+    let min = (time.split(':'))[1];
+    let part = hour >= 12 ? 'PM' : 'AM';
+
+    min = (min + '').length == 1 ? '0'+min : min;
+    hour = hour > 12 ? hour - 12 : hour;
+    hour = (hour + '').length == 1 ? '0'+hour : hour;
+
+    return hour+':'+min+' '+part;
+  }
+
+  //--- Function to return day name by day index
+  dayName(day_index) {
+    //--- 1: Sunday, ..., 7: Saturday
+    if(day_index == '1') {
+      return 'Sunday';
+    } else if(day_index == '2') {
+      return 'Monday';
+    } else if(day_index == '3') {
+      return 'Tuesday';
+    } else if(day_index == '4') {
+      return 'Wednesday';
+    } else if(day_index == '5') {
+      return 'Thursday';
+    } else if(day_index == '6') {
+      return 'Friday';
+    } else if(day_index == '7') {
+      return 'Saturday';
+    } else {
+      return null;
+    }
+  }
+
+  moveRoutineAssign(batch_id) {
+    this.router.navigate(['/routine-assign', {id: batch_id}]);
   }
 
   async onRemove() {
