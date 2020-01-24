@@ -13,7 +13,7 @@ export class RoutineDetailsComponent implements OnInit {
   showloader: boolean;
 
   constructor(
-    //private calendar: NgbCalendar,
+    private calendar: NgbCalendar,
     private config: NgbDatepickerConfig
   ) {
     const current = new Date();
@@ -50,6 +50,7 @@ export class RoutineDetailsComponent implements OnInit {
     console.log('Location: RoutineDetailsComponent');
 
     this.showloader = false;
+    this.model = this.calendar.getToday();
   }
 
   selectDate(model) {
