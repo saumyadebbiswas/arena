@@ -1,15 +1,19 @@
+.w-100 {
+    width: 100%;
+}
 .calender-box{ padding: 0 13px; height: 58vh;}
 .schedule-col {
     width: 100%;
     padding:10px 10px;
 }
-
 .Schedule-col h3 {
     font-size: 24px;
     color: #222;
     font-weight: 700;
 }
-
+.calender-col {
+    width: 100%;
+}
 .ngb-dp-week-number, .ngb-dp-weekday{ 
     font-style: normal !important;
 }
