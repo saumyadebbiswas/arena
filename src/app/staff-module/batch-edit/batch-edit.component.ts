@@ -23,6 +23,9 @@ export class BatchEditComponent implements OnInit {
   batch_id: string;
   students_assign: any;
   is_show_modal: boolean;
+  count_students_assign_chkd: number;
+  today_timestamp: any;
+  batch_date_status: number;
 
   constructor(
     private router: Router,
@@ -53,6 +56,10 @@ export class BatchEditComponent implements OnInit {
     this.maxDate = new Date(new Date().setDate(new Date().getDate() + 365)).toISOString(); //--- Add one year to get max date
     this.checkbox_list = [];
     this.is_show_modal = false;
+    this.count_students_assign_chkd = 1; //--- Assign student checked by default 1 because we need minimum must remain
+    let today = ""+Date.now(); //--- Get today's date-time timestamp
+    this.today_timestamp = today.substring(0,5); //--- Substract today's date timestamp
+    this.batch_date_status = -1; //--- -1:Undefined, 1:Yet not started, 2:Started today, 3:Start date crossed
 
     this.batch_detail();
   }
@@ -76,6 +83,21 @@ export class BatchEditComponent implements OnInit {
         this.batch_name = response.data.name;
         this.course_id = response.data.course_id;
         this.start_date = response.data.start_date;
+
+        let start_date_timestamp = ""+Date.parse(this.start_date); //--- Convert start_date into date-time _timestamp
+        start_date_timestamp = start_date_timestamp.substring(0,5); //--- Substract start_date's date timestamp
+        //console.log('Today, start_day', this.today_timestamp, start_date_timestamp);
+        
+        if(+start_date_timestamp > +this.today_timestamp) {
+          this.batch_date_status = 1; //--- Yet not started
+        } else if(+start_date_timestamp == +this.today_timestamp) {
+          this.batch_date_status = 2; //--- Started today
+        } else if(+start_date_timestamp < +this.today_timestamp) {
+          this.batch_date_status = 3; //--- Start date crossed
+        } else {
+          this.batch_date_status = -1; //--- If any error, undefined
+        }
+
         response.data.students.forEach(element => {
           element.isChecked = false; //-- Set by default all checkbox unchecked
           this.students_assign.push(element);
@@ -258,16 +280,14 @@ export class BatchEditComponent implements OnInit {
     //console.log('Active student list: ', this.active_student_list);
   }
 
-  changeASChkbx(batch_stu_id) {
-    let i = 0;
-    this.students_assign.forEach(element => {
-      if(element.id == batch_stu_id && element.isChecked) {
-        this.students_assign[i].isChecked = false;
-      } else if(element.id == batch_stu_id && !element.isChecked) {
-        this.students_assign[i].isChecked = true;
-      }
-      i++;
-    });
+  changeASChkbx(index) {
+    if(this.students_assign[index].isChecked) {
+      this.students_assign[index].isChecked = false;
+      this.count_students_assign_chkd--;
+    } else if(!this.students_assign[index].isChecked) {
+      this.students_assign[index].isChecked = true;
+      this.count_students_assign_chkd++;
+    }
     //console.log('Assigned student list: ', this.students_assign);
   }
 
@@ -345,15 +365,29 @@ export class BatchEditComponent implements OnInit {
         this.loadingController.dismiss();
 
         if(response.status == true) {
-          const toast = await this.toastController.create({
-            message: response.message,
-            color: "dark",
-            position: "bottom",
-            duration: 2000
-          });
-          toast.present();
+          if(response.type == 1) {
+            console.log('Conflict students data: ', response.data);
+            
+            const toast = await this.toastController.create({
+              message: response.message,
+              color: "dark",
+              position: "bottom",
+              duration: 2000
+            });
+            toast.present();
 
-          this.router.navigate(['/batch-list']);
+            this.router.navigate(['/batch-list']);
+          } else {
+            const toast = await this.toastController.create({
+              message: response.message,
+              color: "dark",
+              position: "bottom",
+              duration: 2000
+            });
+            toast.present();
+
+            this.router.navigate(['/batch-list']);
+          }
         } else {
           const alert = await this.alertCtrl.create({
             header: 'Error!',
@@ -428,6 +462,16 @@ export class BatchEditComponent implements OnInit {
       });
       alert.present();
     });
+  }
+
+  async tooltipMsg(message) {
+    const toast = await this.toastController.create({
+      message: message,
+      color: "dark",
+      position: "bottom",
+      duration: 2000
+    });
+    toast.present();
   }
 
 }

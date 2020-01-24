@@ -18,6 +18,7 @@ export class RoutineComponent implements OnInit {
   admin_id: string;
   batch_id: string;
   student_list_details: any;
+  teachers_time_conflict_details: any = [];
   week_days: any = [
     { "value": "1", "day": "Sunday" },
     { "value": "2", "day": "Monday" },
@@ -73,6 +74,7 @@ export class RoutineComponent implements OnInit {
     this.teacher_list = [];
     this.batch_id = null;
     this.student_list_details = [];
+    this.teachers_time_conflict_details = null;
     this.active_batch_all();
   }
 
@@ -406,42 +408,19 @@ export class RoutineComponent implements OnInit {
   
         //--- If teacher's time conflict
         if(response.status == true) {
-          console.log('Teacher conflict data: ', response.data);
+          this.teachers_time_conflict_details = [];
+          this.teachers_time_conflict_details = response.data;
+          //console.log('this.teachers_time_conflict_details: ', this.teachers_time_conflict_details);
           
           this.day_details[routine_index].teacher_id = this.day_details[routine_index].teacher_id_old; //--- Set old value
 
-          const toast = await this.toastController.create({
-            message: response.message,
-            color: "dark",
-            position: "bottom",
-            duration: 2000
-          });
-          toast.present();
-
-          // let error = false;
-          // //console.log('Teacher routine list response.data: ', response.data);
-          // response.data.forEach(element => {
-          //   //--- If routine day id and alternative routine day id not match
-          //   if(this.day_details[routine_index].id != element.id && this.day_details[routine_index].id != element.alt_routine_day_id) {
-          //     let end_time = this.cal_end_time(element.start_time, element.duration);
-
-          //     if((start_time_temp_select <= end_time) && (end_time_select >= element.start_time)) {
-          //       error = true;
-          //     }
-          //   }
+          // const toast = await this.toastController.create({
+          //   message: response.message,
+          //   color: "dark",
+          //   position: "bottom",
+          //   duration: 2000
           // });
-
-          // if(error) {
-          //   this.day_details[routine_index].teacher_id = this.day_details[routine_index].teacher_id_old;
-
-          //   const toast = await this.toastController.create({
-          //     message: "Teacher's time slot conflict",
-          //     color: "dark",
-          //     position: "bottom",
-          //     duration: 2000
-          //   });
-          //   toast.present();
-          // }
+          // toast.present();
         }
       }, async error => {
         //--- In case of any error - dismiss loader, show error message
@@ -985,6 +964,10 @@ export class RoutineComponent implements OnInit {
 
   moveRoutineAssign() {
     this.router.navigate(['/routine-assign', {id: this.batch_id}]);
+  }
+
+  onHideModal() {
+    this.teachers_time_conflict_details = null;
   }
 
   async tooltipMsg(message) {

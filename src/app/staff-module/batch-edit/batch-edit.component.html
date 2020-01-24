@@ -25,7 +25,8 @@
     </div>
     
     <div class="dropdown frm select-dropdown mar-top-ex ">
-      <ion-datetime id="date" class="info-frm drop-mnu remove-lt-pad" displayFormat="MMM DD, YYYY" [min]="minDate" [max]="maxDate" placeholder="Start Date" [(ngModel)]="start_date"></ion-datetime>
+      <ion-datetime *ngIf="batch_date_status == 1" id="date" class="info-frm drop-mnu remove-lt-pad" displayFormat="MMM DD, YYYY" [min]="minDate" [max]="maxDate" placeholder="Start Date" [(ngModel)]="start_date"></ion-datetime>
+      <ion-datetime *ngIf="batch_date_status != 1" id="date" class="info-frm drop-mnu remove-lt-pad" displayFormat="MMM DD, YYYY" [min]="minDate" [max]="maxDate" placeholder="Start Date" [(ngModel)]="start_date" disabled="true"></ion-datetime>
     </div>
 
     <div class="student-list-box">
@@ -33,10 +34,12 @@
         <h5>Assigned Students <span class="sub-head">(Select to remove)</span></h5>
       
         <ul class="student-list">
-          <li *ngFor="let student of students_assign">
+          <li *ngFor="let student of students_assign; let i = index">
               <p class="chq-inpt">
                 <ion-label class="chq-lebl">{{student.student_name}}</ion-label>
-                <ion-checkbox class="checkbox" (ionChange)="changeASChkbx(student.id)" color="primary" checked="{{student?.isChecked}}"></ion-checkbox>
+                <ion-checkbox *ngIf="students_assign.length == count_students_assign_chkd && student.isChecked == false" class="checkbox" color="primary" checked="{{student?.isChecked}}" disabled="true"></ion-checkbox>
+                <ion-checkbox *ngIf="students_assign.length == count_students_assign_chkd && student.isChecked == true" class="checkbox" (ionChange)="changeASChkbx(i)" color="primary" checked="{{student?.isChecked}}"></ion-checkbox>
+                <ion-checkbox *ngIf="students_assign.length != count_students_assign_chkd" class="checkbox" (ionChange)="changeASChkbx(i)" color="primary" checked="{{student?.isChecked}}"></ion-checkbox>
               </p>
           </li>
         </ul>
@@ -58,7 +61,9 @@
     </div>
 
     <button type="button" (click)="onUpdate()" class="batch-btn">Update</button><br>
-    <button type="button" (click)="onShowModal()" class="batch-btn">Remove</button>
+    <button *ngIf="batch_date_status == 1" type="button" (click)="onShowModal()" class="batch-btn">Remove</button>
+    <button *ngIf="batch_date_status == 2" type="button" (click)="tooltipMsg('Started today. Complete tommorow')" class="batch-btn-disable">Complete</button>
+    <button *ngIf="batch_date_status == 3" type="button" class="batch-btn">Complete</button>
   </div>
 
   <!-- Modal -->

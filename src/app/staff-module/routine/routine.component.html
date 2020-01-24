@@ -101,4 +101,24 @@
         <button *ngIf="show_add_button" type="button" (click)="add_routine()" class="batch-btn-lrg">Add More</button>
         <button *ngIf="!show_add_button" type="button" class="batch-btn-disable">Add More</button>
     </div>
+
+    <!-- Modal for teacher's time conflict -->
+    <div class="show_modal" *ngIf="teachers_time_conflict_details != null">
+        <div class="modal-body-content">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" (click)="onHideModal()" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Oops! Time Conflict</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Teacher's {{teachers_time_conflict_details.length}} date time conflict!</p>
+                </div>
+                <div class="modal-footer">
+                    <button *ngIf="teachers_time_conflict_details.length == 1" type="button" class="btn btn-default" data-dismiss="modal">Fix Other Time</button>
+    
+                    <button type="button" (click)="onHideModal()" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </ion-content>

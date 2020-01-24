@@ -56,3 +56,7 @@ ul.routine-list li h6{ margin-top: 0px; color: #353333; background: #ecebeb;
     margin-top: -29px;
     margin-right: 20px;
 }
+
+.show_modal{ width:100%; position: fixed; background: rgba(0, 0, 0, 0.7); top: 0px; bottom: 0px; left: 0px; z-index: 99;}
+.modal-body-content{ width: 90%; margin: 10% auto; position: relative;}
+.close{ position: absolute; top: 0px; right: 0px;}
