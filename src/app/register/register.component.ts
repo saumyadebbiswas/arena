@@ -10,12 +10,13 @@ import { UserService, VisitorsService } from '../services';
 })
 export class RegisterComponent implements OnInit {
 
-  name: string = "";
-  email: string = "";
-  phone: string = "";
-  password: string = "";
-  course_id: string = null;
-  course_list: any = [];
+  name: string;
+  email: string;
+  phone: string;
+  password: string;
+  confirm_password: string;
+  course_id: string;
+  course_list: any;
 
   constructor(
     public menuCtrl: MenuController,
@@ -38,6 +39,14 @@ export class RegisterComponent implements OnInit {
     } else {
       this.menuCtrl.enable(false);
       console.log('Location: RegisterComponent');
+
+      this.name = "";
+      this.email = "";
+      this.phone = "";
+      this.password = "";
+      this.confirm_password = "";
+      this.course_id = null;
+      this.course_list = [];
 
       this.course_all();
     }
@@ -113,6 +122,22 @@ export class RegisterComponent implements OnInit {
         buttons: ['OK']
         });
       alert.present();
+    } else if(this.confirm_password.length == 0) {
+      const alert = await this.alertCtrl.create({
+        header: 'Error!',
+        message: "Enter confirm password!",
+        buttons: ['OK']
+        });
+      alert.present();
+    } else if(this.password != this.confirm_password) {
+      const alert = await this.alertCtrl.create({
+        header: 'Error!',
+        message: "Confirm password not matched!",
+        buttons: ['OK']
+        });
+      alert.present();
+
+      this.confirm_password = "";
     } else if(this.course_id == null) {
       const alert = await this.alertCtrl.create({
         header: 'Error!',

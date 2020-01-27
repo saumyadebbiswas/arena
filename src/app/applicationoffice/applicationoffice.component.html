@@ -80,11 +80,12 @@
                                     </div>
                                 </div>
 
-                                <input type="button" name="previous" class="previous action-button prv-btns" value="Previous" (click)="movePrevious()" />
+                               
+                            </fieldset>
+                            <div class="btn-col"> <input type="button" name="previous" class="previous action-button prv-btns" value="Previous" (click)="movePrevious()" />
 
                                 <input *ngIf="show_conf_button"  type="button" name="next" class="next action-button nxt-btns" value="Confirm" (click)="confirm()" />
-                                <input *ngIf="!show_conf_button"  type="button" name="next" class="next action-button-previous nxt-btns" value="Confirm" />
-                            </fieldset>
+                                <input *ngIf="!show_conf_button"  type="button" name="next" class="next action-button-previous nxt-btns" value="Confirm" /></div>
                         </div>
                     </div>
                 </div>

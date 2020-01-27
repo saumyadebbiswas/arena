@@ -31,6 +31,7 @@ import { ApplicationactivitiesComponent } from './applicationactivities/applicat
 import { ApplicationofficeComponent } from './applicationoffice/applicationoffice.component';
 import { ApplicationfinishComponent } from './applicationfinish/applicationfinish.component';
 import { StaffModuleModule } from './staff-module/staff-module.module';
+import { ActiveStudentModule } from './active-student/active-student.module';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { StaffModuleModule } from './staff-module/staff-module.module';
     IonicModule.forRoot(),
     AppRoutingModule,
     ReactiveFormsModule,
-    StaffModuleModule
+    StaffModuleModule,
+    ActiveStudentModule
   ],
   providers: [
     StatusBar,

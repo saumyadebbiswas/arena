@@ -24,6 +24,7 @@ export class ApplicationeducationComponent implements OnInit {
   pg1st_class_active: boolean = true;
   
   student_id: string = null;
+  student_type: string = "1";
 
   id_ssc: string = null;
   from_ssc: string = null;
@@ -145,6 +146,7 @@ export class ApplicationeducationComponent implements OnInit {
       console.log('Location: ApplicationeducationComponent');
 
       this.user_type = this.userService.currentUserValue.user_type;
+      this.student_type = localStorage.getItem("student_type");
 
       this.student_id = this.route.snapshot.paramMap.get('id');
 

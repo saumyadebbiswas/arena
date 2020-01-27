@@ -5,6 +5,7 @@ ul.student-list li{ margin-bottom: 10px; line-height: 11px; border-bottom: 1px s
 .student-col{ width: 100%; margin-top: 20px;}
 .student-col h5{ font-size: 18px; color: #373535;  margin-bottom: 12px;}
 .batch-btn{ width: 80%; margin: 0 auto 0; display: block; background-color: #eb1d23; text-align: center; height: 40px; border-radius: 50px; color: #fff; font-size: 14px;}
+.batch-btn-disable{ width: 80%; margin: 0 auto 0; display: block; background-color: #f0ecec; text-align: center; height: 40px; border-radius: 50px; color: #fff; font-size: 14px;}
 .remove-lt-pad{
     padding-left: 7px;
 }
@@ -17,3 +18,14 @@ ul.student-list li{ margin-bottom: 10px; line-height: 11px; border-bottom: 1px s
     overflow: hidden;
     overflow-y: scroll;
 }
+.show_modal{ width:100%; position: fixed; background: rgba(0, 0, 0, 0.7); top: 0px; bottom: 0px; left: 0px; z-index: 99;}
+.modal-body-content{ width: 90%; margin: 10% auto; position: relative;}
+.close{ position: absolute; top: 0px; right: 0px;}
+
+
+
+
+
+
+
+

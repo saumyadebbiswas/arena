@@ -10,17 +10,17 @@ import { LoadingController, AlertController, ToastController } from '@ionic/angu
 })
 export class BatchAssignComponent implements OnInit {
 
-  showloader: boolean = false;
-  course_list: any = [];
-  active_student_list: any = [];
-  batch_name: string = "";
-  course_id: string = null;
-  start_date: string = null;
+  showloader: boolean;
+  course_list: any;
+  active_student_list: any;
+  batch_name: string;
+  course_id: string;
+  start_date: string;
   //today_date: String = new Date().toISOString();
-  minDate: String = new Date(new Date().setDate(new Date().getDate() + 1)).toISOString(); //--- Get tommorow date as min date
-  maxDate: any = new Date(new Date().setDate(new Date().getDate() + 365)).toISOString(); //--- Add one year to get max date
+  minDate: any;
+  maxDate: any;
   admin_id: string;
-  checkbox_list: any = [];
+  checkbox_list: any;
 
   constructor(
     private router: Router,
@@ -35,12 +35,22 @@ export class BatchAssignComponent implements OnInit {
     this.admin_id = user_info.details.id;
   }
 
-  ngOnInit() {
-    this.course_all();
-  }
+  ngOnInit() {}
 
   ionViewWillEnter() {
     console.log('Location: BatchAssignComponent');
+    
+    this.showloader = false;
+    this.course_list = [];
+    this.active_student_list = [];
+    this.batch_name = "";
+    this.course_id = null;
+    this.start_date = null;
+    this.minDate = new Date(new Date().setDate(new Date().getDate() + 1)).toISOString(); //--- Get tommorow date as min date
+    this.maxDate = new Date(new Date().setDate(new Date().getDate() + 365)).toISOString(); //--- Add one year to get max date
+    this.checkbox_list = [];
+    
+    this.course_all();
   }
 
   async course_all() {
@@ -88,7 +98,7 @@ export class BatchAssignComponent implements OnInit {
     this.showloader = true;
 
     this.staffWorkService.active_student_list().subscribe(async response => {
-      //console.log('Active student list...', response);
+      //console.log('Active student list response: ', response);
       //--- After get record - dismiss loader
       this.loadingController.dismiss();
       this.showloader = false;
@@ -96,8 +106,11 @@ export class BatchAssignComponent implements OnInit {
       if(response.status == true) {
         response.data.forEach(element => {
           element.isChecked = false; //-- Set by default all checkbox unchecked
+          element.isDisabled = true; //-- Set by default all checkbox disable
+          element.find_mark = ''; //-- Set other students find mark as blank
           this.active_student_list.push(element);
         });
+        //console.log('Active student list: ', this.active_student_list);
       } else {
         const toast = await this.toastController.create({
           message: response.message,
@@ -130,16 +143,20 @@ export class BatchAssignComponent implements OnInit {
       let temp_not_find_list = [];
       
       this.active_student_list.forEach(element => {
-        if(element.applied_course_id == course_id) {
-          temp_find_list.push(element);
+        if(element.applied_course_id == course_id) {;
+          element.isDisabled = false; //-- Set course wise selected students checkbox enable
+          element.find_mark = '*'; //-- Set course wise selected students a find mark
+          temp_find_list.push(element)
         } else {
+          element.isDisabled = true; //-- Set other students checkbox disable
+          element.find_mark = ''; //-- Set other students find mark as blank
           temp_not_find_list.push(element);
         }
       });
 
+      //--- To short list the selected students at the top
       this.active_student_list = [];
       temp_find_list.forEach(element => {
-        element.find_mark = '*';
         this.active_student_list.push(element);
       });
       temp_not_find_list.forEach(element => {

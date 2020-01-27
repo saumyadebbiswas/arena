@@ -28,6 +28,18 @@ export class ApplicationService {
     return this.http.post<any>(this.api_url+'/application/detail/edit', sendData, {headers: this.requestHeader});
   }
 	
+  personal_course_insert(sendData: any): Observable<any> {
+    return this.http.post<any>(this.api_url+'/application/detail/course/insert', sendData, {headers: this.requestHeader});
+  }
+	
+  personal_course_edit(sendData: any): Observable<any> {
+    return this.http.post<any>(this.api_url+'/application/detail/course/edit', sendData, {headers: this.requestHeader});
+  }
+	
+  personal_course_remove(sendData: any): Observable<any> {
+    return this.http.post<any>(this.api_url+'/application/detail/course/remove', sendData, {headers: this.requestHeader});
+  }
+	
   education_detail(student_id: any) {
     return this.http.get<any>(this.api_url+'/application/educations/student/'+student_id, {headers: this.requestHeader});
   }

@@ -15,32 +15,24 @@
 <ion-content *ngIf="!showloader">
     <div class="container-fluid routine-col" id="grad1">
         <div class="dropdown frm select-dropdown">
-            <ion-select [(ngModel)]="batch_id" class="select-pad" placeholder="Select Batch" [disabled]="page_type == 'edit'">
+            <ion-select (ionChange)="moveRoutineAssign()" [(ngModel)]="batch_id" placeholder="Select Batch">
                 <ion-select-option *ngFor="let batch of batch_list"  [value]="batch.id">{{batch.name}}</ion-select-option>
             </ion-select>
+
+            <!-- <span *ngIf="batch_id != null" data-toggle="tooltip" data-placement="top" title="Can't change!" (click)="tooltipMsg('Cant change')"><i class="fa fa-question-circle toolp"></i></span> -->
         </div>
 
-        <!-- <ion-item class="dropdown frm select-dropdown">
-            <ion-label class="drop-mnu">Select No of Day</ion-label>
-            <ion-select [(ngModel)]="no_of_days" (ionChange)="changeDays($event)" placeholder="Select No of Day">
-                <ion-select-option value="1">1</ion-select-option>
-                <ion-select-option value="2">2</ion-select-option>
-                <ion-select-option value="3">3</ion-select-option>
-                <ion-select-option value="4">4</ion-select-option>
-                <ion-select-option value="5">5</ion-select-option>
-                <ion-select-option value="6">6</ion-select-option>
-                <ion-select-option value="7">7</ion-select-option>
-            </ion-select>
-        </ion-item> -->
-
         <ul class="routine-list">
-            <li *ngFor="let day_details of day_details; let i = index">
-                <h6>Day {{i+1}}</h6>
+            <li *ngFor="let day_detail of day_details; let i = index">
+                <h6>Routine {{i+1}}</h6>
+
+                <p *ngIf="day_detail.week_for != null && day_detail.alt_routine_day_id == null">This routine will <strong>remove</strong> after {{day_detail.week_for}} week. By remove now it will be deleted permanently.</p>
+                <p *ngIf="day_detail.week_for != null && day_detail.alt_routine_day_id != null">This routine will <strong>alter</strong> after {{day_detail.week_for}} week. By remove now it will be altered by it's previous routine.</p>
 
                 <div class="routine-field" style="width:100%;">
                     <ion-label>Select Day</ion-label>
                     <div class="dropdown frm select-dropdown">
-                        <ion-select [(ngModel)]="day_details.week_day"  class="select-pad" (ionChange)="checkDayTimeAvl(i)" placeholder="Select Day">
+                        <ion-select [(ngModel)]="day_detail.week_day" (ionChange)="checkDayTimeAvl(i, 'wd')" placeholder="Select Day">
                             <ion-select-option *ngFor="let days of week_days" [value]="days.value">{{days.day}}</ion-select-option>
                         </ion-select>
                     </div>
@@ -49,56 +41,117 @@
                 <div class="routine-field">
                     <ion-label>Start Time</ion-label>
                     <div class="select-dropdown">
-                        <ion-datetime displayFormat="h:mm a" (ionChange)="checkDayTimeAvl(i)" [(ngModel)]="day_details.start_time" class="select-pad" placeholder="Start Time"></ion-datetime>
+                        <ion-datetime displayFormat="h:mm a" (ionChange)="checkDayTimeAvl(i, 'st')" [(ngModel)]="day_detail.start_time_temp" placeholder="Start Time"></ion-datetime>
                     </div>
                 </div>
 
                 <div class="routine-field">
                     <ion-label>Duration</ion-label>
                     <div class="select-dropdown">
-                        <ion-datetime displayFormat="h:mm" (ionChange)="checkDayTimeAvl(i)" [(ngModel)]="day_details.duration" class="select-pad" placeholder="Duration"></ion-datetime>
+                        <ion-datetime displayFormat="h:mm" (ionChange)="checkDayTimeAvl(i, 'du')" [(ngModel)]="day_detail.duration_temp" placeholder="Duration"></ion-datetime>
                     </div>
                 </div>
 
                 <div class="routine-field" style="width:100%;">
                     <ion-label>Select Teacher</ion-label>
                     <div class="dropdown frm select-dropdown">
-                        <ion-select [(ngModel)]="day_details.teacher_id" class="select-pad" placeholder="Select Teacher">
-                            <ion-select-option *ngFor="let teacher of teacher_list" [value]="teacher.id">{{teacher.name}}</ion-select-option>
+                        <ion-select [(ngModel)]="day_detail.teacher_id"(ionChange)="checkTeacherAvl(i)" placeholder="Select Teacher">
+                            <ion-select-option *ngFor="let teacher of teacher_list" [value]="teacher.id" [disabled]="false">{{teacher.name}}</ion-select-option>
                         </ion-select>
                     </div>
                 </div>
                 
-                <div class="routine-field" style="width:100%;">
-                    <ion-checkbox class="checkbox" (ionChange)="changeChkbx(i)" color="primary" [checked]="day_details.type == 2"></ion-checkbox>
+                <div class="routine-field" style="width: 100%;">
+                    <ion-checkbox class="checkbox" (ionChange)="changeChkbx(i)" color="primary" [checked]="day_detail.type == 2" [disabled]="day_detail.alt_routine_day_id != null"></ion-checkbox>
                     <ion-label class="chq-lebl">Is Temporary?</ion-label>
                 </div>
 
-                <div *ngIf="day_details.type == 2" class="routine-field" style="width:100%;">
+                <div *ngIf="day_detail.type == 2" class="routine-field" style="width:100%;">
                     <ion-label>Week For</ion-label>
                     <div class="dropdown frm select-dropdown">
-                        <ion-select [(ngModel)]="day_details.week_for" placeholder="Week For">
-                            <ion-select-option [value]="1">1 Week</ion-select-option>
-                            <ion-select-option [value]="2">2 Week</ion-select-option>
-                            <ion-select-option [value]="3">3 Week</ion-select-option>
-                            <ion-select-option [value]="4">4 Week</ion-select-option>
-                            <ion-select-option [value]="5">5 Week</ion-select-option>
-                            <ion-select-option [value]="6">6 Week</ion-select-option>
-                            <ion-select-option [value]="7">7 Week</ion-select-option>
-                            <ion-select-option [value]="8">8 Week</ion-select-option>
+                        <ion-select [(ngModel)]="day_detail.week_for" placeholder="Week For">
+                            <ion-select-option value="1">1 Week</ion-select-option>
+                            <ion-select-option value="2">2 Week</ion-select-option>
+                            <ion-select-option value="3">3 Week</ion-select-option>
+                            <ion-select-option value="4">4 Week</ion-select-option>
+                            <ion-select-option value="5">5 Week</ion-select-option>
+                            <ion-select-option value="6">6 Week</ion-select-option>
+                            <ion-select-option value="7">7 Week</ion-select-option>
+                            <ion-select-option value="8">8 Week</ion-select-option>
                         </ion-select>
                     </div>
                 </div>
 
-                <div>
-                    <button *ngIf="day_details.id == null" type="button" (click)="onSubmit(i)" class="batch-btn">Insert</button>
-                    <button *ngIf="day_details.id != null" type="button" (click)="onUpdate(i)" class="batch-btn">Edit</button>
-                    <button type="button" (click)="remove_routine(i)" class="batch-btn">Remove</button>
-                </div>
+                <button *ngIf="day_detail.id == null" type="button" (click)="onSubmit(i)" class="batch-btn">Insert</button>
+                <button *ngIf="day_detail.id != null" type="button" (click)="onUpdate(i)" class="batch-btn">Edit</button>
+
+                <button *ngIf="day_detail.show_alter_btn" type="button" (click)="onAlter(i)" class="batch-btn">Alter</button>
+
+                <!-- If only one routine remain and that routine is not temporary - then disable remove button -->
+                <button *ngIf="day_details.length == 1 && day_detail.type == 1" type="button" (click)="tooltipMsg('Minimum one routine need to remain')"  class="batch-btn-sml-disable">Remove</button>
+                <!-- If only one routine remain and that routine is temporary and have no alternative routine - then disable remove button -->
+                <button *ngIf="day_details.length == 1 && day_detail.type == 2 && day_detail.alt_routine_day_id == null" type="button" (click)="tooltipMsg('Minimum one routine need to remain')"  class="batch-btn-sml-disable">Remove</button>
+                <!-- If only one routine remain and that routine is temporary and have a alternative routine - then enable remove button -->
+                <button *ngIf="day_details.length == 1 && day_detail.type == 2 && day_detail.alt_routine_day_id != null" type="button" (click)="remove_routine(i)" class="batch-btn">Remove</button>
+                <!-- If more than one routine remain - then enable remove button -->
+                <button *ngIf="day_details.length > 1" type="button" (click)="remove_routine(i)" class="batch-btn">Remove</button>
             </li>
         </ul>
 
-        <button *ngIf="show_add_button" type="button" (click)="add_routine()" class="batch-btn">Add More</button>
+        <button *ngIf="show_add_button" type="button" (click)="add_routine()" class="batch-btn-lrg">Add More</button>
         <button *ngIf="!show_add_button" type="button" class="batch-btn-disable">Add More</button>
+    </div>
+
+    <!-- Modal for teacher's time conflict -->
+    <div class="show_modal" *ngIf="teachers_time_conflict_details != null">
+        <div class="modal-body-content">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" (click)="onHideModal()" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Oops! Teacher Time Conflict</h4>
+                </div>
+                <div class="modal-body">
+                    <p>{{teachers_time_conflict_details.length}} times, teacher's({{teachers_time_conflict_details[0]?.teacher_name}}) routine-time conflict in  {{dayName(teachers_time_conflict_details[0]?.week_day)}}!</p>
+
+                    <p *ngFor="let conflict_details of teachers_time_conflict_details">
+                        Batch name: {{conflict_details?.batch_name}},
+                        Start time: {{time_24to12_convert(conflict_details?.start_time)}}, 
+                        End time: {{time_24to12_convert(conflict_details?.end_time)}}
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button *ngIf="teachers_time_conflict_details.length == 1" type="button" class="btn btn-default" data-dismiss="modal" (click)="moveRoutineAssigntofix(teachers_time_conflict_details[0]?.batch_id)">Fix Other Time</button>
+    
+                    <button type="button" (click)="onHideModal()" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal-2 for students's time conflict -->
+    <div class="show_modal" *ngIf="students_time_conflict_details != null">
+        <div class="modal-body-content">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" (click)="onHideModal2()" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Oops! Student Time Conflict</h4>
+                </div>
+                <div class="modal-body">
+                    <p>{{students_time_conflict_details.length}} times, students routine-time conflict in {{dayName(students_time_conflict_details[0]?.week_day)}}!</p>
+
+                    <p *ngFor="let conflict_details of students_time_conflict_details">
+                        Student name: {{conflict_details?.student_name}},
+                        Batch name: {{conflict_details?.batch_name}},
+                        Start time: {{time_24to12_convert(conflict_details?.start_time)}}, 
+                        End time: {{time_24to12_convert(conflict_details?.end_time)}}
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button *ngIf="students_time_conflict_details.length == 1" type="button" class="btn btn-default" data-dismiss="modal" (click)="moveRoutineAssigntofix(students_time_conflict_details[0]?.batch_id)">Fix Other Time</button>
+    
+                    <button type="button" (click)="onHideModal2()" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
     </div>
 </ion-content>

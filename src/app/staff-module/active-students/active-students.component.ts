@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Platform, AlertController, LoadingController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
 import { UserService, VisitorsService } from 'src/app/services';
 import { SITE_URL } from 'src/app/services/constants';
 
 @Component({
-  selector: 'app-visitor-students',
-  templateUrl: './visitor-students.component.html',
-  styleUrls: ['./visitor-students.component.scss'],
+  selector: 'app-active-students',
+  templateUrl: './active-students.component.html',
+  styleUrls: ['./active-students.component.scss'],
 })
-export class VisitorStudentsComponent implements OnInit {
+export class ActiveStudentsComponent implements OnInit {
   
   subscription:any;
   message: string = "Loading...";
@@ -23,8 +23,7 @@ export class VisitorStudentsComponent implements OnInit {
     public alertCtrl: AlertController,
     public loadingController: LoadingController,
     public userService: UserService,
-    public visitorsService: VisitorsService,
-    private platform: Platform
+    public visitorsService: VisitorsService
   ) {
     this.site_url = SITE_URL;
   }
@@ -32,21 +31,11 @@ export class VisitorStudentsComponent implements OnInit {
   ngOnInit() {}
 
   ionViewWillEnter() { 
-    console.log('Location: RegisterStudentComponent');
-    this.reg_student_all();
+    console.log('Location: ActiveStudentsComponent');
+    this.active_student_all();
   }
 
-  ionViewDidEnter() { 
-    this.subscription = this.platform.backButton.subscribe(()=>{ 
-      navigator['app'].exitApp(); 
-    }); 
-  } 
-
-  ionViewWillLeave() { 
-    this.subscription.unsubscribe();
-  }
-
-  async reg_student_all() {
+  async active_student_all() {
     //--- Start loader
     const loading = await this.loadingController.create({
       message: 'Please wait...',
@@ -55,7 +44,7 @@ export class VisitorStudentsComponent implements OnInit {
     loading.present();
     
     let sendData = {
-      type: 1
+      type: 2
     }
     //console.log('Routine assign sendData: ', sendData);
 

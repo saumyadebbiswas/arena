@@ -314,14 +314,129 @@ display: none;
   border-radius: 20px;
   font-weight: 500;
 }
-.next-step-btn{
-  background: #ffffff;
-  width: 91%;
+// .next-step-btn{
+//   background: #ffffff;
+//   width: 91%;
  
-  position: fixed;
-  bottom: 15px;
-  text-align: center;
-}
+//   position: fixed;
+//   bottom: 15px;
+//   text-align: center;
+// }
 .mar-top-ex{
   margin-top: 10px;
 }
+
+//--- For ngb-datepicker - added on 24-01-2020
+
+.ngb-dp-day .bg-primary {
+  background-color: #8c3bfa !important;
+}
+.bg-primary:focus{ outline: none !important; box-shadow: none !important;}
+.ngb-dp-day{outline: none !important; box-shadow: none !important;}
+// .okBtn {
+//     border: 1px solid #4e4e4e !important;
+// }
+ion-item {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.loader1 {
+  z-index: 99999999;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.ngb-dp-day,
+.ngb-dp-week-number,
+.ngb-dp-weekday {
+  width: 14.28% !important;
+  height: 2.3rem !important;
+}
+
+.btn-link {
+  color: #7312f8 !important;
+}
+
+.ngb-dp-weekday {
+  color: #7312f8 !important;
+  font-style: normal !important;
+}
+
+.text-white {
+  background-color: #7312f8 !important;
+}
+
+.ngb-dp-month {
+  width: 100% !important;
+}
+
+.ngb-dp-week-number,
+.ngb-dp-weekday {
+  font-style: normal !important;
+}
+
+.ngb-dp-header {
+  background-color: none !important;
+  background: none !important;
+}
+
+.pac-item {
+  border-top: 0px !important;
+}
+button:focus{ border: none; box-shadow: none;}
+.pac-container {
+  border-radius: 15px !important;
+  padding-top: 10px !important;
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+}
+
+.ngb-dp-weekdays,
+.ngb-dp-month-name {
+  background: none !important;
+  // background: #f8f9fa;
+  // background-color: var(--light);
+}
+
+ngb-datepicker {
+  // border: 1px solid #dfdfdf;
+  border-top: none !important;
+  // border-radius: .25rem;
+  display: block !important;
+}
+
+[ngbDatepickerDayView] {
+  border-radius: 50% !important;
+  width: 2rem !important;
+  height: 2rem !important;
+  line-height: 1.5rem !important;
+}
+
+.ngb-dp-today>div {
+  padding-top: 4px !important;
+  // padding-left: 5px !important;
+}
+.ngb-dp-header{ border-top: 1px #dfdfdf solid !important;}
+.ngb-dp-day>div {
+  padding-top: 4px !important;
+  // padding-left: 5px !important;
+}
+
+.ngb-dp-today {
+  padding-top: 4px !important;
+  padding-left: 5px !important;
+}
+
+.ngb-dp-week-number,
+.ngb-dp-weekday {
+  line-height: 2rem !important;
+}
+
+.ngb-dp-day {
+  // cursor: pointer;
+  padding-left: 4px !important;
+}
+//--- End here

@@ -19,13 +19,14 @@
     </div>
 
     <div class="dropdown frm select-dropdown mar-top-ex ">
-      <ion-select [(ngModel)]="course_id" (ionChange)="filter_student_by_course($event)" class="remove-lt-pad" placeholder="Select Course">
+      <ion-select [(ngModel)]="course_id" (ionChange)="filter_student_by_course($event)" class="remove-lt-pad" placeholder="Select Course" disabled="true">
         <ion-select-option *ngFor="let course of course_list" [value]="course.id">{{course.name}}</ion-select-option>
       </ion-select>
     </div>
     
     <div class="dropdown frm select-dropdown mar-top-ex ">
-      <ion-datetime id="date" class="info-frm drop-mnu remove-lt-pad" displayFormat="MMM DD, YYYY" [min]="minDate" [max]="maxDate" placeholder="Start Date" [(ngModel)]="start_date"></ion-datetime>
+      <ion-datetime *ngIf="batch_date_status == 1" id="date" class="info-frm drop-mnu remove-lt-pad" displayFormat="MMM DD, YYYY" [min]="minDate" [max]="maxDate" placeholder="Start Date" [(ngModel)]="start_date"></ion-datetime>
+      <ion-datetime *ngIf="batch_date_status != 1" id="date" class="info-frm drop-mnu remove-lt-pad" displayFormat="MMM DD, YYYY" [min]="minDate" [max]="maxDate" placeholder="Start Date" [(ngModel)]="start_date" disabled="true"></ion-datetime>
     </div>
 
     <div class="student-list-box">
@@ -33,10 +34,12 @@
         <h5>Assigned Students <span class="sub-head">(Select to remove)</span></h5>
       
         <ul class="student-list">
-          <li *ngFor="let student of students_assign">
+          <li *ngFor="let student of students_assign; let i = index">
               <p class="chq-inpt">
                 <ion-label class="chq-lebl">{{student.student_name}}</ion-label>
-                <ion-checkbox class="checkbox" (ionChange)="changeASChkbx(student.id)" color="primary" checked="{{student?.isChecked}}"></ion-checkbox>
+                <ion-checkbox *ngIf="students_assign.length == count_students_assign_chkd && student.isChecked == false" class="checkbox" color="primary" checked="{{student?.isChecked}}" disabled="true"></ion-checkbox>
+                <ion-checkbox *ngIf="students_assign.length == count_students_assign_chkd && student.isChecked == true" class="checkbox" (ionChange)="changeASChkbx(i)" color="primary" checked="{{student?.isChecked}}"></ion-checkbox>
+                <ion-checkbox *ngIf="students_assign.length != count_students_assign_chkd" class="checkbox" (ionChange)="changeASChkbx(i)" color="primary" checked="{{student?.isChecked}}"></ion-checkbox>
               </p>
           </li>
         </ul>
@@ -49,13 +52,65 @@
           <li *ngFor="let active_student of active_student_list">
               <p class="chq-inpt">
                 <ion-label class="chq-lebl">{{active_student.name}} {{active_student?.find_mark}}</ion-label>
-                <ion-checkbox class="checkbox" (ionChange)="changeChkbx(active_student.id)" color="primary" checked="{{active_student?.isChecked}}"></ion-checkbox>
+                <ion-checkbox class="checkbox" (ionChange)="changeChkbx(active_student.id)" color="primary" checked="{{active_student?.isChecked}}" [disabled]="active_student?.isDisabled"></ion-checkbox>
               </p>
           </li>
         </ul>
 
       </div>
     </div>
-      <button type="button" (click)="onUpdate()" class="batch-btn">Update</button>
+
+    <button type="button" (click)="onUpdate()" class="batch-btn">Update</button><br>
+    <button *ngIf="batch_date_status == 1" type="button" (click)="onShowModal()" class="batch-btn">Remove</button>
+    <button *ngIf="batch_date_status == 2" type="button" (click)="tooltipMsg('Started today. Complete tommorow')" class="batch-btn-disable">Complete</button>
+    <button *ngIf="batch_date_status == 3" type="button" class="batch-btn">Complete</button>
+  </div>
+
+  <!-- Modal for remove batch confirmation -->
+  <div class="show_modal" *ngIf="is_show_modal">
+   <div class="modal-body-content">
+      <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" (click)="onHideModal()" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Remove Batch</h4>
+          </div>
+          <div class="modal-body">
+            <p>Do you want to remove?</p>
+          </div>
+          <div class="modal-footer">
+              <button type="button" (click)="onRemove()" class="btn btn-default" data-dismiss="modal">Confirm</button>
+
+            <button type="button" (click)="onHideModal()" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          </div>
+        </div>
+    </div>
+  </div>
+
+  <!-- Modal-2 for teacher's time conflict -->
+  <div class="show_modal" *ngIf="students_time_conflict_details != null">
+      <div class="modal-body-content">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <button type="button" (click)="onHideModal2()" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Oops! Time Conflict</h4>
+              </div>
+              <div class="modal-body">
+                  <p>{{students_time_conflict_details_length}} times, students date-time conflict!</p>
+
+                  <p *ngFor="let conflict_details of students_time_conflict_details">
+                      Student name: {{conflict_details?.student_name}},
+                      Batch name: {{conflict_details?.batch_name}},
+                      Day: {{dayName(conflict_details?.week_day)}},
+                      Start time: {{time_24to12_convert(conflict_details?.start_time)}}, 
+                      End time: {{time_24to12_convert(conflict_details?.end_time)}}
+                  </p>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal" (click)="moveRoutineAssign(batch_id)">Fix Routine</button>
+  
+                  <button type="button" (click)="onHideModal2()" class="btn btn-default" data-dismiss="modal">Cancel</button>
+              </div>
+          </div>
+      </div>
   </div>
 </ion-content>

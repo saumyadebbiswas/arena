@@ -83,7 +83,7 @@ export class WorkComponent implements OnInit {
     loading.present();
 
     this.visitorsService.art_list().subscribe(async response => {
-      console.log('Art details...', response);
+      //console.log('Art details...', response);
       //--- After get record - dismiss loader
       this.loadingController.dismiss();
 

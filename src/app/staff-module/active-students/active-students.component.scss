@@ -1,0 +1,62 @@
+.ex-pad{
+    padding: 12px 0 0 12px;
+  }
+  .place-box{
+    padding: 0;
+    width: 100%;
+    list-style-type: none;
+  }
+  .place-box li{
+    width: 96%;
+    margin-right: 3%;
+    border-bottom: 1px solid #ddd;
+    float: left;
+    overflow: hidden;
+    padding: 10px 0;
+    position: relative;
+}
+.cours-detal{
+    // display: flex;
+    width: 100%;
+    float: left;
+  }
+  .application-btn{ float: right; border: 2px #d07b7f solid; border-radius: 5px; font-size: 13px; background: #fff; height: 30px; position: absolute; right: 0px;}
+  .place-box li h4{
+    color: #5a5959;
+    margin-top: 0;
+    font-size: 15px;
+  }
+  .place-box li p{
+    margin-bottom: 0px;
+    color: #838383;
+    font-size: 13px;
+    text-align: justify;
+    white-space: pre-line;
+  }
+
+  .place-box li p a{
+    font-size: 11px;
+    color: #eb1d23;
+  }
+.from-date{ width: 47%; margin-right: 6%; display: inline-block;}
+.to-date{ width: 47%; display: inline-block;}
+  .frm{
+    width: 100%;
+    padding-left: 0px;
+    padding-right: 10px;
+    margin-bottom: 0;
+  }
+  
+  .info-frm{
+    color: #757575;
+  }
+  
+  .frm span{
+    color: #757575;
+  }
+  
+  .frm span i{
+    color: #757575;
+    padding-right: 12px;
+  }
+

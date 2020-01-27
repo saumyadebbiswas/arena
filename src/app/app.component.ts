@@ -107,8 +107,8 @@ export class AppComponent {
 
       this.appPages = [
         {
-          title: 'Courses',
-          url: '/course',
+          title: 'Routine Details',
+          url: '/student-routine',
           icon: 'list'
         }
       ];
@@ -126,6 +126,11 @@ export class AppComponent {
         {
           title: 'Register Students',
           url: '/visitor-students',
+          icon: 'list'
+        },
+        {
+          title: 'Active Students',
+          url: '/active-students',
           icon: 'list'
         }
       ];
