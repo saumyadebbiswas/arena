@@ -15,9 +15,81 @@
 <ion-content *ngIf="!showloader">
   <div class="w-100 calender-box">
     <div class="schedule-col">
-      <h3>Select Date</h3>
+      <!-- <h3>Select Date</h3> -->
     </div>
 
     <ngb-datepicker class="w-100 calender" #dp [(ngModel)]="model" (navigate)="date = $event.next" [displayMonths]="displayMonths" [navigation]="arrows" (ngModelChange)="selectDate(model)"></ngb-datepicker>
   </div>
+
+  <h3 class="routin-del">Routine Details <span>View Calender</span></h3>
+  <ul class="tree">
+    <li>
+     <label class="tree_label" for="c1">15-02-20 | Monday</label>
+      <ul>
+        <li>
+         <label for="c2" class="tree_label">10:00 - 12:00</label>
+         <p>Batch: ABC<br>
+          Teacher: Rahul Sing<br>
+          Course: VFX
+        </p>
+        </li>
+
+        <!-- <li>
+          <label for="c2" class="tree_label">13:00 - 15:00</label>
+          <p>Batch: ABC<br>
+           Teacher: Rahul Sing<br>
+           Course: GWDD
+         </p>
+         </li> -->
+        
+      </ul>
+    </li>
+    
+    
+    <li>
+      <label class="tree_label" for="c1">15-02-20 | Monday</label>
+       <ul>
+         <li>
+          <label for="c2" class="tree_label">10:00 - 12:00</label>
+          <p>Batch: ABC<br>
+           Teacher: Rahul Sing<br>
+           Course: VFX
+         </p>
+         </li>
+ 
+         <li>
+           <label for="c2" class="tree_label">13:00 - 15:00</label>
+           <p>Batch: ABC<br>
+            Teacher: Rahul Sing<br>
+            Course: GWDD
+          </p>
+          </li>
+         
+       </ul>
+    </li>
+
+    <li>
+      <label class="tree_label" for="c1">15-02-20 | Monday</label>
+       <ul>
+         <li>
+          <label for="c2" class="tree_label">10:00 - 12:00</label>
+          <p>Batch: ABC<br>
+           Teacher: Rahul Sing<br>
+           Course: VFX
+         </p>
+         </li>
+ 
+         <!-- <li>
+           <label for="c2" class="tree_label">13:00 - 15:00</label>
+           <p>Batch: ABC<br>
+            Teacher: Rahul Sing<br>
+            Course: GWDD
+          </p>
+          </li> -->
+         
+       </ul>
+    </li>
+
+    <span class="end-tree"></span>
+  </ul>
 </ion-content>
