@@ -25,13 +25,13 @@ import { File } from "@ionic-native/file/ngx";
 import { FileTransfer } from "@ionic-native/file-transfer/ngx";
 import { PdfViewerService } from "./services/pdf-viewer.service";
 import { ApplicationformComponent } from './applicationform/applicationform.component';
-//import { NotificationComponent } from './notification/notification.component';
 import { ApplicationeducationComponent } from './applicationeducation/applicationeducation.component';
 import { ApplicationactivitiesComponent } from './applicationactivities/applicationactivities.component';
 import { ApplicationofficeComponent } from './applicationoffice/applicationoffice.component';
 import { ApplicationfinishComponent } from './applicationfinish/applicationfinish.component';
 import { StaffModuleModule } from './staff-module/staff-module.module';
 import { ActiveStudentModule } from './active-student/active-student.module';
+import { TeacherModule } from './teacher/teacher.module';
 
 @NgModule({
   declarations: [
@@ -44,7 +44,6 @@ import { ActiveStudentModule } from './active-student/active-student.module';
     WorkComponent,
     CoursedetailsComponent,
     CourseComponent,
-    //NotificationComponent,
     ApplicationformComponent,
     ApplicationeducationComponent,
     ApplicationactivitiesComponent,
@@ -60,7 +59,8 @@ import { ActiveStudentModule } from './active-student/active-student.module';
     AppRoutingModule,
     ReactiveFormsModule,
     StaffModuleModule,
-    ActiveStudentModule
+    ActiveStudentModule,
+    TeacherModule
   ],
   providers: [
     StatusBar,

@@ -45,6 +45,8 @@ export class AppComponent {
         this.student_pages(this.user_info.details.type);
       } else if(this.user_info.user_type == 'admin') {
         this.staff_pages(this.user_info.details.type);
+      } else if(this.user_info.user_type == 'teacher') {
+        this.teacher_pages();
       }
     }
 
@@ -66,6 +68,8 @@ export class AppComponent {
           this.student_pages(this.user_info.details.type);
         } else if(this.user_info.user_type == 'admin') {
           this.staff_pages(this.user_info.details.type);
+        } else if(this.user_info.user_type == 'teacher') {
+          this.teacher_pages();
         }
       }
     });
@@ -73,7 +77,7 @@ export class AppComponent {
 
   student_pages(student_type) {
     if(student_type == '1') { //--- If visitor student
-      this.show_application_form_link = true;
+      this.show_application_form_link = true; //--- Only visitor students and staff-councellor can access
 
       this.appPages = [
         {
@@ -103,7 +107,7 @@ export class AppComponent {
         }
       ];
     } else if(student_type == '2') { //--- If active student
-      this.show_application_form_link = false;
+      this.show_application_form_link = false; //--- Only visitor students and staff-councellor can access
 
       this.appPages = [
         {
@@ -113,14 +117,14 @@ export class AppComponent {
         }
       ];
     } else {
-      this.show_application_form_link = false;
+      this.show_application_form_link = false; //--- Only visitor students and staff-councellor can access
       this.appPages = [];
     }
   }
 
   staff_pages(staff_type) {
     if(staff_type == '2') { //--- If councellor staff
-      this.show_application_form_link = true;
+      this.show_application_form_link = true; //--- Only visitor students and staff-councellor can access
   
       this.appPages = [
         {
@@ -135,7 +139,7 @@ export class AppComponent {
         }
       ];
     } else if(staff_type == '3') { //--- If Academic Head staff
-      this.show_application_form_link = false;
+      this.show_application_form_link = false; //--- Only visitor students and staff-councellor can access
   
       this.appPages = [
         {
@@ -155,9 +159,21 @@ export class AppComponent {
         }
       ];
     } else {
-      this.show_application_form_link = false;
+      this.show_application_form_link = false; //--- Only visitor students and staff-councellor can access
       this.appPages = [];
     }
+  }
+
+  teacher_pages() {
+      this.show_application_form_link = false; //--- Only visitor students and staff-councellor can access
+  
+      this.appPages = [
+        {
+          title: 'Routine Details',
+          url: '/teacher-routine',
+          icon: 'list'
+        }
+      ];
   }
 
   initializeApp() {

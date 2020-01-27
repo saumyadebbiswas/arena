@@ -13,7 +13,7 @@ import { PdfViewerService } from '../services/pdf-viewer.service';
 export class CourseComponent implements OnInit {
   
   subscription:any;
-  message: string = "Loading..."
+  message: string = "Loading...";
   course_list: any = [];
   site_url: string;
   user_type: string;

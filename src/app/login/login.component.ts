@@ -50,6 +50,8 @@ export class LoginComponent implements OnInit {
         } else if(currentUser.details.type == '3') { //--- If Academic Head staff
           this.router.navigate(['/batch-assign']);
         }
+      } else if(currentUser.user_type == 'teacher') {
+        this.router.navigate(['/teacher-routine']);
       }
       
     } else {
@@ -130,6 +132,8 @@ export class LoginComponent implements OnInit {
             } else if(response.data.details.type == '3') { //--- If Academic Head staff
               this.router.navigate(['/batch-assign']);
             }
+          } else if(response.data.user_type == 'teacher') {
+            this.router.navigate(['/teacher-routine']);
           } else {
             this.userService.logout();
             

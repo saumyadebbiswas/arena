@@ -5,8 +5,7 @@ import { RoutineDetailsComponent } from './routine-details/routine-details.compo
 
 
 const routes: Routes = [
-  
-  { path: "student-routine", component: RoutineDetailsComponent, canActivate: [StudentGuard]},
+  { path: "student-routine", component: RoutineDetailsComponent, canActivate: [StudentGuard]}
 ];
 
 @NgModule({

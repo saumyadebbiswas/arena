@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbDateStruct, NgbCalendar, NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-routine-details',
@@ -8,11 +9,13 @@ import { NgbDateStruct, NgbCalendar, NgbDatepickerConfig } from '@ng-bootstrap/n
 })
 export class RoutineDetailsComponent implements OnInit {
 
+  subscription:any;
   model: NgbDateStruct;
   date: {year: number, month: number};
   showloader: boolean;
 
   constructor(
+    private platform: Platform,
     private calendar: NgbCalendar,
     private config: NgbDatepickerConfig
   ) {
@@ -51,6 +54,16 @@ export class RoutineDetailsComponent implements OnInit {
 
     this.showloader = false;
     this.model = this.calendar.getToday();
+  }
+
+  ionViewDidEnter(){ 
+    this.subscription = this.platform.backButton.subscribe(()=>{ 
+      navigator['app'].exitApp(); 
+    }); 
+  } 
+
+  ionViewWillLeave(){ 
+    this.subscription.unsubscribe();
   }
 
   selectDate(model) {
