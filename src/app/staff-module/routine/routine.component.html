@@ -15,7 +15,7 @@
 <ion-content *ngIf="!showloader">
     <div class="container-fluid routine-col" id="grad1">
         <div class="dropdown frm select-dropdown">
-            <ion-select [(ngModel)]="batch_id" placeholder="Select Batch" [disabled]="page_type == 'edit'">
+            <ion-select [(ngModel)]="batch_id" class="select-pad" placeholder="Select Batch" [disabled]="page_type == 'edit'">
                 <ion-select-option *ngFor="let batch of batch_list"  [value]="batch.id">{{batch.name}}</ion-select-option>
             </ion-select>
         </div>
@@ -40,7 +40,7 @@
                 <div class="routine-field" style="width:100%;">
                     <ion-label>Select Day</ion-label>
                     <div class="dropdown frm select-dropdown">
-                        <ion-select [(ngModel)]="day_details.week_day" (ionChange)="checkDayTimeAvl(i)" placeholder="Select Day">
+                        <ion-select [(ngModel)]="day_details.week_day"  class="select-pad" (ionChange)="checkDayTimeAvl(i)" placeholder="Select Day">
                             <ion-select-option *ngFor="let days of week_days" [value]="days.value">{{days.day}}</ion-select-option>
                         </ion-select>
                     </div>
@@ -49,27 +49,27 @@
                 <div class="routine-field">
                     <ion-label>Start Time</ion-label>
                     <div class="select-dropdown">
-                        <ion-datetime displayFormat="h:mm a" (ionChange)="checkDayTimeAvl(i)" [(ngModel)]="day_details.start_time" placeholder="Start Time"></ion-datetime>
+                        <ion-datetime displayFormat="h:mm a" (ionChange)="checkDayTimeAvl(i)" [(ngModel)]="day_details.start_time" class="select-pad" placeholder="Start Time"></ion-datetime>
                     </div>
                 </div>
 
                 <div class="routine-field">
                     <ion-label>Duration</ion-label>
                     <div class="select-dropdown">
-                        <ion-datetime displayFormat="h:mm" (ionChange)="checkDayTimeAvl(i)" [(ngModel)]="day_details.duration" placeholder="Duration"></ion-datetime>
+                        <ion-datetime displayFormat="h:mm" (ionChange)="checkDayTimeAvl(i)" [(ngModel)]="day_details.duration" class="select-pad" placeholder="Duration"></ion-datetime>
                     </div>
                 </div>
 
                 <div class="routine-field" style="width:100%;">
                     <ion-label>Select Teacher</ion-label>
                     <div class="dropdown frm select-dropdown">
-                        <ion-select [(ngModel)]="day_details.teacher_id" placeholder="Select Teacher">
+                        <ion-select [(ngModel)]="day_details.teacher_id" class="select-pad" placeholder="Select Teacher">
                             <ion-select-option *ngFor="let teacher of teacher_list" [value]="teacher.id">{{teacher.name}}</ion-select-option>
                         </ion-select>
                     </div>
                 </div>
                 
-                <div class="routine-field">
+                <div class="routine-field" style="width:100%;">
                     <ion-checkbox class="checkbox" (ionChange)="changeChkbx(i)" color="primary" [checked]="day_details.type == 2"></ion-checkbox>
                     <ion-label class="chq-lebl">Is Temporary?</ion-label>
                 </div>
@@ -90,10 +90,11 @@
                     </div>
                 </div>
 
-                <button *ngIf="day_details.id == null" type="button" (click)="onSubmit(i)" class="batch-btn">Insert</button>
-                <button *ngIf="day_details.id != null" type="button" (click)="onUpdate(i)" class="batch-btn">Edit</button>
-
-                <button type="button" (click)="remove_routine(i)" class="batch-btn">Remove</button>
+                <div>
+                    <button *ngIf="day_details.id == null" type="button" (click)="onSubmit(i)" class="batch-btn">Insert</button>
+                    <button *ngIf="day_details.id != null" type="button" (click)="onUpdate(i)" class="batch-btn">Edit</button>
+                    <button type="button" (click)="remove_routine(i)" class="batch-btn">Remove</button>
+                </div>
             </li>
         </ul>
 
