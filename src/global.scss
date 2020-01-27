@@ -329,7 +329,7 @@ display: none;
 //--- For ngb-datepicker - added on 24-01-2020
 
 .ngb-dp-day .bg-primary {
-  background-color: #8c3bfa !important;
+  background-color: #ff9499 !important;
 }
 .bg-primary:focus{ outline: none !important; box-shadow: none !important;}
 .ngb-dp-day{outline: none !important; box-shadow: none !important;}
@@ -357,20 +357,21 @@ ion-item {
 }
 
 .btn-link {
-  color: #7312f8 !important;
+  color: #ea5f86 !important;
 }
 
 .ngb-dp-weekday {
-  color: #7312f8 !important;
+  color: #694751 !important;
   font-style: normal !important;
 }
 
 .text-white {
-  background-color: #7312f8 !important;
+  background-color: #ea5f86 !important;
 }
 
 .ngb-dp-month {
   width: 100% !important;
+  color: #ea5f86 !important;
 }
 
 .ngb-dp-week-number,
