@@ -82,19 +82,21 @@
                     </div>
                 </div>
 
-                <button *ngIf="day_detail.id == null" type="button" (click)="onSubmit(i)" class="batch-btn">Insert</button>
-                <button *ngIf="day_detail.id != null" type="button" (click)="onUpdate(i)" class="batch-btn">Edit</button>
+                <div class="btn-row">
+                    <button *ngIf="day_detail.id == null" type="button" (click)="onSubmit(i)" class="batch-btn">Insert</button>
+                    <button *ngIf="day_detail.id != null" type="button" (click)="onUpdate(i)" class="batch-btn">Edit</button>
 
-                <button *ngIf="day_detail.show_alter_btn" type="button" (click)="onAlter(i)" class="batch-btn">Alter</button>
+                    <button *ngIf="day_detail.show_alter_btn" type="button" (click)="onAlter(i)" class="batch-btn">Alter</button>
 
-                <!-- If only one routine remain and that routine is not temporary - then disable remove button -->
-                <button *ngIf="day_details.length == 1 && day_detail.type == 1" type="button" (click)="tooltipMsg('Minimum one routine need to remain')"  class="batch-btn-sml-disable">Remove</button>
-                <!-- If only one routine remain and that routine is temporary and have no alternative routine - then disable remove button -->
-                <button *ngIf="day_details.length == 1 && day_detail.type == 2 && day_detail.alt_routine_day_id == null" type="button" (click)="tooltipMsg('Minimum one routine need to remain')"  class="batch-btn-sml-disable">Remove</button>
-                <!-- If only one routine remain and that routine is temporary and have a alternative routine - then enable remove button -->
-                <button *ngIf="day_details.length == 1 && day_detail.type == 2 && day_detail.alt_routine_day_id != null" type="button" (click)="remove_routine(i)" class="batch-btn">Remove</button>
-                <!-- If more than one routine remain - then enable remove button -->
-                <button *ngIf="day_details.length > 1" type="button" (click)="remove_routine(i)" class="batch-btn">Remove</button>
+                    <!-- If only one routine remain and that routine is not temporary - then disable remove button -->
+                    <button *ngIf="day_details.length == 1 && day_detail.type == 1" type="button" (click)="tooltipMsg('Minimum one routine need to remain')"  class="batch-btn-sml-disable">Remove</button>
+                    <!-- If only one routine remain and that routine is temporary and have no alternative routine - then disable remove button -->
+                    <button *ngIf="day_details.length == 1 && day_detail.type == 2 && day_detail.alt_routine_day_id == null" type="button" (click)="tooltipMsg('Minimum one routine need to remain')"  class="batch-btn-sml-disable">Remove</button>
+                    <!-- If only one routine remain and that routine is temporary and have a alternative routine - then enable remove button -->
+                    <button *ngIf="day_details.length == 1 && day_detail.type == 2 && day_detail.alt_routine_day_id != null" type="button" (click)="remove_routine(i)" class="batch-btn">Remove</button>
+                    <!-- If more than one routine remain - then enable remove button -->
+                    <button *ngIf="day_details.length > 1" type="button" (click)="remove_routine(i)" class="batch-btn">Remove</button>
+                </div>  
             </li>
         </ul>
 
@@ -120,9 +122,9 @@
                     </p>
                 </div>
                 <div class="modal-footer">
-                    <button *ngIf="teachers_time_conflict_details.length == 1" type="button" class="btn btn-default" data-dismiss="modal" (click)="moveRoutineAssigntofix(teachers_time_conflict_details[0]?.batch_id)">Fix Other Time</button>
+                    <button *ngIf="teachers_time_conflict_details.length == 1" type="button" class="btn btn-default modal-btn" data-dismiss="modal" (click)="moveRoutineAssigntofix(teachers_time_conflict_details[0]?.batch_id)">Fix Other Time</button>
     
-                    <button type="button" (click)="onHideModal()" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" (click)="onHideModal()" class="btn btn-default modal-btn" data-dismiss="modal">Cancel</button>
                 </div>
             </div>
         </div>

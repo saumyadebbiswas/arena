@@ -71,7 +71,7 @@
 }
 
 #msform .action-button {
-    width: 100px;
+    // width: 100px;
     background: skyblue;
     font-weight: bold;
     color: white;
@@ -79,7 +79,7 @@
     border-radius: 0px;
     cursor: pointer;
     padding: 10px 5px;
-    margin: 10px 5px;
+    margin: 0px 5px !important;
     width: 45%;
     background: #eb1d23;
     font-family: roboto;
