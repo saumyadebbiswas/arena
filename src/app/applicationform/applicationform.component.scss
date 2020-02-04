@@ -404,6 +404,34 @@ ul.user li{ width: 20% !important;}
     text-align: center;
     animation: ripple 0.7s linear infinite;
   }
+  .btn-row{
+    display: flex;
+    width: 100%;
+    align-content: space-between;
+    justify-content: space-around;
+}
+.frm-edt-btn{
+    background: #eb1d23;
+    width: 100px;
+    padding: 10px;
+    text-align: center;
+    color: #fff;
+    border-radius: 50px;
+    margin-top: 12px;
+}
+.frm-edt-btn2{
+    background: #ffffff;
+    width: 90%;
+    padding: 10px;
+    text-align: center;
+    color: #eb1d23;
+    border-radius: 50px;
+    margin-top: 17px;
+    margin: 17px auto;
+    border: 2px solid #eb1d23;
+    font-weight: bold;
+}
+
   
   @keyframes ripple {
     0% {

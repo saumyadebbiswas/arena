@@ -50,11 +50,13 @@
                                                         <ion-select-option *ngFor="let course of course_list" [value]="course.id">{{course.name}}</ion-select-option>
                                                     </ion-select>
                                                 </div>
-                                                <p *ngIf="courses.id == null" (click)="insert_applied_course(i)">Insert</p>
-                                                <p *ngIf="courses.id != null" (click)="edit_applied_course(i)">Edit</p>
-                                                <p *ngIf="applied_course_list.length > 1" (click)="remove_applied_course(i)">Remove</p>
+                                                <div class="btn-row">
+                                                    <button *ngIf="courses.id == null" (click)="insert_applied_course(i)" class="frm-edt-btn">Insert</button>
+                                                    <button *ngIf="courses.id != null" (click)="edit_applied_course(i)" class="frm-edt-btn">Edit</button>
+                                                    <button *ngIf="applied_course_list.length > 1" (click)="remove_applied_course(i)" class="frm-edt-btn">Remove</button>
+                                                </div>
                                             </div>
-                                            <p *ngIf="show_add_course_btn" (click)="apply_new_course()">Add Course</p>
+                                            <p *ngIf="show_add_course_btn" (click)="apply_new_course()" class="frm-edt-btn2">Add Course</p>
                                         </div>
 
                                         <!-- Name -->
