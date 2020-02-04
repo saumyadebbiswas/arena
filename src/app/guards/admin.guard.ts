@@ -13,7 +13,7 @@ export class AdminGuard implements CanActivate {
   ) {}
 
   canActivate(route: ActivatedRouteSnapshot): boolean {
-    if(this.checkStudent()) {
+    if(this.checkAdmin()) {
       return true;
     } else {
       this.router.navigate(['course']);
@@ -21,7 +21,7 @@ export class AdminGuard implements CanActivate {
     }
   }
 
-  checkStudent() {
+  checkAdmin() {
     if(this.userService.currentUserValue) {
       let user_info = this.userService.currentUserValue;
 

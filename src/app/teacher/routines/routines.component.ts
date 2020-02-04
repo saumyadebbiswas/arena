@@ -57,7 +57,7 @@ export class RoutinesComponent implements OnInit {
   async routine_details() {
     //--- Start loader
     const loading = await this.loadingController.create({
-      message: 'Please wait...',
+      message: 'Loading routine...',
       spinner: 'bubbles'
     });
     loading.present();
@@ -90,25 +90,56 @@ export class RoutinesComponent implements OnInit {
     });
   }
 
-  routine_by_day(routine_data) {
+  async routine_by_day(routine_data) {
     console.log('Routine data: ', routine_data);
+
     const current = new Date();
-    let max_day = 60;
-    for(let count = 1; count <= max_day; count++) {
-      var newdate = new Date(current.getFullYear(), current.getMonth(), current.getDate() + count);
+    let day_count = 1; //--- Increasing day counter
+    let record_count = 1; //--- Increasing record match counter
 
+    //--- Start loader
+    const loading = await this.loadingController.create({
+      message: 'Loading routine...',
+      spinner: 'bubbles'
+    });
+    loading.present();
+    this.showloader = true;
+    
+    while(record_count <= 30) {
+      var newdate = new Date(current.getFullYear(), current.getMonth(), current.getDate() + day_count); //--- Increasing day by 1
 
-      //console.log('newdate: ', newdate);
-      
-      // var thisMonth = newdate.getMonth() + 1; //--- current.getMonth() returns month index 0 to 11
-      // var thisYear = newdate.getFullYear();
-      // var thisDay = newdate.getDate();
+      //--- For every routine check which this-date have any class/es or not
+      routine_data.forEach(element => {
+        let record_found = false;
+        //--- If this-date is matched or crossed batch-start-date
+        if(newdate >= this.date_parse(element.batch_start_date)) {
+          let day_index = newdate.getDay() + 1; //--- Get day-index i.e. 1:Sunday, 2:Monday, ... , 7:Saturday
+
+          if(day_index == element.week_day) {
+            console.log('newdate check (record_count, day_index, newdate): ', record_count, day_index, newdate);
+          }
+
+          record_found = true;
+          record_count++;
+        }
+
+        // if(record_found) {
+        //   record_count++;
+        // }
+      });
+
+      day_count++;
     }
+
+    this.loadingController.dismiss();
+    this.showloader = false;
   } 
 
-  date_format(date) {
-    var parts = date.split("-");
-    return new Date(parts[2], parts[1] - 1, parts[0]);
+  //--- Parse a date from string to Date type
+  date_parse(date) {
+    //--- Var date in type yyyy-mm-dd
+    var parts = date.split("-"); //--- [0]:yyyy, [1]:mm, [2]:dd
+    return new Date(parts[0], parts[1] - 1, parts[2]);
   }
 
 }
