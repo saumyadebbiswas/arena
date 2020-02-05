@@ -1,7 +1,7 @@
 .w-100 {
     width: 100%;
 }
-.calender-box{ padding: 0 13px; height: 58vh;}
+.calender-box{ padding: 0 13px; }
 .schedule-col {
     width: 100%;
     padding:10px 10px;
@@ -26,3 +26,195 @@
 .ngb-dp-month {
     width: 100% !important;
 }
+.bg-primary {
+    background-color: #ff9499 !important;
+}
+
+// -------tree css--------
+.routin-del{
+    padding: 13px;
+    padding-top: 0;
+    font-size: 20px;
+    color: #c35e63;
+}
+
+.routin-del span{
+    float: right;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+body {
+    margin: 30px;
+    font-family: sans-serif;
+    }
+  
+  #fontSizeWrapper { font-size: 16px; }
+  
+  #fontSize {
+    width: 100px;
+    font-size: 1em;
+    }
+  
+  /* ————————————————————–
+    Tree core styles
+  */
+  .tree { margin: 1em; margin-bottom: 65px; margin-left: 0;}
+  
+  .tree input {
+    position: absolute;
+    clip: rect(0, 0, 0, 0);
+    }
+  
+  .tree input ~ ul { display: none; }
+  
+  .tree input:checked ~ ul { display: block; }
+  
+  /* ————————————————————–
+    Tree rows
+  */
+  .tree li {
+    line-height: 1.2;
+    position: relative;
+    padding: 0 0 1em 1em;
+    }
+  
+  .tree ul li { padding: 0 0 0 1em; }
+  
+  .tree > li:last-child { padding-bottom: 0; }
+  
+  /* ————————————————————–
+    Tree labels
+  */
+  .tree_label {
+    position: relative;
+    display: inline-block;
+    background: #fbcdcf73;
+    width: auto;
+    padding: 8px;
+    padding-right: 28px;
+    padding-left: 28px;
+    left: -38px;
+    color: #ad393c;
+    text-align: center;
+    border-radius: 5px;
+    font-size: 14px;
+    clip-path: polygon(20% 0, 100% 0, 100% 100%, 20% 100%, 0 48%);
+    }
+  
+  label.tree_label { cursor: pointer; }
+  
+  label.tree_label:hover { color: #666; }
+  
+  /* ————————————————————–
+    Tree expanded icon
+  */
+  label.tree_label:before {
+    background: #eb1d23;
+    color: #fff;
+    position: relative;
+    z-index: 1;
+    float: left;
+    margin: 0 1em 0 -2em;
+    width: 1em;
+    height: 1em;
+    border-radius: 1em;
+    content: "";
+    text-align: center;
+    line-height: .9em;
+    }
+  
+  :checked ~ label.tree_label:before { content: '–'; }
+  
+  /* ————————————————————–
+    Tree branches
+  */
+  .tree li:before {
+    position: absolute;
+    top: 15px;
+    bottom: -20px;
+    left: -1.5em;
+    display: block;
+    width: 0;
+    border-left: 4px solid #eb1d23;
+    border-radius: 55px;
+    border-image: linear-gradient( to right, red, rgba(243, 210, 210, 0.9) ) 1 10;
+    content: "";
+    }
+  
+  .tree_label:after {
+    position: relative;
+    display: inline-block;
+    background: #fbcdcf;
+    width: auto;
+    padding: 10px;
+    padding-right: 30px;
+    left: -60px;
+    color: #904749;
+    border-radius: 0 0px 67px 10px;
+    -webkit-clip-path: polygon(53% 0, 100% 49%, 51% 100%, 1% 100%, 0 0);
+    clip-path: polygon(53% 0, 100% 49%, 51% 100%, 1% 100%, 0 0);
+    }
+  
+  label.tree_label:after { border-bottom: 0; }
+  
+  :checked ~ label.tree_label:after {
+    border-radius: 0 .3em 0 0;
+    border-top: 1px solid #777;
+    border-right: 1px solid #777;
+    border-bottom: 0;
+    border-left: 0;
+    bottom: 0;
+    top: 0.5em;
+    height: auto;
+    }
+  
+//   .tree li:last-child:before {
+//     height: 1em;
+//     bottom: auto;
+//     }
+  
+  .tree ul li:before {
+    position: absolute;
+    top: 14px;
+    bottom: 0;
+    left: -4.8em;
+    display: block;
+    width: 58px;
+    border-left: 0;
+    border-top: 3px solid #777;
+    border-image: linear-gradient(to left, red, rgba(243, 210, 210, 0.9)) 1 10;
+    
+  }
+  
+  .tree_custom {
+    display: block;
+    background: #eee;
+    padding: 1em;
+    border-radius: 0.3em;
+  }
+  .tree ul li p {
+    position: relative;
+    left: -10px;
+    background: #fbcdcf;
+    padding-left: 10px;
+    color: #904749;
+    width: auto;
+    font-size: 14px;
+    border-radius: 5px;
+    padding: 7px 10px;
+  }
+
+  .end-tree{
+    background: #eb1d23;
+    width: 40px;
+    height: 50px;
+    display: block;
+    /* border-radius: 10px 0 0 5px; */
+    clip-path: ellipse(40% 16% at 50% 33%);
+    z-index: 99999;
+    position: absolute;
+    left: 0px;
+  }
+
+//   ---------end-tree-------

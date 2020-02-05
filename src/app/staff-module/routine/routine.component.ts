@@ -16,6 +16,7 @@ export class RoutineComponent implements OnInit {
   teacher_list: any;
   admin_id: string;
   batch_id: string;
+  batch_start_date: string;
   student_list_details: any;
   teachers_time_conflict_details: any = [];
   students_time_conflict_details: any = [];
@@ -205,10 +206,14 @@ export class RoutineComponent implements OnInit {
             "old_type": element.type,
             "type": element.type,
             "alt_routine_day_id": element.alt_routine_day_id,
+            "week_for_old": element.temp_week,
             "week_for": element.temp_week,
+            "temp_start_date": element.temp_start_date,
             "show_alter_btn": false
           });
         });
+        
+        this.get_batch_start_date();
 
         this.show_add_button = true;
       } else {
@@ -275,6 +280,14 @@ export class RoutineComponent implements OnInit {
   //     alert.present();
   //   });
   // }
+
+  get_batch_start_date() {
+    this.batch_list.forEach(element => {
+      if(element.id == this.batch_id) {
+        this.batch_start_date = element.start_date;
+      }
+    });
+  }
 
   add_routine() {
     this.day_details.push({
@@ -467,7 +480,8 @@ export class RoutineComponent implements OnInit {
 
   changeChkbx(routine_index) {
     if(this.day_details[routine_index].type == 1) {
-      if( this.day_details[routine_index].old_type == 1 && this.day_details[routine_index].alt_routine_day_id == null) {
+      //--- If routine details is in edit mode, routine is not a temporary one and routine is not altered already then show alter button
+      if(this.day_details[routine_index].id != null && this.day_details[routine_index].old_type == 1 && this.day_details[routine_index].alt_routine_day_id == null) {
         this.day_details[routine_index].show_alter_btn = true;
       }
 
@@ -546,7 +560,8 @@ export class RoutineComponent implements OnInit {
         duration: this.day_details[routine_index].duration,
         teacher_id: this.day_details[routine_index].teacher_id,
         type: this.day_details[routine_index].type,
-        week_for: this.day_details[routine_index].week_for
+        week_for: this.day_details[routine_index].week_for,
+        batch_start_date: this.batch_start_date
       }
       //console.log('Routine assign sendData: ', sendData);
 
@@ -569,6 +584,7 @@ export class RoutineComponent implements OnInit {
           this.day_details[routine_index].start_time_temp_old = this.day_details[routine_index].start_time_temp;
           this.day_details[routine_index].duration_temp_old = this.day_details[routine_index].duration_temp;
           this.day_details[routine_index].teacher_id_old = this.day_details[routine_index].teacher_id;
+          this.day_details[routine_index].week_for_old = this.day_details[routine_index].week_for;
           this.show_add_button = true;
         } else {
           if(response.type == 1) {
@@ -658,9 +674,11 @@ export class RoutineComponent implements OnInit {
         duration: this.day_details[routine_index].duration,
         teacher_id: this.day_details[routine_index].teacher_id,
         type: this.day_details[routine_index].type,
-        week_for: this.day_details[routine_index].week_for
+        week_for_old: this.day_details[routine_index].week_for_old,
+        week_for: this.day_details[routine_index].week_for,
+        temp_start_date: this.day_details[routine_index].temp_start_date
       }
-      //console.log('Routine edit sendData: ', sendData);
+      console.log('Routine edit sendData: ', sendData);
 
       this.staffWorkService.routine_day_edit(sendData).subscribe(async response => {
         //console.log('Routine edit response: ', response);
@@ -681,6 +699,7 @@ export class RoutineComponent implements OnInit {
           this.day_details[routine_index].start_time_temp_old = this.day_details[routine_index].start_time_temp;
           this.day_details[routine_index].duration_temp_old = this.day_details[routine_index].duration_temp;
           this.day_details[routine_index].teacher_id_old = this.day_details[routine_index].teacher_id;
+          this.day_details[routine_index].week_for_old = this.day_details[routine_index].week_for;
           this.day_details[routine_index].show_alter_btn = false;
         } else {
           if(response.type == 1) {
@@ -770,7 +789,8 @@ export class RoutineComponent implements OnInit {
         start_time: this.day_details[routine_index].start_time,
         duration: this.day_details[routine_index].duration,
         teacher_id: this.day_details[routine_index].teacher_id,
-        week_for: this.day_details[routine_index].week_for
+        week_for: this.day_details[routine_index].week_for,
+        batch_start_date: this.batch_start_date
       }
       //console.log('Routine alter sendData: ', sendData);
 
@@ -803,6 +823,7 @@ export class RoutineComponent implements OnInit {
             "old_type": 2,
             "type": 2,
             "alt_routine_day_id": this.day_details[routine_index].id,
+            "week_for_old": this.day_details[routine_index].week_for,
             "week_for": this.day_details[routine_index].week_for,
             "show_alter_btn": false
           });
@@ -842,7 +863,8 @@ export class RoutineComponent implements OnInit {
   async remove_routine(routine_index) {
     //--- If more than one routine remain or just one routine remain but that routine must be temporary and have a alternative routine id
     if(this.day_details.length > 1 || (this.day_details.length == 1 && this.day_details[routine_index].type == 2 && this.day_details[routine_index].alt_routine_day_id != null)) {
-      if(this.day_details[routine_index].id == null) {
+
+      if(this.day_details[routine_index].id == null && this.day_details[routine_index].week_day_old == null) {
         //--- This routine yet not submitted, just remove it
         this.day_details.splice(routine_index, 1);
         this.show_add_button = true;
@@ -850,7 +872,7 @@ export class RoutineComponent implements OnInit {
         //--- This routine already submitted and have to be remove from databade
 
         //--- Check empty and invalid credentials
-        if(this.day_details[routine_index].id == null || (this.day_details[routine_index].type == 2 && this.day_details[routine_index].alt_routine_day_id == null)) {
+        if(this.day_details[routine_index].id == null) {
           const alert = await this.alertCtrl.create({
             header: 'Error!',
             message: "Unable to remove routine!",
