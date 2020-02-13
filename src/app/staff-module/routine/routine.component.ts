@@ -54,6 +54,7 @@ export class RoutineComponent implements OnInit {
     this.batch_list = [];
     this.teacher_list = [];
     this.batch_id = null;
+    this.batch_start_date = null;
     this.student_list_details = [];
     this.teachers_time_conflict_details = null;
     this.students_time_conflict_details = null;
@@ -678,7 +679,7 @@ export class RoutineComponent implements OnInit {
         week_for: this.day_details[routine_index].week_for,
         temp_start_date: this.day_details[routine_index].temp_start_date
       }
-      console.log('Routine edit sendData: ', sendData);
+      //console.log('Routine edit sendData: ', sendData);
 
       this.staffWorkService.routine_day_edit(sendData).subscribe(async response => {
         //console.log('Routine edit response: ', response);

@@ -27,7 +27,7 @@
     <span *ngIf="!view_calender" (click)="show_calender('y')">View Calender</span>
     <span *ngIf="view_calender" (click)="show_calender('n')">Hide Calender</span>
   </h3>
-  <ul class="tree">
+  <ul class="tree" *ngIf="routine_description.length != 0">
     
     <li *ngFor="let routine of routine_description">
       <label class="tree_label" for="c1">{{routine?.date | date: "MMM dd, yyyy"}} | {{routine?.week_day}}</label>
@@ -37,7 +37,7 @@
           <label for="c2" class="tree_label">{{time?.start_time}} - {{time?.end_time}}</label>
           <p>
             Batch: {{time?.batch_name}} <br>
-            Course: NA
+            Course: {{time?.course_name}}
           </p>
         </li>
         
@@ -45,5 +45,8 @@
     </li>
 
     <span class="end-tree"></span>
+  </ul>
+  <ul class="tree-blank" *ngIf="routine_description.length == 0">
+    <li>No Routine Available!</li>
   </ul>
 </ion-content>

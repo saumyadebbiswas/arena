@@ -16,8 +16,8 @@ export class RoutinesComponent implements OnInit {
   date: {year: number, month: number};
   showloader: boolean;
   message: string = "Loading...";
-  //routine_list: any = [];
-  routine_description: any;
+  routine_description: any = [];
+  routine_description_fix: any;
   view_calender: boolean;
 
   constructor(
@@ -65,6 +65,7 @@ export class RoutinesComponent implements OnInit {
     this.showloader = true;
     this.model = this.calendar.getToday();
     this.routine_description = [];
+    this.routine_description_fix = [];
     this.view_calender = false;
     this.routine_details();
   }
@@ -96,7 +97,6 @@ export class RoutinesComponent implements OnInit {
 
       if(response.status == true) {
         this.routine_by_day(response.data);
-        //this.routine_list = response.data;
       } else {
         this.message = "No Routine Available!"
       }
@@ -116,8 +116,7 @@ export class RoutinesComponent implements OnInit {
   }
 
   async routine_by_day(routine_data) {
-    console.log('Routine data: ', routine_data);
-
+    //console.log('Routine data: ', routine_data);
     const current = new Date();
     let day_count = 1; //--- Increasing day counter
     let record_count = 0; //--- Increasing record match counter
@@ -132,7 +131,7 @@ export class RoutinesComponent implements OnInit {
     
     let time_details: any;
     //--- Show routine details of next 30 days from today
-    while(record_count < 30) {
+    while(day_count <= 30) {
       var newdate = new Date(current.getFullYear(), current.getMonth(), current.getDate() + day_count); //--- Increasing day by 1
 
       //--- For every routine check wheather this-date have any class/es or not
@@ -143,16 +142,52 @@ export class RoutinesComponent implements OnInit {
         if(newdate >= this.date_parse(element.batch_start_date)) {
           let day_index = newdate.getDay() + 1; //--- Get day-index i.e. 1:Sunday, 2:Monday, ... , 7:Saturday
 
-          //--- If this-date day-index matched with batch's week-day-index
-          if(day_index == element.week_day) {
-            time_details.push({
-              "start_time": this.time_24to12_convert(element.start_time),
-              "duration": element.duration,
-              "end_time": this.time_24to12_convert(element.end_time),
-              "batch_name": element.batch_name
-            });
-            // console.log('newdate check (record_count, day_index, newdate): ', record_count, day_index, newdate);
-            record_found = true;
+          if(+element.type == 1 && +element.is_enable == 1) { //--- If this routine is not temporary one and also enable currently
+            if(day_index == element.week_day) { //--- If this-date day-index matched with batch's week-day-index
+              time_details.push({
+                "start_time": this.time_24to12_convert(element.start_time),
+                "duration": element.duration,
+                "end_time": this.time_24to12_convert(element.end_time),
+                "batch_name": element.batch_name,
+                "course_name": element.course_name
+              });
+              record_found = true;
+            }
+          } else if(+element.type == 1 && +element.is_enable == 0) { //--- If this routine is not temporary one and currently disabled
+            let temp_start_date = this.date_parse(element.temp_start_date);
+            let temp_day = +element.temp_week * 7; //--- Calculate temporary day from temporary week
+            var temp_finish_date = new Date(temp_start_date.getFullYear(), temp_start_date.getMonth(), temp_start_date.getDate() + (temp_day-1)); //--- Calculate date from which this routine will enable again
+
+            if(newdate < temp_start_date || newdate > temp_finish_date) {
+              if(day_index == element.week_day) { //--- If this-date day-index matched with batch's week-day-index
+                time_details.push({
+                  "start_time": this.time_24to12_convert(element.start_time),
+                  "duration": element.duration,
+                  "end_time": this.time_24to12_convert(element.end_time),
+                  "batch_name": element.batch_name,
+                  "course_name": element.course_name
+                });
+                record_found = true;
+              }
+            }
+            
+          } else if(+element.type == 2 && +element.is_enable == 1) { //--- If this routine is a temporary one and currently enable
+            let temp_start_date = this.date_parse(element.temp_start_date);
+            let temp_day = +element.temp_week * 7; //--- Calculate temporary day from temporary week
+            var temp_finish_date = new Date(temp_start_date.getFullYear(), temp_start_date.getMonth(), temp_start_date.getDate() + (temp_day-1));
+
+            if(newdate >= temp_start_date && newdate <= temp_finish_date) {
+              if(day_index == element.week_day) { //--- If this-date day-index matched with batch's week-day-index
+                time_details.push({
+                  "start_time": this.time_24to12_convert(element.start_time),
+                  "duration": element.duration,
+                  "end_time": this.time_24to12_convert(element.end_time),
+                  "batch_name": element.batch_name,
+                  "course_name": element.course_name
+                });
+                record_found = true;
+              }
+            }
           }
         }
       });
@@ -161,6 +196,9 @@ export class RoutinesComponent implements OnInit {
         this.routine_description.push({
           "week_day" : this.dayName(newdate.getDay() + 1),
           "date" : newdate,
+          "date_dd" : newdate.getDate(),
+          "date_mm" : newdate.getMonth(),
+          "date_yyyy" : newdate.getFullYear(),
           "time_details": time_details
         });
         record_count++;
@@ -168,7 +206,8 @@ export class RoutinesComponent implements OnInit {
 
       day_count++;
     }
-    console.log('this.routine_description ', this.routine_description);
+    this.routine_description_fix = this.routine_description;
+    //console.log('this.routine_description ', this.routine_description);
 
     this.loadingController.dismiss();
     this.showloader = false;
@@ -219,29 +258,42 @@ export class RoutinesComponent implements OnInit {
   show_calender(show_type) {
     if(show_type == 'y') {
       this.view_calender = true;
+      this.model = this.calendar.getToday();
     } else {
       this.view_calender = false;
+      this.routine_description = this.routine_description_fix;
     }
   }
 
   selectDate(model) {
+    this.routine_description = this.routine_description_fix;
     let selectedDate = this.createDateFromDateObject(model); 
-    console.log('Selected date: ', selectedDate);
+    var parts = selectedDate.split("-"); //--- [0]:yyyy, [1]:mm, [2]:dd
+
+    let routine_description: any = [];
+    this.routine_description.forEach(element => {
+      //--- Check if any routine available in routine-description of the selected-date
+      if(+element.date_dd == +parts[2] && +element.date_mm == (+parts[1] - 1) && +element.date_yyyy == +parts[0]) {
+        routine_description.push(element);
+      }
+    });
+
+    this.routine_description = routine_description;
   }
   
   createDateFromDateObject(obj) {
     let date = '';
     let month = '';
 
-    if(obj.day.toString().length == 1){
+    if(obj.day.toString().length == 1) {
       date = `0${obj.day}`;
-    }else{
+    } else {
       date = `${obj.day}`;
     }
 
-    if(obj.month.toString().length == 1){
+    if(obj.month.toString().length == 1)  {
       month = `0${obj.month}`;
-    }else{
+    } else {
       month = `${obj.month}`;
     }
 
