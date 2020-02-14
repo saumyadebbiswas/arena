@@ -28,31 +28,7 @@ export class RoutinesComponent implements OnInit {
     public loadingController: LoadingController,
     public teacherService: TeacherService,
     public userService: UserService
-  ) {
-    const current = new Date();
-    //--- current.getMonth() returns month index 0 to 11
-    this.config.minDate = { year: current.getFullYear(), month: 
-    current.getMonth() + 1, day: current.getDate() }; //--- Min date: today
-    var maxMonth = current.getMonth() + 2; //--- Max date: upcoming one month / add one month
-    var maxYear = current.getFullYear();
-    var maxDay = current.getDate();
-
-    if(current.getMonth() == 12) { //--- If month is november
-      maxYear = current.getFullYear() + 1; //--- Add 1 year
-      maxMonth = 1;
-    }
-
-    if(current.getDate() == 31) {
-      maxDay = 30;
-    }
-
-    if(current.getMonth() == 1 && current.getDate() > 28) {
-      maxDay = 28;
-    }
-
-    this.config.maxDate = { year: maxYear, month: maxMonth, day: maxDay };
-    this.config.outsideDays = 'hidden';
-  }
+  ) {}
 
   ngOnInit() {}
 
@@ -61,9 +37,20 @@ export class RoutinesComponent implements OnInit {
 
     let user_info = this.userService.currentUserValue;
     this.teacher_id = user_info.details.id;
+
+    const current = new Date();
+    const current_plus_30 = new Date(new Date().setDate(new Date().getDate() + 30)); // Add 30 days with current date
+
+    //--- current.getMonth() returns month index 0 to 11
+    this.config.minDate = { year: current.getFullYear(), month: 
+    current.getMonth() + 1, day: current.getDate() }; //--- Min date: Today
+    this.config.maxDate = { year: current_plus_30.getFullYear(), month: 
+      current_plus_30.getMonth() + 1, day: current_plus_30.getDate() }; // Max date: Add 30 days with current date
+    this.config.outsideDays = 'hidden'; //--- Diasble all other dates
     
+    this.model = this.calendar.getToday(); //--- By default set today highlighted
+
     this.showloader = true;
-    this.model = this.calendar.getToday();
     this.routine_description = [];
     this.routine_description_fix = [];
     this.view_calender = false;

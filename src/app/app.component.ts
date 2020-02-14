@@ -172,6 +172,11 @@ export class AppComponent {
           title: 'Routine Details',
           url: '/teacher-routine',
           icon: 'list'
+        },
+        {
+          title: 'Attendance',
+          url: '/teacher-attendance',
+          icon: 'list'
         }
       ];
   }

@@ -1,0 +1,31 @@
+<ion-header>
+  <div class="head">
+    <ion-buttons slot="start">
+      <ion-menu-button>
+        <img src="../assets/images/manu.png" alt="" class="manu-icon">
+      </ion-menu-button>
+    </ion-buttons>
+
+    <ion-title class="text-center">Attandance</ion-title>
+
+    <app-notification></app-notification>
+  </div>
+</ion-header>
+
+<ion-content *ngIf="!showloader">
+  
+  <div class="w-100 calender-box" *ngIf="view_calender">
+    <div class="schedule-col">
+      <!-- <h3>Select Date</h3> -->
+    </div>
+
+    <ngb-datepicker class="w-100 calender" #dp [(ngModel)]="model" (navigate)="date = $event.next" [displayMonths]="displayMonths" [navigation]="arrows" (ngModelChange)="selectDate(model)"></ngb-datepicker>
+  </div>
+
+  <h3 class="routin-del">
+    Student List 
+    <span *ngIf="!view_calender" (click)="show_calender('y')">View Calender</span>
+    <span *ngIf="view_calender" (click)="show_calender('n')">Hide Calender</span>
+  </h3>
+  
+</ion-content>

@@ -1,0 +1,56 @@
+.w-100 {
+    width: 100%;
+}
+.calender-box{ padding: 0 13px; }
+.schedule-col {
+    width: 100%;
+    padding:10px 10px;
+}
+.Schedule-col h3 {
+    font-size: 24px;
+    color: #222;
+    font-weight: 700;
+}
+.calender-col {
+    width: 100%;
+}
+.ngb-dp-week-number, .ngb-dp-weekday{ 
+    font-style: normal !important;
+}
+.ngb-dp-day,
+.ngb-dp-week-number,
+.ngb-dp-weekday {
+    width: 3rem !important;
+    height: 3rem !important;
+}
+.ngb-dp-month {
+    width: 100% !important;
+}
+.bg-primary {
+    background-color: #ff9499 !important;
+}
+
+.routin-del{
+    padding: 13px;
+    padding-top: 0;
+    font-size: 20px;
+    color: #c35e63;
+}
+
+.routin-del span{
+    float: right;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+body {
+    margin: 30px;
+    font-family: sans-serif;
+}
+  
+#fontSizeWrapper { font-size: 16px; }
+  
+#fontSize {
+    width: 100px;
+    font-size: 1em;
+}

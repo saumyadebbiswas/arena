@@ -9,11 +9,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TeacherRoutingModule } from './teacher-routing.module';
 import { StaffModuleModule } from '../staff-module/staff-module.module';
 import { RoutinesComponent } from './routines/routines.component';
+import { AttendanceComponent } from './attendance/attendance.component';
 
 
 @NgModule({
   declarations: [
-    RoutinesComponent
+    RoutinesComponent,
+    AttendanceComponent
   ],
   imports: [
     CommonModule,

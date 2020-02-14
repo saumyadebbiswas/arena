@@ -14,13 +14,13 @@
 
 <ion-content *ngIf="!showloader">
 
-  <div class="dropdown frm select-dropdown">
+  <!-- <div class="dropdown frm select-dropdown">
     <ion-select (ionChange)="select_batch()" [(ngModel)]="batch_id" placeholder="Select Batch">
-      <ion-select-option *ngFor="let batch of batch_list" value="-1">All</ion-select-option>
-      <ion-select-option *ngFor="let batch of batch_list" value="1">1st</ion-select-option>
+      <ion-select-option value="-1">All</ion-select-option>
+      <ion-select-option value="1">1st</ion-select-option> -->
       <!-- <ion-select-option *ngFor="let batch of batch_list" [value]="batch.id">{{batch.name}}</ion-select-option> -->
-    </ion-select>
-  </div>
+    <!-- </ion-select>
+  </div> -->
   
   <div class="w-100 calender-box" *ngIf="view_calender">
     <div class="schedule-col">
