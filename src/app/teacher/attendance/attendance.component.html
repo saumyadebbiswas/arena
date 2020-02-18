@@ -14,11 +14,7 @@
 
 <ion-content *ngIf="!showloader">
   
-  <div class="w-100 calender-box" *ngIf="view_calender">
-    <div class="schedule-col">
-      <!-- <h3>Select Date</h3> -->
-    </div>
-
+  <!-- <div class="w-100 calender-box" *ngIf="view_calender">
     <ngb-datepicker class="w-100 calender" #dp [(ngModel)]="model" (navigate)="date = $event.next" [displayMonths]="displayMonths" [navigation]="arrows" (ngModelChange)="selectDate(model)"></ngb-datepicker>
   </div>
 
@@ -26,6 +22,38 @@
     Student List 
     <span *ngIf="!view_calender" (click)="show_calender('y')">View Calender</span>
     <span *ngIf="view_calender" (click)="show_calender('n')">Hide Calender</span>
+  </h3> -->
+  <h3 class="routin-del">
+    <span class="routin-del-attndnc">Previous Attendance</span>
+    <span class="routin-del-refresh" *ngIf="refresh_list" (click)="loadStudents()">Refresh</span>
   </h3>
   
+  <div class="container-fluid" id="grad1" *ngIf="student_list.length > 0">
+
+    <div class="class-details">Batch Name: {{class_details?.batch_name}}</div>
+    <div class="class-details">Start Time: {{time_24to12_convert(class_details?.start_time)}}</div>
+    <div class="class-details">End Time: {{time_24to12_convert(class_details?.end_time)}}</div>
+    <div class="class-details" *ngIf="class_details?.type == 2">Class Type: Temporary</div>
+    <div class="class-details" *ngIf="class_details?.type == 1">Class Type: Fixed</div>
+
+    <div class="student-list-box">
+      <div class="student-col">
+        <h5>Students List <span class="sub-head">(Select for attandance)</span></h5>
+      
+        <ul class="student-list">
+          <li *ngFor="let student of student_list; let i = index">
+            <p class="chq-inpt">
+              <ion-label class="chq-lebl">
+                {{student.student_name}}
+                <span class="prsnt-status" *ngIf="student?.is_attend == 'y'">(Present)</span>
+                <span class="absnt-status" *ngIf="student?.is_attend == 'n'">(Absent)</span>
+              </ion-label>
+              <ion-checkbox class="checkbox" (click)="changeChkbx(i)" color="primary" checked="{{student?.is_attend == 'y'}}"></ion-checkbox>
+            </p>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
 </ion-content>

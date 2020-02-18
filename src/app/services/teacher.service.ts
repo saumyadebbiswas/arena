@@ -18,4 +18,12 @@ export class TeacherService {
   routine_list(teacher_id:any) {
     return this.http.get<any>(this.api_url+'/routine/teacher/'+teacher_id, {headers: this.requestHeader});
   }
+	
+  attendance_list(sendData:any) {
+    return this.http.post<any>(this.api_url+'/teachers/current-class', sendData, {headers: this.requestHeader});
+  }
+	
+  get_attendance(sendData:any) {
+    return this.http.post<any>(this.api_url+'/teachers/get-attendance', sendData, {headers: this.requestHeader});
+  }
 }

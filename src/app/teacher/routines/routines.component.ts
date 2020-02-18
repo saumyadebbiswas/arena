@@ -85,7 +85,7 @@ export class RoutinesComponent implements OnInit {
       if(response.status == true) {
         this.routine_by_day(response.data);
       } else {
-        this.message = "No Routine Available!"
+        this.message = "No Routine Available!";
       }
     }, async error => {
       //--- In case of any error - dismiss loader, show error message
