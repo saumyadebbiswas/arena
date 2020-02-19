@@ -26,4 +26,13 @@ export class TeacherService {
   get_attendance(sendData:any) {
     return this.http.post<any>(this.api_url+'/teachers/get-attendance', sendData, {headers: this.requestHeader});
   }
+	
+  all_class_list(sendData:any) {
+    return this.http.post<any>(this.api_url+'/teachers/previous-class', sendData, {headers: this.requestHeader});
+  }
+	
+  class_details(sendData:any) {
+    return this.http.post<any>(this.api_url+'/teachers/previous-class-details', sendData, {headers: this.requestHeader});
+  }
+  
 }

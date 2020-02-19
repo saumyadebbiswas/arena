@@ -12,12 +12,20 @@ export class AttendanceComponent implements OnInit {
 
   teacher_id: string;
   //view_calender: boolean;
-  refresh_list: boolean;
-  model: NgbDateStruct;
+  //model: NgbDateStruct;
   showloader: boolean;
   message: string;
+  message_allcls: string;
+  message_clsdtl: string;
   student_list: any = [];
+  class_list: any = [];
+  details_student_list: any = [];
   class_details: any;
+  show_class_link: string;
+  refresh_list: boolean;
+  show_current_class: boolean;
+  show_all_class: boolean;
+  show_all_details: boolean;
 
   constructor(
     private calendar: NgbCalendar,
@@ -51,11 +59,16 @@ export class AttendanceComponent implements OnInit {
     
     // this.view_calender = false;
     this.showloader = true;
-    this.message = null;
     this.student_list = [];
+    this.class_list = [];
+    this.details_student_list = [];
+    this.show_class_link = 'all';
     this.refresh_list = false;
+    this.show_current_class = true;
+    this.show_all_class = false;
+    this.show_all_details = false;
 
-    this.loadStudents();
+    this.loadCurrentStudents();
   }
 
   // show_calender(show_type) {
@@ -92,7 +105,7 @@ export class AttendanceComponent implements OnInit {
   //   return `${obj.year}-${month}-${date}`;
   // }
 
-  async loadStudents() {
+  async loadCurrentStudents() {
     //--- Start loader
     const loading = await this.loadingController.create({
       message: 'Loading students...',
@@ -100,6 +113,11 @@ export class AttendanceComponent implements OnInit {
     });
     loading.present();
     this.showloader = true;
+    this.message = null;
+    this.show_class_link = 'all';
+    this.show_current_class = true;
+    this.show_all_class = false;
+    this.show_all_details = false;
 
     let sendData = {
       teacher_id : this.teacher_id
@@ -141,6 +159,93 @@ export class AttendanceComponent implements OnInit {
       alert.present();
     });
   }
+
+  async loadAllClasses() {
+    //--- Start loader
+    const loading = await this.loadingController.create({
+      message: 'Loading students...',
+      spinner: 'bubbles'
+    });
+    loading.present();
+    this.message_allcls = null;
+    this.show_class_link = 'current';
+    this.show_current_class = false;
+    this.show_all_class = true;
+    this.show_all_details = false;
+
+    let sendData = {
+      teacher_id : this.teacher_id
+    };
+    this.teacherService.all_class_list(sendData).subscribe(async response => {
+      //console.log('All class response: ', response);
+      //--- After get record - dismiss loader
+      this.loadingController.dismiss();
+      this.showloader = false;
+
+      if(response.status == true) {
+        this.class_list = response.data;
+      } else {
+        this.message_allcls = response.message;
+        this.class_list = [];
+      }
+    }, async error => {
+      //--- In case of any error - dismiss loader, show error message
+      this.message_allcls = "Unable load all classes!";
+      this.class_list = [];
+
+      const alert = await this.alertCtrl.create({
+        header: 'Error!',
+        message: "Internal problem! " + error,
+        buttons: ['OK']
+      });
+      alert.present();
+    });
+  }
+
+  async loadAllClassesDetails(index) {
+    //--- Start loader
+    const loading = await this.loadingController.create({
+      message: 'Loading students...',
+      spinner: 'bubbles'
+    });
+    loading.present();
+    this.message_clsdtl = null;
+    this.show_current_class = false;
+    this.show_all_class = false;
+    this.show_all_details = true;
+
+    let sendData = {
+      batch_id: this.class_list[index].batch_id,
+      date: this.class_list[index].date,
+      time: this.class_list[index].time,
+      week_day: this.class_list[index].week_day
+    };
+    //console.log('All class details sendData: ', sendData);
+    this.teacherService.class_details(sendData).subscribe(async response => {
+      //console.log('All class details response: ', response);
+      //--- After get record - dismiss loader
+      this.loadingController.dismiss();
+      this.showloader = false;
+
+      if(response.status == true) {
+        this.details_student_list = response.data;
+      } else {
+        this.message_clsdtl = response.message;
+        this.details_student_list = [];
+      }
+    }, async error => {
+      //--- In case of any error - dismiss loader, show error message
+      this.message_clsdtl = "Unable load all classes!";
+      this.details_student_list = [];
+
+      const alert = await this.alertCtrl.create({
+        header: 'Error!',
+        message: "Internal problem! " + error,
+        buttons: ['OK']
+      });
+      alert.present();
+    });
+  }
   
   //--- Function to convert 24-hour time format(i.e. 14:30) to 12-hourtime format(i.e. 02:30 PM)
   time_24to12_convert(time) {
@@ -155,8 +260,30 @@ export class AttendanceComponent implements OnInit {
     return hour+':'+min+' '+part;
   }
 
+  //--- Function to return day name by day index
+  dayName(day_index) {
+    //--- 1: Sunday, ..., 7: Saturday
+    if(day_index == '1') {
+      return 'Sunday';
+    } else if(day_index == '2') {
+      return 'Monday';
+    } else if(day_index == '3') {
+      return 'Tuesday';
+    } else if(day_index == '4') {
+      return 'Wednesday';
+    } else if(day_index == '5') {
+      return 'Thursday';
+    } else if(day_index == '6') {
+      return 'Friday';
+    } else if(day_index == '7') {
+      return 'Saturday';
+    } else {
+      return null;
+    }
+  }
+
   async changeChkbx(index) {
-    console.log('Check box index: ', index);
+    //console.log('Check box index: ', index);
     //--- Start loader
     const loading = await this.loadingController.create({
       message: 'Please wait...',
@@ -193,6 +320,66 @@ export class AttendanceComponent implements OnInit {
         toast.present();
 
         this.student_list[index].is_attend = attend_status;
+      } else {
+        const alert = await this.alertCtrl.create({
+          header: 'Error!',
+          message: response.message,
+          buttons: ['OK']
+        });
+        alert.present();
+      }
+    }, async error => {
+      //--- In case of any error - dismiss loader, show error message
+      this.loadingController.dismiss();
+      this.showloader = false;
+
+      const alert = await this.alertCtrl.create({
+        header: 'Error!',
+        message: "Internal problem! " + error,
+        buttons: ['OK']
+      });
+      alert.present();
+    });
+  }
+
+  async changeChkbxForOld(index) {
+    //console.log('Check box index: ', index);
+    //--- Start loader
+    const loading = await this.loadingController.create({
+      message: 'Please wait...',
+      spinner: 'bubbles'
+    });
+    loading.present();
+    this.showloader = true;
+
+    let attend_status: string;
+    if(this.details_student_list[index].is_attend == 'n') {
+      attend_status = 'y';
+    } else {
+      attend_status = 'n';
+    }
+
+    let sendData = {
+      attandance_id : this.details_student_list[index].id,
+      is_attend : attend_status
+    };
+    //console.log('Get attendance sendData: ', sendData);
+    this.teacherService.get_attendance(sendData).subscribe(async response => {
+      //console.log('Get attendance response: ', response);
+      //--- After get record - dismiss loader
+      this.loadingController.dismiss();
+      this.showloader = false;
+
+      if(response.status == true) {
+        const toast = await this.toastController.create({
+          message: response.message,
+          color: "dark",
+          position: "bottom",
+          duration: 2000
+        });
+        toast.present();
+
+        this.details_student_list[index].is_attend = attend_status;
       } else {
         const alert = await this.alertCtrl.create({
           header: 'Error!',
