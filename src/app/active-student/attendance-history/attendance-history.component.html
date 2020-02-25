@@ -1,0 +1,37 @@
+<ion-header>
+  <div class="head">
+    <ion-buttons slot="start">
+      <ion-menu-button>
+        <img src="../assets/images/manu.png" alt="" class="manu-icon">
+      </ion-menu-button>
+    </ion-buttons>
+
+    <ion-title class="text-center">Attandance History</ion-title>
+
+    <app-notification></app-notification>
+  </div>
+</ion-header>
+
+<ion-content *ngIf="!showloader">
+  <h3 class="routin-del">
+    <span class="atnd-refresh-link" *ngIf="refresh_list" (click)="loadAttendanceHistory()">Refresh</span>
+  </h3>
+
+  <!-- All attendance list section - start -->
+  <div class="container-fluid">
+    <!-- <div>
+      <div *ngFor="let class of class_list; let i = index">
+        <div>Batch Name: {{class.batch_name}}</div>
+        <div>Class Date: {{class.date | date: "MMM dd, yyyy"}} ({{dayName(class.week_day)}})</div>
+        <div>Attendance Time: {{time_24to12_convert(class.time)}}</div>
+        <div>No of Students: {{class.no_of_student}}</div>
+        <hr>
+      </div>
+    </div>
+
+    <div id="err-msg" *ngIf="message != null">
+      {{message}}
+    </div> -->
+  </div>
+  <!-- All attendance list section - end -->
+</ion-content>

@@ -13,7 +13,6 @@
 </ion-header>
 
 <ion-content *ngIf="!showloader">
-  
   <!-- <div class="w-100 calender-box" *ngIf="view_calender">
     <ngb-datepicker class="w-100 calender" #dp [(ngModel)]="model" (navigate)="date = $event.next" [displayMonths]="displayMonths" [navigation]="arrows" (ngModelChange)="selectDate(model)"></ngb-datepicker>
   </div>
@@ -26,12 +25,12 @@
   <h3 class="routin-del">
     <span class="routin-del-attndnc" *ngIf="show_class_link == 'all'" (click)="loadAllClasses()">Show All Classes</span>
     <span class="routin-del-attndnc" *ngIf="show_class_link == 'current'" (click)="loadCurrentStudents()">Load Current Class</span>
+    <span class="atnd-refresh-link" *ngIf="refresh_list && show_current_class" (click)="loadCurrentStudents()">Refresh</span>
+    <span class="atnd-refresh-link" *ngIf="show_all_details" (click)="loadAllClasses()">Cancel</span>
   </h3>
   
   <!-- Current class student attendance list section - start -->
   <div class="container-fluid" id="grad1" *ngIf="show_current_class">
-    <span class="atnd-refresh-link" *ngIf="refresh_list" (click)="loadCurrentStudents()">Refresh</span>
-      
     <div *ngIf="student_list.length > 0">
       <div class="class-details">Batch Name: {{class_details?.batch_name}}</div>
       <div class="class-details">Start Time: {{time_24to12_convert(class_details?.start_time)}}</div>
@@ -87,8 +86,6 @@
   
   <!-- Selected class'es details section - start -->
   <div class="container-fluid" id="grad1" *ngIf="show_all_details">
-    <span class="atnd-refresh-link" (click)="loadAllClasses()">Cancel</span>
-      
     <div *ngIf="details_student_list.length > 0">
       <div class="class-details">Batch Name: {{details_student_list[0]?.batch_name}}</div>
       <div class="class-details">Class Date: {{details_student_list[0]?.date | date: "MMM dd, yyyy"}} ({{dayName(details_student_list[0]?.week_day)}})</div>

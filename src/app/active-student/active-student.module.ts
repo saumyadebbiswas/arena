@@ -10,11 +10,13 @@ import { ActiveStudentRoutingModule } from './active-student-routing.module';
 
 import { RoutineDetailsComponent } from './routine-details/routine-details.component';
 import { StaffModuleModule } from '../staff-module/staff-module.module';
+import { AttendanceHistoryComponent } from './attendance-history/attendance-history.component';
 
 
 @NgModule({
   declarations: [
-    RoutineDetailsComponent
+    RoutineDetailsComponent,
+    AttendanceHistoryComponent
   ],
   imports: [
     CommonModule,

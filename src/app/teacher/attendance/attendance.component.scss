@@ -26,16 +26,13 @@
 .ngb-dp-month {
     width: 100% !important;
 }
-.bg-primary {
-    background-color: #ff9499 !important;
-}
 .routin-del{
     padding: 13px;
     padding-top: 0;
     font-size: 20px;
     color: #c35e63;
 }
-.routin-del-refresh{
+.atnd-refresh-link{
     float: right;
     font-size: 13px;
     font-weight: bold;
@@ -48,17 +45,6 @@ body {
 #fontSize {
     width: 100px;
     font-size: 1em;
-}
-.batch-btn{ 
-    width: 80%; 
-    margin: 0 auto; 
-    display: block; 
-    background-color: #eb1d23; 
-    text-align: center; 
-    height: 40px; 
-    border-radius: 50px; 
-    color: #fff; 
-    font-size: 14px;
 }
 .checkbox{ float: right;}
 .student-col{ width: 100%; margin-top: 20px;}

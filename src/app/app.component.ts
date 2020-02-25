@@ -114,6 +114,11 @@ export class AppComponent {
           title: 'Routine Details',
           url: '/student-routine',
           icon: 'list'
+        },
+        {
+          title: 'Attandance History',
+          url: '/student-attendance',
+          icon: 'list'
         }
       ];
     } else {

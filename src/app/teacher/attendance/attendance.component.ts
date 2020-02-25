@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService, TeacherService } from 'src/app/services';
-import { NgbCalendar, NgbDateStruct, NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
+//import { NgbCalendar, NgbDateStruct, NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 import { LoadingController, AlertController, ToastController } from '@ionic/angular';
 
 @Component({
@@ -28,8 +28,8 @@ export class AttendanceComponent implements OnInit {
   show_all_details: boolean;
 
   constructor(
-    private calendar: NgbCalendar,
-    private config: NgbDatepickerConfig,
+    //private calendar: NgbCalendar,
+    //private config: NgbDatepickerConfig,
     public loadingController: LoadingController,
     public alertCtrl: AlertController,
     public toastController: ToastController,

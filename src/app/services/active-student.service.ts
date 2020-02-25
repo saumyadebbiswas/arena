@@ -18,4 +18,8 @@ export class ActiveStudentService {
   routine_list(student_id:any) {
     return this.http.get<any>(this.api_url+'/routine/student/'+student_id, {headers: this.requestHeader});
   }
+	
+  all_attendance(sendData:any) {
+    return this.http.post<any>(this.api_url+'/student/attendance-list', sendData, {headers: this.requestHeader});
+  }
 }
