@@ -161,6 +161,11 @@ export class AppComponent {
           title: 'Routine Assign',
           url: '/routine-assign',
           icon: 'list'
+        },
+        {
+          title: 'Attendance Details',
+          url: '/attendance-details',
+          icon: 'list'
         }
       ];
     } else {

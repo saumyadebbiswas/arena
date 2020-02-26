@@ -7,6 +7,7 @@ import { BatchAssignComponent } from './batch-assign/batch-assign.component';
 import { BatchListComponent } from './batch-list/batch-list.component';
 import { BatchEditComponent } from './batch-edit/batch-edit.component';
 import { ActiveStudentsComponent } from './active-students/active-students.component';
+import { AttendanceDetailsComponent } from './attendance-details/attendance-details.component';
 
 
 const routes: Routes = [
@@ -15,7 +16,8 @@ const routes: Routes = [
   { path: "batch-assign",  component: BatchAssignComponent, canActivate: [AdminGuard]},
   { path: "batch-list",  component: BatchListComponent, canActivate: [AdminGuard]},
   { path: "batch-edit",  component: BatchEditComponent, canActivate: [AdminGuard]},
-  { path: "routine-assign",  component: RoutineComponent, canActivate: [AdminGuard]}
+  { path: "routine-assign", component: RoutineComponent, canActivate: [AdminGuard] },
+  { path: "attendance-details", component: AttendanceDetailsComponent, canActivate: [AdminGuard] }
 ];
 
 @NgModule({

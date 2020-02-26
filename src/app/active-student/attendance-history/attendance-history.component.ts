@@ -68,7 +68,7 @@ export class AttendanceHistoryComponent implements OnInit {
       }
     }, async error => {
       //--- In case of any error - dismiss loader, show error message
-      this.message = "Unable load attendance list!"
+      this.message = "Unable to load attendance list!"
       this.loadingController.dismiss();
       this.showloader = false;
       this.refresh_list = false;
@@ -81,6 +81,41 @@ export class AttendanceHistoryComponent implements OnInit {
       });
       alert.present();
     });
+  }
+
+  //--- Function to convert 24-hour time format(i.e. 14:30) to 12-hour time format(i.e. 02:30 PM)
+  time_24to12_convert(time) {
+    let hour = (time.split(':'))[0];
+    let min = (time.split(':'))[1];
+    let part = hour >= 12 ? 'PM' : 'AM';
+
+    min = (min + '').length == 1 ? '0' + min : min;
+    hour = hour > 12 ? hour - 12 : hour;
+    hour = (hour + '').length == 1 ? '0' + hour : hour;
+
+    return hour + ':' + min + ' ' + part;
+  }
+
+  //--- Function to return day name by day index
+  dayName(day_index) {
+    //--- 1: Sunday, ..., 7: Saturday
+    if (day_index == '1') {
+      return 'Sunday';
+    } else if (day_index == '2') {
+      return 'Monday';
+    } else if (day_index == '3') {
+      return 'Tuesday';
+    } else if (day_index == '4') {
+      return 'Wednesday';
+    } else if (day_index == '5') {
+      return 'Thursday';
+    } else if (day_index == '6') {
+      return 'Friday';
+    } else if (day_index == '7') {
+      return 'Saturday';
+    } else {
+      return null;
+    }
   }
 
 }

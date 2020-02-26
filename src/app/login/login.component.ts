@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
         if(currentUser.details.type == '1') { //--- If visitor student
           this.router.navigate(['/course']);
         } else if(currentUser.details.type == '2') { //--- If active student
-          this.router.navigate(['/course']);
+          this.router.navigate(['/student-routine']);
         }
       } else if(currentUser.user_type == 'admin') {
         if(currentUser.details.type == '2') { //--- If councellor staff

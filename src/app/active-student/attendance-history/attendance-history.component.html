@@ -19,19 +19,21 @@
 
   <!-- All attendance list section - start -->
   <div class="container-fluid">
-    <!-- <div>
-      <div *ngFor="let class of class_list; let i = index">
-        <div>Batch Name: {{class.batch_name}}</div>
-        <div>Class Date: {{class.date | date: "MMM dd, yyyy"}} ({{dayName(class.week_day)}})</div>
-        <div>Attendance Time: {{time_24to12_convert(class.time)}}</div>
-        <div>No of Students: {{class.no_of_student}}</div>
+    <div>
+      <div *ngFor="let attendance of attendance_list; let i = index">
+        <div *ngIf="attendance.is_attend == 'y'">Status: Present</div>
+        <div *ngIf="attendance.is_attend == 'n'">Status: Absent</div>
+        <div>Batch Name: {{attendance.batch_name}}</div>
+        <div>Teacher Name: {{attendance.teacher_name}}</div>
+        <div>Class Date: {{attendance.date | date: "MMM dd, yyyy"}} ({{dayName(attendance.week_day)}})</div>
+        <div>Attendance Time: {{time_24to12_convert(attendance.time)}}</div>
         <hr>
       </div>
     </div>
 
     <div id="err-msg" *ngIf="message != null">
       {{message}}
-    </div> -->
+    </div>
   </div>
   <!-- All attendance list section - end -->
 </ion-content>

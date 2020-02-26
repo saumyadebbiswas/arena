@@ -92,7 +92,7 @@ export class RoutineDetailsComponent implements OnInit {
     this.showloader = true;
 
     this.activeStudentService.routine_list(this.student_id).subscribe(async response => {
-      console.log('Routine details: ', response);
+      //console.log('Routine details: ', response);
       //--- After get record - dismiss loader
       this.loadingController.dismiss();
       this.showloader = false;
@@ -305,8 +305,8 @@ export class RoutineDetailsComponent implements OnInit {
     return `${obj.year}-${month}-${date}`;
   }
 
-  select_batch() {
-    console.log('Selected batch id: ', this.batch_id);
-  }
+  // select_batch() {
+  //   console.log('Selected batch id: ', this.batch_id);
+  // }
 
 }

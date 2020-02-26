@@ -12,6 +12,7 @@ import { VisitorStudentsComponent } from './visitor-students/visitor-students.co
 import { BatchListComponent } from './batch-list/batch-list.component';
 import { BatchEditComponent } from './batch-edit/batch-edit.component';
 import { ActiveStudentsComponent } from './active-students/active-students.component';
+import { AttendanceDetailsComponent } from './attendance-details/attendance-details.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { ActiveStudentsComponent } from './active-students/active-students.compo
     BatchEditComponent,
     RoutineComponent,
     NotificationComponent,
-    ActiveStudentsComponent
+    ActiveStudentsComponent,
+    AttendanceDetailsComponent
   ],
   imports: [
     BrowserModule,

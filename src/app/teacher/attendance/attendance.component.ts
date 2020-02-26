@@ -145,7 +145,7 @@ export class AttendanceComponent implements OnInit {
       }
     }, async error => {
       //--- In case of any error - dismiss loader, show error message
-      this.message = "Unable load attendance list!"
+      this.message = "Unable to load attendance list!"
       this.loadingController.dismiss();
       this.showloader = false;
       this.student_list = [];
