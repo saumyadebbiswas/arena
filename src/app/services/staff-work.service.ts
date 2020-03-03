@@ -43,6 +43,14 @@ export class StaffWorkService {
   active_batch_list() {
     return this.http.get<any>(this.api_url+'/batch/activelist', {headers: this.requestHeader});
   }
+
+  started_batch_list(sendData: any) {
+    return this.http.post<any>(this.api_url + '/batch/startedlist', sendData, { headers: this.requestHeader });
+  }
+
+  student_attendance(sendData: any) {
+    return this.http.post<any>(this.api_url + '/student/batch-attendance', sendData, { headers: this.requestHeader });
+  }
 	
   batch_details(batch_id: any) {
     return this.http.get<any>(this.api_url+'/batch/details/'+batch_id, {headers: this.requestHeader});
